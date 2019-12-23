@@ -1,0 +1,230 @@
+---
+output:
+   pdf_document:
+      keep_tex: true
+      fig_caption: yes
+      latex_engine: xelatex
+      template: syllabus-template.tex
+geometry: margin=.8in
+author: ""
+course: "Stat 218 - Introduction to Statistics"
+semester: "Spring 2020"
+classroom: "Morrill Hall 141"
+classhours: "TR 3:30-4:50"
+instructor: 
+   name: "Susan Vanderplas"
+   email: "susan.vanderplas@unl.edu"
+# ta:
+#    - name: TBD
+#      email: TBD
+# grader:
+#    - name: TBD
+#      email: TBD
+officehours:
+   - name: "Susan Vanderplas"
+     time: "TR 1:30-3"
+     location: "Hardin Hall 349a (East Campus)"
+   # - name: TBD
+   #   time: TBD
+   #   location: TBD
+fontfamily: mathpazo
+fontsize: 11pt
+---
+
+```{r dates, echo = F, include = F}
+library(lubridate)
+library(tidyverse)
+
+start_date <- ymd("2020-01-13")
+holidays <- c(ymd("2020-01-20"), seq.Date(ymd("2020-03-22"), ymd("2020-03-29"), by = "day"))
+penalty_free_drop_date <- ymd("2020-01-24")
+withdraw_date <- ymd("2020-04-03")
+dead_week <- seq.Date(ymd("2020-04-27"), ymd("2020-05-02"), by = "day")
+end_date <- max(dead_week)
+
+class_days <- c("Tuesday", "Thursday")
+
+class_material <- c("Review syllabus, Chapter P", "Chapter P, Chapter 1, Section 1.1", 
+                    "Chapter 1, Section 1.2", "Chapter 1, Section 1.3-1.4", 
+                    "Chapter 1, Section 1.4-1.5", "Chapter 1, Section 1.5 and Chapter 1 review", 
+                    "Chapter 2, Section 2.1", "Chapter 2, Section 2.2", 
+                    "Chapter 2, Section 2.3 and Exam 1 review", "Exam 1", 
+                    "Chapter 2 review and Chapter 3, Section 3.1", "Chapter 3, Section 3.2", 
+                    "Chapter 3, Section 3.3", "Chapter 3, Section 3.4 and Chapter 3 review", 
+                    "Chapter 4, Section 4.1", "Chapter 4, Section 4.2 and Chapter 4 review", 
+                    "Chapter 5, Section 5.1", "Chapter 5, Section 5.2", 
+                    "Chapter 5, Section 5.3 and Exam 2 review", "Exam 2", 
+                    "Spring Break", "Spring Break", 
+                    "Chapter 6, Section 6.1", "Chapter 6, Section 6.2", 
+                    "Chapter 6, Section 6.3 and Chapter 6 review", "Chapter 7, Section 7.1", 
+                    "Chapter 7, Section 7.2", "Chapter 7, Section 7.3",
+                    "TBD", "TBD",
+                    "Review", "Review")
+
+classes <- tibble(date = seq(start_date, end_date, by = "day")) %>%
+   filter(wday(date, label = T, abbr = F) %in% class_days) %>%
+   mutate(holiday = date %in% holidays, 
+          material = class_material) %>%
+   mutate(day = wday(date, label = T),
+          week = isoweek(date) - min(isoweek(date)) + 1,
+          Week = ifelse(holiday, NA, week - ceiling(cumsum(holiday)/2)))
+
+course_schedule <- classes %>%
+   mutate(day = wday(date, label = T),
+          week = isoweek(date) - min(isoweek(date)) + 1,
+          Week = ifelse(holiday, NA, week - ceiling(cumsum(holiday)/2))) %>%
+   group_by(week) %>%
+   mutate(week_of = format.Date(min(date) - days(1), "%b %d")) %>%
+   ungroup() %>%
+   select(-date, -holiday) %>%
+   pivot_wider(id_cols = c(week, Week, week_of), names_from = day, values_from = material) %>%
+   select(-week) %>%
+   select(week_of, Week, Tue, Thu) %>%
+   set_names(c("Week of...", "Course Week", "Tuesday", "Thursday"))
+
+class_schedule <- classes %>%
+   select(-holiday, -day, -week) %>%
+   mutate(Date = format(date, "%b %d")) %>%
+   select(Week, Date, Schedule = material) %>%
+   mutate_each(as.character) %>%
+   bind_rows(tibble(Week = "Finals", Date = "May 5, 6-8 pm", Schedule = "Final Exam"))
+
+```
+
+<!-- # About This Course -->
+
+## Course Goals
+
+1. Students are critical consumers of statistically based results reported in popular media, recognizing whether reported results reasonably follow from the study and analysis conducted.
+2. Students recognize questions for which the investigative process in statistics would be useful and should be able to answer questions using the investigative process.
+3. Students produce graphical displays and numerical summaries and interpret what graphs do and do not reveal.
+4. Students recognize and be able to explain the central role of variability in the field of statistics.
+5. Students recognize and be able to explain the central role of randomness in designing studies and drawing conclusions.
+6. Students gain experience with how statistical models, including multivariate models, are used.
+7. Students demonstrate an understanding of, and ability to use, basic ideas of statistical inference (hypothesis tests and interval estimation) in a variety of settings.
+8. Students interpret and draw conclusions from standard output from statistical software packages.
+9. Students demonstrate an awareness of ethical issues associated with sound statistical practice.
+
+## Course Expectations
+
+1. Be an active participant. Ask questions and engage with the material.
+2. If you understand the material being discussed, help your neighbors and classmates to understand the material. Teaching and mentoring others reinforces your own understanding; giving answers without explanations doesn't help anyone.
+3. Come to class prepared. Do the assigned readings, questions, and writing. 
+4. Be respectful and inclusive. Be mindful of how you are affecting others. 
+5. Communicate with the instructor or TAs early (e.g. when you start to have problems). Don't wait until the day before the exam! 
+
+## ACE Outcome 3
+Use mathematical, computational, statistical, or formal reasoning (including reasoning based on principles of logic) to solve problems, draw inferences, and determine reasonableness. The reinforced skills for STAT 218 are writing and critical thinking. STAT 218 will provide the student opportunities to achieve this learning outcome through readings, projects, and in-class activities. These assignments (together with exams) will be used by the instructor to assess achievement of the outcome. The final exam will be used by the Department of Statistics to carry out an overall assessment of STAT 218 and the course's effectiveness at assisting students in achieving Outcome 3.
+\clearpage
+
+# Required Materials
+
+- Textbook: **Introduction to Statistical Investigations**, Tintle et al., 2015.  Access code is required. Online textbook is available through WileyPLUS. If you would like a physical copy of the textbook, you may purchase one; however, some homework will be done through the WileyPLUS portal.
+
+- Calculator (NOT a cell phone, computer, or other networked device) for quizzes and tests. 
+
+- Laptop computer (one per group, for every class)
+
+# Course Policies
+
+## Grading Policy
+
+- Exam 1: **15%** of your grade.
+
+- Exam 2: **20%** of your grade.
+
+- Final Exam: **25%** of your grade.
+
+- Quizzes: **15%** of your grade.
+
+- Homework/Participation: **25%** of your grade.
+
+## Participation
+
+Participation will be determined using in-class activities and data collection. Most of the in-class activities will be group activities. You will receive your group/seating assignment on the first day of class. You will sit with your group throughout the semester. Group activities will primarily be from the chapter explorations and may be graded for completeness or correctness or both. If you do not finish the activity during class time, you must finish it outside of class. 
+
+After you have finished reading the syllabus, email a picture of your childhood pet (or another cute critter) to me at [susan.vanderplas@unl.edu](mailto:susan.vanderplas@unl.edu) with the subject line "I read the syllabus".
+
+## Homework
+
+Homework will include assignments on WileyPLUS and Chapter explorations (group assignments). **No late work will be accepted.** Chapter explorations will be started during class and usually will involve using an app or the internet. Please make sure that at least one person in your group brings a laptop each class period.
+
+
+## Calculator
+
+You will need a calculator for this class. We will not emphasize memorization of formulas or complex calculations, but you will still need a basic calculator. You may not use cell phones or computers (or any device which communicates with another electronic device wirelessly) for computations during quizzes or exams. 
+
+## Quizzes
+
+Quizzes will be given online (WileyPLUS) at the end of each chapter. They will be timed, available during a certain time period, and you will not be able to go back once you have answered a question. Questions will be multiple choice, true/false, and short answer.
+
+## Exams
+
+Exams are closed (no book, no notes). You are expected to take the exams at the times they are scheduled. If you cannot make a scheduled test time due to extreme circumstances, you must notify the instructor **prior to the exam**. No make-up exams will be given without prior notification and a signed note from your advisor or your physician if you are ill. All work must be shown (legibly) to receive credit.
+
+
+The Final Exam will be held on Tuesday, May 5, from 6-8 pm. This is a unit exam and conflicts with the CHEM 109/110 exam; during the spring semester, Stat 218 students take the exam at the scheduled time and must schedule an alternate exam for CHEM 109/110.
+
+# General Information
+
+## Disabilities
+
+The University strives to make all learning experiences as accessible as possible. If you anticipate or experience barriers based on your disability (including mental health, chronic or temporary medical conditions), please let me know immediately so that we can discuss options privately. To establish reasonable accommodations, I may request that you register with Services for Students with Disabilities (SSD). If you are eligible for services and register with their office, make arrangements with me as soon as possible to discuss your accommodations so they can be implemented in a timely manner.  SSD contact information:  232 Canfield Admin. Bldg.; 402-472-3787.
+
+
+__Personal note__: I have a condition called _prosopagnosia_ ("face blindness") that makes it extremely difficult to recognize people's faces. I will work very hard to get to know you all during the semester, but it is likely that if I see you outside of class I may not recognize you. I am also red-green colorblind. I attempt to make my slides colorblind-friendly, but if you have any problems understanding my course materials due to perceptual problems (or for any other reason), please come talk to me about it so that I can improve! 
+
+
+## Academic Support Services
+
+You can schedule free appointments for individual academic coaching with First-Year Experience and Transition Program staff through MyPLAN.  You can also take advantage of study stops--which provide individual and group study with learning consultants in a variety of disciplines--and free group workshops on topics such as time management, goal setting, test preparation, and reading strategies.  See [success.unl.edu](http://success.unl.edu/) for schedules and more information. 
+
+## Counseling and Psychological Services
+
+UNL offers a variety of options to students to aid them in dealing with stress and adversity. [Counseling and Psychological & Services (CAPS)](https://caps.unl.edu/) is a multidisciplinary team of psychologists and counselors that works collaboratively with Nebraska students to help them explore their feelings and thoughts and learn helpful ways to improve their mental, psychological and emotional well-being when issues arise. CAPS can be reached by calling 402-472-7450. 
+
+[Big Red Resilience & Well-Being](https://resilience.unl.edu/big-red-resilience-well-being) (BRRWB) provides one-on-one well-being coaching to any student who wants to enhance their well-being. Trained well-being coaches help students create and be grateful for positive experiences, practice resilience and self-compassion, and find support as they need it.  BRRWB can be reached by calling 402-472-8770.
+
+## Academic Honesty
+
+Academic honesty is essential to the existence and integrity of an academic institution. The responsibility for maintaining that integrity is shared by all members of the academic community. The University's Student Code of ConductLinks to an external site. addresses academic dishonesty. Students who commit acts of academic dishonesty are subject to disciplinary action and are granted due process and the right to appeal any decision.
+
+## Diversity & Inclusion
+
+The University of Nebraska-Lincoln does not discriminate on the basis of race, ethnicity, color, national origin, sex (including pregnancy), religion, age, disability, sexual orientation, gender identity, genetic information, veteran status, marital status, and/or political affiliation.
+
+## Emergency Response:
+
+- Fire Alarm (or other evacuation): Gather belongings (Purse, keys, cellphone, N-Card, etc.) and use the nearest exit to leave the building. Do not use the elevators. After exiting notify emergency personnel of the location of persons unable to exit the building. Do not return to building unless told to do so by emergency personnel. 
+
+- Tornado Warning: When sirens sound, move to the lowest interior area of building or designated shelter. Stay away from windows and stay near an inside wall when possible.
+
+- Active Shooter
+   1. Evacuate: If there is a safe escape path, leave belongings behind, keep hands visible and follow police officer instructions.
+   2. Hide out: If evacuation is impossible secure yourself in your space by turning out lights, closing blinds and barricading doors if possible.
+   3. Take action: As a last resort, and only when your life is in imminent danger, attempt to disrupt and/or incapacitate the active shooter.
+
+- UNL Alert:    
+   - Notifications about serious incidents on campus are sent via text message, email, unl.edu website, and social 
+media.  For more information go to http://unlalert.unl.edu.
+   - Additional Emergency Procedures can be found here: http://emergency.unl.edu/doc/Emergency_Procedures_Quicklist.pdf
+
+
+\clearpage
+
+# Class Schedule
+
+(This schedule is tentative and subject to change) 
+
+You are expected to read the assigned chapters before coming to class.
+\begin{center}
+```{r schedule, echo = F, results='markup', out.extra="center"}
+options(knitr.kable.NA = "")
+knitr::kable(class_schedule, align = "l", format = "latex", booktabs = T) %>%
+   kableExtra::row_spec(c(9, 10, 19, 20, 22, 30, 32), hline_after = T) %>%
+   kableExtra::row_spec(c(10, 20, 33), bold = T)
+```
+\end{center}
+
+In the body of the email you send, include the species (dog, cat, rabbit, etc.) of the type of pet you had as a child (if you didn't have a pet, include "none"). 
+
