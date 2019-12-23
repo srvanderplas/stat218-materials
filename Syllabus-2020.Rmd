@@ -130,13 +130,9 @@ Use mathematical, computational, statistical, or formal reasoning (including rea
 ## Grading Policy
 
 - Exam 1: **15%** of your grade.
-
 - Exam 2: **20%** of your grade.
-
 - Final Exam: **25%** of your grade.
-
 - Quizzes: **15%** of your grade.
-
 - Homework/Participation: **25%** of your grade.
 
 A 90% score is guaranteed to receive at least an A-, 80% at least a B-, 70% at least a C-, and 60% at least a D-. Any score below 60% will correspond to an F. 
@@ -145,7 +141,7 @@ A 90% score is guaranteed to receive at least an A-, 80% at least a B-, 70% at l
 
 Participation will be determined using in-class activities and data collection. Most of the in-class activities will be group activities. You will receive your group/seating assignment on the first day of class. You will sit with your group throughout the semester. Group activities will primarily be from the chapter explorations and may be graded for completeness or correctness or both. If you do not finish the activity during class time, you must finish it outside of class. 
 
-After you have finished reading the syllabus, email a picture of your childhood pet (or another cute critter) to me at [susan.vanderplas@unl.edu](mailto:susan.vanderplas@unl.edu) with the subject line "I read the syllabus".
+After you have finished reading the syllabus, email a picture of a cute mammal to me at [susan.vanderplas@unl.edu](mailto:susan.vanderplas@unl.edu) with the subject line "I read the syllabus".
 
 ## Homework
 
@@ -228,5 +224,5 @@ knitr::kable(class_schedule, align = "l", format = "latex", booktabs = T) %>%
 ```
 \end{center}
 
-In the body of the email you send, include the species (dog, cat, rabbit, etc.) of the type of pet you had as a child (if you didn't have a pet, include "none"). 
+In the body of the email you send, provide your height (in inches) and shoe length (in inches, measured from toe to heel). 
 
