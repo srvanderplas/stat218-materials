@@ -1,0 +1,112 @@
+---
+title: "Stat 218 Introduction"
+author: ""
+output:
+  xaringan::moon_reader:
+    lib_dir: libs
+    nature:
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+---
+
+```{r setup, include=FALSE}
+options(htmltools.dir.version = FALSE)
+```
+
+## Syllabus
+
+- Available on Canvas
+
+- Read it by Thursday's class 
+
+<br/><br/>
+.center[![Cat Reading gif](https://media.giphy.com/media/NFA61GS9qKZ68/giphy.gif)]
+
+---
+class:inverse, middle, center
+# Syllabus Highlights
+
+---
+## Getting Help
+
+- My office: Hardin Hall (East Campus) 349a    
+TR 1:30-3 (e.g. before class)
+
+- TA office hours: TBD
+
+- Grader office hours: TBD
+
+- Other times by appointment
+
+.center[![Simba help me gif](https://media.giphy.com/media/cz314BBYiCkiA/giphy.gif)]
+
+---
+## Grades
+
+- Exam 1: 15%
+- Exam 2: 20%
+- Final: 25%
+- Quizzes: 15%
+- Homework/Participation: 25%
+
+If you have to miss an exam, you must notify me beforehand. 
+
+No late homework will be accepted
+
+---
+## Disabilities
+
+- University resources if you have (or think you have) a disability requiring accommodation:    
+232 Canfield Admin Building, (402) 472-3787
+
+- Reasonable accommodations may include: extra time on tests/quizzes, testing room (quiet, low distraction environment), etc.
+
+-----------
+
+.center[<img src="https://media.mnn.com/assets/images/2015/03/face_blindness_prosopagnosia.jpg.653x0_q80_crop-smart.jpg" alt="Face Blindness graphic" width="50%"/>]
+
+???
+
+If you have a disability (or suspect you have a disabilty), you can work with Services for Students with Disabilities to get accommodations to support you. Disabilities might include ADHD, sensory processing disorders, depression, chronic illness, migraines, etc. in addition to physical limitations and learning disabilities. SSD will work with you to figure out what accommodations are reasonable and provide written documentation to give to your professors. 
+
+On that note, I'd like to make you aware of a couple of my own limitations. I have prosopagnosia, which is also called face blindness; it affects my ability to recognize faces. I can see your face just fine, but it doesn't get "written to memory" properly, so I have trouble identifying people. I use cues such as haircuts and glasses, but these aren't failsafe. I will work to learn your names, but it is difficult for me, so I would ask that you remind me who you are when we talk one-on-one, and don't get offended if I walk right past you and don't wave or smile outside of class. I'm also red-green colorblind; when I create my slides I try to make them visually accessible, but if you have trouble with the course materials from a perceptual standpoint, please let me know - I'm happy to try to change things up to make them more broadly accessible.
+
+---
+## Other Resources
+
+- Academic Support - [success.unl.edu](success.unl.edu)
+
+- Counseling/Psychological Services
+
+- Big Red Resilience and Wellbeing
+
+---------
+
+.center[![gif of raccoons forming a chain to rescue a baby](https://media.giphy.com/media/NO9goTrxos5BS/giphy.gif)]
+
+---
+## Class Schedule
+
+- January: Chapter P, Chapter 1
+
+- February: Chapter 2, **Exam 1** (Feb 13), Chapter 3
+
+- March: Chapter 4, Chapter 5, **Exam 2** (Mar 19), Spring Break
+
+- April: Chapter 6, Chapter 7
+
+- May: **Final Exam** (May 5, 6-8 pm)
+
+
+---
+class:inverse, middle, center
+# Groups
+
+---
+## Group Assignments
+
+
+
+---
+## Exploration
