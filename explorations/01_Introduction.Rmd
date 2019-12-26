@@ -1,0 +1,146 @@
+---
+title: "Introduction"
+output: 
+  word_document:
+    reference_docx: word_template_reference.docx
+#   pdf_document:
+#     template: template.tex
+#     keep_tex: true
+# geometry: margin=1in,headsep=.2in
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = F)
+```
+
+
+### Syllabus    
+Read by Thursday
+
+### Groups    
+Find on Canvas
+
+### Exploration - Infant behavior
+
+A study reported in *Nature* in November 2007 discusses the results of an experiment investigating whether infants (<1 year old) can evaluate someone's behavior as appealing (helping someone else) or aversive (hindering someone else). In one portion of the experiment, 10 month old infants were shown a "climber" character that could not make it up a hill in two tries. Infants were then shown one of two scenarios for the climber's next try: one showed the climber being pushed to the top of the hill by another character ("helper") and the other scenario showed the climber being pushed down the hill by another character ("hinderer"). This process was repeated several times, alternating whether the helper or hinderer was shown, until the infants no longer paid attention to the scenarios. Subsequently, infants were presented with the helper and hinderer character and asked to pick one to play with. the researchers reported that 14 of the 16 10 month olds chose the helper over the hinderer.
+
+Hamlin, J. K., Wynn, K., & Bloom, P. (2007). Social evaluation by preverbal infants. Nature, 450(7169), 557–559. [doi:10.1038/nature06288](https://www.nature.com/articles/nature06288)
+
+
+- What proportion of the infants chose the helper toy? Is it more than half? 
+
+- What was the researcher's conjecture?
+
+- Is it wrong? What should be the case if the babies were randomly guessing?
+
+- Would the observed result (14 of 16 choosing the helper) be very surprising, somewhat surprising, or not so surprising, if the infants had no real preference?
+- How strong do you believe the evidence is against the chance model?
+
+
+**Null Model** A model that reflects no effects other than random chance
+
+
+## Study Simulation
+
+- Each group: Toss a coin 16 times (heads = helper, tails = hinderer). Why 16?
+
+- Count the total number of times heads comes up: ______________
+
+- Send one group member to the front of the room to plot your group's results on the class dot plot
+
+- What assumptions are made in the dot plot?
+  1.
+  
+  2.
+  
+  3. 
+  
+#### Class Discussion
+
+- What does each dot on the plot represent?
+
+- Why didn't every group get the same value?
+
+- If you truly don't have any preference, how many times would you have chosen the helper toy by chance?
+
+- What would a dot in the right tail of the dot plot mean? The left tail?
+
+- If we want lots of points, we need to collect lots more data. How could we do this?
+
+
+## Six Steps and Introduction to the Applets
+
+### Six Steps of a Statistical Investigation
+
+1. Ask a research question
+
+2. Design a study and collect data
+
+3. Explore the data
+
+4. Draw inferences beyond the data
+
+5. Formulate conclusions
+
+6. Look back and ahead
+
+In groups, discuss the six steps in the Helper vs. Hinderer Experiment
+
+### Terminology
+
+For the Helper vs. Hinderer experiment:
+
+- Data? 
+- Observational unit? 
+- Variables of interest? 
+- Categorical or quantitative? 
+- Are 60ish sets of 16 coin flips enough? 
+- What would you expect to happen with 100 sets of 16 coin flips? 
+- What would you expect to happen with 1000 sets of 16 coin flips? 
+- Would the distribution have the same shape?
+- Would it be centered at the same place? 
+- Would the variability (spread) change? 
+
+
+## One Proportion Applet
+
+[http://www.rossmanchance.com/ISIapplets.html](http://www.rossmanchance.com/ISIapplets.html)
+
+For this applet, 
+
+- What is the statistic?
+
+- What is the probability of heads (under the chance model)?
+
+- How many flips in one run?
+
+  - How many repetitions? 
+  
+  - Copy the picture of the distribution with 62 simulations:    
+&nbsp;    
+&nbsp;
+  
+  - Copy the picture of the distribution with 100 simulations:    
+&nbsp;    
+&nbsp;
+  
+  - Copy the picture of the distribution with 1000 simulations:    
+&nbsp;    
+&nbsp;
+
+## Distribution of Number of Helper preference selections
+
+The **distribution** of the variable is the pattern of outcomes. We describe the distribution using some of the following measures:
+
+- Center - the middle or typical value of a quantitative variable (mean, median)    
+&nbsp;    
+&nbsp;    
+&nbsp;
+
+- Shape of the distribution    
+&nbsp;    
+&nbsp;    
+&nbsp;
+
+- Variability - the spread of the observations
+  - **Standard deviation** is a measure of the variability
