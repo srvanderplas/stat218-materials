@@ -1,12 +1,12 @@
 ---
 title: "Introduction"
 output: 
-  word_document:
-    reference_docx: word_template_reference.docx
-#   pdf_document:
-#     template: template.tex
-#     keep_tex: true
-# geometry: margin=1in,headsep=.2in
+  # word_document:
+  #   reference_docx: word_template_reference.docx
+  pdf_document:
+    template: template.tex
+    # keep_tex: true
+geometry: margin=1in,headsep=.2in
 ---
 
 ```{r setup, include=FALSE}
@@ -14,59 +14,60 @@ knitr::opts_chunk$set(echo = F)
 ```
 
 
-### Syllabus    
-Read by Thursday
+## Syllabus - Read by Thursday
 
-### Groups    
-Find on Canvas
+## Groups
+- Find on Canvas
+- Sit in your assigned seats on Thursday
 
-### Exploration - Infant behavior
+## Exploration - Infant behavior
 
 A study reported in *Nature* in November 2007 discusses the results of an experiment investigating whether infants (<1 year old) can evaluate someone's behavior as appealing (helping someone else) or aversive (hindering someone else). In one portion of the experiment, 10 month old infants were shown a "climber" character that could not make it up a hill in two tries. Infants were then shown one of two scenarios for the climber's next try: one showed the climber being pushed to the top of the hill by another character ("helper") and the other scenario showed the climber being pushed down the hill by another character ("hinderer"). This process was repeated several times, alternating whether the helper or hinderer was shown, until the infants no longer paid attention to the scenarios. Subsequently, infants were presented with the helper and hinderer character and asked to pick one to play with. the researchers reported that 14 of the 16 10 month olds chose the helper over the hinderer.
 
 Hamlin, J. K., Wynn, K., & Bloom, P. (2007). Social evaluation by preverbal infants. Nature, 450(7169), 557–559. [doi:10.1038/nature06288](https://www.nature.com/articles/nature06288)
 
 
-- What proportion of the infants chose the helper toy? Is it more than half? 
+- What proportion of the infants chose the helper toy? Is it more than half? \vfil
 
-- What was the researcher's conjecture?
+- What was the researcher's conjecture? \vfil
 
-- Is it wrong? What should be the case if the babies were randomly guessing?
+- Is it wrong? What should be the case if the babies were randomly guessing?\vfil
 
-- Would the observed result (14 of 16 choosing the helper) be very surprising, somewhat surprising, or not so surprising, if the infants had no real preference?
-- How strong do you believe the evidence is against the chance model?
+- Would the observed result (14 of 16 choosing the helper) be very surprising, somewhat surprising, or not so surprising, if the infants had no real preference?\vfil
 
+- How strong do you believe the evidence is against the chance model?\vfil\vfil
 
 **Null Model** A model that reflects no effects other than random chance
 
+\clearpage
+### Study Simulation
 
-## Study Simulation
-
-- Each group: Toss a coin 16 times (heads = helper, tails = hinderer). Why 16?
+- Each group: Toss a coin 16 times (heads = helper, tails = hinderer). Why 16?\vfil
 
 - Count the total number of times heads comes up: ______________
 
-- Send one group member to the front of the room to plot your group's results on the class dot plot
+- Send one group member to the front of the room to plot your group's results on the class dot plot\vfil\vfil\vfil
 
 - What assumptions are made in the dot plot?
-  1.
+  1. \phantom{a}
   
-  2.
+  2. \phantom{a}\vfil
   
-  3. 
+  3. \phantom{a}\vfil
   
-#### Class Discussion
+### Class Discussion
 
-- What does each dot on the plot represent?
+- What does each dot on the plot represent?\vfil
 
-- Why didn't every group get the same value?
+- Why didn't every group get the same value?\vfil
 
-- If you truly don't have any preference, how many times would you have chosen the helper toy by chance?
+- If you truly don't have any preference, how many times would you have chosen the helper toy by chance?\vfil
 
-- What would a dot in the right tail of the dot plot mean? The left tail?
+- What would a dot in the right tail of the dot plot mean? The left tail?\vfil
 
-- If we want lots of points, we need to collect lots more data. How could we do this?
+- If we want lots of points, we need to collect lots more data. How could we do this?\vfil
 
+\clearpage
 
 ## Six Steps and Introduction to the Applets
 
@@ -86,61 +87,64 @@ Hamlin, J. K., Wynn, K., & Bloom, P. (2007). Social evaluation by preverbal infa
 
 In groups, discuss the six steps in the Helper vs. Hinderer Experiment
 
-### Terminology
+-------------------
 
-For the Helper vs. Hinderer experiment:
+### Terminology and Concepts
+For the Helper vs. Hinderer experiment, answer the following questions using terminology defined in Section P of the book.
 
-- Data? 
-- Observational unit? 
-- Variables of interest? 
-- Categorical or quantitative? 
-- Are 60ish sets of 16 coin flips enough? 
-- What would you expect to happen with 100 sets of 16 coin flips? 
-- What would you expect to happen with 1000 sets of 16 coin flips? 
-- Would the distribution have the same shape?
-- Would it be centered at the same place? 
-- Would the variability (spread) change? 
+- What are the data? \vfil
+- What is the observational unit? \vfil
+- Variables of interest? \vfil
+- Are the variables of interest categorical or quantitative? \vfil
+- Are ~60 sets of 16 coin flips enough? \vfil
+- What would you expect to happen with 100 sets of 16 coin flips? \vfil
+- What would you expect to happen with 1000 sets of 16 coin flips? \vfil
+- Would the distribution have the same shape?\vfil
+- Would it be centered at the same place? \vfil
+- Would the variability (spread) change? \vfil
 
-
+\clearpage
 ## One Proportion Applet
 
 [http://www.rossmanchance.com/ISIapplets.html](http://www.rossmanchance.com/ISIapplets.html)
 
 For this applet, 
 
-- What is the statistic?
+- What is the statistic?\vfil
 
-- What is the probability of heads (under the chance model)?
+- What is the probability of heads (under the chance model)? \vfil
 
-- How many flips in one run?
+- How many flips in one run?\vfil
 
-  - How many repetitions? 
-  
-  - Copy the picture of the distribution with 62 simulations:    
-&nbsp;    
-&nbsp;
-  
-  - Copy the picture of the distribution with 100 simulations:    
-&nbsp;    
-&nbsp;
-  
-  - Copy the picture of the distribution with 1000 simulations:    
-&nbsp;    
-&nbsp;
+- How many repetitions?\vfil
 
-## Distribution of Number of Helper preference selections
+- Sketch the distribution with 62 simulations:\vfil\vfil
+
+- Sketch the distribution with 100 simulations:\vfil\vfil
+
+- Sketch the distribution with 1000 simulations:\vfil\vfil
+
+\clearpage
+## Distributions
 
 The **distribution** of the variable is the pattern of outcomes. We describe the distribution using some of the following measures:
-
-- Center - the middle or typical value of a quantitative variable (mean, median)    
-&nbsp;    
-&nbsp;    
-&nbsp;
-
-- Shape of the distribution    
-&nbsp;    
-&nbsp;    
-&nbsp;
-
+  
+- Center - the middle or typical value of a quantitative variable (mean, median)\vfil
+- Shape of the distribution\vfil
 - Variability - the spread of the observations
-  - **Standard deviation** is a measure of the variability
+  - **Standard deviation** is a measure of the variability\vfil
+
+## Next time
+
+- Sit in your groups
+
+- Read Section P
+
+- Bring your answers to Section P.3 #1, 2:
+  1. Suppose you are a contestant on this show. Intuitively, what do you think is the probability that you win the car? \vfil
+  2. Give a one-sentence description of what you think probability means in this context\vfil
+
+- Read Ch. 1: Overview and Section 1.1 (up through and including FAQ 1.1.1, Chapter 1 pages 22-30)
+- Try to complete Q1-10 of Exploration 1.1 (Can Dogs Understand Human Cues?)
+- We will call on you by name, so be prepared!
+  
