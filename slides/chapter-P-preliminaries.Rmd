@@ -3,6 +3,8 @@ title: "Preliminaries"
 author: ""
 output:
   xaringan::moon_reader:
+    css: ["css/default.css", "css/default-fonts.css"]
+    mathjax: "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_HTMLorMML"
     lib_dir: libs
     nature:
       highlightStyle: github
@@ -230,8 +232,12 @@ class: inverse, middle, center
 ---
 ## Cars or Goats
 
-.left-column[![Let's Make A Deal logo](https://upload.wikimedia.org/wikipedia/en/c/cf/LMADlogo2011.jpg)]
-.right-column[
+<div class="right-column">
+<img alt = "Let's Make A Deal logo" src="https://upload.wikimedia.org/wikipedia/en/c/cf/LMADlogo2011.jpg"/>
+
+<img alt = "3 doors: 2 goats, 1 car" src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a1/Monty-RightCar.svg/500px-Monty-RightCar.svg.png"/>
+</div>
+
 - TV Show from the 1960s and 1970s
 
 - 3 doors containing prizes:
@@ -240,13 +246,12 @@ class: inverse, middle, center
     
     - 2 goats
     
-    
+What is the probability of picking the car? 
 
-We can **simulate ** this game and keep track of how often we win the car. 
-
-]
 
 ---
 ## Cars or Goats
 
-Work through Exploration P.3 in your groups. Submit the exploration on Canvas.
+Work through Exploration P.3. 
+
+Plot your results for questions 6 and 8 in a chart, with number of games on the x axis and proportion of wins on the y axis (see Fig. P.6 for an example). Upload the graph to Canvas. 

@@ -4,8 +4,9 @@
     <title>Preliminaries</title>
     <meta charset="utf-8" />
     <meta name="author" content="" />
-    <link href="libs/remark-css-0.0.1/default.css" rel="stylesheet" />
-    <link href="libs/remark-css-0.0.1/default-fonts.css" rel="stylesheet" />
+    <link rel="stylesheet" href="css/slides.css" type="text/css" />
+    <link rel="stylesheet" href="css/default.css" type="text/css" />
+    <link rel="stylesheet" href="css/default-fonts.css" type="text/css" />
   </head>
   <body>
     <textarea id="source">
@@ -39,6 +40,34 @@ class: inverse,middle,center
     
 
 ---
+## Simulation
+
+We can simulate this experiment if we use a **null model** that assumes that infants are equally likely to choose the helper or hinderer puppet.
+
+Let heads = selecting the helper puppet, and flip a coin 16 times.
+
+The **test statistic** is the number of infants selecting the helper puppet (the number of heads)
+
+If infants are equally likely to select either puppet, this replicates the original experiment (16 infants)
+
+By combining multiple simulated trials, we can see what the **distribution** of the test statistic would be under the null model.
+
+---
+## Class Discussion
+
+- What does each dot on the plot represent?
+
+- Why didn't every group get the same value?
+
+- If you truly don't have any preference, how many times would you have chosen the helper toy by chance?
+
+- What would a dot in the right tail of the dot plot mean? The left tail?
+
+- If we want lots of points, we need to collect lots more data. How could we do this?
+
+
+
+---
 class:inverse, middle, center
 # P.1: Introduction to the Six-Step Method
 
@@ -56,6 +85,11 @@ class:inverse, middle, center
 5. Formulate conclusions (using step 4)
 
 6. Look back (limitations) and look ahead (new questions)
+
+---
+## Group Discussion
+
+How do the six steps apply to the Helper vs. Hinderer experiment?
 
 ---
 class: inverse, middle,center
@@ -146,6 +180,20 @@ Somewhere between 3 and 3.5 minutes is a good cutoff for the clustering of the p
 With this cutoff, we get two separate unimodal distributions that have lower overall variability
 
 --&gt;
+
+---
+## Distributions
+
+- Center - what is the most likely value?
+  - mean (average), median (middle value), mode (most common value)
+  
+- Shape - how many "peaks" does the distribution have? Is it symmetric?
+
+- Variability - how spread out is the distribution? 
+  - standard deviation - typical distance between the data values and the mean of the distribution
+
+&lt;img src="chapter-P-preliminaries_files/figure-html/unnamed-chunk-4-1.png" width="80%" center /&gt;
+
 ---
 class: inverse, middle, center
 # P.3: Exploring Random Processes
@@ -153,8 +201,12 @@ class: inverse, middle, center
 ---
 ## Cars or Goats
 
-.left-column[![Let's Make A Deal logo](https://upload.wikimedia.org/wikipedia/en/c/cf/LMADlogo2011.jpg)]
-.right-column[
+&lt;div class="right-column"&gt;
+&lt;img alt = "Let's Make A Deal logo" src="https://upload.wikimedia.org/wikipedia/en/c/cf/LMADlogo2011.jpg"/&gt;
+
+&lt;img alt = "3 doors: 2 goats, 1 car" src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a1/Monty-RightCar.svg/500px-Monty-RightCar.svg.png"/&gt;
+&lt;/div&gt;
+
 - TV Show from the 1960s and 1970s
 
 - 3 doors containing prizes:
@@ -163,11 +215,15 @@ class: inverse, middle, center
     
     - 2 goats
     
-    
+What is the probability of picking the car? 
 
-We can **simulate ** this game and keep track of how often we win the car. 
 
-]
+---
+## Cars or Goats
+
+Work through Exploration P.3. 
+
+Plot your results for questions 6 and 8 in a chart, with number of games on the x axis and proportion of wins on the y axis (see Fig. P.6 for an example). Upload the graph to Canvas.
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
@@ -268,7 +324,7 @@ slideshow._releaseMath(document);
 (function () {
   var script = document.createElement('script');
   script.type = 'text/javascript';
-  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  script.src  = 'https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_HTMLorMML';
   if (location.protocol !== 'file:' && /^https?:/.test(script.src))
     script.src  = script.src.replace(/^https?:/, '');
   document.getElementsByTagName('head')[0].appendChild(script);
