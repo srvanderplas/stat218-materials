@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Ch. 1: Significance: How Strong Is the Evidence?</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="" />
+    <link rel="stylesheet" href="css/default.css" type="text/css" />
+    <link rel="stylesheet" href="css/default-fonts.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# Ch. 1: Significance: How Strong Is the Evidence?
+
+---
+
+&lt;script type="text/x-mathjax-config"&gt;
+  MathJax.Hub.Config({ TeX: { extensions: ["color.js"] }});
+&lt;/script&gt;
+
+
+
+class: inverse,middle,center
+# 1.1: Introduction to Chance Models
+
+---
+## Statistical Significance
+
+&lt;br/&gt;&lt;br/&gt;
+**Statistical significance** - unlikely to have occurred by random chance
+
+&gt; [Helper vs. Hinderer example](https://srvanderplas.github.io/unl-stat218-materials/slides/chapter-P-preliminaries.html#3), what is P(14/16 infants)? Is it rare? What is P(8/16 infants)?
+
+--
+
+&lt;br/&gt;&lt;br/&gt;
+
+**Probabilty** - Long run proportion of times an outcome from a random process occurs
+&gt; Let's Make a Deal example - result after 100s of simulations
+
+
+---
+## Statistical Significance
+
+General strategy: 
+
+1. Create a model for the process under random chance
+
+2. Use the model to calculate the **probability** of the observation under random chance
+
+3. If that probability is very small, conclude that the effect is likely not due to chance    
+e.g. is **statistically significant**
+
+
+---
+## Vocabulary
+
+- **Statistic** - number summarizing the results from a *sample*
+
+- **Parameter** - long-run numerical property of the *population*
+
+&lt;br/&gt;
+***
+&lt;br/&gt;
+.center[
+.inline-left[**P**arameter -&gt; **P**opulation].inline-right[**S**tatistic -&gt; **S**ample]
+
+.small[.inline-left[unknown value].inline-right[known value]]
+]
+&lt;br/&gt;
+***
+&lt;br/&gt;
+
+.center[We use **statistics** to estimate  **parameters**]
+
+---
+## Example 1.1: Can Dolphins Communicate?
+
+.pull-left[
+Training: 
+1. Shine headlight into tank
+2. If light is steady, hit the right-side lever to get a fish
+3. If light is blinking, hit the left-side lever to get a fish
+
+Experiment: 
+1. Show Doris the light 
+2. Give Buzz the levers
+3. See if Doris could tell Buzz which lever to push
+
+].pull-right[![gif of dolphin splashing a kid](https://media.giphy.com/media/uSy9uVHKqRNjG/giphy.gif)
+
+]
+
+
+---
+## Example 1.1: Can Dolphins Communicate?
+
+.pull-left[
+Training: 
+1. Shine headlight into tank
+2. If light is steady, hit the right-side lever to get a fish
+3. If light is blinking, hit the left-side lever to get a fish
+
+Experiment: 
+1. Show Doris the light 
+2. Give Buzz the levers
+3. See if Doris could tell Buzz which lever to push
+
+].pull-right[![gif of dolphin splashing a kid](https://media.giphy.com/media/uSy9uVHKqRNjG/giphy.gif)
+
+&lt;br/&gt;&lt;br/&gt;
+Buzz hit the correct lever 15/16 times
+]
+
+
+---
+## Example 1.1: Can Dolphins Communicate?
+
+1. Ask a research question:    
+.red[Can the dolphins communicate ideas?]
+
+2. Design a study and collect data:
+  - Observational Units: .red[Each of Buzz's attempts]
+  - Variable: .red[Correct or incorrect button]
+  - Categorical or quantitative?: .red[Categorical]
+  
+3. Explore the data: .red[We observed 15 correct responses out of 16 total trials]
+
+4. Draw inferences beyond the data:    
+&gt; What would we expect the **statistic** to be if Buzz was guessing?    
+&gt; Was the observed **statistic** significantly greater than that?
+
+--
+
+&lt;br/&gt;&lt;br/&gt;
+.large[.center[We need to build a chance model to find out!]]
+
+
+---
+## Example 1.1: Can Dolphins Communicate?
+
+Real Study | Physical Simulation
+---------: | :------------------
+Lever pull by Buzz | Coin Flip
+Correct lever | Heads
+Incorrect lever | Tails
+Probability of correct button&lt;br&gt; **when Buzz is guessing** (1/2) | Chance of heads (1/2)
+16 attempts by Buzz | 16 coin flips = &lt;br/&gt;One **Repetition** of the study
+
+
+.center[If Buzz is just guessing, what is a **typical** value we would see in one repetition of the study?
+
+http://www.rossmanchance.com/ISIapplets.html]
+
+---
+## Determining Statistical Significance: 3 S Strategy
+
+1. **Statistic** - numerical summary from sample
+  - Helper/Hinderer: 14/16
+  - Doris/Buzz: 15/16
+
+2. **Simulate** - identify a "by chance alone" model for the scenario and repeatedly simulate values for the statistic under that model
+
+3. **Strength of Evidence** - Is the observed statistic unusual?
+
+
+&lt;img src="chapter-1-significance_files/figure-html/unnamed-chunk-1.gif" width="80%" style="display: block; margin: auto;" /&gt;
+
+---
+## Exploration 1.1: Can Dogs Understand Human Cues?
+
+1. State the research question
+
+2. Observational units
+
+3. Variable
+
+4. Sample size
+
+5. Observed statistic
+
+6. Is the statistic in the direction suggested by the researcher?
+
+7. Is the observed result *possible*?
+
+8. Is the observed result *probable*?
+
+9. If he picked the cup at random, what is the probability (parameter) that he chooses correctly?
+
+10. What would the probability of choosing the correct cup be if Harley understands the experimenter?    
+.small[(can be a range of values)]
+
+
+---
+## For next time
+
+- Complete Exploration 1.1 and submit it on Canvas
+
+- Read Section 1.2 of the textbook
+
+- Complete the first two questions of Exploration 1.2: Tasting water
+
+---
+class:inverse,middle,center
+# 1.2: Measuring the Strength of Evidence
+
+---
+## Definitions
+
+The **Null Hypothesis** `\(H_0\)` is the "by random chance alone" explanation
+
+The **Alternative Hypothesis** `\(H_A\)` is the explanation that consists of a not-random effect. 
+&gt; This is usually the thing we want to show - our research hypothesis.
+
+We want to disprove `\(H_0\)`, forcing us to conclude that `\(H_A\)` is a better (more probable) explanation. 
+
+---
+## Binary Variables
+
+**Binary** variables have only two possible outcomes
+
+`\(\pi\)` is used to represent the *parameter* for a long-run probability or proportion
+
+`\(n\)` is the sample size or number of observational units
+
+`\(\hat p\)` represents our *sample statistic* (the observed value)
+
+
+---
+## Rock Paper Scissors
+.pull-left[
+- Two players
+- Three options
+
+Are all options equally likely to be played?
+
+Some evidence* suggests that novice players are less likely to choose scissors. 
+
+.bottom[\*[See Eyler et al., 2009](https://www.jstor.org/stable/pdf/25653686.pdf)]
+
+].pull-right[
+![rock paper scissors graphic](rock_paper_scissors.png)
+]
+
+
+---
+## Rock Paper Scissors
+
+1. Research question: .red[Are novice players are less likely to choose scissors?]
+
+2. Design a study and collect data:    
+Play `\(n\)` rounds, recording 0 or 1, where 1 = scissors was played
+  - Observational Unit: .red[Each round of play]
+  - Variable: .red[Outcome of a round (rock, paper, scissors)] .small[Categorical]
+  - Outcomes: .red[Scissors or not scissors (rock, paper)] .small[Binary]
+  - Statistic: .red[Let] &lt;math xmlns="http://www.w3.org/1998/Math/MathML"&gt;&lt;mstyle color="red"&gt;
+  &lt;mi&gt;x&lt;/mi&gt;
+  &lt;mo&gt;=&lt;/mo&gt;
+  &lt;mo fence="false" stretchy="false"&gt;{&lt;/mo&gt;
+  &lt;mtext&gt;# scissors selected in&amp;#xA0;&lt;/mtext&gt;
+  &lt;mi&gt;n&lt;/mi&gt;
+  &lt;mtext&gt;&amp;#xA0;rounds&lt;/mtext&gt;
+  &lt;mo fence="false" stretchy="false"&gt;}&lt;/mo&gt;&lt;/mstyle&gt;
+&lt;/math&gt;.red[; then ]&lt;math xmlns="http://www.w3.org/1998/Math/MathML"&gt;
+  &lt;mstyle displaystyle="true" scriptlevel="0" color="red"&gt;
+    &lt;mrow class="MJX-TeXAtom-ORD"&gt;
+      &lt;mover&gt;
+        &lt;mi&gt;p&lt;/mi&gt;
+        &lt;mo stretchy="false"&gt;&amp;#x005E;&lt;!-- ^ --&gt;&lt;/mo&gt;
+      &lt;/mover&gt;
+    &lt;/mrow&gt;
+    &lt;mo&gt;=&lt;/mo&gt;
+    &lt;mfrac&gt;
+      &lt;mi&gt;x&lt;/mi&gt;
+      &lt;mi&gt;n&lt;/mi&gt;
+    &lt;/mfrac&gt;
+  &lt;/mstyle&gt;
+&lt;/math&gt;    
+&gt; In our study, `\(n=12\)`, `\(x=2\)`
+  - Parameter of interest: .red[Probability of selecting scissors]    
+  Options:
+      - Equal preference for all 3 choices, so `\(\pi = 1/3\)`
+      - `\(\pi_{\text{scissors}} &lt; 1/3\)`, that is, scissors is chosen less frequently    
+.grey[.small[Note: You don't specify a particular value, just a direction from a particular value]]
+    
+3. Explore the data: .red[2 scissors in 12 trials; 2/12 = 1/6] &lt;math xmlns="http://www.w3.org/1998/Math/MathML"&gt;&lt;mstyle color="red"&gt;
+  &lt;mo&gt;&amp;#x2248;&lt;!-- ≈ --&gt;&lt;/mo&gt;
+  &lt;mn&gt;0.1667&lt;/mn&gt;&lt;/mstyle&gt;
+&lt;/math&gt;
+
+.toprightfig[
+![rock paper scissors graphic](rock_paper_scissors.png)
+]
+---
+## Rock Paper Scissors
+
+1. Research question
+2. Design a study and collect data
+  - Outcomes: .red[Scissors or not scissors (rock, paper)] .small[Binary]
+  - Statistic: .red[Let] &lt;math xmlns="http://www.w3.org/1998/Math/MathML"&gt;&lt;mstyle color="red"&gt;
+  - Parameter of interest: .red[Probability of selecting scissors]    
+  Options:
+      - Equal preference for all 3 choices, so `\(\pi = 1/3\)`
+      - `\(\pi_{\text{scissors}} &lt; 1/3\)`, that is, scissors is chosen less frequently    
+.grey[.small[Note: You don't specify a particular value, just a direction from a particular value]]
+    
+3. Explore the data
+4. Draw inferences beyond the data: 
+
+--
+
+.center[Your parameter options represent the null and alternative hypotheses.&lt;br/&gt;Which is which?]
+
+---
+## Rock Paper Scissors
+
+1. Research question
+2. Design a study and collect data
+  - Outcomes: .red[Scissors or not scissors (rock, paper)] .small[Binary]
+  - Statistic: .red[Let] &lt;math xmlns="http://www.w3.org/1998/Math/MathML"&gt;&lt;mstyle color="red"&gt;
+  - Parameter of interest: .red[Probability of selecting scissors]    
+  Options:
+      - Equal preference for all 3 choices, so `\(\pi = 1/3\)`
+      - `\(\pi_{\text{scissors}} &lt; 1/3\)`, that is, scissors is chosen less frequently    
+.grey[.small[Note: You don't specify a particular value, just a direction from a particular value]]
+    
+3. Explore the data
+4. Draw inferences beyond the data: 
+&lt;math xmlns="http://www.w3.org/1998/Math/MathML" display="block"&gt;&lt;mstyle color="red"&gt;
+  &lt;mtable columnalign="right left right left right left right left right left right left" rowspacing="3pt" columnspacing="0em 2em 0em 2em 0em 2em 0em 2em 0em 2em 0em" displaystyle="true"&gt;
+    &lt;mtr&gt;
+      &lt;mtd&gt;
+        &lt;msub&gt;
+          &lt;mi&gt;H&lt;/mi&gt;
+          &lt;mn&gt;0&lt;/mn&gt;
+        &lt;/msub&gt;
+        &lt;mo&gt;:&lt;/mo&gt;
+      &lt;/mtd&gt;
+      &lt;mtd&gt;
+        &lt;mspace width="thickmathspace" /&gt;
+        &lt;mspace width="thickmathspace" /&gt;
+        &lt;mi&gt;&amp;#x03C0;&lt;!-- π --&gt;&lt;/mi&gt;
+        &lt;mo&gt;=&lt;/mo&gt;
+        &lt;mn&gt;1&lt;/mn&gt;
+        &lt;mrow class="MJX-TeXAtom-ORD"&gt;
+          &lt;mo&gt;/&lt;/mo&gt;
+        &lt;/mrow&gt;
+        &lt;mn&gt;3&lt;/mn&gt;
+      &lt;/mtd&gt;
+    &lt;/mtr&gt;
+    &lt;mtr&gt;
+      &lt;mtd&gt;
+        &lt;msub&gt;
+          &lt;mi&gt;H&lt;/mi&gt;
+          &lt;mi&gt;A&lt;/mi&gt;
+        &lt;/msub&gt;
+        &lt;mo&gt;:&lt;/mo&gt;
+      &lt;/mtd&gt;
+      &lt;mtd&gt;
+        &lt;mspace width="thickmathspace" /&gt;
+        &lt;mspace width="thickmathspace" /&gt;
+        &lt;mi&gt;&amp;#x03C0;&lt;!-- π --&gt;&lt;/mi&gt;
+        &lt;mo&gt;&amp;lt;&lt;/mo&gt;
+        &lt;mn&gt;1&lt;/mn&gt;
+        &lt;mrow class="MJX-TeXAtom-ORD"&gt;
+          &lt;mo&gt;/&lt;/mo&gt;
+        &lt;/mrow&gt;
+        &lt;mn&gt;3&lt;/mn&gt;
+      &lt;/mtd&gt;
+    &lt;/mtr&gt;
+  &lt;/mtable&gt;&lt;/mstyle&gt;
+&lt;/math&gt;
+
+.toprightfig[
+![rock paper scissors graphic](rock_paper_scissors.png)
+]
+
+
+---
+## Rock Paper Scissors
+.toprightfig[
+![rock paper scissors graphic](rock_paper_scissors.png)
+]
+
+- Is `\(\hat p_{scissors}\)` less than the probability specified in the null hypothesis?&lt;br/&gt;    
+.red[Yes, the sample proportion of 1/6 is in the direction of the alternative hypothesis]
+
+- Is it possible that `\(\hat p\)` could turn out this small even if `\(H_0\)` were true?&lt;br/&gt;    
+.red[Yes, it is possible that it could be this small]
+
+---
+## P-values
+
+The **p-value** is the probability of obtaining a value of the statistic at least as extreme as the observed statistic *when the null hypothesis is true*
+
+We estimate a p-value by finding the **proportion of simulated statistics** using the random chance model assuming `\(H_0\)`  
+
+**that are at least as extreme** (in the direction of `\(H_A\)`)  
+
+**as the value of the observed statistic** from the research study.
+
+.grey[.bottom[Note that the &lt;strong&gt;p-value&lt;/strong&gt; is not the same p as the sample proportion, &lt;math xmlns="http://www.w3.org/1998/Math/MathML"&gt;&lt;mstyle color="gray"&gt;
+  &lt;mrow class="MJX-TeXAtom-ORD"&gt;
+    &lt;mover&gt;
+      &lt;mi&gt;p&lt;/mi&gt;
+      &lt;mo stretchy="false"&gt;&amp;#x005E;&lt;!-- ^ --&gt;&lt;/mo&gt;
+    &lt;/mover&gt;
+  &lt;/mrow&gt;&lt;/mstyle&gt;
+&lt;/math&gt;. &lt;br/&gt;p-values can be computed using any sample statistic, not just proportions.]]
+
+---
+## Guidelines for Interpreting p-values
+
+p-value range | Interpretation 
+------------: | :--------------
+`\(0.10 &lt; p\;\phantom{\leq 0.10}\)` | Not much evidence against `\(H_0\)` &lt;br&gt; ( `\(H_0\)` is plausible)
+`\(0.05 &lt; p \leq 0.10\)` | Moderate evidence against `\(H_0\)`
+`\(0.01 &lt; p \leq 0.05\)` | Strong evidence against `\(H_0\)`
+`\(\phantom{0.10 &lt;}p &lt; 0.01\)` | Very strong evidence against `\(H_0\)`
+
+If you have done the modeling correctly, you'll still be wrong `\((100\times p)\)`% of the time when `\(H_0\)` is actually true
+
+.large[The smaller the p-value, the more evidence against]  `\(\displaystyle H_0\)` 
+
+---
+## Rock Paper Scissors
+.toprightfig[
+![rock paper scissors graphic](rock_paper_scissors.png)
+]
+
+3 S Strategy:
+
+1. Statistic: .red[2/12 ]&lt;math xmlns="http://www.w3.org/1998/Math/MathML"&gt;&lt;mstyle color="red"&gt;
+  &lt;mo&gt;&amp;#x2248;&lt;!-- ≈ --&gt;&lt;/mo&gt;
+  &lt;mn&gt;0.1667&lt;/mn&gt;&lt;/mstyle&gt;
+&lt;/math&gt;
+
+2. Simulation: .red["coin flip" with p(heads) = 1/3]
+.pull-left[.small[Actual coins don't work, but we could use dice - rolls of 1 or 2 represent scissors... or we could let the computer do it for us using the &lt;br/&gt;[**One Proportion** applet](http://www.rossmanchance.com/ISIapplets.html)]]
+.pull-right[&lt;img alt="Rock paper scissors simulation result" src="rock-paper-scissors-simulation.png"/&gt;]
+&lt;br/&gt;
+3. Strength of evidence:
+.red[
+193 of 1000 simulation samples showed a value of 0, 1, or 2 scissors (out of 12 games)
+
+~19% of the time, we would see a value as or more extreme than 2 under the random chance model
+]
+
+---
+## P-values
+
+&lt;img src="chapter-1-significance_files/figure-html/unnamed-chunk-2-1.png" width="80%" style="display: block; margin: auto;" /&gt;
+
+---
+## P-values
+
+&lt;img src="chapter-1-significance_files/figure-html/unnamed-chunk-3-1.png" width="80%" style="display: block; margin: auto;" /&gt;
+
+---
+## P-values
+
+&lt;img src="chapter-1-significance_files/figure-html/unnamed-chunk-4-1.png" width="80%" style="display: block; margin: auto;" /&gt;
+
+---
+## P-values
+
+&lt;img src="chapter-1-significance_files/figure-html/unnamed-chunk-5-1.png" width="80%" style="display: block; margin: auto;" /&gt;
+
+---
+## P-values
+
+&lt;img src="chapter-1-significance_files/figure-html/unnamed-chunk-6-1.png" width="80%" style="display: block; margin: auto;" /&gt;
+
+`$$\underbrace{P(x \leq 2)} \approx P(x^\ast \leq 2) =  \frac{193}{1000} = .193$$`
+
+---
+## Rock Paper Scissors
+.toprightfig[
+![rock paper scissors graphic](rock_paper_scissors.png)
+]
+
+
+`$$\underbrace{P(x \leq 2)} \approx P(x^\ast \leq 2) =  \frac{193}{1000} = .193$$`
+
+Is this an unlikely result if `\(H_0\)` is true?
+
+--
+
+.red[No, our sample statistic is not in the tail of the distribution. There is an almost 20% chance of obtaining a result as or more extreme as this by random chance.]
+
+--
+
+What would you expect to happen to the p-value if we had seen only 1 scissors in the 12 rounds of the original study?
+
+--
+
+.red[There would be fewer simulation statistics as or more extreme than the observed statistic, so the p-value would be smaller.]
+
+--
+
+How much smaller?
+
+--
+
+`$$P(x \leq 1) \approx P(x^\ast \leq 1) = \frac{58}{1000} = 0.058$$`
+
+.red[If we had originally observed only 1/12 scissors, we would have moderate evidence against the null hypothesis.]
+
+---
+## Exploration 1.2: Tasting Water
+
+People spend a lot of money on bottled water. But do they really prefer bottled water to ordinary tap water? 
+
+Researchers at Longwood University investigated this question by presenting people who came to a booth at 
+a local festival with four cups of water.  
+
+Three cups contained different brands of bottled water, and one cup was filled with tap water.  
+
+Each participant (person) was asked which of the four cups of water they most preferred. 
+
+Researchers kept track of how many people chose tap water in order to see whether tap water was chosen significantly less often than would be expected by random chance.
+
+---
+## Exploration 1.2: Tasting Water
+### Step 1: Ask a research question
+
+What is the question the researcher hoped to answer?
+
+
+---
+## Exploration 1.2: Tasting Water
+### Step 2: Design a study and collect data
+
+Identify the observational units in this study
+
+
+
+In groups, continue with Exploration 1.2, filling in the PDF on Canvas. Answer questions 1-24. 
+
+Hand in one PDF per group on Canvas.
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_HTMLorMML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
