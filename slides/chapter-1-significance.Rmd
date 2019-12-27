@@ -297,7 +297,7 @@ ggplot(data = tibble(x = x), aes(x = x)) +
 ---
 ## For next time
 
-- Complete Exploration 1.1 and submit it on Canvas
+- Complete Exploration 1.1 and submit it on Canvas by January 20 (Monday) at 6pm
 
 - Read Section 1.2 of the textbook
 
@@ -691,4 +691,34 @@ Identify the observational units in this study
 
 In groups, continue with Exploration 1.2. Answer questions 1-24. 
 
-Hand in one submission per group on Canvas by Jan 27 at 6pm.
+Hand in one submission per group on Canvas by Jan 23 at 3pm.
+
+---
+class: inverse,middle,center
+# Review
+
+---
+## P-value
+
+.large[
+The p-value is the .underline[.hidden[probability]] of obtaining a value for the statistic which is as or more .underline[.hidden[extreme]] as the observed statistic when .underline[.hidden[the null hypothesis]] is true
+]
+
+--
+## P-value
+
+If the p-value is $\leq 0.05$, we have .underline[.hidden[strong]] evidence .underline[.hidden[against]] the null (suggesting the phenomenon is NOT random)
+
+- We are .underline[.hidden[not very]] likely to see our observed result if the process happens by random chance.
+
+- **Written conclusion**: With a p-value of .underline[.hidden[0.05]], I .underline[.hidden[reject]] the null hypothesis and conclude the alternative .grey[(in the context of the problem)]
+
+--
+
+If the p-value is $> 0.05$, we have .underline[.hidden[not much]] evidence against the null (suggesting the phenomenom could plausibly occur due to chance).
+
+- **Written conclusion**: 
+---
+class:inverse,middle,center
+# 1.3: Alternative Measure of Strength of Evidence
+

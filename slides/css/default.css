@@ -161,3 +161,11 @@ div.container {
   height:auto;
   width: auto;
 }
+
+.underline{
+  border-bottom:1px solid black;display:inline-block;
+}
+
+.hidden{
+  visibility:hidden;
+}
