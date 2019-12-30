@@ -20,7 +20,6 @@ a, a > code {
 }
 /* Two-column layout */
 .left-column {
-  color: #777;
   width: 80%;
   height: 92%;
   float: left;

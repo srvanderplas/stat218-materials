@@ -6,6 +6,9 @@ output:
     css: ["css/default.css", "css/default-fonts.css"]
     mathjax: "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_HTMLorMML"
     lib_dir: libs
+    # includes:
+    #   in_header: 
+    #     - 'show-hidden.html'
     nature:
       highlightStyle: github
       highlightLines: true
@@ -20,9 +23,18 @@ output:
 library(ggplot2)
 library(tidyverse)
 knitr::opts_chunk$set(dpi=300, message = F, warning = F, echo = F, fig.width = 8, fig.height = 4, out.width = "80%", fig.align = "center")
+theme_set(theme_bw())
 ```
 
-class: inverse,middle,center
+---
+# Navigation
+
+- January 16: [start](#3) - [end](#14)
+- January 21: [start](#15) - [end](#34)
+- January 23: [start](#35) - [end](#62)
+
+---
+class:inverse,middle,center
 # 1.1: Introduction to Chance Models
 
 ---
@@ -37,7 +49,7 @@ class: inverse,middle,center
 
 <br/><br/>
 
-**Probabilty** - Long run proportion of times an outcome from a random process occurs
+**Probability** - Long run proportion of times an outcome from a random process occurs
 > Let's Make a Deal example - result after 100s of simulations
 
 
@@ -698,27 +710,408 @@ class: inverse,middle,center
 # Review
 
 ---
-## P-value
+## Review
 
 .large[
 The p-value is the .underline[.hidden[probability]] of obtaining a value for the statistic which is as or more .underline[.hidden[extreme]] as the observed statistic when .underline[.hidden[the null hypothesis]] is true
 ]
 
---
-## P-value
+---
+## Review
 
-If the p-value is $\leq 0.05$, we have .underline[.hidden[strong]] evidence .underline[.hidden[against]] the null (suggesting the phenomenon is NOT random)
+If the p-value is $\leq 0.05$, we have .underline[.hidden[strong]] evidence .underline[.hidden[against]] the null hypothesis (suggesting the phenomenon is NOT random)
 
 - We are .underline[.hidden[not very]] likely to see our observed result if the process happens by random chance.
 
 - **Written conclusion**: With a p-value of .underline[.hidden[0.05]], I .underline[.hidden[reject]] the null hypothesis and conclude the alternative .grey[(in the context of the problem)]
 
---
+---
+## Review
 
-If the p-value is $> 0.05$, we have .underline[.hidden[not much]] evidence against the null (suggesting the phenomenom could plausibly occur due to chance).
+If the p-value is $> 0.05$, we have .underline[.hidden[not much]] evidence against the null (suggesting the phenomenon could plausibly occur due to chance).
 
-- **Written conclusion**: 
+- **Written conclusion**: With a p-value of .underline[.hidden[more than 0.05]], I .underline[.hidden[cannot reject]] the null hypothesis. We do not have enough evidence to conclude that the alternative hypothesis is more plausible than the null hypothesis that the effect occurred by chance alone. 
+
+- This does not mean we know the .underline[.hidden[null hypothesis]]!
+
+---
+## Review
+
+- P-value calculation
+  - Want to calculate statistics as or more extreme than our observed statistic, in the direction of the alternative hypothesis
+  - Compare our statistic (from the data) to the randomly simulated statistics
+  
+- When solving questions
+  - Calculate the p-value with the applet
+  - Is the p-value less than or greater than 0.05?
+  - Should I reject or fail to reject?
+  - Make conclusion
+  - Interpret in the context of the problem
+
 ---
 class:inverse,middle,center
 # 1.3: Alternative Measure of Strength of Evidence
+## Standardized Statistics
 
+---
+## Example 1.3 - Heart Transplant Operations
+
+- Sudden spike in heart transplant mortality rates at St. George's Hospital in London
+
+- Of the last 10 transplants, 80% resulted in deaths within 30 days of the transplant
+    - Over 5x the national average mortality rate of 15% for the procedure
+  
+- **Research question:** .hidden[Is the current heart transplantation mortality rate at St. George's Hospital higher than the national rate?]
+
+- **Observational Units**: .hidden[individual heart transplants]
+
+- **Variable**: .hidden[whether the patient dies within 30 days of the transplant]
+
+- **Parameter**: .hidden[$\pi$, the long-run mortality rate from heart transplant operations at St. George's Hospital in London]
+
+- **Statistic**: .hidden[$p = 0.80$, the number of patients who died within 30 days of a transplant divided by the number of patients who received transplants (mortality rate)]
+
+
+<!-- .bottom[<button onclick = "myFunction()">Show Answers</button>] -->
+
+---
+## Example 1.3 - Heart Transplant Operations
+
+- Binary variables are often coded as 0 = failure, 1 = success, where the choice of 0/1 is arbitrary or based on the desired statistic (survival rate vs. mortality rate) 
+
+- In medical and epidemiological studies, 1 or success may be used to denote "the patient died" because X-day mortality rate may be more informative
+
+
+<br/><br/>
+
+.center[![Nathan Fillion huh gif](https://media.giphy.com/media/A928XcIImHJAc/giphy.gif)]
+
+
+---
+## Example 1.3 - Heart Transplant Operations
+
+- **Null hypothesis** .hidden[The transplant mortality rate at St. George's Hospital is the same as the national rate (0.15) $$H_0: \pi = 0.15$$] 
+
+- **Alternative hypothesis** .hidden[The mortality rate at St. George's Hospital is higher than the national mortality rate of 0.15 $$H_A: \pi > 0.15$$]
+
+
+---
+## Example 1.3 - Heart Transplant Operations
+
+In your groups, use the online applet to conduct a relevant simulation, and apply the 3 S's strategy to the problem:
+
+- Statistic
+
+- Simulate
+
+- Strength
+
+---
+## Example 1.3 - Heart Transplant Operations
+
+- Statistic: 0.80 (8/10)
+
+- Simulate: .underline[.hidden[10]] trials per simulation, with success probability .underline[.hidden[0.15]]
+```{r, fig.cap = "Simulated 30 day mortality rate", fig.width = 8, fig.height = 3.5, fig.align = "center", out.width = "80%"}
+set.seed(342509182)
+tbl <- tibble(x = rbinom(1000, 10, .15)/10, extreme = x > .8)
+
+ggplot(tbl, aes(x = x, fill = extreme)) + 
+  geom_bar() + 
+  scale_x_continuous(limits = c(-0.05, 1), breaks = (0:10)/10, "30 Day Mortality Rate, 10 patients") + 
+  scale_y_continuous("# Simulated Cases") + 
+  annotate("segment", x = 0.8, xend = 0.8, y = 0, yend = Inf) + 
+  annotate("label", x = 0.8, y = 300, label = "St. George's\nMortality Rate") +
+  annotate("text", x = .9, y = -Inf, label = sprintf("Mean: %0.3f  \nSD: %0.3f  \nProp: %0.3f  ", mean(tbl$x), sd(tbl$x), mean(tbl$extreme)), hjust = 0, vjust = -0.25)
+```
+
+- Strength: An as or more extreme result than our statistic, assuming the national mortality rate of 15%, occurs with probability $< `r mean(tbl$x >= .8) + 1/1000`$<br/>
+.small[.grey[We only conducted 1000 simulations, so we can't say the p-value is equal to 0. We can say it is less than 1/1000. Remember that this approach is an *approximation*]] 
+
+---
+## Example 1.3 - Heart Transplant
+
+- Could it be that people are only paying attention because of a run of bad luck?
+
+- Has something changed in the hospital recently?
+
+- Has St. George's historically had a higher mortality rate than the national average?
+  - Previous 361 heart transplants (dating back to 1986) - 71 of the patients died within 30 days of the transplant
+  
+  
+
+---
+## Example 1.3
+
+```{r, fig.cap = "Simulated 30 day mortality rate", fig.width = 8, fig.height = 3.5, fig.align = "center", out.width = "80%"}
+set.seed(342509182)
+tbl1 <- tibble(x = rbinom(1000, 361, .15)/361, extreme = x > 71/361)
+
+ggplot(tbl1, aes(x = x, fill = extreme)) + 
+  geom_bar() + 
+  scale_x_continuous("30 Day Mortality Rate, 361 patients") + 
+  scale_y_continuous("# Simulated Cases") + 
+  annotate("segment", x = 71/361, xend = 71/361, y = 0, yend = Inf) + 
+  annotate("label", x = 71/361, y = 40, label = "St. George's\nMortality Rate\n(1986-2000)") +
+  annotate("text", x = .08, y = Inf, label = sprintf("Mean: %0.3f\nSD: %0.3f\nProp: %0.3f", mean(tbl1$x), sd(tbl1$x), mean(tbl1$extreme)), nudge_x = .15, hjust = 0, vjust = 1.5)
+```
+
+- Our simulated p-value is $P(x > \frac{71}{361}) = `r mean(tbl1$x >= 71/376)`$
+
+
+---
+## An Alternative to the P-value: Standardized Value of a Statistic
+
+**Standardized statistic** - a measure of how far an observed statistic is from the mean of the distribution
+
+- Commonly denoted by $z$
+
+- $\displaystyle z=\frac{\text{Statistic} - \text{Mean of null distribution}}{\text{standard deviation of null distribution}}$
+
+---
+## An Alternative to the P-value: Standardized Value of a Statistic
+
+
+
+**Standard Deviation** - a measure of the distance a "typical" value is away from the mean
+
+.center[<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8c/Standard_deviation_diagram.svg/1920px-Standard_deviation_diagram.svg.png" alt="Normal distribution with standard deviation" width="50%"/>]
+
+
+Observations more than 2 or 3 standard deviations from the mean are "in the tail of the distribution" or extreme
+
+---
+## Guidelines for Interpreting Standardized Statistics
+
+z-value range | Interpretation 
+------------: | :-------------
+$\phantom{\leq 0.10}\;\lvert z\rvert < 1.5$ | **little or no** evidence against $H_0$ 
+$1.5 \leq \lvert z\rvert < 2\phantom{.5}$ | **moderate** evidence against $H_0$
+$2 \leq \lvert z\rvert < 3\phantom{.5}$ | **strong** evidence against $H_0$
+$3 \leq \lvert z\rvert\phantom{< 3}\;\phantom{.5}$ | **very strong** evidence against $H_0$
+
+
+```{r, fig.width = 6, fig.height = 3}
+
+tibble(
+  x = seq(-5, 5, .01),
+  y = dnorm(x),
+  evidence = case_when(abs(x) < 1.5 ~ "little or none", 
+                       abs(x) <= 2 ~ "moderate",
+                       abs(x) <= 3 ~ "strong", 
+                       TRUE ~ "very strong") %>%
+    factor(levels = rev(c("little or none", "moderate", "strong", "very strong")), ordered = T),
+  side = ifelse(abs(x) < 1.5, TRUE, x >= 0)
+) %>% 
+ggplot(aes(x = x)) + 
+  geom_area(aes(x = x, y = y, fill = evidence, color = evidence, group = interaction(evidence, side))) + 
+  geom_ribbon(aes(x = x, ymin = -Inf, ymax = 0, color = evidence, fill = evidence)) + 
+  annotate("rect", xmin = -Inf, xmax = Inf, ymin = -Inf, ymax = 0, alpha = 0.75, fill = "white", color = NA) + 
+  stat_function(fun = dnorm, geom = "line") + 
+  xlab("Standardized Statistic (z) Value") + 
+  ggtitle("Interpretation of Standardized Statistic Values") + 
+  coord_cartesian(xlim = c(-4, 4)) + 
+  theme(legend.position = "bottom", axis.title.y = element_blank())
+```
+
+---
+## An Alternative to the P-value: Standardized Value of a Statistic
+
+**Standardized statistic** - a measure of how far an observed statistic is from the mean of the distribution
+
+- Commonly denoted by $z$
+
+- $\displaystyle z=\frac{\text{Statistic} - \text{Mean of null distribution}}{\text{standard deviation of null distribution}}$ (Equation 1.5)
+
+.center[.large[Indicates how many standard deviations from the observed value to the hypothesized process mean]]
+
+---
+## Ex: St. George
+
+.pull-left[$n=10$
+
+- **Statistic**: 
+
+- **Mean of $H_0$**:
+
+- **Std. Dev of $H_0$**:
+
+- $\mathbf{z}$
+
+].pull-right[$n=361$
+
+- **Statistic**: 
+
+- **Mean of $H_0$**:
+
+- **Std. Dev of $H_0$**:
+
+- $\mathbf{z}$
+
+]
+
+---
+## Ex: St. George
+
+.pull-left[
+$$n=10$$
+
+- **Statistic**: 0.8
+
+- **Mean of $H_0$**: 0.15
+
+- **Std. Dev of $H_0$**: `r sd(tbl$x)`
+
+$$z = \frac{0.8 - 0.15}{0.113} \approx 5.729$$
+
+].pull-right[
+$$n=361$$
+
+- **Statistic**: $\frac{71}{361} = `r 71/361`$
+
+- **Mean of $H_0$**: 0.15
+
+- **Std. Dev of $H_0$**: `r sd(tbl1$x)`
+
+$$z = \frac{0.197 - 0.15}{0.018} \approx 2.544$$
+
+]
+
+
+---
+## Standardized Statistic
+
+- Applet will calculate $z$ as well
+
+- Normally use .underline[.hidden[$|z| > 2$]] as a single cut-off
+  - $z$ can be .underline[.hidden[positive or negative]]
+  - The .underline[.hidden[further]] the standardized statistic is from zero, the stronger the evidence against the null model
+
+### Summary - Standardized Statistics
+
+Standardized statistic far from 0 $\rightarrow$ .underline[.hidden[small]] p-value $\rightarrow$ .underline[.hidden[reject $H_0$]]
+
+Standardized statistic close to 0 $\rightarrow$ .underline[.hidden[large]] p-value $\rightarrow$ .underline[.hidden[fail to reject $H_0$]]
+
+---
+## Standardized Statistic
+
+- Can calculate both p-value and standardized statistic
+
+- Quizzes/Exams may have either one, or both
+
+- P-value and standardized statistic should always give the same conclusion
+
+- Standardized Statistic takes into account .underline[sample size] and .underline[spread] of the data - helpful to compare multiple samples with different sample sizes
+
+<br/><br/>
+**What you need to find Standardized Statistic**
+- Observed statistic (from the sample)
+- Mean of null distribution
+- Standard deviation of null distribution    
+.small[.grey[May be given to you in the question, from the applet, or from equation 1.5]]
+
+$$\displaystyle z=\frac{\text{Statistic} - \text{Mean of null distribution}}{\text{standard deviation of null distribution}} \;\;\;\;\text{(Equation 1.5)}$$
+
+---
+class:center,middle,inverse
+# 1.4: What Impacts Strength of Evidence?
+
+---
+## Bob vs. Tim
+
+.bottom[[Link to full study](https://www.researchgate.net/publication/5760749)]
+
+![Two male faces](Tim_Bob.png)
+
+.center[Is the man on the left named Tim or Bob?]
+
+---
+## What Impacts the Strength of Evidence?
+
+- Bob/Tim: 85% of people say Tim is on the left
+  - Compared to .5 as the null (chance) value
+
+- What happens as the statistic gets farther away from .5?
+  - **p-value** gets .underline[.hidden[smaller]]
+  - **standardized statistic** gets .underline[.hidden[larger]]
+
+- Closer to 0.5?
+  - **p-value** gets .underline[.hidden[larger]]
+  - **standardized statistic** gets .underline[.hidden[smaller]]
+
+---
+## What Impacts the Strength of Evidence?
+
+\# 1: Difference between the statistic and the null hypothesis
+  - Farther apart: Random chance/null is less plausible
+      - p-value gets smaller
+      - standardized statistic gets larger
+      
+  - Closer together: Random chance becomes more plausible
+      - p-value gets larger
+      - standardized statistic gets smaller
+      
+---
+## What Impacts the Strength of Evidence?
+
+.pull-left[
+\# 2: Sample size
+  - What happens as sample size increases (holding the statistic constant)?
+  
+  - Depends on standard deviation, variability, and the spread of the data
+  
+  Assume the statistic is 0.6. What happens to the strength of evidence against the null as the sample size increases?
+]
+```{r, out.extra = "class='pull-right'", fig.width = 4, fig.height = 6}
+tbl <- tibble(n = c(32, 128, 256), x = purrr::map(n, rbinom, n = 100, prob = 23/32)) %>%
+  unnest(x) %>%
+  mutate(x = x/n)
+
+ggplot(tbl, aes(x = x)) + 
+  geom_histogram(bindwidth = .02) + 
+  facet_wrap(~n, labeller = "label_both", ncol = 1) + 
+  ylab("# Simulations") + 
+  xlab("Simulated Proportion")
+```
+
+
+---
+## What Impacts the Strength of Evidence?
+
+\# 3: One-sided vs. Two-sided alternatives
+
+Two-sided alternative:
+- don't care about the direction of the effect - only care about the magnitude difference from the null
+
+```{r}
+tbl <- tibble(x = seq(-4, 4, .01), y = dnorm(x)) %>%
+  mutate(`One Sided` = ifelse(x > 2, y, NA), `Two Sided` = ifelse(abs(x) > 2, y, NA), sign = x >= 0) %>%
+  pivot_longer(`One Sided`:`Two Sided`, names_to = "Type", values_to = "value")
+  
+
+ggplot(tbl) + 
+  geom_area(aes(x = x, y = value, group = interaction(Type, sign)), fill = "darkgreen") + 
+  geom_line(aes(x = x, y = y)) + 
+  facet_wrap(~Type) + 
+  theme(axis.title = element_blank())
+```
+
+- Using a two-sided hypothesis causes p-values to .underline[.hidden[increase]]
+
+
+---
+## Scenarios Worksheet
+
+- Write the hypotheses in symbols for all five scenarios
+
+- Choose 1 to complete a simulation on. Find the p-value, standardized statistic, and draw a conclusion.
+
+.center[This is practice, so ask questions!]
+
+
+## Homework
+
+- Exploration 1.2 is due at 6pm on Monday
+
+- WileyPlus Chapter 1 Homework is due Feb 3 at 6pm
