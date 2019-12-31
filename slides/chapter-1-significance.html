@@ -203,7 +203,9 @@ http://www.rossmanchance.com/ISIapplets.html]
 ---
 ## For next time
 
-- Ch. P HW and Exploration P.3 due January 20 at 6pm
+- Exploration P.3 due January 17 (Friday) at 6pm
+
+- Ch. P HW due January 20 at 6pm
 
 - Complete Exploration 1.1 and submit it on Canvas by January 20 (Monday) at 6pm
 
@@ -548,7 +550,7 @@ Identify the observational units in this study
 
 In groups, continue with Exploration 1.2. Answer questions 1-24. 
 
-Hand in one submission per group on Canvas by Jan 23 at 3pm.
+Hand in one submission per group on Canvas by Jan 24 at 6pm.
 
 ---
 class: inverse,middle,center
@@ -899,11 +901,185 @@ Two-sided alternative:
 
 ## Due dates
 
-- Exploration 1.2 is due at 6pm on Monday, Jan 27
+- Exploration 1.2 is due at 6pm on Friday, Jan 24
 
 - WileyPlus Chapter 1 Homework is due Feb 3 at 6pm
 
 - Quiz over Ch. P and Ch. 1 is due Feb 5 at 11:59 pm
+
+---
+class: inverse,middle,center
+## Review
+
+---
+## Review
+
+- Standardized Statistic
+
+- What impacts strength of evidence?
+--
+  - Distance between hypothesis and statistic
+
+--
+  - Sample size
+
+--
+  - One sided vs. Two sided tests
+
+
+---
+## Standardized Statistic
+
+- We can't use raw values to determine significance
+
+Example: Determining if coins are fair
+- Flip a coin twice and get heads both times
+  - `\(H_0: \pi = 0.5\)`
+  - `\(\hat p = 1\)`
+  - `\(|\pi_0 - \hat p| = 0.5\)`
+
+- Flip a coin 100 times and get heads 80 times
+  - `\(H_0: \pi = 0.5\)`
+  - `\(\hat p = .8\)`
+  - `\(|\pi_0 - \hat p| = 0.3\)`
+  
+- Standardization allows us to add some context (the mean and spread of the null distribution) to our estimate
+
+---
+## Standardized Statistic
+
+![I-80 through the midwest](https://www.google.com/maps/vt/data=NzYLl7dwLkG8129wr_LSSPN77Jhpn0Br19EyToiXi1nMYwVdg4QAFe1dq_YBFQRo6F5DxZF4nTmrLq1WN4zPYRGZadkN1u8T0PJN_XmDiHxGIXQNApsMZB7g3WoT5bUfBAmpieU8I0PBQwuGOYyVYm4jJ-JFe10nnr9culZ9_sO2pL4bQNeFTTG68fIQSN0SiMthed1hwNDP8iO06knm)
+
+- Length of I-80 traveling across NE: 455.3 miles
+
+- Distance from LA to Hawaii: 2491 miles
+&lt;br/&gt;&lt;br/&gt;
+.center[.large[How many times could you fit the state of Nebraska in between LA and Hawaii?]]
+--
+.bottom[Roughly 5.47 times]
+
+---
+## Standardized Statistic Practice
+
+
+- Flip a coin 10 times and get heads 8 times
+
+  - What value is `\(H_0\)` centered at?
+  
+  - How many standard deviations could fit between the null hypothesis value and the observed value?
+  
+  - Is this value significant?
+  
+&lt;img src="chapter-1-significance_files/figure-html/unnamed-chunk-12-1.png" width="80%" style="display: block; margin: auto;" /&gt;
+
+---
+## What Impacts Strength of Evidence?
+
+- Strength of evidence - difference between the observed statistic and the null hypothesis
+
+Which would give us more evidence against `\(H_0\)`?
+
+- Flipping a coin 100 times and getting 55 heads
+
+- Flipping a coin 100 times and getting 70 heads
+
+
+---
+## What Impacts Strength of Evidence?
+
+- Strength of evidence - difference between the observed statistic and the null hypothesis
+
+Which would give us more evidence against `\(H_0\)`?
+
+- Flipping a coin 5 times and getting 4 heads
+
+- Flipping a coin 1000 times and getting 800 heads
+
+---
+## What Impacts Strength of Evidence?
+
+One Sided vs. Two Sided
+
+- One Sided
+  - Testing whether we get heads more often than tails
+  - `\(H_0: \pi = 0.5\)`, `\(H_A: \pi &gt; 0.5\)`
+
+- Two Sided
+  - Testing whether a coin is fair
+  - `\(H_0: \pi=0.5\)`, `\(H_A: \pi\neq 0.5\)`
+  
+---
+## One Sided vs. Two Sided Examples
+
+Decide whether the test should be one sided or two sided and determine what `\(H_A\)` should be
+
+- My favorite outside temperature is `\(75^\circ\)` F. Has the average temperature this year been significantly different from that?
+
+- In 2009, a dog brought to a shelter had about a 55% chance of being adopted or returned to its owner. In 2017, the chance of adoption or return to owner was almost 70%. Has the probability of a good outcome for shelter pups increased significantly?
+
+-  A government official claims that the dropout rate for local schools is 25%. Last year, 190 out of 603 students dropped out. Is there enough evidence to reject the government official’s claim?
+
+  
+---
+## One Sided vs. Two Sided Examples
+
+Decide whether the test should be one sided or two sided and determine what `\(H_A\)` should be
+
+- My favorite outside temperature is `\(75^\circ\)` F. Has the average temperature this year been significantly **different** from that?    
+.red[Different -&gt;] `\(H_A: T \neq 75\)` .red[-&gt; two-sided test]
+
+- In 2009, a dog brought to a shelter had about a 55% chance of being adopted or returned to its owner. In 2017, the chance of adoption or return to owner was almost 70%. Has the probability of a good outcome for shelter pups **increased** significantly?    
+.red[increased -&gt;]  `\(H_A: \pi &gt; .55\)` .red[-&gt; one-sided test]
+
+-  A government official claims that the dropout rate for local schools **is** 25%. Last year, 190 out of 603 students dropped out. Is there enough evidence to reject the government official’s claim?    
+.red[is (equal to) -&gt;]  `\(H_A: \pi \neq .25\)` .red[-&gt; two sided test]
+
+
+---
+## One-Sided vs. Two-Sided tests
+
+&lt;img src="chapter-1-significance_files/figure-html/unnamed-chunk-13-1.png" width="80%" style="display: block; margin: auto;" /&gt;
+- 100 dots
+
+- To find the p-value, we count the dots which are as or more extreme than what we observed (0.8)
+
+- For a 1-sided test of whether we observed more heads, that  includes 0.8, 0.9, and 1.0    
+`\(p=0.03\)`
+
+- For a 2-sided test of whether the coin is fair, that includes 0.8, 0.9, 1.0, and 0.2, 0.1, 0.0
+`\(p=0.07\)`
+
+---
+class:center,middle,inverse
+# 1.5: Inference for a Single Proportion: Theory-Based Approach
+
+---
+## Simulations vs. Theory
+
+- Simulations require a lot of computer power
+
+.center[
+&lt;a href="https://www.theatlantic.com/technology/archive/2013/10/computing-power-used-to-be-measured-in-kilo-girls/280633/"&gt;&lt;img alt="Historical computers were people; usually women" src="https://cdn.theatlantic.com/assets/media/img/posts/computer_wide.jpeg" width="60%"/&gt;&lt;/a&gt;
+]
+.bottom[.tiny[If you'd like to read more about human computers, [this](https://www.amazon.com/When-Computers-Human-David-Grier/dp/0691133824) book is really good]
+]
+
+- Historically, statisticians didn't have enough computing power for simulation, so they developed theory-based approaches
+
+---
+## Distributions
+
+What do the following pictures have in common?
+
+
+&lt;img src="chapter-1-significance_files/figure-html/unnamed-chunk-14-1.png" width="80%" style="display: block; margin: auto;" /&gt;
+
+---
+## Theoretical Null Distributions
+
+Most of the null distributions we've seen so far have been fairly symmetric and "bell shaped":
+
+&lt;img src="chapter-1-significance_files/figure-html/unnamed-chunk-15-1.png" width="80%" style="display: block; margin: auto;" /&gt;
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>

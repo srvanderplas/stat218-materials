@@ -1122,3 +1122,228 @@ ggplot(tbl) +
 
 - Quiz over Ch. P and Ch. 1 is due Feb 5 at 11:59 pm
 
+---
+class: inverse,middle,center
+## Review
+
+---
+## Review
+
+- Standardized Statistic
+
+- What impacts strength of evidence?
+--
+  - Distance between hypothesis and statistic
+
+--
+  - Sample size
+
+--
+  - One sided vs. Two sided tests
+
+
+---
+## Standardized Statistic
+
+- We can't use raw values to determine significance
+
+Example: Determining if coins are fair
+- Flip a coin twice and get heads both times
+  - $H_0: \pi = 0.5$
+  - $\hat p = 1$
+  - $|\pi_0 - \hat p| = 0.5$
+
+- Flip a coin 100 times and get heads 80 times
+  - $H_0: \pi = 0.5$
+  - $\hat p = .8$
+  - $|\pi_0 - \hat p| = 0.3$
+  
+- Standardization allows us to add some context (the mean and spread of the null distribution) to our estimate
+
+---
+## Standardized Statistic
+
+![I-80 through the midwest](https://www.google.com/maps/vt/data=NzYLl7dwLkG8129wr_LSSPN77Jhpn0Br19EyToiXi1nMYwVdg4QAFe1dq_YBFQRo6F5DxZF4nTmrLq1WN4zPYRGZadkN1u8T0PJN_XmDiHxGIXQNApsMZB7g3WoT5bUfBAmpieU8I0PBQwuGOYyVYm4jJ-JFe10nnr9culZ9_sO2pL4bQNeFTTG68fIQSN0SiMthed1hwNDP8iO06knm)
+
+- Length of I-80 traveling across NE: 455.3 miles
+
+- Distance from LA to Hawaii: 2491 miles
+<br/><br/>
+.center[.large[How many times could you fit the state of Nebraska in between LA and Hawaii?]]
+--
+.bottom[Roughly 5.47 times]
+
+---
+## Standardized Statistic Practice
+
+
+- Flip a coin 10 times and get heads 8 times
+
+  - What value is $H_0$ centered at?
+  
+  - How many standard deviations could fit between the null hypothesis value and the observed value?
+  
+  - Is this value significant?
+  
+```{r}
+set.seed(41209083)
+tbl <- tibble(x = rbinom(10000, 10, .5)/10)
+
+ggplot(tbl, aes(x = x)) + 
+  geom_bar() + 
+  ylab("# simulations") + xlab("Proportion of heads") + 
+  annotate("text", x = 0, y = 2500, label = sprintf("Mean: %0.3f\nSD: %0.3f", mean(tbl$x), sd(tbl$x)), vjust = 1, hjust = 0)
+```
+
+---
+## What Impacts Strength of Evidence?
+
+- Strength of evidence - difference between the observed statistic and the null hypothesis
+
+Which would give us more evidence against $H_0$?
+
+- Flipping a coin 100 times and getting 55 heads
+
+- Flipping a coin 100 times and getting 70 heads
+
+
+---
+## What Impacts Strength of Evidence?
+
+- Strength of evidence - difference between the observed statistic and the null hypothesis
+
+Which would give us more evidence against $H_0$?
+
+- Flipping a coin 5 times and getting 4 heads
+
+- Flipping a coin 1000 times and getting 800 heads
+
+---
+## What Impacts Strength of Evidence?
+
+One Sided vs. Two Sided
+
+- One Sided
+  - Testing whether we get heads more often than tails
+  - $H_0: \pi = 0.5$, $H_A: \pi > 0.5$
+
+- Two Sided
+  - Testing whether a coin is fair
+  - $H_0: \pi=0.5$, $H_A: \pi\neq 0.5$
+  
+---
+## One Sided vs. Two Sided Examples
+
+Decide whether the test should be one sided or two sided and determine what $H_A$ should be
+
+- My favorite outside temperature is $75^\circ$ F. Has the average temperature this year been significantly different from that?
+
+- In 2009, a dog brought to a shelter had about a 55% chance of being adopted or returned to its owner. In 2017, the chance of adoption or return to owner was almost 70%. Has the probability of a good outcome for shelter pups increased significantly?
+
+-  A government official claims that the dropout rate for local schools is 25%. Last year, 190 out of 603 students dropped out. Is there enough evidence to reject the government official’s claim?
+
+  
+---
+## One Sided vs. Two Sided Examples
+
+Decide whether the test should be one sided or two sided and determine what $H_A$ should be
+
+- My favorite outside temperature is $75^\circ$ F. Has the average temperature this year been significantly **different** from that?    
+.red[Different ->] $H_A: T \neq 75$ .red[-> two-sided test]
+
+- In 2009, a dog brought to a shelter had about a 55% chance of being adopted or returned to its owner. In 2017, the chance of adoption or return to owner was almost 70%. Has the probability of a good outcome for shelter pups **increased** significantly?    
+.red[increased ->]  $H_A: \pi > .55$ .red[-> one-sided test]
+
+-  A government official claims that the dropout rate for local schools **is** 25%. Last year, 190 out of 603 students dropped out. Is there enough evidence to reject the government official’s claim?    
+.red[is (equal to) ->]  $H_A: \pi \neq .25$ .red[-> two sided test]
+
+
+---
+## One-Sided vs. Two-Sided tests
+
+```{r}
+set.seed(204908579)
+tbl <- tibble(x = rbinom(100, 10, .5)/10, one_sided = x >= .8, two_sided = abs(x - .5) >= .3) %>%
+  pivot_longer(-x, names_to = "type", values_to = "extreme") %>%
+  mutate(type = str_replace(type, "_", " ") %>% str_to_title())
+
+ggplot(tbl, aes(x = x)) + 
+  geom_dotplot(aes(fill = extreme)) + 
+  facet_wrap(~type) + 
+  scale_fill_discrete(guide = F) + 
+  scale_x_continuous("Proportion", breaks = (0:10)/10, limits = c(0,1)) + 
+  theme(axis.title.y = element_blank(), axis.text.y = element_blank(), axis.ticks.y = element_blank())
+```
+- 100 dots
+
+- To find the p-value, we count the dots which are as or more extreme than what we observed (0.8)
+
+- For a 1-sided test of whether we observed more heads, that  includes 0.8, 0.9, and 1.0    
+$p=0.03$
+
+- For a 2-sided test of whether the coin is fair, that includes 0.8, 0.9, 1.0, and 0.2, 0.1, 0.0
+$p=0.07$
+
+---
+class:center,middle,inverse
+# 1.5: Inference for a Single Proportion: Theory-Based Approach
+
+---
+## Simulations vs. Theory
+
+- Simulations require a lot of computer power
+
+.center[
+<a href="https://www.theatlantic.com/technology/archive/2013/10/computing-power-used-to-be-measured-in-kilo-girls/280633/"><img alt="Historical computers were people; usually women" src="https://cdn.theatlantic.com/assets/media/img/posts/computer_wide.jpeg" width="60%"/></a>
+]
+.bottom[.tiny[If you'd like to read more about human computers, [this](https://www.amazon.com/When-Computers-Human-David-Grier/dp/0691133824) book is really good]
+]
+
+- Historically, statisticians didn't have enough computing power for simulation, so they developed theory-based approaches
+
+---
+## Distributions
+
+What do the following pictures have in common?
+
+
+```{r fig.scap="Simulation results from Doris and Buzz, fair coin, heart transplant, and rock-paper-scissors examples. Of the examples, only the heart transplant example is not symmetric (because it is truncated at 0).", fig.height =  3}
+set.seed(2016100700)
+df <- bind_rows(
+    tibble(x = rbinom(1000, 12, 1/3)/12, example = "Rock Paper Scissors"),
+    tibble(x = rbinom(1000, 10, .15)/10, example = "Heart Transplant - 10 cases"),
+    tibble(x = rbinom(500, 361, .15)/361, example = "Heart Transplant - 361 cases"),
+    tibble(x = rbinom(1000, 10, .5)/10, example = "Fair Coin"),
+    tibble(x = rbinom(1000, 16, .5)/16, example = "Doris and Buzz")
+  )
+
+ggplot(df, aes(x = x)) + geom_histogram(breaks = (0:50)/50) + 
+  facet_wrap(~example, scales = "free_y") + 
+  scale_x_continuous("Proportion of Successes") +
+  scale_y_continuous("# Simulation Trials") + 
+  ggtitle("Simulation Results")
+```
+
+---
+## Theoretical Null Distributions
+
+Most of the null distributions we've seen so far have been fairly symmetric and "bell shaped":
+
+```{r fig.scap="Simulation results from fair coin, heart transplant, and rock-paper-scissors examples. Of the examples, only the heart transplant example is not symmetric (because it is truncated at 0).", fig.height =  3}
+set.seed(2016100700)
+df <- bind_rows(
+    tibble(x = rbinom(1000, 12, 1/3)/12, example = "Rock Paper Scissors"),
+    tibble(x = rbinom(1000, 10, .15)/10, example = "Heart Transplant - 10 cases"),
+    tibble(x = rbinom(500, 361, .15)/361, example = "Heart Transplant - 361 cases"),
+    tibble(x = rbinom(1000, 10, .5)/10, example = "Fair Coin"),
+    tibble(x = rbinom(1000, 16, .5)/16, example = "Doris and Buzz")
+  )
+
+ggplot(df, aes(x = x)) + geom_histogram(breaks = (0:50)/50) + 
+  facet_wrap(~example, scales = "free_y") + 
+  scale_x_continuous("Proportion of Successes") +
+  scale_y_continuous("# Simulation Trials") + 
+  ggtitle("Simulation Results")
+
+```
+
