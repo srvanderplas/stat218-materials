@@ -12,7 +12,8 @@ geometry: margin=1in,headsep=.2in
 Below are 5 practice problems. For each problem, write the hypotheses (null and alternative) in symbols. 
 
 Choose one problem to work to completion (simulating using the applet, with 1000 samples), finding the p-value and standardized statistic, interpreting each statistic, and stating the conclusion to the research problem. Do the p-value and standardized statistic agree?
-
+\hrule
+\vspace{1cm}
 1. A governor is concerned about his "negatives" - the percentage of the state's residents who express disapproval of his job performance. His political committee pays for a series of TV ads, hoping that they can keep the negatives below 30%. They will use follow-up polling to assess the effectiveness of the ad campaign. After the campaign, 337 out of 1200 residents surveyed expressed disapproval.
 \begin{tabularx}{\linewidth}{XX}$H_0$: & $H_A$:\\&\\&\end{tabularx}
 \begin{tabularx}{\linewidth}{lXXX}Simulation Settings:&probability of success & sample size ($n$) & number of samples\\
@@ -20,7 +21,7 @@ Choose one problem to work to completion (simulating using the applet, with 1000
 \begin{tabularx}{\linewidth}{XX}\\p-value: & standardized statistic:\\&\\&\\&\\&\\&\end{tabularx}
 \begin{tabularx}{\linewidth}{X}Does the p-value agree with the standardized statistic? Explain.\\\\\\\\
 What is the conclusion to the research problem?\\\\\\\\\end{tabularx}\vfill
-
+\clearpage
 2. Is a coin fair? It was found that 12 of 16 flips landed heads up.
 \begin{tabularx}{\linewidth}{XX}$H_0$: & $H_A$:\\&\\&\end{tabularx}
 \begin{tabularx}{\linewidth}{lXXX}Simulation Settings:&probability of success & sample size ($n$) & number of samples\\
@@ -28,7 +29,7 @@ What is the conclusion to the research problem?\\\\\\\\\end{tabularx}\vfill
 \begin{tabularx}{\linewidth}{XX}\\p-value: & standardized statistic:\\&\\&\\&\\&\\&\end{tabularx}
 \begin{tabularx}{\linewidth}{X}Does the p-value agree with the standardized statistic? Explain.\\\\\\\\
 What is the conclusion to the research problem?\\\\\\\\\end{tabularx}\vfill
-\clearpage
+
 
 3. Only about 20% of people who try to quit smoking succeed. Sellers of a motivational tape claim that listening to the recorded messages can help people quit. After surveying people who have attempted quitting using the recorded messages, 62 out of the 250 people were successful at quitting.
 \begin{tabularx}{\linewidth}{XX}$H_0$: & $H_A$:\\&\\&\end{tabularx}
@@ -37,7 +38,7 @@ What is the conclusion to the research problem?\\\\\\\\\end{tabularx}\vfill
 \begin{tabularx}{\linewidth}{XX}\\p-value: & standardized statistic:\\&\\&\\&\\&\\&\end{tabularx}
 \begin{tabularx}{\linewidth}{X}Does the p-value agree with the standardized statistic? Explain.\\\\\\\\
 What is the conclusion to the research problem?\\\\\\\\\end{tabularx}\vfill
-
+\clearpage
 4. In the 1950s about 40% of high school graduates went on to college. Has the percentage changed? A survey of 1300 recent graduates revealed that 488 went on to college. 
 \begin{tabularx}{\linewidth}{XX}$H_0$: & $H_A$:\\&\\&\end{tabularx}
 \begin{tabularx}{\linewidth}{lXXX}Simulation Settings:&probability of success & sample size ($n$) & number of samples\\
@@ -46,7 +47,6 @@ What is the conclusion to the research problem?\\\\\\\\\end{tabularx}\vfill
 \begin{tabularx}{\linewidth}{X}Does the p-value agree with the standardized statistic? Explain.\\\\\\\\
 What is the conclusion to the research problem?\\\\\\\\\end{tabularx}\vfill
 
-\clearpage
 
 5. 20% of cars of a certain model have needed costly transmission work after being driven between 50,000 and 100,000 miles. The manufadcturer hoeps that redesigning a component of the transmission  has solved this problem. The manufacturer tested 50 cars and found that 7 of them needed costly transmission work after being driven between 50,000 and 100,000 miles. 
 \begin{tabularx}{\linewidth}{XX}$H_0$: & $H_A$:\\&\\&\end{tabularx}
