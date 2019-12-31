@@ -309,7 +309,9 @@ ggplot(data = tibble(x = x), aes(x = x)) +
 ---
 ## For next time
 
-- Ch. P HW and Exploration P.3 due January 20 at 6pm
+- Exploration P.3 due January 17 (Friday) at 6pm
+
+- Ch. P HW due January 20 at 6pm
 
 - Complete Exploration 1.1 and submit it on Canvas by January 20 (Monday) at 6pm
 
@@ -705,7 +707,7 @@ Identify the observational units in this study
 
 In groups, continue with Exploration 1.2. Answer questions 1-24. 
 
-Hand in one submission per group on Canvas by Jan 23 at 3pm.
+Hand in one submission per group on Canvas by Jan 24 at 6pm.
 
 ---
 class: inverse,middle,center
@@ -1114,8 +1116,9 @@ ggplot(tbl) +
 
 ## Due dates
 
-- Exploration 1.2 is due at 6pm on Monday, Jan 27
+- Exploration 1.2 is due at 6pm on Friday, Jan 24
 
 - WileyPlus Chapter 1 Homework is due Feb 3 at 6pm
 
 - Quiz over Ch. P and Ch. 1 is due Feb 5 at 11:59 pm
+
