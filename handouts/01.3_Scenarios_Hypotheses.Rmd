@@ -1,0 +1,26 @@
+---
+title: "1.3: Scenarios"
+output: 
+  # word_document:
+  #   reference_docx: word_template_reference.docx
+  pdf_document:
+    template: template.tex
+    # keep_tex: true
+geometry: margin=1in,headsep=.2in
+---
+
+Below are 5 practice problems. For each problem, write the hypotheses (null and alternative) in symbols. Choose one problem to work to completion (simulating using the applet), finding the p-value and standardized statistic, interpreting each statistic, and stating the conclusion to the research problem. Do the p-value and standardized statistic agree?
+
+1. A governor is concerned about his "negatives" - the percentage of the state's residents who express disapproval of his job performance. His political committee pays for a series of TV ads, hoping that they can keep the negatives below 30%. They will use follow-up polling to assess the effectiveness of the ad campaign. After the campaign, 337 out of 1200 residents surveyed expressed disapproval. 
+  
+  - $H_0$:
+  
+  - $H_A$:
+  
+  - p-value
+  
+  - standardized statistic
+  
+  - Does the p-value agree with the standardized statistic? Explain.
+  
+  - What is the conclusion to the research problem?
