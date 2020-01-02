@@ -22,7 +22,7 @@ output:
 
 library(ggplot2)
 library(tidyverse)
-knitr::opts_chunk$set(dpi=300, message = F, warning = F, echo = F, fig.width = 8, fig.height = 4, out.width = "80%", fig.align = "center")
+knitr::opts_chunk$set(dpi=300, message = F, warning = F, echo = F, fig.width = 8, fig.height = 4, out.width = "80%", fig.align = "center", cache = T)
 theme_set(theme_bw())
 ```
 
@@ -1291,6 +1291,8 @@ class:center,middle,inverse
 ---
 ## Simulations vs. Theory
 
+- Simulation provides an easy method for comparing a statistic to a model representing random chance
+
 - Simulations require a lot of computer power
 
 .center[
@@ -1299,12 +1301,12 @@ class:center,middle,inverse
 .bottom[.tiny[If you'd like to read more about human computers, [this](https://www.amazon.com/When-Computers-Human-David-Grier/dp/0691133824) book is really good]
 ]
 
-- Historically, statisticians didn't have enough computing power for simulation, so they developed theory-based approaches
+- Historically, statisticians didn't have enough computing power for simulation, so they developed theory-based approaches to find p-values and standardized statistics
 
 ---
 ## Distributions
 
-What do the following pictures have in common?
+What do the following pictures have in common? What makes the exceptions different?
 
 
 ```{r fig.scap="Simulation results from Doris and Buzz, fair coin, heart transplant, and rock-paper-scissors examples. Of the examples, only the heart transplant example is not symmetric (because it is truncated at 0).", fig.height =  3}
@@ -1329,21 +1331,171 @@ ggplot(df, aes(x = x)) + geom_histogram(breaks = (0:50)/50) +
 
 Most of the null distributions we've seen so far have been fairly symmetric and "bell shaped":
 
-```{r fig.scap="Simulation results from fair coin, heart transplant, and rock-paper-scissors examples. Of the examples, only the heart transplant example is not symmetric (because it is truncated at 0).", fig.height =  3}
+```{r fig.scap="Simulation results from fair coin, heart transplant, and rock-paper-scissors examples. Of the examples, only the heart transplant example is not symmetric (because it is truncated at 0).", fig.height =  2}
 set.seed(2016100700)
 df <- bind_rows(
     tibble(x = rbinom(1000, 12, 1/3)/12, example = "Rock Paper Scissors"),
-    tibble(x = rbinom(1000, 10, .15)/10, example = "Heart Transplant - 10 cases"),
-    tibble(x = rbinom(500, 361, .15)/361, example = "Heart Transplant - 361 cases"),
+    tibble(x = rbinom(1000, 10, .15)/10, example = "Heart Transplant\n10 cases"),
+    tibble(x = rbinom(500, 361, .15)/361, example = "Heart Transplant\n361 cases"),
     tibble(x = rbinom(1000, 10, .5)/10, example = "Fair Coin"),
     tibble(x = rbinom(1000, 16, .5)/16, example = "Doris and Buzz")
   )
 
 ggplot(df, aes(x = x)) + geom_histogram(breaks = (0:50)/50) + 
-  facet_wrap(~example, scales = "free_y") + 
+  facet_wrap(~example, scales = "free_y", ncol = 5) + 
   scale_x_continuous("Proportion of Successes") +
   scale_y_continuous("# Simulation Trials") + 
   ggtitle("Simulation Results")
 
 ```
 
+The not symmetric distribution has p = 0.15 and only 10 cases. In the other examples with small $n$, p is 0.333 or  0.5. 
+
+---
+## Theoretical Null Distribution
+
+When p is "not too small or too large"\* and $n$ is "big enough"\*, we can use theoretical approximations .bottom[\* (More on this in a couple of slides)]
+
+Using a theoretical distribution, we can calculate p-values and standardized statistics, if we have
+
+1. the mean of the distribution
+2. the theoretical standard deviation of the distribution
+3. a good idea of whether the assumptions hold
+
+2 (and sometimes 1) will require formulas and calculations.
+
+---
+## Theory Based approach
+
+Based on the **Central Limit Theorem** (see [Wikipedia](https://en.wikipedia.org/wiki/Illustration_of_the_central_limit_theorem#Illustration_of_the_discrete_case) for an illustration)
+
+> If the sample size ($n$) is large enough, the distribution of the _sample proportion_ will be approximately bell shaped, centered at the long-run probability $\pi$ with the standard deviation of the null distribution.
+
+The standard deviation of the null distribution, $\sigma$, will also be used in the standardized statistic calculation. We need a formula for it because we are no longer doing simulation
+
+---
+## Large enough
+
+- How large is large enough?
+  - Our book: if the theoretical number of successes and failures are both more than 10
+  - Others: $n > 30$, $n > 50$, ...
+  - Depends on the discipline (and likely values for $p$ within the discipline)
+
+In the animation below, when does each distribution appear to be centered around the red line? 
+```{r, ffmpeg.format='gif', fig.show='animate', dev = "jpeg", dpi = 300, fig.width = 8, fig.height = 3}
+tbl <- expand_grid(size = c(20, 30, 40, 50, 100, 150, 200, 500),
+                   prob = c(.05, .15, .3)) %>%
+  mutate(sample = purrr::pmap(., rbinom, n = 1000)) %>%
+  unnest_longer(sample) %>%
+  mutate(sample = sample/size) %>% 
+  mutate(n = size) %>% nest(-n)
+
+plot_hists <- function(data) {
+  bw <- 1/unique(data$size)
+  sz <- unique(data$size)
+  print(ggplot(data, aes(x = sample)) + 
+          geom_vline(aes(xintercept = prob), data = unique(select(data, prob)), color = "red") + 
+    geom_histogram(binwidth = .025) + 
+    facet_grid(.~prob, label = "label_both") + 
+    ggtitle(paste("1000 samples with n = ", sz)) + 
+    scale_x_continuous("Sample proportion", limits = c(0, 1))) + 
+    theme(axis.text.y = element_text(angle = 90, vjust = 0.5, hjust = 0.5))
+}
+
+tbl$data %>%
+  purrr::walk(plot_hists)
+```
+
+---
+## Example
+
+St George: $\pi = 0.15$, $\hat p = 0.197$, $n = 361$
+
+New SD? Standardized Statistic?
+<br/><br/>
+
+Simulation approach: SD = $0.018$ and standardized statistic = $2.544$
+<br/><br/>
+--
+Simulation results could be different for everyone. 
+
+---
+## Normal Distribution
+
+- Replaces the simulated null distribution
+
+- Fits curve to what we'd expect to see in the data given random chance
+
+- Used to find p-values
+> Technically, we'd need calculus to find p-values, but the applet will do it for us. 
+    
+- We can see if it's a good approximation or not by comparing to the simulation results
+> The prediction is valid if $n\pi \geq 10$ and $n(1-\pi) \geq 10$ 
+> (**Validity condition** for 1-proportion problems)
+
+For proportions, the normal distribution has a mean of $\pi$ and a standard deviation of $\sqrt{\pi(1-\pi)/n}$
+
+
+---
+## Example 1.5: Halloween Treats
+
+Do children show any preference for candy vs. toys?
+
+Measure the proportion of children choosing candy, compare to $\pi=0.5$
+
+- $H_0:$
+- $H_A:$
+
+Data:
+- Sample Size $n = 283$
+- Sample Statistic $\hat p = 148/283 = 0.523$
+
+Use the app to find the standard deviation of the null distribution. How does it compare to the theoretical standard deviation?
+
+---
+## Example 1.5: Halloween Treats
+
+Does the distribution look like one where a bell shaped curve will approximate it?
+
+.pull-left[![Theory/Simulation comparison](figure/theory-simulation-distn.png)]
+.pull-right[
+Quantity | Theory | Simulation
+-------- | ------ | ----------
+SD | | 
+Z-score | |
+Decision | | 
+]
+
+---
+## Example: Rock Paper Scissors
+.toprightfig[
+![rock paper scissors graphic](figure/rock_paper_scissors.png)
+]
+
+$n = 12$, with 10 successes and 2 failures
+
+- Are the validity conditions met? Why or why not?
+
+- Normal distribution predictions:
+    - bell shaped, approximately normal
+    - null centered at .333
+    - standard deviation will be: 
+
+- What happens with more/less skew?
+<br/><br/>
+
+- What happens with a smaller/larger sample size?
+
+---
+## Summary: Chapter 1.5
+
+- If you want to use a theory based approach: 
+  - need a sample size large enough to say $H_0$ follows a normal distribution
+  - Applet: Normal approximation button (calculates p-value for you)
+  - Can always calculate standardized statistic by hand
+  
+- Theory based approach doesn't always work
+  - if the sample size is small, null distribution will not be approximately bell shaped
+  - if the distribution is not bell shaped, the normal approximation to the p-value and the standardized statistic are not accurate
+  
+- Simulation ALWAYS works

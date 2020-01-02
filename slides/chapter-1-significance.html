@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="" xml:lang="">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
   <head>
     <title>Ch. 1: Significance: How Strong Is the Evidence?</title>
     <meta charset="utf-8" />
@@ -252,7 +252,7 @@ Some evidence* suggests that novice players are less likely to choose scissors.
 .bottom[\*[See Eyler et al., 2009](https://www.jstor.org/stable/pdf/25653686.pdf)]
 
 ].pull-right[
-![rock paper scissors graphic](rock_paper_scissors.png)
+![rock paper scissors graphic](figure/rock_paper_scissors.png)
 ]
 
 
@@ -302,7 +302,7 @@ Play `\(n\)` rounds, recording 0 or 1, where 1 = scissors was played
 &lt;/math&gt;
 
 .toprightfig[
-![rock paper scissors graphic](rock_paper_scissors.png)
+![rock paper scissors graphic](figure/rock_paper_scissors.png)
 ]
 ---
 ## Rock Paper Scissors
@@ -385,14 +385,14 @@ Play `\(n\)` rounds, recording 0 or 1, where 1 = scissors was played
 &lt;/math&gt;
 
 .toprightfig[
-![rock paper scissors graphic](rock_paper_scissors.png)
+![rock paper scissors graphic](figure/rock_paper_scissors.png)
 ]
 
 
 ---
 ## Rock Paper Scissors
 .toprightfig[
-![rock paper scissors graphic](rock_paper_scissors.png)
+![rock paper scissors graphic](figure/rock_paper_scissors.png)
 ]
 
 - Is `\(\hat p_{scissors}\)` less than the probability specified in the null hypothesis?&lt;br/&gt;    
@@ -438,7 +438,7 @@ If you have done the modeling correctly, you'll still be wrong `\((100\times p)\
 ---
 ## Rock Paper Scissors
 .toprightfig[
-![rock paper scissors graphic](rock_paper_scissors.png)
+![rock paper scissors graphic](figure/rock_paper_scissors.png)
 ]
 
 3 S Strategy:
@@ -450,7 +450,7 @@ If you have done the modeling correctly, you'll still be wrong `\((100\times p)\
 
 2. Simulation: .red["coin flip" with p(heads) = 1/3]
 .pull-left[.small[Actual coins don't work, but we could use dice - rolls of 1 or 2 represent scissors... or we could let the computer do it for us using the &lt;br/&gt;[**One Proportion** applet](http://www.rossmanchance.com/ISIapplets.html)]]
-.pull-right[&lt;img alt="Rock paper scissors simulation result" src="rock-paper-scissors-simulation.png"/&gt;]
+.pull-right[&lt;img alt="Rock paper scissors simulation result" src="figure/rock-paper-scissors-simulation.png"/&gt;]
 &lt;br/&gt;
 3. Strength of evidence:
 .red[
@@ -489,7 +489,7 @@ If you have done the modeling correctly, you'll still be wrong `\((100\times p)\
 ---
 ## Rock Paper Scissors
 .toprightfig[
-![rock paper scissors graphic](rock_paper_scissors.png)
+![rock paper scissors graphic](figure/rock_paper_scissors.png)
 ]
 
 
@@ -832,7 +832,7 @@ class:center,middle,inverse
 
 .bottom[[Link to full study](https://www.researchgate.net/publication/5760749)]
 
-![Two male faces](Tim_Bob.png)
+![Two male faces](figure/Tim_Bob.png)
 
 .center[Is the man on the left named Tim or Bob?]
 
@@ -1056,6 +1056,8 @@ class:center,middle,inverse
 ---
 ## Simulations vs. Theory
 
+- Simulation provides an easy method for comparing a statistic to a model representing random chance
+
 - Simulations require a lot of computer power
 
 .center[
@@ -1064,12 +1066,12 @@ class:center,middle,inverse
 .bottom[.tiny[If you'd like to read more about human computers, [this](https://www.amazon.com/When-Computers-Human-David-Grier/dp/0691133824) book is really good]
 ]
 
-- Historically, statisticians didn't have enough computing power for simulation, so they developed theory-based approaches
+- Historically, statisticians didn't have enough computing power for simulation, so they developed theory-based approaches to find p-values and standardized statistics
 
 ---
 ## Distributions
 
-What do the following pictures have in common?
+What do the following pictures have in common? What makes the exceptions different?
 
 
 &lt;img src="chapter-1-significance_files/figure-html/unnamed-chunk-14-1.png" width="80%" style="display: block; margin: auto;" /&gt;
@@ -1080,6 +1082,135 @@ What do the following pictures have in common?
 Most of the null distributions we've seen so far have been fairly symmetric and "bell shaped":
 
 &lt;img src="chapter-1-significance_files/figure-html/unnamed-chunk-15-1.png" width="80%" style="display: block; margin: auto;" /&gt;
+
+The not symmetric distribution has p = 0.15 and only 10 cases. In the other examples with small `\(n\)`, p is 0.333 or  0.5. 
+
+---
+## Theoretical Null Distribution
+
+When p is "not too small or too large"\* and `\(n\)` is "big enough"\*, we can use theoretical approximations .bottom[\* (More on this in a couple of slides)]
+
+Using a theoretical distribution, we can calculate p-values and standardized statistics, if we have
+
+1. the mean of the distribution
+2. the theoretical standard deviation of the distribution
+3. a good idea of whether the assumptions hold
+
+2 (and sometimes 1) will require formulas and calculations.
+
+---
+## Theory Based approach
+
+Based on the **Central Limit Theorem** (see [Wikipedia](https://en.wikipedia.org/wiki/Illustration_of_the_central_limit_theorem#Illustration_of_the_discrete_case) for an illustration)
+
+&gt; If the sample size ($n$) is large enough, the distribution of the _sample proportion_ will be approximately bell shaped, centered at the long-run probability `\(\pi\)` with the standard deviation of the null distribution.
+
+The standard deviation of the null distribution, `\(\sigma\)`, will also be used in the standardized statistic calculation. We need a formula for it because we are no longer doing simulation
+
+---
+## Large enough
+
+- How large is large enough?
+  - Our book: if the theoretical number of successes and failures are both more than 10
+  - Others: `\(n &gt; 30\)`, `\(n &gt; 50\)`, ...
+  - Depends on the discipline (and likely values for `\(p\)` within the discipline)
+
+In the animation below, when does each distribution appear to be centered around the red line? 
+&lt;img src="chapter-1-significance_files/figure-html/unnamed-chunk-16.gif" width="80%" style="display: block; margin: auto;" /&gt;
+
+---
+## Example
+
+St George: `\(\pi = 0.15\)`, `\(\hat p = 0.197\)`, `\(n = 361\)`
+
+New SD? Standardized Statistic?
+&lt;br/&gt;&lt;br/&gt;
+
+Simulation approach: SD = `\(0.018\)` and standardized statistic = `\(2.544\)`
+&lt;br/&gt;&lt;br/&gt;
+--
+Simulation results could be different for everyone. 
+
+---
+## Normal Distribution
+
+- Replaces the simulated null distribution
+
+- Fits curve to what we'd expect to see in the data given random chance
+
+- Used to find p-values
+&gt; Technically, we'd need calculus to find p-values, but the applet will do it for us. 
+    
+- We can see if it's a good approximation or not by comparing to the simulation results
+&gt; The prediction is valid if `\(n\pi \geq 10\)` and `\(n(1-\pi) \geq 10\)` 
+&gt; (**Validity condition** for 1-proportion problems)
+
+For proportions, the normal distribution has a mean of `\(\pi\)` and a standard deviation of `\(\sqrt{\pi(1-\pi)/n}\)`
+
+
+---
+## Example 1.5: Halloween Treats
+
+Do children show any preference for candy vs. toys?
+
+Measure the proportion of children choosing candy, compare to `\(\pi=0.5\)`
+
+- `\(H_0:\)`
+- `\(H_A:\)`
+
+Data:
+- Sample Size `\(n = 283\)`
+- Sample Statistic `\(\hat p = 148/283 = 0.523\)`
+
+Use the app to find the standard deviation of the null distribution. How does it compare to the theoretical standard deviation?
+
+---
+## Example 1.5: Halloween Treats
+
+Does the distribution look like one where a bell shaped curve will approximate it?
+
+.pull-left[![Theory/Simulation comparison](figure/theory-simulation-distn.png)]
+.pull-right[
+Quantity | Theory | Simulation
+-------- | ------ | ----------
+SD | | 
+Z-score | |
+Decision | | 
+]
+
+---
+## Example: Rock Paper Scissors
+.toprightfig[
+![rock paper scissors graphic](figure/rock_paper_scissors.png)
+]
+
+`\(n = 12\)`, with 10 successes and 2 failures
+
+- Are the validity conditions met? Why or why not?
+
+- Normal distribution predictions:
+    - bell shaped, approximately normal
+    - null centered at .333
+    - standard deviation will be: 
+
+- What happens with more/less skew?
+&lt;br/&gt;&lt;br/&gt;
+
+- What happens with a smaller/larger sample size?
+
+---
+## Summary: Chapter 1.5
+
+- If you want to use a theory based approach: 
+  - need a sample size large enough to say `\(H_0\)` follows a normal distribution
+  - Applet: Normal approximation button (calculates p-value for you)
+  - Can always calculate standardized statistic by hand
+  
+- Theory based approach doesn't always work
+  - if the sample size is small, null distribution will not be approximately bell shaped
+  - if the distribution is not bell shaped, the normal approximation to the p-value and the standardized statistic are not accurate
+  
+- Simulation ALWAYS works
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
