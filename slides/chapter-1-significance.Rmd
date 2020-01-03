@@ -1533,3 +1533,5 @@ $n = 12$, with 10 successes and 2 failures
 - Quiz over Ch P and Ch 1 is due Feb 5. Please work independently on the quizzes.
 
 - Exam 1 is Feb 13 during class and covers Ch P, Ch 1, and Ch 2.
+
+- Read Section 2.1 for Feb. 4
