@@ -1,0 +1,536 @@
+---
+title: "Ch. 2: Generalization: How Broadly Do the Results Apply"
+author: ""
+output:
+  xaringan::moon_reader:
+    css: ["css/default.css", "css/default-fonts.css"]
+    mathjax: "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_HTMLorMML"
+    lib_dir: libs
+    # includes:
+    #   in_header: 
+    #     - 'show-hidden.html'
+    nature:
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+---
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({ TeX: { extensions: ["color.js"] }});
+</script>
+
+```{r setup, include = F}
+
+library(ggplot2)
+library(tidyverse)
+knitr::opts_chunk$set(dpi=300, message = F, warning = F, echo = F, fig.width = 8, fig.height = 4, out.width = "80%", fig.align = "center", cache = T)
+theme_set(theme_bw())
+```
+
+# Navigation
+
+.pull-left[
+.large[By Date]
+
+- February 4: [start](#4) - [end](#19)
+
+- February 6: [start](#20) - [end](#33)
+
+- February 11: [start](#34) - [end](#62)
+
+]
+.pull-right[
+.large[By Section]
+
+- [Section 2.1](#4)
+
+- [Section 2.2](#28)
+
+- [Section 2.3](#39)
+]
+
+---
+## Ch 2 Goals and Overview
+
+- Explain when and why you can (sometimes) think of choosing your sample as a random process
+  - When you can, Ch 1 applies
+  - When you can't, use caution
+
+- Sections:
+  1. How sampling works in practice:    
+  Either from a process or a population
+  
+  2. Quantitative data:    
+  how processes work for means
+  
+  3. Errors and significance:    
+  Controlling how often we make a mistake
+
+---
+class: inverse,middle,center
+# 2.1: Sampling From A Finite Population
+
+---
+## Review
+
+**population** - The entire collection of observational units we are interested in
+
+.center[.large[population -> parameter]]
+<br/><br/>
+**sample** - The subset of the population on which we record data
+
+
+.center[.large[sample -> statistic]]
+
+---
+## Example 2.1 - Sampling Students
+
+Data from "College of the Midwest" for all students enrolled in Spring 2011. 
+
+Table 2.1: Data table of College of the Midwest
+
+Student ID | Cumulative GPA | On campus?
+---------- | -------------- | ----------
+1 | 3.92 | Yes
+2 | 2.80 | Yes
+3 | 3.08 | Yes
+4 | 2.71 | No
+5 | 3.31 | Yes
+6 | 3.83 | Yes
+7 | 3.80 | No
+8 | 3.58 | Yes
+... | ... | ...
+
+What type of data is this?
+
+---
+## Example 2.1 - Sampling Students
+
+Data from "College of the Midwest" for **all students** enrolled in Spring 2011.     
+.red[*=> Population data*]
+
+Student ID | Cumulative GPA | On campus?
+---------- | -------------- | ----------
+ | .red[*quantitative*] | .red[*binary*]
+1 | 3.92 | Yes
+2 | 2.80 | Yes
+3 | 3.08 | Yes
+4 | 2.71 | No
+5 | 3.31 | Yes
+6 | 3.83 | Yes
+... | ... | ...
+
+A **data table** stores each observation in one row, and each variable in a separate column.
+
+
+---
+## Example 2.1 - Sampling Students
+
+The entire **population** for College of the Midwest is 2919 students. We can use the data from these students to examine the distribution using an applet.
+
+.center[http://www.math.hope.edu/isi/applets.html]
+
+**Histogram** - a graph that summarizes the distribution of a quantitative variable
+  - separate the data into bins
+  - bar height = number of observations in the bin. 
+  - bar width = limits of the bin
+
+**Parameters** - numerical summaries of the population
+
+---
+## Sampling Methods
+
+We usually don't get to conduct a census (e.g. collect data from the whole population). Instead, statisticians sample from the population.
+
+A **representative sample** is a sample collected that is similar to the results we would find in the entire population
+
+--
+
+****
+Suppose the researcher only has time to collect data on a sample of students. The researcher asks the first 30 students he finds on campus one morning whether he or she lives on campus.
+
+Is this sample **representative**? Discuss in your groups.
+
+
+---
+## Sampling Methods
+
+A **convenience sample** is a nonrandom sample of a population
+
+What could the researcher have done instead to obtain a representative sample?
+
+Why should we worry about whether or not the sample is not representative?
+
+--
+
+**Bias**: A sampling method is biased if the statistics from the samples consistently over-estimates or consistently under-estimates the population parameter of interest.
+
+---
+## Biased Sampling
+
+In 1948, major polling operations were using a technique called "quota sampling", where each interviewer was given a certain number of individuals in a demographic to interview (e.g. 7 white men living in rural areas). Interviewers were free to choose anyone who met the criteria to be part of the sample. 
+
+Data were collected until the amount of data collected matched statistics about the nation as a whole (race, gender, above/below 40, etc.).
+
+Is this sampling method representative? Is it random?
+
+---
+## Biased Sampling
+
+Gallup conducted a poll on the presidential election using this method and determined that approximately 50% of the vote was for Thomas Dewey, 44% for Harry Truman, and 6% for third-party candidates Strom Thurmond and Henry Wallace.
+
+The lead in the polls was so big, the Chicago Daily Tribune printed the headlines before the election results were in.
+
+.center[
+<img alt="Dewey defeats Truman" src="https://upload.wikimedia.org/wikipedia/en/2/28/Deweytruman12.jpg" width = "50%"/>
+]
+
+---
+## Biased Sampling
+
+Later investigations of quota sampling found that there were two main problems with the method:
+
+1. Interviewers could choose the people who they interviewed    
+.red[lack of randomness]
+
+2. You can always add more demographic characteristics, leading to ever more strict rules for who can be sampled.    
+.red[hard to get a truly representative sample]
+
+The biggest problem, however, was that quota sampling had a clear tendency to overestimate the Republican vote.    
+.red[The quota sampling method was **biased** in favor of Republicans.]
+
+
+---
+## Sampling Methods
+
+A **simple random sample** is a sample that ensures that every group of size $n$ is equally likely to be the sample selected from the population
+
+How do you take a simple random sample from a population?
+
+- Sampling Frame: a list of all individuals (observational units) in a population
+
+- Computer randomly selects $n$ individuals in the sampling frame
+
+If not all individuals in the population can be included in the sampling frame, the resulting random sampling can be biased.
+
+***
+Bias in random sampling methods:
+- 2010 Pew Research Study: [Landline only polls](https://www.pewresearch.org/2010/11/22/the-growing-gap-between-landline-and-dual-frame-election-polls/) are biased
+- 2017 Pew Research Study: [Low response rates](https://www.pewresearch.org/methods/2017/05/15/what-low-response-rates-mean-for-telephone-surveys/) cause bias on some topics, but not others
+
+***
+
+In both cases, not all individuals in the population are equally likely to be included in the sample.
+
+---
+## Example 2.1: Simple Random Sample
+A simple random sample of 30 students gives us the following data:
+
+```{r, results = 'asis'}
+set.seed(1987082111)
+pop_data <- read_tsv("http://www.isi-stats.com/isi/data/chap3/CollegeMidwest.txt") %>%
+  mutate(ID = 1:n()) %>% select(ID, GPA=CumGpa, OnCampus)
+sample <- sample_n(pop_data, 30) %>%
+  mutate(blank = "   ")
+sample_format <- bind_cols(sample[1:10,], sample[11:20,], sample[21:30,]) %>%
+  set_names(rep(names(sample), times = 3)%>% str_remove_all("blank") )
+knitr::kable(sample_format[,1:11], "html", table.attr="class='small'")
+```
+
+Statistics: 
+- Sample average of cumulative GPA $\overline{x} = `r mean(sample$GPA)`$
+- Sample proportion of on-campus students $\hat p=`r sprintf("%.03f", mean(sample$OnCampus == "Y"))`$
+
+---
+## Sampling
+
+**Sampling Variability** - variability from sample to sample
+
+What if we take multiple samples of size 30 from the  population?
+
+- Each SRS will give us different values for the statistics
+
+- What happens if we take 1000 different SRS? (long run pattern)
+
+---
+## Exploration 2.1 - Sampling Words
+
+Select a representative set of 10 words from the passage by circling them with your pen or pencil
+
+.small[
+> Four score and seven years ago our fathers brought forth on this continent a new nation, conceived in liberty, and dedicated to the proposition that all men are created equal.
+Now we are engaged in a great civil war, testing whether that nation, or any nation so conceived and so dedicated, can long endure. We are met on a great battlefield of that war. We have come to dedicate a portion of that field, as a final resting place for those who here gave their lives that that nation might live. It is altogether fitting and proper that we should do this.
+
+> But, in a larger sense, we cannot dedicate, we cannot consecrate, we cannot hallow this ground. The brave men, living and dead, who struggled here, have consecrated it, far above our poor power to add or detract. The world will little note, nor long remember what we say here, but it can never forget what they did here. 
+
+> It is for us the living, rather, to be dedicated here to the unfinished work which they who fought here have thus far so nobly advanced. It is rather for us to be here dedicated to the great task remaining before us that from these honored dead we take increased devotion to that cause for which they gave the last full measure of devotion that we here highly resolve that these dead shall not have died in vain that this nation, under God, shall have a new birth of freedom and that government of the people, by the people, for the people, shall not perish from the earth.
+
+]
+
+---
+## Exploration 2.1 - Sampling Words
+
+Record each word from your sample and indicate the length of the word (# letters) and whether or not it contains at least one letter $e$.
+
+<table width="100%">
+<tr><th></th><th>Word</th><th>Length</th><th>Contains e? (Y/N)</th></tr>
+<tr><td>1</td><td></td><td></td><td></td></tr>
+<tr><td>2</td><td></td><td></td><td></td></tr>
+<tr><td>3</td><td></td><td></td><td></td></tr>
+<tr><td>4</td><td></td><td></td><td></td></tr>
+<tr><td>5</td><td></td><td></td><td></td></tr>
+<tr><td>6</td><td></td><td></td><td></td></tr>
+<tr><td>7</td><td></td><td></td><td></td></tr>
+<tr><td>8</td><td></td><td></td><td></td></tr>
+<tr><td>9</td><td></td><td></td><td></td></tr>
+<tr><td>10</td><td></td><td></td><td></td></tr>
+</table>
+
+---
+## Exploration 2.1 - Sampling Words
+
+Individually, do questions 4-9 before Thursday
+
+We will use i>clickers on Thursday to collect and combine your results
+
+---
+class:center,middle,inverse
+## Review
+
+---
+## Review - Section 2.1
+
+- Changing from proportion/probability to averages of quantitative data
+
+- **population** - entire collection of observational units
+
+- **sample** - subset of data
+
+- **parameters** - numerical summary of the population
+
+- **statistics** - numerical summary of the sample
+
+---
+## Review
+- What is sampling?
+<br/><br/>
+
+- Why do we sample? What is the goal?
+<br/><br/>
+
+- What makes a sample good or bad?
+
+---
+## Review
+
+- **Representative** - data from a sample will be similar to results from the population
+
+- **Bias** - statistics that consistently over/under estimate the population parameter, based on sampling method; occurs when not taking a representative sample
+
+---
+## Review
+
+- **Convenience sample** - a nonrandom sample of a population
+
+- **Simple Random Sample** - every member of the population has equal probability of being chosen. To do this, you have to define (and list) the entire population.
+
+- **Sampling frame** - List of individuals in a population, used when choosing a random sample
+  - What might be the sampling frame to sample UNL students?
+
+  - How might we select a SRS of everyone in the entire state?
+  
+---
+## Review
+### New Symbols
+
+- Sample mean: .underline[.hidden[xbarx]]
+
+- Sample standard deviation: .underline[.hidden[sxxxx]]
+
+- Population mean: .underline[.hidden[muxxx]]
+
+- Population standard deviation: .underline[.hidden[sigma]]
+
+---
+## Review
+### New Symbols
+
+- Sample mean: $\overline{x}$
+
+- Sample standard deviation: $s$
+
+- Population mean: $\mu$
+
+- Population standard deviation: $\sigma$
+
+---
+## Exploration 2.1
+
+
+---
+class:center,middle,inverse
+# 2.2: Inference on a Single Quantitative Variable
+
+---
+## Introduction
+In Ch 1, we used categorical/binary data...
+
+Inference: 
+- Simulation (3 S's strategy)
+- Standardized Statistics / p-values
+- Theory based approximations
+
+Now, we're going to shift to **quantitative** variables
+
+2.1 covered sampling methods and vocabulary, symbols, and  drawing conclusions about **population means**
+
+---
+## Testing with means
+
+Parameter of interest is now in terms of **quantitative** data 
+  - number of emails in a day
+  - amount of money spent Christmas shopping
+  - population size
+
+Hypotheses set up in the same way (new symbols):     
+$H_0: \mu = a$    
+$H_A: \mu > a \text{, or } H_A: \mu < a \text{, or } H_A: \mu \neq a$
+
+Tests have the same interpretation and conclusions from p-values and standardized statistics
+
+---
+## Describing Distributions
+
+Quantitative variables can be distributed in more interesting ways...
+
+### Shape
+![Positive Skew, Symmetric, and Negative Skew Distributions](https://upload.wikimedia.org/wikipedia/commons/c/cc/Relationship_between_mean_and_median_under_different_skewness.png)
+---
+## Describing Distributions
+
+Quantitative variables can be distributed in more interesting ways...
+
+### Shape
+Rounding effects (very common in human-recorded data)
+
+```{r rounding}
+tbl <- tibble(x = runif(100, 0, 10), y = rbernoulli(100, .6), z = ifelse(y, round(x), x))
+ggplot(tbl, aes(x = z)) + geom_histogram(binwidth = .25) + scale_x_continuous("", breaks = 0:10) + 
+  scale_y_continuous("# samples") + theme(axis.title.x = element_blank())
+```
+---
+## Describing Distributions
+### Center
+
+If skew is shifting the mean, we might use another measure of center
+
+- **median** - the middle number when the data values are sorted from smallest to largest
+
+- **mode** - the most common value
+
+We usually use the median when the mean is not appropriate
+
+---
+## Describing Distributions
+### Variability
+
+The standard deviation of a binary variable is generally fixed; with quantitative variables, there is much more freedom.
+
+```{r}
+data(cerealsugar, package = "DAAG")
+data(cuckoos, package = "DAAG")
+data(Fair, package = "Ecdat")
+data(measles, package = "DAAG")
+tbl <- bind_rows(
+  tibble(x = cerealsugar, set = "% Sugar in  Breakfast Cereal"),
+  tibble(x = filter(cuckoos, species == "meadow.pipit")$length, set = "Length of Meadow Pipit"),
+  tibble(x = Fair$nbaffairs, set = "Number of Extramarital Affairs"),
+  tibble(x = as.numeric(measles) %>% ifelse(is.na(.), 0, .), set = "Deaths in London from Measles")
+)
+ggplot(data = tbl, aes(x = x)) + facet_wrap(~set, scales = "free") + geom_histogram() 
+```
+
+---
+## Describing Distributions
+### Unusual Observations
+
+- Unusual observations are called **outliers**
+
+- Some extreme values can impact our summary statistics (e.g. mean, standard deviation)
+
+- A summary statistic is called **resistant** if its value does not change much when extreme observations are removed from the data set
+
+---
+## Describing Distributions
+## Example
+
+```{r}
+df <- tibble(n_states = 0:43,
+    count = c(0, 2, 1, 5, 2, 10, 5, 5, 3, 3, 1, 4, 1, 1, 3, 1, rep(0, 9), 1, 0, 0, 0, 0, 1, rep(0, 12), 1)) %>%
+  filter(count > 0) %>%
+  mutate(lines = purrr::map(count, ~rep(1, .))) %>%
+  unnest(lines)
+
+df %>%
+  ggplot(aes(x = n_states)) + geom_dotplot(binwidth = 1, dotsize = .8) + 
+  theme(axis.title.y = element_blank(), axis.ticks.y = element_blank(), axis.text.y = element_blank()) + 
+  scale_x_continuous("Number of US states visited")
+```
+
+Describe the distribution
+
+Median is .underline[.hidden[`r median(df$n_states)`]]
+
+What if 43 is a typo and it should be 34?
+
+---
+## Quantitative Data
+
+- Categorical data
+  - Simulations with spinners, coins, etc.
+  - Create a null distribution
+  - Evaluate how our sample relates to the null distribution
+  
+- Where was the null centered? How did sample size affect the null distribution?
+
+- Quantitative data can't be modeled with coin flips, but the same principles apply
+
+---
+## New values
+- The principles from categorical data carry over to quantitative data
+
+- Using theory-based methods, the standard deviation of the sample mean is calculated to be _______
+
+What do you remember about $\sigma$?
+
+Is it a parameter or a statistic?
+
+---
+## New values
+
+We don't  have to have $\sigma$ - we can use $s$, the sample standard deviation, in its place
+
+In order to find thet standardized statistic, we use  $\displaystyle \frac{s}{\sqrt{n}}$ in place of $\sigma$
+
+$\displaystyle \frac{s}{\sqrt{n}}$ is the **standard error** of the sample mean
+
+The **standard error** is a measure of the accuracy of an estimate
+
+
+---
+## T-statistics and Z-statistics
+- As with the normal approximation, we need a reference distribution
+  - Categorical data: $z$ and compare to a normal distribution
+  - Quantitative: use $s$ in place of $\sigma$ -> we can't compare to a normal distribution    
+  Instead, we use the $t$ distribution, which is very similar but not quite the same
+  
+```{r}
+tibble(x = seq(-4, 4, .01), z = dnorm(x), t = dt(x, df = 5)) %>%
+  pivot_longer(cols = z:t, names_to = "dist", values_to = "dens") %>%
+  mutate(dist = str_replace_all(dist, c("z" = "normal"))) %>%
+  ggplot(aes(x = x, y = dens, color = dist)) + geom_line() + 
+  scale_color_discrete("Distribution") + 
+  theme(legend.position = c(1, 1), legend.justification = c(1, 1), legend.background = element_rect(fill = "transparent")) + 
+  xlab("Score") + ylab("Density")
+
+```
+**Interpretations and conclusions are still the same**
