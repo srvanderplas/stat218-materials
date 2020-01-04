@@ -365,12 +365,14 @@ class:center,middle,inverse
 ---
 ## Exploration 2.1
 
-???
-10. Make class dotplot, describe shape, center, variability
-11. Compare to population parameters
-12. Examine bias
-13. Describe why this method would maybe be biased
-14. 
+Answer Question 10 here: https://forms.gle/8vCzyVAxLGLx84hH6
+
+---
+## Exploration 2.1
+
+Answer Question 17 here: https://forms.gle/UxaVigrMn1gpVpaD7
+
+Turn in answers to 10-19 on Canvas by Monday at 6pm. I will post the graphs shown in class on Canvas.
 
 ---
 class:center,middle,inverse
@@ -540,3 +542,20 @@ tibble(x = seq(-4, 4, .01), z = dnorm(x), t = dt(x, df = 5)) %>%
 
 ```
 **Interpretations and conclusions are still the same**
+
+---
+## Distributions
+.pull-left[
+### Z-Distribution
+- Categorical data - falls into specific groups; corresponding probabilities
+- Test estimates of population proportions
+- **Theory Validity Conditions** - 10 successes and 10 failures
+- Can simulate because we have finite groups
+].pull-right[
+### T-Distribution
+- Quantitative Data - numerical values, with mean/averages
+- Want to run tests to estimate our population mean
+- **Theory Validity Conditions** - $n \geq 20$ (sample size)
+- Cannot simulate
+
+]
