@@ -288,7 +288,7 @@ Record each word from your sample and indicate the length of the word (# letters
 ---
 ## Exploration 2.1 - Sampling Words
 
-Individually, do questions 4-9 before Thursday
+Individually, do questions 4-9 before Thursday. Upload your answers to Canvas by Thursday at 3:30 pm. 
 
 We will use i>clickers on Thursday to collect and combine your results
 
@@ -365,6 +365,12 @@ class:center,middle,inverse
 ---
 ## Exploration 2.1
 
+???
+10. Make class dotplot, describe shape, center, variability
+11. Compare to population parameters
+12. Examine bias
+13. Describe why this method would maybe be biased
+14. 
 
 ---
 class:center,middle,inverse
