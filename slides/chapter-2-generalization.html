@@ -76,6 +76,13 @@ class: inverse,middle,center
 
 .center[.large[sample -&gt; statistic]]
 
+--
+***
+
+Up until now, we have sampled data using a **process** (coin flips, etc.). 
+
+Now, we're going to be sampling from a **population** of individuals; we'll record data about those individuals instead of the outcome of the process.
+
 ---
 ## Example 2.1 - Sampling Students
 
@@ -643,20 +650,19 @@ The **standard error** is a measure of the accuracy of an estimate
 
 ---
 ## Distributions
-.pull-left[
-### Z-Distribution
-- Categorical data - falls into specific groups; corresponding probabilities
-- Test estimates of population proportions
-- **Theory Validity Conditions** - 10 successes and 10 failures
-- Can simulate because we have finite groups
-].pull-right[
-### T-Distribution
-- Quantitative Data - numerical values, with mean/averages
-- Want to run tests to estimate our population mean
-- **Theory Validity Conditions** - `\(n \geq 20\)` (sample size)
-- Cannot simulate
 
-]
+Z-Distribution | T-Distribution 
+-------------- | ---------------
+Categorical data - falls into specific groups; corresponding probabilities | Quantitative Data - numerical values, with mean/averages
+Test estimates of population proportions | Test estimates of population mean
+**Theory Validity Conditions** &lt;br/&gt; 10 successes and 10 failures | **Theory Validity Conditions** &lt;br/&gt; `\(n \geq 20\)` (sample size)
+Can simulate because we have finite groups and/or a known process | Cannot simulate
+
+
+---
+## Significance test - Sleep Data (Exploration 2.2)
+
+-
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>

@@ -81,6 +81,13 @@ class: inverse,middle,center
 
 .center[.large[sample -> statistic]]
 
+--
+***
+
+Up until now, we have sampled data using a **process** (coin flips, etc.). 
+
+Now, we're going to be sampling from a **population** of individuals; we'll record data about those individuals instead of the outcome of the process.
+
 ---
 ## Example 2.1 - Sampling Students
 
@@ -545,17 +552,34 @@ tibble(x = seq(-4, 4, .01), z = dnorm(x), t = dt(x, df = 5)) %>%
 
 ---
 ## Distributions
-.pull-left[
-### Z-Distribution
-- Categorical data - falls into specific groups; corresponding probabilities
-- Test estimates of population proportions
-- **Theory Validity Conditions** - 10 successes and 10 failures
-- Can simulate because we have finite groups
-].pull-right[
-### T-Distribution
-- Quantitative Data - numerical values, with mean/averages
-- Want to run tests to estimate our population mean
-- **Theory Validity Conditions** - $n \geq 20$ (sample size)
-- Cannot simulate
 
-]
+Z-Distribution | T-Distribution 
+-------------- | ---------------
+Categorical data - falls into specific groups; corresponding probabilities | Quantitative Data - numerical values, with mean/averages
+Test estimates of population proportions | Test estimates of population mean
+**Theory Validity Conditions** <br/> 10 successes and 10 failures | **Theory Validity Conditions** <br/> $n \geq 20$ (sample size)
+Can simulate because we have finite groups and/or a known process | Cannot simulate
+
+
+---
+## Significance test - Sleep Data (2015)
+
+From the Theory Based Inference Applet:
+- Sample size: $n=24$
+- Sample mean: $\overline x=6.61$
+- Sample standard deviation: $s = 1.48$
+
+**On a quiz or exam, values will be given**
+
+Hypotheses:
+- To see if the population average hours of sleep is 8 or is less than 8
+
+Using our sample, we need to find a p-value and a standardized statistic
+
+P-value from Theory based inference Applet: _______
+
+---
+## Significance test - Sleep Data (2015)
+
+
+
