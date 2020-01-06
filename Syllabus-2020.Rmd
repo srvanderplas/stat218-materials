@@ -21,7 +21,7 @@ instructor:
 #      email: TBD
 officehours:
    - name: "Susan Vanderplas"
-     time: "TR 1:30-3"
+     time: "TR 11:30-1"
      location: "Hardin Hall 349a (East Campus)"
    # - name: TBD
    #   time: TBD
