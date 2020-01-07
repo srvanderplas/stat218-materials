@@ -290,30 +290,20 @@ Play `\(n\)` rounds, recording 0 or 1, where 1 = scissors was played
   - Observational Unit: .red[Each round of play]
   - Variable: .red[Outcome of a round (rock, paper, scissors)] .small[Categorical]
   - Outcomes: .red[Scissors or not scissors (rock, paper)] .small[Binary]
-  - Statistic: .red[Let] &lt;math xmlns="http://www.w3.org/1998/Math/MathML"&gt;&lt;mstyle color="red"&gt;
-  &lt;mi&gt;x&lt;/mi&gt;
+  - Statistic: .red[Let x=# scissors selected in n rounds; then] &lt;math xmlns="http://www.w3.org/1998/Math/MathML"&gt;&lt;mstyle color="red"&gt;
+  &lt;mrow class="MJX-TeXAtom-ORD"&gt;
+    &lt;mover&gt;
+      &lt;mi&gt;p&lt;/mi&gt;
+      &lt;mo stretchy="false"&gt;&amp;#x005E;&lt;!-- ^ --&gt;&lt;/mo&gt;
+    &lt;/mover&gt;
+  &lt;/mrow&gt;
   &lt;mo&gt;=&lt;/mo&gt;
-  &lt;mo fence="false" stretchy="false"&gt;{&lt;/mo&gt;
-  &lt;mtext&gt;# scissors selected in&amp;#xA0;&lt;/mtext&gt;
-  &lt;mi&gt;n&lt;/mi&gt;
-  &lt;mtext&gt;&amp;#xA0;rounds&lt;/mtext&gt;
-  &lt;mo fence="false" stretchy="false"&gt;}&lt;/mo&gt;&lt;/mstyle&gt;
-&lt;/math&gt;.red[; then ]&lt;math xmlns="http://www.w3.org/1998/Math/MathML"&gt;
-  &lt;mstyle displaystyle="true" scriptlevel="0" color="red"&gt;
-    &lt;mrow class="MJX-TeXAtom-ORD"&gt;
-      &lt;mover&gt;
-        &lt;mi&gt;p&lt;/mi&gt;
-        &lt;mo stretchy="false"&gt;&amp;#x005E;&lt;!-- ^ --&gt;&lt;/mo&gt;
-      &lt;/mover&gt;
-    &lt;/mrow&gt;
-    &lt;mo&gt;=&lt;/mo&gt;
-    &lt;mfrac&gt;
-      &lt;mi&gt;x&lt;/mi&gt;
-      &lt;mi&gt;n&lt;/mi&gt;
-    &lt;/mfrac&gt;
-  &lt;/mstyle&gt;
-&lt;/math&gt;    
-&gt; In our study, `\(n=12\)`, `\(x=2\)`
+  &lt;mfrac&gt;
+    &lt;mi&gt;x&lt;/mi&gt;
+    &lt;mi&gt;n&lt;/mi&gt;
+  &lt;/mfrac&gt;&lt;/mstyle&gt;
+&lt;/math&gt;
+&gt; In our study, `\(n=12, x=2\)`
   - Parameter of interest: .red[Probability of selecting scissors]    
   Options:
       - Equal preference for all 3 choices, so `\(\pi = 1/3\)`
@@ -334,7 +324,19 @@ Play `\(n\)` rounds, recording 0 or 1, where 1 = scissors was played
 1. Research question
 2. Design a study and collect data
   - Outcomes: .red[Scissors or not scissors (rock, paper)] .small[Binary]
-  - Statistic: .red[Let] &lt;math xmlns="http://www.w3.org/1998/Math/MathML"&gt;&lt;mstyle color="red"&gt;
+  - Statistic: &lt;math xmlns="http://www.w3.org/1998/Math/MathML"&gt;&lt;mstyle color="red"&gt;
+  &lt;mrow class="MJX-TeXAtom-ORD"&gt;
+    &lt;mover&gt;
+      &lt;mi&gt;p&lt;/mi&gt;
+      &lt;mo stretchy="false"&gt;&amp;#x005E;&lt;!-- ^ --&gt;&lt;/mo&gt;
+    &lt;/mover&gt;
+  &lt;/mrow&gt;
+  &lt;mo&gt;=&lt;/mo&gt;
+  &lt;mfrac&gt;
+    &lt;mi&gt;x&lt;/mi&gt;
+    &lt;mi&gt;n&lt;/mi&gt;
+  &lt;/mfrac&gt;&lt;/mstyle&gt;
+&lt;/math&gt;
   - Parameter of interest: .red[Probability of selecting scissors]    
   Options:
       - Equal preference for all 3 choices, so `\(\pi = 1/3\)`
@@ -354,7 +356,19 @@ Play `\(n\)` rounds, recording 0 or 1, where 1 = scissors was played
 1. Research question
 2. Design a study and collect data
   - Outcomes: .red[Scissors or not scissors (rock, paper)] .small[Binary]
-  - Statistic: .red[Let] &lt;math xmlns="http://www.w3.org/1998/Math/MathML"&gt;&lt;mstyle color="red"&gt;
+  - Statistic:  &lt;math xmlns="http://www.w3.org/1998/Math/MathML"&gt;&lt;mstyle color="red"&gt;
+  &lt;mrow class="MJX-TeXAtom-ORD"&gt;
+    &lt;mover&gt;
+      &lt;mi&gt;p&lt;/mi&gt;
+      &lt;mo stretchy="false"&gt;&amp;#x005E;&lt;!-- ^ --&gt;&lt;/mo&gt;
+    &lt;/mover&gt;
+  &lt;/mrow&gt;
+  &lt;mo&gt;=&lt;/mo&gt;
+  &lt;mfrac&gt;
+    &lt;mi&gt;x&lt;/mi&gt;
+    &lt;mi&gt;n&lt;/mi&gt;
+  &lt;/mfrac&gt;&lt;/mstyle&gt;
+&lt;/math&gt;
   - Parameter of interest: .red[Probability of selecting scissors]    
   Options:
       - Equal preference for all 3 choices, so `\(\pi = 1/3\)`
@@ -960,12 +974,12 @@ Example: Determining if coins are fair
 - Flip a coin twice and get heads both times
   - `\(H_0: \pi = 0.5\)`
   - `\(\hat p = 1\)`
-  - `\(|\pi_0 - \hat p| = 0.5\)`
+  - `\(|\hat p - \pi_0 | = 0.5\)`
 
 - Flip a coin 100 times and get heads 80 times
   - `\(H_0: \pi = 0.5\)`
   - `\(\hat p = .8\)`
-  - `\(|\pi_0 - \hat p| = 0.3\)`
+  - `\(|\hat p - \pi_0 | = 0.3\)`
   
 - Standardization allows us to add some context (the mean and spread of the null distribution) to our estimate
 

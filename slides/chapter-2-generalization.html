@@ -660,9 +660,322 @@ Can simulate because we have finite groups and/or a known process | Cannot simul
 
 
 ---
-## Significance test - Sleep Data (Exploration 2.2)
+## Significance test - Example 2.2 (Sleep)
 
--
+From the Theory Based Inference Applet:
+- Sample size: `\(n=21\)`
+- Sample mean: `\(\overline x=6.69\)`
+- Sample standard deviation: `\(s = 1.295\)`
+
+**On a quiz or exam, values or data will be given**
+
+Hypotheses:
+- To see if the population average hours of sleep is 8 or is less than 8
+
+Using our sample, we need to find a p-value and a standardized statistic
+
+P-value from Theory based inference Applet: _______
+
+---
+## Significance test - Example 2.2 (Sleep)
+
+**Interpretation** With our p-value of _____, we (reject/fail to reject), because the p-value is (less/greater) than 0.05.
+
+**Conclusion** From our p-value we (do/do not) have enough evidence to conclude that the average hours slept per night for UNL students is significantly below  8 hours.
+
+---
+## Standardized Statistic - Example 2.2 (Sleep)
+
+Calculation with Applet values:
+- Sample size: `\(n=21\)`
+- Sample mean: `\(\overline x=6.69\)`
+- Sample standard deviation: `\(s = 1.295\)`
+
+1. Find the standard error: $$\frac{\text{sample std.dev.}}{{\sqrt{\text{sample size}}}} = $$    
+We are trying to use the **standard deviation from our one sample** to estimate the standard deviation of the mean for **many samples** of size `\(n\)`
+
+2. Input values into S.S. formula
+$$t = \frac{\overline x - \mu_0}{\text{standard error}} = $$
+
+---
+## Standardized Statistic - Example 2.2 (Sleep)
+1. Find the standard error
+2. Input values into S.S. formula
+
+3. **Interpretation**: We will .underline[.hidden[reject]] the null because our standardized statistic is .underline[.hidden[-4.635]], which is .underline[.hidden[extremely low]] and provides .underline[.hidden[extremely strong evidence]] to suggest that UNL students get .underline[.hidden[less than]] 8 hours of sleep per night.
+
+4. **Conclusion**: We can use the same conclusion as before, but with the standardized statistic as our reasoning.
+
+---
+## Example: Sunscreen
+Most dermatologists recommend using sunscreens that have a sun protection factor (SPF) of at least 30. One of the authors wanted to find out whether the SPF of sunscreens used by students at her school (which is in a very sunny part of the US) exceeds this value, on average?
+
+- Identify the variable of interest and whether the variable is categorical or quantitative.
+
+- Describe the author's parameter of interest and assign an appropriate symbol to denote it.
+
+- Write the appropriate hypothesis using symbols
+
+
+
+---
+## Example: Sunscreen
+Most dermatologists recommend using sunscreens that have a sun protection factor (SPF) of at least 30. One of the authors wanted to find out whether the SPF of sunscreens used by students at her school (which is in a very sunny part of the US) exceeds this value, on average?
+
+- Identify the variable of interest and whether the variable is categorical or quantitative.    
+.red[SPF of sunscreen used by students at the school]
+
+- Describe the author's parameter of interest and assign an appropriate symbol to denote it.    
+.red[average SPF of sunscreen used by all students at the school; `\(\mu\)`]
+
+- Write the appropriate hypotheses using symbols
+`$$H_0: \mu = 30\\H_A: \mu &gt; 30$$`
+
+---
+## Example: Sunscreen
+
+To collect data, the author surveyed students in her introductory statistics course and found that in a sample of 48 students the average SPF was 35.29 and the standard deviation of the SPF was 17.19
+
+- Assign appropriate symbols to the numbers: `$$\;\;=48\;\;\;\;\; \;\;\;\;=35.29\;\;\;\;\; \;\;\;\;=17.19$$`
+
+- In the context of this stuudy, is the theory-based approach (one-sample t-test) valid to find a p-value to investigate whether the data provide evidence that the average SPF of sunscreens used by the students at this school exceeds 30? Explain
+
+- Find and report a standardized statistic (t-statistic)
+
+- Use the Theory-Based Inference applet to conduct a one-sample t-test and find a p-value
+
+- State your conclusion from this study based on the p-value, being sure to provide justification for your conclusion.
+
+
+---
+## Example: Sunscreen
+
+To collect data, the author surveyed students in her introductory statistics course and found that in a sample of 48 students the average SPF was 35.29 and the standard deviation of the SPF was 17.19
+
+- Assign appropriate symbols to the numbers: `$$n=48\;\;\;\;\;\overline{x}=35.29\;\;\;\;\;s=17.19$$`
+
+- In the context of this stuudy, is the theory-based approach (one-sample t-test) valid to find a p-value to investigate whether the data provide evidence that the average SPF of sunscreens used by the students at this school exceeds 30? Explain    
+.red[Yes, the theory-based approach is valid. We have more than 20 observations in our sample, which means that we can expect our sample mean to be normally distributed thanks to the central limit theorem.]
+
+- Find and report a standardized statistic (t-statistic) `$$t = \frac{\overline{x} - \mu}{\frac{s}{\sqrt{n}}} = \frac{35.29 - 30}{\frac{17.19}{\sqrt{48}}} = 2.132$$`
+
+---
+## Example: Sunscreen
+
+- Use the Theory-Based Inference applet to conduct a one-sample t-test and find a p-value
+
+.center[
+&lt;table class="blank" width="80%"&gt;&lt;tr&gt;&lt;td&gt;&lt;img src="figure/example_sunscreen_applet1.png" alt="applet settings: n, x, s"/&gt;&lt;/td&gt;&lt;td rowspan=2&gt;&lt;img src="figure/example_sunscreen_applet3.png" alt="applet results"/&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;&lt;img src="figure/example_sunscreen_applet2.png" alt="applet settings: hypotheses"/&gt;&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+]
+
+---
+## Example: Sunscreen
+
+- State your conclusion from this study based on the p-value, being sure to provide justification for your conclusion.    
+    
+.red[We reject the null hypothesis, because p=0.191 is less than 0.05. We have evidence that the average SPF of sunscreen used by students at this college is higher than 30. ]
+
+---
+class:center,middle,inverse
+# 2.3: Errors and Significance
+
+---
+## Introduction
+
+So far:    
+Significance tests are for examining the **strength of evidence** against `\(H_0\)`
+
+&lt;br/&gt;&lt;br/&gt;
+Another approach:    
+Significance tests are used to **make a decision** about whether the data provide enough evidence to reject `\(H_0\)`
+
+--
+***
+But decisions imply making mistakes...
+
+
+---
+## Significance and Errors
+
+- How extreme is extreme enough?
+  - Changes with the study: the consequences may be different for different types of errors    
+  Criminal justice system: 
+  &gt; It is better that ten guilty persons escape than that one innocent suffer - William Blackstone
+  
+- In statistics, we control "extreme enough" with the value where we reject the null, aka. **significance level** or **alpha** ( `\(\alpha\)` )
+
+- Changing `\(\alpha\)` has consequences: 
+  - if we increase it (lowering the level of "extreme" necessary to reject), we might find evidence of an effect even though there is only chance. 
+  - if we decrease it (we need more evidence to reject), we might fail to reject an effect that is actually there
+  
+---
+## Errors
+
+- Any time we make a decision based on data, a mistake is possible
+
+- In significance tests, there are two types of mistakes we can make:
+  - (The effect is really there) and we fail to reject `\(H_0\)`
+  - (The effect is really not there) and we reject `\(H_0\)`
+
+&lt;br/&gt;&lt;br/&gt;
+  
+  &lt;table style="text-align:center;"&gt; &lt;tr&gt;&lt;td&gt;&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;td  colspan=2&gt;Reality&lt;/td&gt;&lt;/tr&gt;
+  &lt;tr&gt;&lt;td style="background-color:#FFFFFF;"&gt;&lt;/td&gt;&lt;td style="background-color:#FFFFFF;"&gt;&lt;/td&gt;&lt;td&gt; `\(H_0\)` is true &lt;/td&gt;&lt;td&gt; `\(H_A\)` is true &lt;/td&gt;&lt;/tr&gt;
+  &lt;tr&gt;&lt;td rowspan=2&gt;What we say&lt;/td&gt;&lt;td&gt; Fail to reject `\(H_0\)` &lt;/td&gt;&lt;td&gt; Correct decision! &lt;/td&gt;&lt;td&gt; Missed opportunity&lt;br/&gt;(Type 2 error) &lt;/td&gt;&lt;/tr&gt;
+  &lt;tr&gt;&lt;td&gt;Reject `\(H_0\)` &lt;/td&gt; &lt;td&gt; False alarm&lt;br/&gt;(Type 1 error)&lt;/td&gt;&lt;td&gt; Correct decision!&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+  
+---
+## Errors
+- Helper toy example: Do more than half the babies pick the helper toy? `$$H_0: \pi = 0.5 \;\;\;\; H_A: \pi &gt; 0.5$$`
+
+- We can simulate 100 reps of 16 babies assuming the null:
+&lt;img src="chapter-2-generalization_files/figure-html/unnamed-chunk-5-1.png" width="80%" style="display: block; margin: auto;" /&gt;
+
+- Is this strong evidence against the null?
+
+- Enough evidence to reject?
+
+  
+---
+## Errors
+
+- Usual threshold is `\(\alpha = 0.05\)`    
+**What that actually means**: we are ok with making a type 1 error 5% of the time
+
+- We can choose something other than 5% `\((\alpha = 0.05)\)`
+
+- What if `\(\alpha = .10\)`?
+  - 10% of the time we will reject a true null hypothesis (in the long run)
+
+- The only thing that changes in our procedure is that we're deciding the cutoff for rejecting; it might be something other than 5%.
+
+- Where do we draw the line?
+  - How small does `\(p\)` have to be?
+  - Field dependent
+  - Consequences dependent: Would you want a lower p-value for 
+      - deciding whether someone should be executed,     
+      or for 
+      - deciding whether someone should get a sticker?
+  
+---
+## Types of Error
+
+**Type 1 Error** - reject the null hypothesis when `\(H_0\)` is actually true
+- False alarm - believe we have discovered a difference when no difference exists
+- i.e. Students at UNL use sunscreen that is on average 30 spf, but we said it was more.
+
+**Type 2 Error** - fail to reject `\(H_0\)`, but in reality, `\(H_0\)` is actually false
+- Missed opportunity - failing to detect a difference that is there
+- i.e. UNL students use sunscreen that is over 30 spf, but we did not reject the null hypothesis of `\(\mu = 30\)`
+
+---
+## Reality
+- We never actually know whether we've made an error
+
+- We can control what we want to happen (depending on discipline)
+
+- **Significance level** is the probability of Type 1 error
+  - Smaller `\(\alpha\)` = less likely to make a Type 1 error
+  - Trade off: more likely to make a Type 2 error
+
+- **Power** is the probability of rejecting a false null hypothesis
+  - We want to reject when the null is not true
+  - We want our tests to be as powerful as possible
+
+---
+## Reality
+  &lt;table style="text-align:center;"&gt; &lt;tr&gt;&lt;td&gt;&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;td  colspan=2&gt;Reality&lt;/td&gt;&lt;/tr&gt;
+  &lt;tr&gt;&lt;td style="background-color:#FFFFFF;"&gt;&lt;/td&gt;&lt;td style="background-color:#FFFFFF;"&gt;&lt;/td&gt;&lt;td&gt; `\(H_0\)` is true &lt;/td&gt;&lt;td&gt; `\(H_A\)` is true &lt;/td&gt;&lt;/tr&gt;
+  &lt;tr&gt;&lt;td rowspan=2&gt;What we say&lt;/td&gt;&lt;td&gt; Fail to reject `\(H_0\)` &lt;/td&gt;&lt;td&gt; Correct decision! &lt;/td&gt;&lt;td&gt; Missed opportunity&lt;br/&gt;(Type 2 error) &lt;/td&gt;&lt;/tr&gt;
+  &lt;tr&gt;&lt;td&gt;Reject `\(H_0\)` &lt;/td&gt; &lt;td&gt; False alarm&lt;br/&gt; 
+&lt;span style="font-weight:bold;"&gt;(Type 1 error)&lt;/span&gt; &lt;/td&gt;&lt;td&gt; Correct decision!&lt;br/&gt; 
+&lt;span style="font-weight:bold;"&gt;Power&lt;/span&gt; &lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+
+---
+## Example
+
+You are sitting on a jury and must decide whether the defendant is innocent or guilty. If they are guilty, they will go to jail.
+
+- Hypothesis (in words):
+  - `\(H_0:\)`
+  - `\(H_A:\)`
+
+- Errors:
+  - Type 1: 
+  - Type 2: 
+
+- Which error would be worse?
+
+- Significance level: 
+
+- How should we adjust our significance level?
+
+---
+## Example
+
+You are sitting on a jury and must decide whether the defendant is innocent or guilty. If they are guilty, they will go to jail.
+
+- Hypothesis (in words):
+  - `\(H_0:\)` .red[The defendant is innocent]
+  - `\(H_A:\)` .red[The defendant is guilty]
+
+- Errors:
+  - Type 1: .red[Send the defendant to jail when they are innocent]
+  - Type 2: .red[Let a guilty person go free]
+
+- Which error would be worse?
+
+- Significance level: .red[Percent of time that you send an innocent person to jail]
+
+- How should we adjust our significance level?
+
+---
+## Example
+
+You need to decide whether to bring your umbrella with you tomorrow
+
+- Hypothesis (in words):
+  - `\(H_0:\)` 
+  - `\(H_A:\)`
+
+- Errors:
+  - Type 1: 
+  - Type 2: 
+
+- Which error would be worse?
+
+- Significance level: 
+
+- How should we adjust our significance level?
+
+---
+## Example
+
+You need to decide whether to bring your umbrella with you tomorrow
+
+- Hypothesis (in words):
+  - `\(H_0:\)` .red[It will not rain tomorrow (I should leave the umbrella at home)]
+  - `\(H_A:\)` .red[It will rain tomorrow (I should bring my umbrella)]
+
+- Errors:
+  - Type 1: .red[Bringing your umbrella even though you don't need it]
+  - Type 2: .red[Getting rained on with no umbrella]
+
+- Which error would be worse?
+
+- Significance level: .red[Proportion of the time you are stuck carrying an umbrella when it's not raining?]
+
+- How should we adjust our significance level?
+
+---
+## Errors
+
+The most important thing about errors is when they occur
+
+- Type 1 errors only occur if you reject `\(H_0\)`
+- Type 2 errors only occur if you fail to reject `\(H_0\)`
+
+Common quiz/test question: Draw a conclusion for a study and determine which type of error you may have made
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>

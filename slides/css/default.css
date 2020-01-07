@@ -168,3 +168,13 @@ div.container {
 .hidden{
   visibility:hidden;
 }
+
+.remark-slide table.blank {
+  margin:0;
+  border-top:0;
+  border-bottom:0;
+  background-color:#FFFFFF;
+}
+.remark-slide table.blank tr {
+  background-color:#FFFFFF;
+}

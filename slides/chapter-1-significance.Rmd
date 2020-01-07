@@ -396,30 +396,20 @@ Play $n$ rounds, recording 0 or 1, where 1 = scissors was played
   - Observational Unit: .red[Each round of play]
   - Variable: .red[Outcome of a round (rock, paper, scissors)] .small[Categorical]
   - Outcomes: .red[Scissors or not scissors (rock, paper)] .small[Binary]
-  - Statistic: .red[Let] <math xmlns="http://www.w3.org/1998/Math/MathML"><mstyle color="red">
-  <mi>x</mi>
+  - Statistic: .red[Let x=# scissors selected in n rounds; then] <math xmlns="http://www.w3.org/1998/Math/MathML"><mstyle color="red">
+  <mrow class="MJX-TeXAtom-ORD">
+    <mover>
+      <mi>p</mi>
+      <mo stretchy="false">&#x005E;<!-- ^ --></mo>
+    </mover>
+  </mrow>
   <mo>=</mo>
-  <mo fence="false" stretchy="false">{</mo>
-  <mtext># scissors selected in&#xA0;</mtext>
-  <mi>n</mi>
-  <mtext>&#xA0;rounds</mtext>
-  <mo fence="false" stretchy="false">}</mo></mstyle>
-</math>.red[; then ]<math xmlns="http://www.w3.org/1998/Math/MathML">
-  <mstyle displaystyle="true" scriptlevel="0" color="red">
-    <mrow class="MJX-TeXAtom-ORD">
-      <mover>
-        <mi>p</mi>
-        <mo stretchy="false">&#x005E;<!-- ^ --></mo>
-      </mover>
-    </mrow>
-    <mo>=</mo>
-    <mfrac>
-      <mi>x</mi>
-      <mi>n</mi>
-    </mfrac>
-  </mstyle>
-</math>    
-> In our study, $n=12$, $x=2$
+  <mfrac>
+    <mi>x</mi>
+    <mi>n</mi>
+  </mfrac></mstyle>
+</math>
+> In our study, $n=12, x=2$
   - Parameter of interest: .red[Probability of selecting scissors]    
   Options:
       - Equal preference for all 3 choices, so $\pi = 1/3$
@@ -440,7 +430,19 @@ Play $n$ rounds, recording 0 or 1, where 1 = scissors was played
 1. Research question
 2. Design a study and collect data
   - Outcomes: .red[Scissors or not scissors (rock, paper)] .small[Binary]
-  - Statistic: .red[Let] <math xmlns="http://www.w3.org/1998/Math/MathML"><mstyle color="red">
+  - Statistic: <math xmlns="http://www.w3.org/1998/Math/MathML"><mstyle color="red">
+  <mrow class="MJX-TeXAtom-ORD">
+    <mover>
+      <mi>p</mi>
+      <mo stretchy="false">&#x005E;<!-- ^ --></mo>
+    </mover>
+  </mrow>
+  <mo>=</mo>
+  <mfrac>
+    <mi>x</mi>
+    <mi>n</mi>
+  </mfrac></mstyle>
+</math>
   - Parameter of interest: .red[Probability of selecting scissors]    
   Options:
       - Equal preference for all 3 choices, so $\pi = 1/3$
@@ -460,7 +462,19 @@ Play $n$ rounds, recording 0 or 1, where 1 = scissors was played
 1. Research question
 2. Design a study and collect data
   - Outcomes: .red[Scissors or not scissors (rock, paper)] .small[Binary]
-  - Statistic: .red[Let] <math xmlns="http://www.w3.org/1998/Math/MathML"><mstyle color="red">
+  - Statistic:  <math xmlns="http://www.w3.org/1998/Math/MathML"><mstyle color="red">
+  <mrow class="MJX-TeXAtom-ORD">
+    <mover>
+      <mi>p</mi>
+      <mo stretchy="false">&#x005E;<!-- ^ --></mo>
+    </mover>
+  </mrow>
+  <mo>=</mo>
+  <mfrac>
+    <mi>x</mi>
+    <mi>n</mi>
+  </mfrac></mstyle>
+</math>
   - Parameter of interest: .red[Probability of selecting scissors]    
   Options:
       - Equal preference for all 3 choices, so $\pi = 1/3$
@@ -1175,12 +1189,12 @@ Example: Determining if coins are fair
 - Flip a coin twice and get heads both times
   - $H_0: \pi = 0.5$
   - $\hat p = 1$
-  - $|\pi_0 - \hat p| = 0.5$
+  - $|\hat p - \pi_0 | = 0.5$
 
 - Flip a coin 100 times and get heads 80 times
   - $H_0: \pi = 0.5$
   - $\hat p = .8$
-  - $|\pi_0 - \hat p| = 0.3$
+  - $|\hat p - \pi_0 | = 0.3$
   
 - Standardization allows us to add some context (the mean and spread of the null distribution) to our estimate
 
