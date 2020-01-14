@@ -41,6 +41,129 @@ class:inverse,middle,center
 # 3.1: Statistical Inference: Confidence Intervals
 
 ---
+## Introduction
+
+- So far, we have been looking at whether our parameter may be equal to a value or if it is equal to something else
+
+- Other ways to find the parameter?
+  - Range of values?    
+  <br/><br/>
+  
+![Garfield weather prediction comic](https://d1ejxu6vysztl5.cloudfront.net/comics/garfield/1999/1999-03-12.gif)  
+
+---
+## Confidence Intervals
+
+When we fail to reject our null hypothesis...    
+Conclusion: Null hypothesis value is .underline[.hidden[plausible]]
+
+- We could do multiple two-sided tests to find which null hypothesis values are plausible and which are unlikely
+- This sets up an interval of values that could be our parameter rather than just a single estimate
+
+---
+## Example 3.1 - Dogs Smell Cancer
+
+Can dogs sniff out cancer? Marine the labrador was presented with a bag breathed into by a colorectal cancer patient. Then, she was shown 5 bags, one from a colorectal cancer patient and 4 from controls who did not have cancer. This procedure was repeated 33 times. 
+
+- What is the experimental unit?
+
+- What is $n$?
+
+- What are the hypotheses?
+
+---
+## Example 3.1 - Dogs Smell Cancer
+
+Marine guessed correctly in 32/33 trials.  $\hat p = .909$ 
+
+- Test the hypothesis that $\pi = 0.2$ (random chance)    
+<br/><br/><br/>
+
+--
+
+- Test the hypothesis that $\pi = 0.7$    
+<br/><br/><br/>
+
+
+--
+
+- Test the hypothesis that $\pi = 0.85$    
+<br/><br/><br/>
+
+
+---
+## Example 3.1 - Dogs Smell Cancer
+
+By row, each group should test the following value:
+
+Row | Hypothesized value | Accept/reject
+--- | ------------------ | -------------
+A | 0.75 | 
+B | 0.78 | 
+C | 0.81 |
+D | 0.84 |
+E | 0.87 |
+F | 0.90 |
+G | 0.93 |
+H | 0.96 |
+ | 1.0 | 
+
+---
+## Visual Confidence Interval
+
+```{r}
+
+function(ptest) {
+  ps <- seq(0, 1, .001)
+  se <- sqrt((32/33*1/33)/33)
+  dlow <- ptest - abs(ptest - 32/33)
+  dhigh <- ptest + abs(ptest - 32/33)
+  
+  ggplot() + geom_line(aes(x = ps, y = dnorm(ps, mean = ptest, sd = se))) + 
+    geom_area()
+}
+
+ps <- seq(0, 1, .001)
+ph <- .75
+se <- sqrt(32/33*1/33/33)
+ggplot() + 
+  geom_line(aes(x = ps, y = dnorm(ps, mean = ph, sd = se))) + 
+  geom_vline(aes(xintercept = 32/33, color = "Sample prop")) +
+  geom_point(aes(x = ph, y = 0, color = "reject"))
+
+ph <- .78
+ggplot() + 
+  geom_line(aes(x = ps, y = dnorm(ps, mean = ph, sd = se))) + 
+  geom_vline(aes(xintercept = 32/33, color = "Sample prop")) +
+  geom_point(aes(x = .75, y = 0, color = "reject")) +
+  geom_point(aes(x = .78, y = 0, color = "reject"))
+
+ph <- .81
+ggplot() + 
+  geom_line(aes(x = ps, y = dnorm(ps, mean = ph, sd = se))) + 
+  geom_vline(aes(xintercept = 32/33, color = "Sample prop")) +
+  geom_point(aes(x = .75, y = 0, color = "reject")) +
+  geom_point(aes(x = .78, y = 0, color = "reject")) +
+  geom_point(aes(x = .81, y = 0, color = "reject"))
+
+ph <- .81
+ggplot() + 
+  geom_line(aes(x = ps, y = dnorm(ps, mean = ph, sd = se))) + 
+  geom_vline(aes(xintercept = 32/33, color = "Sample prop")) +
+  geom_point(aes(x = .75, y = 0, color = "reject")) +
+  geom_point(aes(x = .78, y = 0, color = "reject")) +
+  geom_point(aes(x = .81, y = 0, color = "reject"))
+
+xx <- c(0, 1, 32, 33)
+purrr::map_df(seq(0, 1, .01), function(x) tibble(orig = x, p = mean(rbinom(1000, 33, x) %in% xx))) %>%
+ggplot() + 
+  geom_vline(aes(xintercept = 32/33, color = "Sample proportion")) + 
+  geom_point(aes(x = orig, y = 0, color = p < 0.05)) 
+  
+
+```
+
+---
 ## Exploration 3.1
 
 Most people are right-dominant. In a study reported in Nature (2003), researchers showed that couples tend to lean their heads to the right while kissing. The researchers observed kissing couples in various public places and recorded which direction their heads tilted, excluding any couples who were holding objects that might affect the direction they turned. They observed that 80 of 124 couples leaned their heads to the right.
@@ -151,7 +274,8 @@ class:center,middle,inverse
 - We do not want to plug in those parameter values every time we want an interval
 
 - Method boils down to one idea:     
-We're finding a set of plausible values for the parameter centered around the .underline[.hidden[sample mean]] and adding some wiggle room around it.
+We're finding a set of plausible values for the parameter centered around the .underline[.hidden[sample mean]] and adding some wiggle room around it.    
+<br/><br/>
 
 - The wiggle room is known as the .underline[.hidden[margin of error]]
 
@@ -162,8 +286,12 @@ So the basic set up for our confidence interval is:
 $$\text{Sample statistic}\pm \text{margin of error}$$
 
 Margin of error is based on two values:
-1. The .underline[.hidden[standard deviation]] of the sample statistic
-2. A .underline[.hidden[multiplier]] reflecting the confidence level we want
+
+1. The .underline[.hidden[standard deviation]] of the sample statistic    
+<br/><br/>
+
+2. A .underline[.hidden[multiplier]] reflecting the confidence level we want    
+<br/><br/>
 
 Thus the margin of error is...
 
@@ -178,7 +306,9 @@ Thus the margin of error is...
 
   
 - For a .underline[.hidden[lower]] confidence level, the multiplier will be smaller
+
   - Leads to a .underline[.hidden[narrower]] interval
+  
   - But we don't have as much confidence
 
 ---
@@ -193,4 +323,95 @@ Thus the margin of error is...
 
 - Other confidence levels lead to different multipliers
   - We will always use 95% in this class
+  
+---
+## Standard Error in Confidence Intervals
+
+- What standard error did we use for **proportions** within our standardized statistic?
+
+  - But that was when we were testing a hypothesis that gave us a value for $\pi$
+  
+  - With a confidence interval, we are estimating where $\pi$ is between 0 and 1
+  
+  - What is our best guess of what $\pi$ is?
+  
+---
+## Standard Error
+The __standard error__ is the best guess for how much .underline[**variability**] we have
+
+- SE is the measure of spread of many samples
+- must account for how big of a sample we have
+- Different from the standard deviation of individual observations within a sample
+
+for proportion data with sample proportion $\hat p$, the SE is $\displaystyle\sqrt{\frac{\hat p (1-\hat p)}{n}}$
+
+---
+## Standard Error
+
+- Larger standard error -> 
+  - Less precise estimate
+  - Harder to pin down "truth"
+  - Wider confidence intervals
+
+- Standard error also reflects sample size
+  - as $n$  increases, we have more information about the parameter
+  - narrower confidence interval
+  - SE goes down as $n$ increases
+  
+---
+## Confidence Interval for a Proportion
+$$\text{Sample statistic} \pm (Multiplier)\times (\text{Standard Error})$$
+
+- Plug in our sample statistic and standard error for the type of data we have
+
+$$\hat p \pm 2 * \sqrt{\frac{\hat p (1-\hat p)}{n}} = $$
+Interpretation: 
+
+
+---
+## Conclusions
+
+- Different interpretation for confidence intervals:    
+We are 95% confident that the true value of ... lies between ... and ...
+
+- We can figure out what our p-value would be if we have a confidence interval and a set of hypotheses
+  - If the null hypothesis value is INSIDE the interval...    
+<br/><br/>
+  - If the null hypothesis value is OUTSIDE the interval...
+  
+---
+## Kissing Couples: Exploration 3.1
+
+$\hat p = 0.645$
+
+Our manual interval: (0.56, 0.72)
+
+Standard error: 
+
+<br/><br/>
+
+Using the 2SE method, calculate the confidence interval:
+
+
+---
+## Applet
+
+Use the Theory-Based Inference applet to check that your answer is approximately correct
+
+![Screenshot of applet](figure/Theory-Based-Inference-Screenshot-CI.png)
+
+---
+## Comparing other Confidence Levels
+
+Conf Level | Interval
+---------- | --------
+90% | (0.5745, 0.7159)
+95% | (0.5610, 0.7294)
+99% | (0.5345, 0.7559)
+
+- Center: sample proportion $\hat p$
+- Larger CI -> wider interval
+- Notice the 95% interval is close to what we found with the 2 SE method
+  - 2 is quick and easy as a multiplier
+  - 95% actually uses a multiplier of 1.96
   
