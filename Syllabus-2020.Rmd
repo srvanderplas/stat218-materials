@@ -13,19 +13,19 @@ classhours: "TR 3:30-4:50"
 instructor: 
    name: "Susan Vanderplas"
    email: "susan.vanderplas@unl.edu"
-# ta:
-#    - name: TBD
-#      email: TBD
-# grader:
-#    - name: TBD
-#      email: TBD
+ta:
+   name: "Kevin Toney"
+   email: "ktoney@huskers.unl.edu"
+grader:
+   name: "Josh Carini"
+   email: "joshua.carini@huskers.unl.edu"
 officehours:
    - name: "Susan Vanderplas"
      time: "TR 11:30-1"
      location: "Hardin Hall 349a (East Campus)"
-   # - name: TBD
-   #   time: TBD
-   #   location: TBD
+   - name: "Kevin Toney"
+     time: "M 2:15-3:15PM, W 9:30-10:30AM"
+     location: "Pound 208.1"
 fontfamily: mathpazo
 fontsize: 11pt
 ---
