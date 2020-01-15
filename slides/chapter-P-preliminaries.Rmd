@@ -15,7 +15,8 @@ output:
 
 library(ggplot2)
 library(tidyverse)
-knitr::opts_chunk$set(message = F, warning = F, echo = F, fig.width = 8, fig.height = 4, out.width = "80%", out.extra = "center")
+knitr::opts_chunk$set(message = F, warning = F, echo = F, fig.width = 8, fig.height = 4, out.width = "80%", out.extra = "center", dpi = 300)
+theme_set(theme_bw())
 ```
 
 class: inverse,middle,center
