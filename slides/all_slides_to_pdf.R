@@ -11,3 +11,6 @@ html_to_pdf <- function(x) {
 }
 
 purrr::map(html_files, html_to_pdf)
+rmarkdown::render("index.Rmd")
+
+git2r::add(path = list.files("../slides/*.pdf"))
