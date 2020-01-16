@@ -13,4 +13,7 @@ html_to_pdf <- function(x) {
 purrr::map(html_files, html_to_pdf)
 rmarkdown::render("index.Rmd")
 
-git2r::add(path = list.files("../slides/*.pdf"))
+git2r::add(path = list.files(here::here("slides"), ".pdf$", full.names = T))
+git2r::add(path = list.files(here::here("slides"), ".html$", full.names = T))
+git2r::add(path = list.files(here::here("slides"), "_files/*", full.names = T))
+git2r::commit(repo = here::here(), "Updated pdf and html slides")
