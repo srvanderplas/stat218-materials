@@ -1,0 +1,34 @@
+---
+title: "Stat 218 Slides"
+author: "Susan Vanderplas"
+date: "1/15/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = F)
+library(tidyverse)
+library(shiny)
+```
+
+```{r}
+html_files <- list.files(here::here("slides"), pattern = "html$")
+pdf_files <- list.files(here::here("slides"), pattern = "pdf$")
+
+tibble(file = c(html_files, pdf_files)) %>%
+  mutate(basename = str_remove(file, "\\.html") %>% str_remove("(-\\d)?\\.pdf"),
+         type = str_extract(file, "(-\\d)?\\.(html|pdf)") %>% 
+           str_remove_all("[-\\.]") %>% 
+           str_replace("(\\d)pdf", "\\1 per page PDF") %>% 
+           str_replace("html", "HTML") %>% 
+           str_replace("pdf", "1 per page PDF"),
+         link = sprintf("<a href=\"%s\">Link</a>", file)
+         ) %>%
+  filter(!str_detect(file, "index")) %>%
+  arrange(type) %>%
+  pivot_wider(id_cols = basename, names_from = type, values_from = link) %>%
+  mutate(Chapter = str_replace_all(basename, "-", " ") %>% str_to_title()) %>%
+  select(-basename) %>%
+  select(Chapter, everything()) %>%
+  knitr::kable(escape = F)
+```

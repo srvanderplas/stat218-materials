@@ -26,12 +26,34 @@ knitr::opts_chunk$set(dpi=300, message = F, warning = F, echo = F, fig.width = 8
 theme_set(theme_bw())
 ```
 
----
 # Navigation
 
-- January 16: [start](#3) - [end](#14)
-- January 21: [start](#15) - [end](#34)
-- January 23: [start](#35) - [end](#62)
+.pull-left[
+.large[By Date]
+
+- January 16: [start](#3) - [end](#13)
+
+- January 21: [start](#14) - [end](#33)
+
+- January 23: [start](#34) - [end](#62)
+
+- January 28: [start](#63) - [end](#86)
+
+- January 30: [Review](#87)
+]
+.pull-right[
+.large[By Section]
+
+- [Section 1.1](#3)
+
+- [Section 1.2](#14)
+
+- [Section 1.3](#39)
+
+- [Section 1.4](#55)
+
+- [Section 1.5](#73)
+]
 
 ---
 class:inverse,middle,center
@@ -103,6 +125,7 @@ Experiment:
 
 ].pull-right[![gif of dolphin splashing a kid](https://media.giphy.com/media/uSy9uVHKqRNjG/giphy.gif)
 
+![Doris and Buzz experiment setup](figure/doris_buzz.png)
 ]
 
 
@@ -120,7 +143,8 @@ Experiment:
 2. Give Buzz the levers
 3. See if Doris could tell Buzz which lever to push
 
-].pull-right[![gif of dolphin splashing a kid](https://media.giphy.com/media/uSy9uVHKqRNjG/giphy.gif)
+].pull-right[
+![Doris and Buzz experiment setup](figure/doris_buzz.png)
 
 <br/><br/>
 Buzz hit the correct lever 15/16 times
@@ -378,30 +402,20 @@ Play $n$ rounds, recording 0 or 1, where 1 = scissors was played
   - Observational Unit: .red[Each round of play]
   - Variable: .red[Outcome of a round (rock, paper, scissors)] .small[Categorical]
   - Outcomes: .red[Scissors or not scissors (rock, paper)] .small[Binary]
-  - Statistic: .red[Let] <math xmlns="http://www.w3.org/1998/Math/MathML"><mstyle color="red">
-  <mi>x</mi>
+  - Statistic: .red[Let x=# scissors selected in n rounds; then] <math xmlns="http://www.w3.org/1998/Math/MathML"><mstyle color="red">
+  <mrow class="MJX-TeXAtom-ORD">
+    <mover>
+      <mi>p</mi>
+      <mo stretchy="false">&#x005E;<!-- ^ --></mo>
+    </mover>
+  </mrow>
   <mo>=</mo>
-  <mo fence="false" stretchy="false">{</mo>
-  <mtext># scissors selected in&#xA0;</mtext>
-  <mi>n</mi>
-  <mtext>&#xA0;rounds</mtext>
-  <mo fence="false" stretchy="false">}</mo></mstyle>
-</math>.red[; then ]<math xmlns="http://www.w3.org/1998/Math/MathML">
-  <mstyle displaystyle="true" scriptlevel="0" color="red">
-    <mrow class="MJX-TeXAtom-ORD">
-      <mover>
-        <mi>p</mi>
-        <mo stretchy="false">&#x005E;<!-- ^ --></mo>
-      </mover>
-    </mrow>
-    <mo>=</mo>
-    <mfrac>
-      <mi>x</mi>
-      <mi>n</mi>
-    </mfrac>
-  </mstyle>
-</math>    
-> In our study, $n=12$, $x=2$
+  <mfrac>
+    <mi>x</mi>
+    <mi>n</mi>
+  </mfrac></mstyle>
+</math>
+> In our study, $n=12, x=2$
   - Parameter of interest: .red[Probability of selecting scissors]    
   Options:
       - Equal preference for all 3 choices, so $\pi = 1/3$
@@ -427,7 +441,19 @@ Play $n$ rounds, recording 0 or 1, where 1 = scissors was played
 1. Research question
 2. Design a study and collect data
   - Outcomes: .red[Scissors or not scissors (rock, paper)] .small[Binary]
-  - Statistic: .red[Let] <math xmlns="http://www.w3.org/1998/Math/MathML"><mstyle color="red">
+  - Statistic: <math xmlns="http://www.w3.org/1998/Math/MathML"><mstyle color="red">
+  <mrow class="MJX-TeXAtom-ORD">
+    <mover>
+      <mi>p</mi>
+      <mo stretchy="false">&#x005E;<!-- ^ --></mo>
+    </mover>
+  </mrow>
+  <mo>=</mo>
+  <mfrac>
+    <mi>x</mi>
+    <mi>n</mi>
+  </mfrac></mstyle>
+</math>
   - Parameter of interest: .red[Probability of selecting scissors]    
   Options:
       - Equal preference for all 3 choices, so $\pi = 1/3$
@@ -452,7 +478,19 @@ Play $n$ rounds, recording 0 or 1, where 1 = scissors was played
 1. Research question
 2. Design a study and collect data
   - Outcomes: .red[Scissors or not scissors (rock, paper)] .small[Binary]
-  - Statistic: .red[Let] <math xmlns="http://www.w3.org/1998/Math/MathML"><mstyle color="red">
+  - Statistic:  <math xmlns="http://www.w3.org/1998/Math/MathML"><mstyle color="red">
+  <mrow class="MJX-TeXAtom-ORD">
+    <mover>
+      <mi>p</mi>
+      <mo stretchy="false">&#x005E;<!-- ^ --></mo>
+    </mover>
+  </mrow>
+  <mo>=</mo>
+  <mfrac>
+    <mi>x</mi>
+    <mi>n</mi>
+  </mfrac></mstyle>
+</math>
   - Parameter of interest: .red[Probability of selecting scissors]    
   Options:
       - Equal preference for all 3 choices, so $\pi = 1/3$
@@ -727,7 +765,7 @@ Hand in one submission per group on Canvas by Jan 24 at 6pm.
 
 ---
 class: inverse,middle,center
-# Review
+## Review
 
 ---
 ## Review
@@ -1167,12 +1205,12 @@ Example: Determining if coins are fair
 - Flip a coin twice and get heads both times
   - $H_0: \pi = 0.5$
   - $\hat p = 1$
-  - $|\pi_0 - \hat p| = 0.5$
+  - $|\hat p - \pi_0 | = 0.5$
 
 - Flip a coin 100 times and get heads 80 times
   - $H_0: \pi = 0.5$
   - $\hat p = .8$
-  - $|\pi_0 - \hat p| = 0.3$
+  - $|\hat p - \pi_0 | = 0.3$
   
 - Standardization allows us to add some context (the mean and spread of the null distribution) to our estimate
 
@@ -1290,15 +1328,11 @@ ggplot(tbl, aes(x = x)) +
   scale_x_continuous("Proportion", breaks = (0:10)/10, limits = c(0,1)) + 
   theme(axis.title.y = element_blank(), axis.text.y = element_blank(), axis.ticks.y = element_blank())
 ```
-- 100 dots
+- There are 100 dots. To find the p-value, we count the dots which are as or more extreme than what we observed (0.8)
 
-- To find the p-value, we count the dots which are as or more extreme than what we observed (0.8)
+- For a 1-sided test of whether we observed more heads (0.8, 0.9, and 1.0), $p=0.03$
 
-- For a 1-sided test of whether we observed more heads, that  includes 0.8, 0.9, and 1.0    
-$p=0.03$
-
-- For a 2-sided test of whether the coin is fair, that includes 0.8, 0.9, 1.0, and 0.2, 0.1, 0.0
-$p=0.07$
+- For a 2-sided test of whether the coin is fair (0.8, 0.9, 1.0, and 0.2, 0.1, 0.0), $p=0.07$
 
 ---
 class:center,middle,inverse
@@ -1307,14 +1341,13 @@ class:center,middle,inverse
 ---
 ## Simulations vs. Theory
 
-- Simulation provides an easy method for comparing a statistic to a model representing random chance
-
-- Simulations require a lot of computer power
+- Simulation provides an easy method for comparing a statistic to a model representing random chance, but it requires a lot of computer power
 
 .center[
-<a href="https://www.theatlantic.com/technology/archive/2013/10/computing-power-used-to-be-measured-in-kilo-girls/280633/"><img alt="Historical computers were people; usually women" src="https://cdn.theatlantic.com/assets/media/img/posts/computer_wide.jpeg" width="60%"/></a>
+<a href="https://www.theatlantic.com/technology/archive/2013/10/computing-power-used-to-be-measured-in-kilo-girls/280633/"><img alt="Historical computers were people; usually women" src="https://cdn.theatlantic.com/assets/media/img/posts/computer_wide.jpeg" width="40%"/></a></br>
+.grey[A room full of "computers" during WWII]
 ]
-.bottom[.tiny[If you'd like to read more about human computers, [this](https://www.amazon.com/When-Computers-Human-David-Grier/dp/0691133824) book is really good]
+.bottom[.tiny[If you'd like to read more about human computers, [this](https://www.amazon.com/When-Computers-Human-David-Grier/dp/0691133824) book is very interesting.]
 ]
 
 - Historically, statisticians didn't have enough computing power for simulation, so they developed theory-based approaches to find p-values and standardized statistics
@@ -1325,7 +1358,7 @@ class:center,middle,inverse
 What do the following pictures have in common? What makes the exceptions different?
 
 
-```{r fig.scap="Simulation results from Doris and Buzz, fair coin, heart transplant, and rock-paper-scissors examples. Of the examples, only the heart transplant example is not symmetric (because it is truncated at 0).", fig.height =  3}
+```{r fig.scap="Simulation results from Doris and Buzz, fair coin, heart transplant, and rock-paper-scissors examples. Of the examples, only the heart transplant example is not symmetric (because it is truncated at 0).", fig.height =  5, out.width = "100%"}
 set.seed(2016100700)
 df <- bind_rows(
     tibble(x = rbinom(1000, 12, 1/3)/12, example = "Rock Paper Scissors"),
@@ -1345,9 +1378,9 @@ ggplot(df, aes(x = x)) + geom_histogram(breaks = (0:50)/50) +
 ---
 ## Theoretical Null Distributions
 
-Most of the null distributions we've seen so far have been fairly symmetric and "bell shaped":
+Most of the null distributions we've seen so far have been fairly symmetric and "bell shaped"
 
-```{r fig.scap="Simulation results from fair coin, heart transplant, and rock-paper-scissors examples. Of the examples, only the heart transplant example is not symmetric (because it is truncated at 0).", fig.height =  2}
+```{r fig.scap="Simulation results from fair coin, heart transplant, and rock-paper-scissors examples. Of the examples, only the heart transplant example is not symmetric (because it is truncated at 0).", fig.height =  2.5, out.width = "100%"}
 set.seed(2016100700)
 df <- bind_rows(
     tibble(x = rbinom(1000, 12, 1/3)/12, example = "Rock Paper Scissors"),
@@ -1370,38 +1403,44 @@ The not symmetric distribution has p = 0.15 and only 10 cases. In the other exam
 ---
 ## Theoretical Null Distribution
 
-When p is "not too small or too large"\* and $n$ is "big enough"\*, we can use theoretical approximations .bottom[\* (More on this in a couple of slides)]
+When $n$ is "big enough"\*, we can use theoretical approximations instead of simulations.
 
 Using a theoretical distribution, we can calculate p-values and standardized statistics, if we have
 
 1. the mean of the distribution
+
 2. the theoretical standard deviation of the distribution
-3. a good idea of whether the assumptions hold
+
+3. a good idea of whether the assumptions hold 
 
 2 (and sometimes 1) will require formulas and calculations.
+
+.bottom[\*More on this in a couple of slides]
+
 
 ---
 ## Theory Based approach
 
 Based on the **Central Limit Theorem** (see [Wikipedia](https://en.wikipedia.org/wiki/Illustration_of_the_central_limit_theorem#Illustration_of_the_discrete_case) for an illustration)
 
-> If the sample size ($n$) is large enough, the distribution of the _sample proportion_ will be approximately bell shaped, centered at the long-run probability $\pi$ with the standard deviation of the null distribution.
+> If the sample size $n$ is large enough, the distribution of the _sample proportion_ will be approximately bell shaped, centered at the long-run probability $\pi$ with the standard deviation of the null distribution.
 
-The standard deviation of the null distribution, $\sigma$, will also be used in the standardized statistic calculation. We need a formula for it because we are no longer doing simulation
+The standard deviation of the null distribution, $\sigma$, will also be used in the standardized statistic calculation. 
+
+We need a formula for $\sigma$ because we are no longer doing simulation.
 
 ---
-## Large enough
+## How large is large enough?
 
-- How large is large enough?
-  - Our book: if the theoretical number of successes and failures are both more than 10
-  - Others: $n > 30$, $n > 50$, ...
-  - Depends on the discipline (and likely values for $p$ within the discipline)
+- Our book: if the number of successes and failures are at least 10
+- Others: $n > 30$, $n > 50$, ...
+- Depends on the discipline (and likely values for $p$ within the discipline)
 
 In the animation below, when does each distribution appear to be centered around the red line? 
 ```{r, ffmpeg.format='gif', fig.show='animate', dev = "jpeg", dpi = 300, fig.width = 8, fig.height = 3}
 tbl <- expand_grid(size = c(20, 30, 40, 50, 100, 150, 200, 500),
                    prob = c(.05, .15, .3)) %>%
-  mutate(sample = purrr::pmap(., rbinom, n = 1000)) %>%
+  mutate(sample = purrr::pmap(., rbinom, n = 1000)) %>% 
   unnest_longer(sample) %>%
   mutate(sample = sample/size) %>% 
   mutate(n = size) %>% nest(-n)
@@ -1515,3 +1554,14 @@ $n = 12$, with 10 successes and 2 failures
   - if the distribution is not bell shaped, the normal approximation to the p-value and the standardized statistic are not accurate
   
 - Simulation ALWAYS works
+
+---
+## Reminders
+
+- Ch 1 HW due on Canvas Feb 3 at 6pm
+
+- Quiz over Ch P and Ch 1 is due Feb 5. Please work independently on the quizzes.
+
+- Exam 1 is Feb 13 during class and covers Ch P, Ch 1, and Ch 2.
+
+- Read Section 2.1 for Feb. 4

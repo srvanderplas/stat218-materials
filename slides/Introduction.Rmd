@@ -31,11 +31,10 @@ class:inverse, middle, center
 ## Getting Help
 
 - My office: Hardin Hall (East Campus) 349a    
-TR 1:30-3 (e.g. before class)
+TR 11:30-1    
+Zoom is an option
 
-- TA office hours: TBD
-
-- Grader office hours: TBD
+- TA office hours: Mondays, 2:15 - 3:15 PM, Wednesdays 9:30 - 10:30 AM
 
 - Other times by appointment
 
@@ -50,7 +49,7 @@ TR 1:30-3 (e.g. before class)
 - Quizzes: 15%
 - Homework/Participation: 25%
 
-If you have to miss an exam, you must notify me beforehand. 
+If you have to miss an exam, you must make arrangements with me beforehand. 
 
 No late homework will be accepted
 
@@ -105,5 +104,23 @@ class:inverse, middle, center
 
 ---
 ## Group Assignments
+
+- Check Canvas
+
+- Sit in your groups
+
+- One person needs to bring a laptop to each class
+
+- In-class activities will be submitted on canvas in groups
+
+
+---
+## Handouts
+
+I'll occasionally post handouts as announcements. 
+
+If you want the paper copy, print it out. (Today is the exception)
+
+PDFs of slides are available online if you want them (see canvas announcement)
 
 
