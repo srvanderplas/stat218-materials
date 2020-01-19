@@ -338,6 +338,12 @@ We want to disprove $H_0$, forcing us to conclude that $H_A$ is a better (more p
 
 **Binary** variables have only two possible outcomes
 
+- Success/Failure
+
+- Heads/Tails
+
+- Pass/Fail
+
 $\pi$ is used to represent the *parameter* for a long-run probability or proportion
 
 $n$ is the sample size or number of observational units
@@ -365,7 +371,7 @@ Some evidence* suggests that novice players are less likely to choose scissors.
 ---
 ## Rock Paper Scissors
 
-1. Research question: .red[Are novice players are less likely to choose scissors?]
+1. Research question: .red[Are novice players are less likely to <br/>choose scissors?]
 
 2. Design a study and collect data:    
 Play $n$ rounds, recording 0 or 1, where 1 = scissors was played
@@ -413,6 +419,11 @@ Play $n$ rounds, recording 0 or 1, where 1 = scissors was played
 ---
 ## Rock Paper Scissors
 
+.toprightfig[
+![rock paper scissors graphic](figure/rock_paper_scissors.png)
+]
+
+
 1. Research question
 2. Design a study and collect data
   - Outcomes: .red[Scissors or not scissors (rock, paper)] .small[Binary]
@@ -432,6 +443,11 @@ Play $n$ rounds, recording 0 or 1, where 1 = scissors was played
 
 ---
 ## Rock Paper Scissors
+
+.toprightfig[
+![rock paper scissors graphic](figure/rock_paper_scissors.png)
+]
+
 
 1. Research question
 2. Design a study and collect data
@@ -501,7 +517,7 @@ Play $n$ rounds, recording 0 or 1, where 1 = scissors was played
 ![rock paper scissors graphic](figure/rock_paper_scissors.png)
 ]
 
-- Is $\hat p_{scissors}$ less than the probability specified in the null hypothesis?<br/>    
+- Is $\hat p_{scissors}$ less than the probability specified in the <br/>null hypothesis?<br/>    
 .red[Yes, the sample proportion of 1/6 is in the direction of the alternative hypothesis]
 
 - Is it possible that $\hat p$ could turn out this small even if $H_0$ were true?<br/>    
