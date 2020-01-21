@@ -68,6 +68,16 @@ th, td { padding: 5px; }
     top: 0 !important;
     left: 0 !important;
   }
+  .inverse{
+
+  background-color: #f0f0f0;
+  color: #000000;
+  text-shadow: none;
+  }
+
+.inverse h1, .inverse h2, .inverse h3 {
+  color: #000000;
+}
 }
 
 div.container div.middle{
