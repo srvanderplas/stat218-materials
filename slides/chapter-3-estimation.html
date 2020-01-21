@@ -27,11 +27,17 @@ class: center, middle, inverse, title-slide
 .large[By Date]
 
 - February 18: [start](#3) - [end](#13)
+- February 20: [start](#14) - [end](#30)
+- February 25: [start](#31) - [end](#48)
+- February 27: [start](#49) - [end](#56)
 
 ]
 .pull-right[
 .large[By Section]
-
+- 3.1: [start](#3) - [end](#14)
+- 3.2: [start](#15) - [end](#35)
+- 3.3: [start](#36) - [end](#48)
+- 3.4: [start](#49) - [end](#56)
 ]
 
 ---
@@ -214,6 +220,17 @@ We're finding a set of plausible values for the parameter centered around the .u
 - The wiggle room is known as the .underline[.hidden[margin of error]]
 
 ---
+## Theory Based Method
+
+- We do not want to plug in those parameter values every time we want an interval
+
+- Method boils down to one idea:     
+We're finding a set of plausible values for the parameter centered around the .underline[.red[sample mean]] and adding some wiggle room around it.    
+&lt;br/&gt;&lt;br/&gt;
+
+- The wiggle room is known as the .underline[.red[margin of error]]
+
+---
 ## Confidence Interval
 
 So the basic set up for our confidence interval is:
@@ -225,6 +242,22 @@ Margin of error is based on two values:
 &lt;br/&gt;&lt;br/&gt;
 
 2. A .underline[.hidden[multiplier]] reflecting the confidence level we want    
+&lt;br/&gt;&lt;br/&gt;
+
+Thus the margin of error is...
+
+---
+## Confidence Interval
+
+So the basic set up for our confidence interval is:
+`$$\text{Sample statistic}\pm \text{margin of error}$$`
+
+Margin of error is based on two values:
+
+1. The .underline[.red[standard deviation]] of the sample statistic    
+&lt;br/&gt;&lt;br/&gt;
+
+2. A .underline[.red[multiplier]] reflecting the confidence level we want    
 &lt;br/&gt;&lt;br/&gt;
 
 Thus the margin of error is...
@@ -244,7 +277,22 @@ Thus the margin of error is...
   - Leads to a .underline[.hidden[narrower]] interval
   
   - But we don't have as much confidence
+  
+---
+## Multiplier
 
+- The multiplier is based on the confidence level (Sec 3.1)
+
+- For a .underline[.red[higher]] confidence level, the multiplier must get bigger
+  - Want a .underline[.red[wider]] interval to cover more plausible values
+
+  
+- For a .underline[.red[lower]] confidence level, the multiplier will be smaller
+
+  - Leads to a .underline[.red[narrower]] interval
+  
+  - But we don't have as much confidence
+  
 ---
 ## Multiplier
 - We will use a multiplier of `\(\pm 2\)` in this class
@@ -253,10 +301,8 @@ Thus the margin of error is...
   - Bell shaped distribution
   - 95% of the distribution captured within 2 standard deviations of the center of the null distribution
   - True parameter will be within two standard deviations of the observed sample statistic in about 95% of samples
-  - Where else do we use `\(\pm 2\)` in this class?
 
 - Other confidence levels lead to different multipliers
-  - We will always use 95% in this class
   
 ---
 ## Standard Error in Confidence Intervals
@@ -368,7 +414,7 @@ Conf Level | Interval
   .hidden[If the interval contains the null hypothesis value, the p-value will be above our significance level. If not, the p-value will be below our significance level.]
 
 ---
-## Introduction
+## Revivew
 
 - Confidence Intervals
   - Purpose: to find a range of **plausible** values for our parameter
