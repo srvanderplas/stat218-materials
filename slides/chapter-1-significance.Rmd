@@ -566,13 +566,18 @@ Play $n$ rounds, recording 0 or 1, where 1 = scissors was played
 
 The **p-value** is the probability of obtaining a value of the statistic at least as extreme as the observed statistic *when the null hypothesis is true*
 
-We estimate a p-value by finding the **proportion of simulated statistics** using the random chance model assuming $H_0$  
+We estimate a p-value by finding the
 
-**that are at least as extreme** (in the direction of $H_A$)  
+**proportion of simulated statistics** 
+  - using the random chance model 
+  - assuming $H_0$ 
+
+**that are at least as extreme** 
+  - (in the direction of $H_A$)  
 
 **as the value of the observed statistic** from the research study.
 
-.grey[.bottom[Note that the <strong>p-value</strong> is not the same p as the sample proportion, <math xmlns="http://www.w3.org/1998/Math/MathML"><mstyle color="gray">
+.bottom[.grey[Note that the <strong>p-value</strong> is not the same p as the sample proportion, <math xmlns="http://www.w3.org/1998/Math/MathML"><mstyle color="gray">
   <mrow class="MJX-TeXAtom-ORD">
     <mover>
       <mi>p</mi>
@@ -580,6 +585,90 @@ We estimate a p-value by finding the **proportion of simulated statistics** usin
     </mover>
   </mrow></mstyle>
 </math>. <br/>p-values can be computed using any sample statistic, not just proportions.]]
+
+---
+## P-values
+
+```{r, fig.height = 5, dpi = 300}
+set.seed(2016100700)
+df <- tibble(x = rbinom(1000, 12, 1/3)/12)
+
+ggplot(df, aes(x = x)) + geom_bar() + 
+  scale_x_continuous("Proportion of Scissors in 12 trials", breaks = (0:12)/12,
+                     labels = sprintf("%d/12", 0:12), limits = c(0, 1)) +
+  scale_y_continuous("# Simulation Trials") + 
+  ggtitle("Simulation Results")
+```
+
+---
+## P-values
+
+```{r, fig.height = 5, dpi = 300}
+
+ggplot(df, aes(x = x)) + geom_bar() + 
+  scale_x_continuous("Proportion of Scissors in 12 trials", breaks = (0:12)/12,
+                     labels = sprintf("%d/12", 0:12), limits = c(0, 1)) +
+  scale_y_continuous("# Simulation Trials") + 
+  ggtitle("Simulation Results with observed statistic") +
+  annotate("segment", y = 0, yend = Inf, x = 2/12, xend = 2/12, color = "red")
+
+```
+
+---
+## P-values
+
+```{r, fig.height = 5, dpi = 300}
+ggplot(df, aes(x = x)) + geom_bar() + 
+  scale_x_continuous("Proportion of Scissors in 12 trials", breaks = (0:12)/12,
+                     labels = sprintf("%d/12", 0:12), limits = c(0, 1)) +
+  scale_y_continuous("# Simulation Trials") +  
+  ggtitle("Which direction to go?") +
+  annotate("segment", y = 0, yend = Inf, x = 2/12, xend = 2/12, color = "red") +
+  annotate("text", y = 175, x = 1/12, label = "atop(displaystyle(atop(In~the,direction)),of~H[A])", color = "red", parse = T, vjust = 0) + 
+  annotate("segment", x = 1.75/12, xend = 0, y = 150, yend = 150, color = "red", arrow = arrow(ends = "last", length = unit(0.1, "inches")) )
+```
+
+---
+## P-values
+
+```{r, fig.height = 5, dpi = 300}
+
+df <- df %>%
+  mutate(extreme = factor(x <=2/12, labels = c("Not extreme", "Extreme"))) 
+
+ggplot(df, aes(x = x, fill = extreme)) + geom_bar() + 
+  scale_fill_manual("", values = c("Extreme" = "red", "Not extreme" = "grey20")) + 
+  theme(legend.title = element_blank(), legend.position = c(1, 1), legend.justification = c(1,1), legend.background = element_rect(fill = "transparent")) + 
+  scale_x_continuous("Proportion of Scissors in 12 trials", breaks = (0:12)/12,
+                     labels = sprintf("%d/12", 0:12), limits = c(0, 1)) +
+  scale_y_continuous("# Simulation Trials") + 
+  ggtitle("Simulation statistics as or more extreme than the observed statistic") +
+  annotate("segment", y = 0, yend = Inf, x = 2/12, xend = 2/12, color = "red") +
+  annotate("text", y = 175, x = 1/12, label = "atop(displaystyle(atop(In~the,direction)),of~H[A])", color = "red", parse = T, vjust = 0) + 
+  annotate("segment", x = 1.75/12, xend = 0, y = 150, yend = 150, color = "red", arrow = arrow(ends = "last", length = unit(0.1, "inches")) )
+
+```
+
+---
+## P-values
+
+```{r, fig.height = 5, dpi = 300}
+ggplot(df, aes(x = x, fill = extreme)) + geom_bar() + 
+  scale_fill_manual("", values = c("Extreme" = "red", "Not extreme" = "grey20")) + 
+  theme(legend.title = element_blank(), legend.position = c(1, 1), legend.justification = c(1,1), legend.background = element_rect(fill = "transparent")) + 
+  scale_x_continuous("Proportion of Scissors in 12 trials", breaks = (0:12)/12,
+                     labels = sprintf("%d/12", 0:12), limits = c(0, 1)) +
+  scale_y_continuous("# Simulation Trials") + 
+  ggtitle("Simulation Results with p-value calculation") +
+  annotate("segment", y = 0, yend = Inf, x = 2/12, xend = 2/12, color = "red") +
+  annotate("text", y = 175, x = 1/12, label = "atop(displaystyle(atop(In~the,direction)),of~H[A])", color = "red", parse = T, vjust = 0) + 
+  annotate("segment", x = 1.75/12, xend = 0, y = 150, yend = 150, color = "red", arrow = arrow(ends = "last", length = unit(0.1, "inches")) ) #+ 
+  # annotate("text", x = 12, y = 150, label = paste("P~bgroup('(', x^'*'<= 2,')')~phantom(0)== frac(", sum(df$extreme == "Extreme"), ", ", nrow(df), ")~phantom(0)== ", mean(df$extreme == "Extreme")), parse = T, hjust = 1)
+
+```
+
+$$\underbrace{P(\hat p \leq 2/12)}_\text{under random chance} \approx P(\underbrace{p^\ast \leq 2/12}_\text{simulation}) =  \frac{193}{1000} = .193$$
+
 
 ---
 ## Guidelines for Interpreting p-values
@@ -594,6 +683,7 @@ $\phantom{0.10 <}p < 0.01$ | Very strong evidence against $H_0$
 If you have done the modeling correctly, you'll still be wrong $(100\times p)$% of the time when $H_0$ is actually true
 
 .large[The smaller the p-value, the more evidence against]  $\displaystyle H_0$ 
+
 
 ---
 ## Rock Paper Scissors
@@ -620,91 +710,14 @@ If you have done the modeling correctly, you'll still be wrong $(100\times p)$% 
 ]
 
 ---
-## P-values
-
-```{r, fig.height = 5, dpi = 300}
-set.seed(2016100700)
-df <- tibble(x = rbinom(1000, 12, 1/3))
-
-ggplot(df, aes(x = x)) + geom_bar() + 
-  scale_x_continuous("# Scissors in 12 trials", breaks = 0:12, limits = c(0, 12)) +
-  scale_y_continuous("# Simulation Trials") + 
-  ggtitle("Simulation Results")
-```
-
----
-## P-values
-
-```{r, fig.height = 5, dpi = 300}
-
-ggplot(df, aes(x = x)) + geom_bar() + 
-  scale_x_continuous("# Scissors in 12 trials", breaks = 0:12, limits = c(0, 12)) +
-  scale_y_continuous("# Simulation Trials") + 
-  ggtitle("Simulation Results with observed statistic") +
-  annotate("segment", y = 0, yend = Inf, x = 2, xend = 2, color = "red")
-
-```
-
----
-## P-values
-
-```{r, fig.height = 5, dpi = 300}
-ggplot(df, aes(x = x)) + geom_bar() + 
-  scale_x_continuous("# Scissors in 12 trials", breaks = 0:12, limits = c(0, 12)) +
-  scale_y_continuous("# Simulation Trials") + 
-  ggtitle("Which direction to go?") +
-  annotate("segment", y = 0, yend = Inf, x = 2, xend = 2, color = "red") +
-  annotate("text", y = 175, x = 1, label = "atop(displaystyle(atop(In~the,direction)),of~H[A])", color = "red", parse = T, vjust = 0) + 
-  annotate("segment", x = 1.75, xend = 0, y = 150, yend = 150, color = "red", arrow = arrow(ends = "last", length = unit(0.1, "inches")) )
-```
-
----
-## P-values
-
-```{r, fig.height = 5, dpi = 300}
-
-df <- df %>%
-  mutate(extreme = factor(x <=2, labels = c("Not extreme", "Extreme"))) 
-
-ggplot(df, aes(x = x, fill = extreme)) + geom_bar() + 
-  scale_fill_manual("", values = c("Extreme" = "red", "Not extreme" = "grey20")) + 
-  theme(legend.title = element_blank(), legend.position = c(1, 1), legend.justification = c(1,1), legend.background = element_rect(fill = "transparent")) + 
-  scale_x_continuous("# Scissors in 12 trials", breaks = 0:12, limits = c(0, 12)) +
-  scale_y_continuous("# Simulation Trials") + 
-  ggtitle("Simulation statistics as or more extreme than the observed statistic") +
-  annotate("segment", y = 0, yend = Inf, x = 2, xend = 2, color = "red") +
-  annotate("text", y = 175, x = 1, label = "atop(displaystyle(atop(In~the,direction)),of~H[A])", color = "red", parse = T, vjust = 0) + 
-  annotate("segment", x = 1.75, xend = 0, y = 150, yend = 150, color = "red", arrow = arrow(ends = "last", length = unit(0.1, "inches")) )
-
-```
-
----
-## P-values
-
-```{r, fig.height = 5, dpi = 300}
-ggplot(df, aes(x = x, fill = extreme)) + geom_bar() + 
-  scale_fill_manual("", values = c("Extreme" = "red", "Not extreme" = "grey20")) + 
-  theme(legend.title = element_blank(), legend.position = c(1, 1), legend.justification = c(1,1), legend.background = element_rect(fill = "transparent")) + 
-  scale_x_continuous("# Scissors in 12 trials", breaks = 0:12, limits = c(0, 12)) +
-  scale_y_continuous("# Simulation Trials") + 
-  ggtitle("Simulation Results with p-value calculation") +
-  annotate("segment", y = 0, yend = Inf, x = 2, xend = 2, color = "red") +
-  annotate("text", y = 175, x = 1, label = "atop(displaystyle(atop(In~the,direction)),of~H[A])", color = "red", parse = T, vjust = 0) + 
-  annotate("segment", x = 1.75, xend = 0, y = 150, yend = 150, color = "red", arrow = arrow(ends = "last", length = unit(0.1, "inches")) ) #+ 
-  # annotate("text", x = 12, y = 150, label = paste("P~bgroup('(', x^'*'<= 2,')')~phantom(0)== frac(", sum(df$extreme == "Extreme"), ", ", nrow(df), ")~phantom(0)== ", mean(df$extreme == "Extreme")), parse = T, hjust = 1)
-
-```
-
-$$\underbrace{P(x \leq 2)} \approx P(x^\ast \leq 2) =  \frac{193}{1000} = .193$$
-
----
 ## Rock Paper Scissors
 .toprightfig[
 ![rock paper scissors graphic](figure/rock_paper_scissors.png)
 ]
 
 
-$$\underbrace{P(x \leq 2)} \approx P(x^\ast \leq 2) =  \frac{193}{1000} = .193$$
+$$\underbrace{P(\hat p \leq 2/12)}_\text{under random chance} \approx P(\underbrace{p^\ast \leq 2/12}_\text{simulation}) =  \frac{193}{1000} = .193$$
+
 
 Is this an unlikely result if $H_0$ is true?
 
@@ -726,7 +739,7 @@ How much smaller?
 
 --
 
-$$P(x \leq 1) \approx P(x^\ast \leq 1) = \frac{58}{1000} = 0.058$$
+$$P(\hat p \leq 1/12) \approx P(p^\ast \leq 1/12) = \frac{58}{1000} = 0.058$$
 
 .red[If we had originally observed only 1/12 scissors, we would have moderate evidence against the null hypothesis.]
 
