@@ -999,7 +999,8 @@ ggplot(aes(x = x)) +
 ---
 ## Ex: St. George
 
-.pull-left[$n=10$
+.pull-left[
+$$n=10$$
 
 - **Statistic**: 
 
@@ -1009,7 +1010,8 @@ ggplot(aes(x = x)) +
 
 - $\mathbf{z}$
 
-].pull-right[$n=361$
+].pull-right[
+$$n=361$$
 
 - **Statistic**: 
 
