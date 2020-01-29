@@ -1,0 +1,72 @@
+---
+title: "Ch. P and Ch. 1 Review"
+output: 
+  pdf_document:
+    template: template.tex
+    # keep_tex: true
+geometry: margin=1in,headsep=.2in
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = F, dpi = 300)
+library(tidyverse)
+```
+
+# Formulas
+
+Sample standard deviation: $\displaystyle \sqrt{\frac{\sum(x-\overline{x})^2}{n-1}}$
+
+Sample proportion: $\displaystyle \hat p = \frac{\text{Number of successes in the sample}}{n}$
+
+Standardized statistic: $\displaystyle \frac{\text{statistic} - \text{mean of null distribution}}{\text{SD of null distribution}}$
+
+Long-run proportion standard deviation: $\displaystyle\sqrt\frac{\pi(1-\pi)}{n}$
+
+# Practice Problems
+
+## Dyslexia
+
+Scientists suspect dyslexia is much more common than recorded diagnoses would indicate; some argue that up to 15% of the population may show signs of dyslexia. More conservative estimates based off of recorded diagnoses put the prevalence of dyslexia around 5%. In order to examine the prevalence of dyslexia, researchers would like to test a sample of the adult population to see if there is evidence that the rate of dyslexia in the population is higher than 5%.
+
+1. State the null and alternative hypothesis\vfil\vfil
+<!-- 2. Which of the following would be appropriate sampling methods? Why? -->
+<!--     a. Ask travelers waiting at the airport to take a quick screening test while they wait\vfil -->
+<!--     b. Mail a screening test to a random sample of addresses taken from a list of mailing addresses used by the post office\vfil -->
+<!--     c. Call your neighbors and friends and ask them to take the screening test\vfil -->
+<!--     d. Randomly select blocks from a city and ask adults at each house to take a screening test\vfil -->
+<!-- \clearpage -->
+2. Suppose you sample 250 adults and of those 250, 23 of the screening tests indicate that the individual likely has dyslexia. 
+    - State the validity conditions for a one-proportion theory-based hypothesis test. Are they met?\vfil
+    - Calculate the population standard deviation, $\sigma$\vfil
+    - Calculate the standardized statistic, $z$\vfil
+    - Conduct a test of your hypothesis using theory-based methods. Use the one-proportion applet to get the p-value for your test. \vfil
+    - What is your conclusion?\vfil
+\clearpage
+3. You conduct a second sample of 120 adults, and this time, you find that 14 of the tests indicate the individuals have dyslexia.
+    - Does this second sample contradict the results of the first sample? Why or why not?\vfil
+    - Use the one proportion applet to conduct 1000 simulations of this experiment. Calculate or use the app to get the following:
+        - Sample proportion\vfil
+        - Population standard deviation\vfil
+        - Standardized statistic\vfil
+        - p-value\vfil
+    - Using the histogram below, draw lines indicating the cutoff(s) for extreme values, draw one or more arrows corresponding to the direction of $H_A$, and shade in the values considered "extreme".
+```{r dyslexia-hist, fig.width = 8, fig.height = 4}
+set.seed(20934702)
+qplot(x = rbinom(1000, 120, .05), geom = "histogram", binwidth = 1, color = I("black"), fill = I("grey80")) + theme_bw() + scale_x_continuous("Simulated Number of Individuals Testing Positive for Dyslexia")
+```
+    - How much evidence does the standardized statistic provide? What is your conclusion based on the standardized statistic?\vfil
+    - Based on your simulated p-value, what is your conclusion?
+
+\clearpage
+## Hypothesis practice
+For each of the following study descriptions, identify the parameter, define success as measured in the study, write the null and alternative hypothesis, and calculate the sample statistic. Determine whether you could use theory-based inference on each study.
+
+1. Edison is a very talented Jack Russell Terrier pup who is competing to be in a demonstration at the Puppy Bowl. To qualify, Edison must catch more than 75% of the frisbees thrown for him (over the long run). In one practice, he catches 16 of 20 frisbees thrown.\vfil
+
+2. Edison has been watching squirrels and would like to know if, when being chased, squirrels turn right and left equally often, so that he can catch them more easily when he escapes. He monitors the squirrels that come into his yard for a week, and notes that in 30 observations, squirrels turned left 20 times and right 10 times. \vfil
+
+3. Edison might also be called "destroyer of toys". His owner would like to know whether, in the long run, he destroys the squeakers in more than 50% of the toys she buys for him. Over the course of a year, she carefully records the fate of each toy, finding that of the 24 squeaky toys she bought, only 11 still make noise. \vfil
+
+4. Edison is perfecting his puppy dog eyes. He has practiced very hard for the past month, and would like to know if giving his people "the look" results in treats more than 50% of the time. Over the course of two weeks, Edison uses "the look" 56 times, and gets a total of 30 treats. \vfil
+
+5. Edison has staring contests with the cat next door, who he has named Satan. He would like to know whether he has an even chance of winning the staring contests with Satan, over the long run. As a statistically inclined dog, he collects data over the course of two months, finding that of 184 staring contests, he won 80 times.\vfil
