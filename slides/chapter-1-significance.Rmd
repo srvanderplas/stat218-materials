@@ -1993,3 +1993,10 @@ Edison has staring contests with the cat next door, who he has named Satan. He w
 - $\hat p = 80/184 \approx .4348$
 
 - Can use theory? *Yes, we would expect 92 successes and 92 failures under $H_0$, so we have at least 10 of each and can use theory based techniques*
+
+---
+## Chapter 1 Review
+
+.center[
+<iframe width="560" height="315" src="https://www.youtube.com/embed/zVeoQTOTIuQ" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+]
