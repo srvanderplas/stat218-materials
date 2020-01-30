@@ -1614,7 +1614,7 @@ Scientists suspect dyslexia is much more common than recorded diagnoses would in
 
 In order to examine the prevalence of dyslexia, researchers would like to test a sample of the adult population to see if there is evidence that the rate of dyslexia in the population is higher than 5%
 
-State the null and alternative hypotheses
+- State the null and alternative hypotheses
 
 ---
 ## Chapter 1 Review
@@ -1623,7 +1623,7 @@ Scientists suspect dyslexia is much more common than recorded diagnoses would in
 
 In order to examine the prevalence of dyslexia, researchers would like to test a sample of the adult population to see if there is evidence that the rate of dyslexia in the population is **higher** than **5%**
 
-State the null and alternative hypotheses
+- State the null and alternative hypotheses
 
 \begin{align}H_0: \pi &= 0.05\\\\ H_A: \pi &> 0.05\end{align}
 
@@ -1697,9 +1697,299 @@ Sample 250 adults and find that 23 likely have dyslexia.
 
 - What is your conclusion?
 
-We have very strong evidence against the null hypothesis that the rate of dyslexia in the population is 5%. With $p \approx 0.0012$, we reject the null hypothesis and conclude that more than 5% of the population has dyslexia.
+We have very strong evidence against the null hypothesis that the rate of dyslexia in the population is 5%. With $p \approx 0.0012$, we reject the null hypothesis and conclude that there is evidence that more than 5% of the population has dyslexia.
 
 --
+***
 
-On the test:    
-We have very strong evidence against the null hypothesis that the rate of dyslexia in the population is 5%. With $z > 3$, we know that our observed result would occur in the tail of the distribution under $H_0$. Thus, we reject the null hypothesis and conclude that more than 5% of the population has dyslexia.
+On the test:
+
+We have very strong evidence against the null hypothesis that the rate of dyslexia in the population is 5%. Since $z > 3$, we know that our observed result would occur in the tail of the distribution under $H_0$. Thus, we reject the null hypothesis and conclude that there is evidence that more than 5% of the population has dyslexia.
+
+---
+## Chapter 1 Review
+
+You conduct a second sample of 120 adults, and this time, you find that 14 individuals have dyslexia.
+
+  - Does this second sample contradict the results of the first sample? Why or why not?
+  
+  - Use the one proportion applet to conduct 1000 simulations of this experiment. Calculate or use the app to get the following:
+      - Sample proportion
+      
+      - Population standard deviation
+      
+      - Standardized statistic
+      
+      - p-value
+      
+---
+## Chapter 1 Review
+
+You conduct a second sample of 120 adults, and this time, you find that 14 individuals have dyslexia.
+
+  - Does this second sample contradict the results of the first sample? Why or why not?
+
+No, this sample does not contradict the results of the first sample. We would expect that different random samples would contain different individuals and thus lead to a different result.
+
+---
+## Chapter 1 Review
+  - Use the one proportion applet to conduct 1000 simulations of this experiment.    
+<img alt="Theory-based inference app screenshot" src="figure/Ch1Review-Simulation-Screenshot.png" width="80%"/>
+
+
+---
+## Chapter 1 Review
+Calculate or use the app to get the following:    
+  - Sample proportion: $\hat p = 14/120 = .1167$
+  
+  - Population standard deviation: 
+$$\sigma = \sqrt{\frac{\pi_0 (1-\pi_0)}{n}} = \sqrt{\frac{.05 (.95)}{120}} \approx 0.0199$$
+  
+  - Standardized statistic
+$$z = \frac{\hat p - \pi_0}{\sigma} = \frac{.1167 - .05}{.0199} = 3.35$$
+
+  - p-value: (From the app) $$p \approx 0.0020$$
+
+---
+## Chapter 1 Review
+
+You conduct a second sample of 120 adults, and this time, you find that 14 individuals have dyslexia.
+
+  - Using the histogram below, draw lines indicating the cutoff(s) for extreme values, draw one or more arrows corresponding to the direction of $H_A$, and shade in the values considered "extreme".
+```{r dyslexia-hist, fig.width = 8, fig.height = 4}
+set.seed(20934702)
+qplot(x = rbinom(1000, 120, .05), geom = "histogram", binwidth = 1, color = I("black"), fill = I("grey80")) + theme_bw() + scale_x_continuous("Simulated Number of Individuals Testing Positive for Dyslexia")
+```
+
+---
+## Chapter 1 Review
+
+You conduct a second sample of 120 adults, and this time, you find that 14 individuals have dyslexia.
+
+  - Using the histogram below, draw lines indicating the cutoff(s) for extreme values, draw one or more arrows corresponding to the direction of $H_A$, and shade in the values considered "extreme".
+```{r dyslexia-hist-ans, fig.width = 8, fig.height = 4}
+set.seed(20934702)
+x <- rbinom(1000, 120, .05)
+extreme <- factor(x >= 14, labels = c("Not extreme", "Extreme"))
+qplot(x = x, fill = extreme, geom = "histogram", binwidth = 1, color = I("black")) + theme_bw() + 
+  scale_x_continuous("Simulated Number of Individuals Testing Positive for Dyslexia") + 
+  scale_fill_manual("", values = c("grey80", "red")) + 
+  annotate("segment", x = 13.5, xend = 13.5, y = 0, yend = 150, color = "red") + 
+  annotate("text", x = 13.5, y = 155, label = "Observed Value", hjust = 0.5, color = "red") + 
+  annotate("segment", x = 13.75, y = 100, xend = 16, yend = 100, color = "red", arrow = arrow()) + 
+  annotate("text", x = 16.5, y = 100, label = "H[A]", color = "red", parse = T) + 
+  theme(legend.title = element_blank(), legend.position = c(.01, .99), legend.justification = c(.01, .99), legend.background = element_rect(fill = "transparent"))
+```
+Note: This is a different simulated dataset than the one from the app. 
+
+.small[.bottom[(This is how I would test whether you understand how simulation works)]]
+
+---
+## Chapter 1 Review
+
+You conduct a second sample of 120 adults, and this time, you find that 14 individuals have dyslexia.
+
+  - How much evidence does the standardized statistic provide? What is your conclusion based on the standardized statistic?
+  
+  - Based on your simulated p-value, what is your conclusion?
+  
+
+---
+## Chapter 1 Review
+
+You conduct a second sample of 120 adults, and this time, you find that 14 individuals have dyslexia.
+
+  - How much evidence does the standardized statistic provide? What is your conclusion based on the standardized statistic?
+  
+The standardized statistic is **3.35**. This indicates that the sample value is in the tails of the distribution of values expected under $H_0$, which means it is **not very likely to occur if $H_0$ is true**. It is more likely that $H_A$ is true, so we **reject $H_0$ and conclude that there is evidence that more than 5% of the population has dyslexia.**
+
+.small[.bottom[The important parts are in bold]]
+
+---
+## Chapter 1 Review
+
+You conduct a second sample of 120 adults, and this time, you find that 14 individuals have dyslexia.
+
+  - Based on your simulated p-value, what is your conclusion?
+
+**Under the null hypothesis**, sampling 120 individuals and finding that 14 or more have dyslexia occurs with $\mathbf{p \approx 0.002}$, which is very unlikely. Thus, having observed that 14/120 adults have dyslexia in or sample, **we have very strong evidence against $H_0$, and conclude that it is more likely that $H_A$ is true, that is, that more than 5% of the population has dyslexia**
+
+.small[.bottom[The important parts are in bold]]
+
+---
+## Chapter 1 Review - The Adventures of Edison
+
+.center[
+<img src="figure/Edison.png" alt = "A photo of Edison the Jack Russell" width = "75%"/>    
+Your reward for getting this far is a puppy picture and puppy-focused problems!
+]
+
+---
+## Chapter 1 Review - The Adventures of Edison
+
+Edison is a very talented Jack Russell Terrier pup who is competing to be in a demonstration at the Puppy Bowl. To qualify, Edison must catch more than 75% of the frisbees thrown for him (over the long run). In one practice, he catches 16 of 20 frisbees thrown.
+
+- Parameter: 
+
+- Success: 
+
+- $H_0$: 
+
+- $H_A$:
+
+- $\hat p =$
+
+- Can use theory?
+
+---
+## Chapter 1 Review - The Adventures of Edison
+
+Edison is a very talented Jack Russell Terrier pup who is competing to be in a demonstration at the Puppy Bowl. To qualify, Edison must catch more than 75% of the frisbees thrown for him (over the long run). In one practice, he catches 16 of 20 frisbees thrown.
+
+- Parameter: *The long run proportion of frisbees caught*
+
+- Success: *Catching a frisbee*
+
+- $H_0$: $\pi = 0.75$
+
+- $H_A$: $\pi > 0.75$
+
+- $\hat p = 16/20 = .8$
+
+- Can use theory? *No. $n\pi = 15 > 10$ but $n(1-\pi) = 5$, so we do not have 10 successes and 10 failures.*
+
+---
+## Chapter 1 Review - The Adventures of Edison
+
+Edison has been watching squirrels and would like to know if, when being chased, squirrels turn right and left equally often, so that he can catch them more easily when he escapes. He monitors the squirrels that come into his yard for a week, and notes that in 30 observations, squirrels turned left 20 times and right 10 times. 
+
+- Parameter: 
+
+- Success: 
+
+- $H_0$: 
+
+- $H_A$:
+
+- $\hat p =$
+
+- Can use theory?
+
+---
+## Chapter 1 Review - The Adventures of Edison
+
+Edison has been watching squirrels and would like to know if, when being chased, squirrels turn right and left equally often, so that he can catch them more easily when he escapes. He monitors the squirrels that come into his yard for a week, and notes that in 30 observations, squirrels turned left 20 times and right 10 times. 
+
+- Parameter: *The long run proportion of times squirrels turn left*
+
+- Success: *Turning left*
+
+- $H_0$: $\pi = 0.5$
+
+- $H_A$: $\pi \neq 0.5$
+
+- $\hat p = 20/30 \approx .6667$
+
+- Can use theory? *Yes. Under $H_0$ we would have 15 successes and 15 failures.*
+
+---
+## Chapter 1 Review - The Adventures of Edison
+
+Edison might also be called "destroyer of toys". His owner would like to know whether, in the long run, he destroys the squeakers in more than 65% of the toys she buys for him. Over the course of a year, she carefully records the fate of each toy, finding that of the 24 squeaky toys she bought, only 8 still make noise. 
+
+- Parameter: 
+
+- Success: 
+
+- $H_0$: 
+
+- $H_A$:
+
+- $\hat p =$
+
+- Can use theory?
+
+---
+## Chapter 1 Review - The Adventures of Edison
+
+Edison might also be called "destroyer of toys". His owner would like to know whether, in the long run, he destroys the squeakers in more than 65% of the toys she buys for him. Over the course of a year, she carefully records the fate of each toy, finding that of the 24 squeaky toys she bought, only 8 still make noise. 
+
+- Parameter: *The long-run death rate of squeakers in Edison's toys*
+
+- Success: *Edison destroys a squeaker in a toy*
+
+- $H_0$: $\pi = 0.65$
+
+- $H_A$: $\pi > 0.65$
+
+- $\hat p = 16/24 = .6667$
+
+- Can use theory? *No. Under $H_0$, we would expect 15.6 successes and 8.4 failures. We need 10 of each to use theory based techniques.*
+
+---
+## Chapter 1 Review - The Adventures of Edison
+
+Edison is perfecting his puppy dog eyes. He has practiced very hard for the past month, and would like to know if giving his people "the look" results in treats more than 50% of the time. Over the course of two weeks, Edison uses "the look" 56 times, and gets a total of 30 treats. 
+
+- Parameter: 
+
+- Success: 
+
+- $H_0$: 
+
+- $H_A$:
+
+- $\hat p =$
+
+- Can use theory?
+
+---
+## Chapter 1 Review - The Adventures of Edison
+
+Edison is perfecting his puppy dog eyes. He has practiced very hard for the past month, and would like to know if giving his people "the look" results in treats more than 50% of the time. Over the course of two weeks, Edison uses "the look" 56 times, and gets a total of 30 treats. 
+
+- Parameter: *The long run rate of getting treats after using puppy dog eyes*
+
+- Success: *Using puppy dog eyes and getting a treat*
+
+- $H_0$: $\pi = 0.5$
+
+- $H_A$: $\pi > 0.5$
+
+- $\hat p = 30/56 \approx 0.5457$
+
+- Can use theory? *Yes. Under $H_0$ we would expect 28 successes and 28 failures. *
+
+---
+## Chapter 1 Review - The Adventures of Edison
+
+Edison has staring contests with the cat next door, who he has named Satan. He would like to know whether he has an even chance of winning the staring contests with Satan, over the long run. As a statistically inclined dog, he collects data over the course of two months, finding that of 184 staring contests, he won 80 times.
+
+- Parameter: 
+
+- Success: 
+
+- $H_0$: 
+
+- $H_A$:
+
+- $\hat p =$
+
+- Can use theory?
+
+---
+## Chapter 1 Review - The Adventures of Edison
+
+Edison has staring contests with the cat next door, who he has named Satan. He would like to know whether he has an even chance of winning the staring contests with Satan, over the long run. As a statistically inclined dog, he collects data over the course of two months, finding that of 184 staring contests, he won 80 times.
+
+- Parameter: *The long-run proportion of times Edison wins a staring contest with Satan*
+
+- Success: *Winning one staring contest*
+
+- $H_0$: $\pi = 0.5$
+
+- $H_A$: $\pi \neq 0.5$
+
+- $\hat p = 80/184 \approx .4348$
+
+- Can use theory? *Yes, we would expect 92 successes and 92 failures under $H_0$, so we have at least 10 of each and can use theory based techniques*

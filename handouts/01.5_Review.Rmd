@@ -42,7 +42,7 @@ Scientists suspect dyslexia is much more common than recorded diagnoses would in
     - Conduct a test of your hypothesis using theory-based methods. Use the theory-based inference applet to get the p-value for your test. \vfil
     - What is your conclusion?\vfil
 \clearpage
-3. You conduct a second sample of 120 adults, and this time, you find that 14 of the tests indicate the individuals have dyslexia.
+3. You conduct a second sample of 120 adults, and this time, you find that 14 individuals have dyslexia.
     - Does this second sample contradict the results of the first sample? Why or why not?\vfil
     - Use the one proportion applet to conduct 1000 simulations of this experiment. Calculate or use the app to get the following:
         - Sample proportion\vfil
@@ -65,7 +65,7 @@ For each of the following study descriptions, identify the parameter, define suc
 
 2. Edison has been watching squirrels and would like to know if, when being chased, squirrels turn right and left equally often, so that he can catch them more easily when he escapes. He monitors the squirrels that come into his yard for a week, and notes that in 30 observations, squirrels turned left 20 times and right 10 times. \vfil
 
-3. Edison might also be called "destroyer of toys". His owner would like to know whether, in the long run, he destroys the squeakers in more than 50% of the toys she buys for him. Over the course of a year, she carefully records the fate of each toy, finding that of the 24 squeaky toys she bought, only 11 still make noise. \vfil
+3. Edison might also be called "destroyer of toys". His owner would like to know whether, in the long run, he destroys the squeakers in more than 65% of the toys she buys for him. Over the course of a year, she carefully records the fate of each toy, finding that of the 24 squeaky toys she bought, only 8 still make noise.  \vfil
 
 4. Edison is perfecting his puppy dog eyes. He has practiced very hard for the past month, and would like to know if giving his people "the look" results in treats more than 50% of the time. Over the course of two weeks, Edison uses "the look" 56 times, and gets a total of 30 treats. \vfil
 
