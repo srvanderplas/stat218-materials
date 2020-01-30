@@ -31,28 +31,28 @@ theme_set(theme_bw())
 .pull-left[
 .large[By Date]
 
-- January 16: [start](#3) - [end](#13)
+- January 16: [start](#3) - [end](#15)
 
-- January 21: [start](#14) - [end](#33)
+- January 21: [start](#16) - [end](#41)
 
-- January 23: [start](#34) - [end](#62)
+- January 23: [start](#42) - [end](#69)
 
-- January 28: [start](#63) - [end](#86)
+- January 28: [start](#70) - [end](#99)
 
-- January 30: [Review](#87)
+- January 30: [Review](#100)
 ]
 .pull-right[
 .large[By Section]
 
 - [Section 1.1](#3)
 
-- [Section 1.2](#14)
+- [Section 1.2](#16)
 
-- [Section 1.3](#39)
+- [Section 1.3](#42)
 
-- [Section 1.4](#55)
+- [Section 1.4](#63)
 
-- [Section 1.5](#73)
+- [Section 1.5](#85)
 ]
 
 ---
@@ -1583,3 +1583,123 @@ $n = 12$, with 10 successes and 2 failures
 - Exam 1 is Feb 13 during class and covers Ch P, Ch 1, and Ch 2.
 
 - Read Section 2.1 for Feb. 4
+
+
+---
+## Chapter 1.5 Review
+
+You should know: 
+
+- That the Central Limit Theorem describes how the distribution of a sample statistic behaves if $n$ is large enough
+
+- How to calculate the standardized statistic for a proportion
+
+- The validity conditions for a one-proportion theory based test
+
+- How to use the app to get a theory-based p-value for a proportion (this can't be easily tested)
+
+--
+
+In Ch. 2, we will discuss cases where theory-based inference is the only reasonable option. 
+
+--
+
+For now, it's enough to know that it's another method to calculate p-values and standardized statistics
+
+
+---
+## Chapter 1 Review
+
+Scientists suspect dyslexia is much more common than recorded diagnoses would indicate; some argue that up to 15% of the population may show signs of dyslexia. More conservative estimates based off of recorded diagnoses put the prevalence of dyslexia around 5%. 
+
+In order to examine the prevalence of dyslexia, researchers would like to test a sample of the adult population to see if there is evidence that the rate of dyslexia in the population is higher than 5%
+
+State the null and alternative hypotheses
+
+---
+## Chapter 1 Review
+
+Scientists suspect dyslexia is much more common than recorded diagnoses would indicate; some argue that up to 15% of the population may show signs of dyslexia. More conservative estimates based off of recorded diagnoses put the prevalence of dyslexia around 5%. 
+
+In order to examine the prevalence of dyslexia, researchers would like to test a sample of the adult population to see if there is evidence that the rate of dyslexia in the population is **higher** than **5%**
+
+State the null and alternative hypotheses
+
+\begin{align}H_0: \pi &= 0.05\\\\ H_A: \pi &> 0.05\end{align}
+
+---
+## Chapter 1 Review
+
+Sample 250 adults and find that 23 likely have dyslexia. 
+
+- State the validity conditions for a one-proportion theory-based hypothesis test. Are they met?
+
+- Calculate the population standard deviation, $\sigma$
+
+- Calculate the standardized statistic, $z$
+
+- Conduct a test of your hypothesis using theory-based methods. Use the theory-based inference app to get a p-value for your test.
+
+- What is your conclusion?
+
+---
+## Chapter 1 Review
+
+Sample 250 adults and find that 23 likely have dyslexia. 
+
+- State the validity conditions for a one-proportion theory-based hypothesis test. Are they met?    
+
+  - Validity conditions: 10 successes and 10 failures under $H_0$
+    
+  - If $\pi = 0.05$, then we would expect $n(\pi) = 250(0.05) = 12.5$ people with dyslexia and $n(1-\pi) = 237.5$ people without dyslexia.
+  
+  - 12.5 > 10 and 237.5 > 10 so the validity conditions are met
+    
+---
+## Chapter 1 Review
+
+Sample 250 adults and find that 23 likely have dyslexia. 
+
+- Calculate the population standard deviation, $\sigma$
+
+\begin{align}
+\sigma &= \sqrt{\frac{\pi(1-\pi)}{n}} \\
+& = \sqrt{\frac{0.05(0.95)}{250}} \\
+& = \sqrt{0.0475/250} \\
+& \approx 0.01378
+\end{align}
+    
+---
+## Chapter 1 Review
+
+Sample 250 adults and find that 23 likely have dyslexia. 
+
+- Calculate the standardized statistic, $z$
+\begin{align}
+z &= \frac{\hat p - \pi}{\sigma} \\\\
+& = \frac{\frac{23}{250} - 0.05}{0.01378} \\\\
+& = \frac{0.092 - 0.05}{0.01378} \\\\
+& = \frac{0.042}{0.01378} \approx 3.05
+\end{align}
+
+---
+## Chapter 1 Review
+
+Sample 250 adults and find that 23 likely have dyslexia. 
+
+- Conduct a test of your hypothesis using theory-based methods. Use the theory-based inference app to get a p-value for your test.    
+<img alt="Theory-based inference app screenshot" src="figure/Review-Ch1_theory-one-prop.png" width="80%"/>
+
+---
+## Chapter 1 Review
+
+Sample 250 adults and find that 23 likely have dyslexia. 
+
+- What is your conclusion?
+
+We have very strong evidence against the null hypothesis that the rate of dyslexia in the population is 5%. With $p \approx 0.0012$, we reject the null hypothesis and conclude that more than 5% of the population has dyslexia.
+
+--
+
+On the test:    
+We have very strong evidence against the null hypothesis that the rate of dyslexia in the population is 5%. With $z > 3$, we know that our observed result would occur in the tail of the distribution under $H_0$. Thus, we reject the null hypothesis and conclude that more than 5% of the population has dyslexia.

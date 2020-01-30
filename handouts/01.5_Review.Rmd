@@ -28,18 +28,18 @@ Long-run proportion standard deviation: $\displaystyle\sqrt\frac{\pi(1-\pi)}{n}$
 
 Scientists suspect dyslexia is much more common than recorded diagnoses would indicate; some argue that up to 15% of the population may show signs of dyslexia. More conservative estimates based off of recorded diagnoses put the prevalence of dyslexia around 5%. In order to examine the prevalence of dyslexia, researchers would like to test a sample of the adult population to see if there is evidence that the rate of dyslexia in the population is higher than 5%.
 
-1. State the null and alternative hypothesis\vfil\vfil
+1. State the null and alternative hypotheses\vfil\vfil
 <!-- 2. Which of the following would be appropriate sampling methods? Why? -->
 <!--     a. Ask travelers waiting at the airport to take a quick screening test while they wait\vfil -->
 <!--     b. Mail a screening test to a random sample of addresses taken from a list of mailing addresses used by the post office\vfil -->
 <!--     c. Call your neighbors and friends and ask them to take the screening test\vfil -->
 <!--     d. Randomly select blocks from a city and ask adults at each house to take a screening test\vfil -->
 <!-- \clearpage -->
-2. Suppose you sample 250 adults and of those 250, 23 of the screening tests indicate that the individual likely has dyslexia. 
+2. Suppose you randomly sample 250 adults and find that 23 likely have dyslexia. 
     - State the validity conditions for a one-proportion theory-based hypothesis test. Are they met?\vfil
     - Calculate the population standard deviation, $\sigma$\vfil
     - Calculate the standardized statistic, $z$\vfil
-    - Conduct a test of your hypothesis using theory-based methods. Use the one-proportion applet to get the p-value for your test. \vfil
+    - Conduct a test of your hypothesis using theory-based methods. Use the theory-based inference applet to get the p-value for your test. \vfil
     - What is your conclusion?\vfil
 \clearpage
 3. You conduct a second sample of 120 adults, and this time, you find that 14 of the tests indicate the individuals have dyslexia.
