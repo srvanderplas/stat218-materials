@@ -297,7 +297,7 @@ Record each word from your sample and indicate the length of the word (# letters
 
 Individually, do questions 4-9 before Thursday. Upload your answers to Canvas by Thursday at 3:30 pm. 
 
-We will use i>clickers on Thursday to collect and combine your results
+We will use google sheets on Thursday to collect and combine your results
 
 ---
 class:center,middle,inverse
@@ -513,7 +513,9 @@ What if 43 is a typo and it should be 34?
 ## New values
 - The principles from categorical data carry over to quantitative data
 
-- Using theory-based methods, the standard deviation of the sample mean is calculated to be _______
+- Using theory-based methods, the standard deviation of the sample mean is calculated to be 
+$$s = \frac{\sum_{i=1}^n{(x_i-\overline x)^2}}{n-1}$$
+
 
 What do you remember about $\sigma$?
 
@@ -576,12 +578,12 @@ Hypotheses:
 
 Using our sample, we need to find a p-value and a standardized statistic
 
-P-value from Theory based inference Applet: _______
+P-value from Theory based inference Applet: .underline[.hidden[p = 0.0001]]
 
 ---
 ## Significance test - Example 2.2 (Sleep)
 
-**Interpretation** With our p-value of _____, we (reject/fail to reject), because the p-value is (less/greater) than 0.05.
+**Interpretation** With our p-value of .underline[.hidden[p = 0.0001]], we (reject/fail to reject), because the p-value is (less/greater) than 0.05.
 
 **Conclusion** From our p-value we (do/do not) have enough evidence to conclude that the average hours slept per night for UNL students is significantly below  8 hours.
 
@@ -638,7 +640,8 @@ $$H_0: \mu = 30\\H_A: \mu > 30$$
 
 To collect data, the author surveyed students in her introductory statistics course and found that in a sample of 48 students the average SPF was 35.29 and the standard deviation of the SPF was 17.19
 
-- Assign appropriate symbols to the numbers: $$\;\;=48\;\;\;\;\; \;\;\;\;=35.29\;\;\;\;\; \;\;\;\;=17.19$$
+- Assign appropriate symbols to the numbers: 
+$$\;\;\;=48\;\;\;\;\;\;\;\;=35.29\;\;\;\;\;\;\;\;=17.19$$
 
 - In the context of this stuudy, is the theory-based approach (one-sample t-test) valid to find a p-value to investigate whether the data provide evidence that the average SPF of sunscreens used by the students at this school exceeds 30? Explain
 
@@ -675,7 +678,7 @@ To collect data, the author surveyed students in her introductory statistics cou
 
 - State your conclusion from this study based on the p-value, being sure to provide justification for your conclusion.    
     
-.red[We reject the null hypothesis, because p=0.191 is less than 0.05. We have evidence that the average SPF of sunscreen used by students at this college is higher than 30. ]
+.red[We reject the null hypothesis, because p=0.0191 is less than 0.05. We have evidence that the average SPF of sunscreen used by students at this college is higher than 30. ]
 
 ---
 class:center,middle,inverse
@@ -700,7 +703,7 @@ But decisions imply making mistakes...
 ## Significance and Errors
 
 - How extreme is extreme enough?
-  - Changes with the study: the consequences may be different for different types of errors    
+  - Changes with the study: the consequences may be different for different types of errors<br/><br/>
   Criminal justice system: 
   > It is better that ten guilty persons escape than that one innocent suffer - William Blackstone
   
@@ -728,7 +731,8 @@ But decisions imply making mistakes...
   
 ---
 ## Errors
-- Helper toy example: Do more than half the babies pick the helper toy? $$H_0: \pi = 0.5 \;\;\;\; H_A: \pi > 0.5$$
+- Helper toy example: Do more than half the babies pick the helper toy? 
+$$H_0: \pi = 0.5 \;\;\;\; H_A: \pi > 0.5$$
 
 - We can simulate 100 reps of 16 babies assuming the null:
 ```{r, fig.width = 8, fig.height = 4}
@@ -828,11 +832,11 @@ You are sitting on a jury and must decide whether the defendant is innocent or g
   - Type 1: .red[Send the defendant to jail when they are innocent]
   - Type 2: .red[Let a guilty person go free]
 
-- Which error would be worse?
+- Which error would be worse? .red[In common law jurisdictions, it is seen as worse to send an innocent person to jail.]
 
 - Significance level: .red[Percent of time that you send an innocent person to jail]
 
-- How should we adjust our significance level?
+- How should we adjust our significance level? .red[(If it's worse to send an innocent person to jail) we would want to decrease our significance level] $\alpha$ .red[so that the probability of sending an innocent person to jail is lower.]
 
 ---
 ## Example
@@ -880,4 +884,6 @@ The most important thing about errors is when they occur
 - Type 1 errors only occur if you reject $H_0$
 - Type 2 errors only occur if you fail to reject $H_0$
 
-Common quiz/test question: Draw a conclusion for a study and determine which type of error you may have made
+Common quiz/test question: 
+
+Draw a conclusion for a study and determine which type of error you may have made.
