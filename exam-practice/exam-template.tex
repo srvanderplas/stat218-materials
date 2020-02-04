@@ -1,0 +1,166 @@
+\documentclass[12pt]{article}
+\usepackage[$geometry$]{geometry}
+\newcommand*{\authorfont}{\fontfamily{phv}\selectfont}
+$if(fontfamily)$
+\usepackage[$fontfamilyoptions$]{$fontfamily$}
+$else$
+\usepackage{lmodern}
+$endif$
+\usepackage{xcolor}
+\newcommand{\cfbox}[2]{%
+    \colorlet{currentcolor}{.}%
+    {\color{#1}%
+    \fbox{\color{currentcolor}#2}}%
+}
+
+% \let\olditem\item
+% \renewcommand{\item}{%
+% \olditem\vspace{3em}}
+
+\usepackage{longtable,booktabs}
+
+\usepackage{parskip}
+
+\usepackage[$if(fontenc)$$fontenc$$else$T1$endif$]{fontenc}
+\usepackage[utf8]{inputenc}
+
+\usepackage{amsmath,amssymb,amsthm}
+
+\usepackage{nameref}
+\makeatletter
+\newcommand*{\currentname}{\@currentlabelname}
+\makeatother
+
+\makeatletter
+\newcommand*{\longanswer}[2][2.5em]{%
+\begin{minipage}[c][#1]{\linewidth}\vfil #2\vfil\end{minipage}}
+\makeatother
+
+\usepackage{comment}
+
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\usepackage{lastpage}
+\setlength{\headheight}{15pt}
+\renewcommand{\headrulewidth}{0.3pt}
+\renewcommand{\footrulewidth}{0.3pt}
+\lhead{Name: }
+\chead{}
+\rhead{ID: \hspace{2in}}
+\lfoot{\small\currentname}
+\cfoot{$if(course)$$course$ -- $endif$ $if(exam)$$exam$$endif$ $if(version_str)$(Form $version_str$)$endif$}
+\rfoot{\small \thepage/\pageref*{LastPage}}
+
+\fancypagestyle{firststyle}
+{
+\renewcommand{\headrulewidth}{0.3pt}%
+\lhead{Name:}
+\chead{}
+\rhead{ID: \hspace{2in}}
+\lfoot{\small\currentname}
+\cfoot{}
+\rfoot{\small\thepage/\pageref*{LastPage}}
+}
+
+\usepackage{titlesec}
+
+\titlespacing{\section}{0em}{1em}{.25em}[0em]
+\titlespacing{\subsection}{0em}{.5em}{.1em}[0em]
+
+%\def\labelitemi{--}
+\usepackage{enumitem}
+\setitemize[0]{leftmargin=15pt,itemsep=3em}
+\setenumerate[0]{leftmargin=15pt,itemsep=3em}
+\makeatletter
+\@ifpackageloaded{hyperref}{}{%
+\ifxetex
+  \usepackage[setpagesize=false, % page size defined by xetex
+              unicode=false, % unicode breaks when used with xetex
+              xetex]{hyperref}
+\else
+  \usepackage[unicode=true]{hyperref}
+\fi
+}
+\@ifpackageloaded{color}{
+    \PassOptionsToPackage{usenames,dvipsnames}{color}
+}{%
+    \usepackage[usenames,dvipsnames]{color}
+}
+\makeatother
+\hypersetup{breaklinks=true,
+            bookmarks=true,
+            pdfauthor={$instructor$},
+            pdftitle={$title$},
+            colorlinks=true,
+            citecolor=$if(citecolor)$$citecolor$$else$blue$endif$,
+            urlcolor=$if(urlcolor)$$urlcolor$$else$blue$endif$,
+            linkcolor=$if(linkcolor)$$linkcolor$$else$magenta$endif$,
+            pdfborder={0 0 0}}
+\urlstyle{same}  % don't use monospace font for urls
+
+
+\setcounter{secnumdepth}{0}
+
+$if(listings)$
+\usepackage{listings}
+$endif$
+$if(lhs)$
+\lstnewenvironment{code}{\lstset{language=r,basicstyle=\small\ttfamily}}{}
+$endif$
+$if(highlighting-macros)$
+$highlighting-macros$
+$endif$
+$if(verbatim-in-note)$
+\usepackage{fancyvrb}
+$endif$
+$if(tables)$
+\usepackage{longtable}
+$endif$
+
+$if(graphics)$
+\usepackage{graphicx}
+% We will generate all images so they have a width \maxwidth. This means
+% that they will get their normal width if they fit onto the page, but
+% are scaled down if they would overflow the margins.
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+\else\Gin@nat@width\fi}
+\makeatother
+\let\Oldincludegraphics\includegraphics
+\renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=\maxwidth]{#1}}
+$endif$
+
+\usepackage{setspace}
+
+\title{$course$}
+\date{$semester$}
+
+\begin{document}
+\thispagestyle{firststyle}
+\begin{center}
+{\Large $if(course)$$course$$endif$ - $if(exam)$$exam$$endif$ $if(version_str)$(Form $version_str$)$endif$}\\[.5cm]
+\end{center}
+\hrule
+\vspace{.5cm}
+
+$body$
+
+
+
+$for(include-after)$
+$include-after$
+
+$endfor$
+\end{document}
+
+\makeatletter
+\def\@maketitle{%
+  \newpage
+%  \null
+%  \vskip 2em%
+%  \begin{center}%
+  \let \footnote \thanks
+    {\fontsize{18}{20}\selectfont\raggedright  \setlength{\parindent}{0pt} \@title \par}%
+}
+%\fi
+\makeatother
