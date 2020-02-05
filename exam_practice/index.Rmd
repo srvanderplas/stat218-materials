@@ -1,0 +1,33 @@
+---
+title: "Stat 218 Slides"
+author: "Susan Vanderplas"
+date: "1/15/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = F)
+library(tidyverse)
+library(shiny)
+```
+
+```{r}
+keys <- list.files(here::here("exam-practice"), pattern = "_key.pdf$")
+practice_exams <- list.files(here::here("exam-practice"), pattern = "-practice.pdf$")
+
+tibble(file = c(keys, practice_exams)) %>%
+  mutate(basename = str_remove(file, "-practice") %>% str_remove("\\.pdf"),
+         type = ifelse(str_detect(file, "_key"), "Practice Exam", "Key") %>%
+           factor(levels = c("Practice Exam", "Key"), ordered = T),
+         link = sprintf("<a href=\"%s\">Link</a>", file),
+         Exam = str_extract(file, "\\d{1,}|(final)"),
+         Exam = ifelse(Exam == "final", "Final", paste("Exam", Exam))
+         ) %>%
+  filter(!str_detect(file, "index")) %>%
+  arrange(type) %>%
+  select(-file, -basename) %>%
+  group_by(Exam) %>%
+  pivot_wider(names_from = type, values_from = link, names_repair = "minimal") %>%
+  select(Exam, everything()) %>%
+  knitr::kable(escape = F)
+```
