@@ -1,6 +1,5 @@
 ---
 title: "Stat 218 Exam Practice"
-author: "Susan Vanderplas"
 output: html_document
 ---
 
