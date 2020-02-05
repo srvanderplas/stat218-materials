@@ -1,7 +1,6 @@
 ---
-title: "Stat 218 Slides"
+title: "Stat 218 Exam Practice"
 author: "Susan Vanderplas"
-date: "1/15/2020"
 output: html_document
 ---
 
@@ -12,7 +11,7 @@ library(shiny)
 ```
 
 ```{r}
-keys <- list.files(here::here("exam-practice"), pattern = "_key.pdf$")
+keys <- list.files(here::here("exam_practice"), pattern = "_key.pdf$")
 practice_exams <- list.files(here::here("exam-practice"), pattern = "-practice.pdf$")
 
 tibble(file = c(keys, practice_exams)) %>%
