@@ -1,7 +1,7 @@
 # Compile the exams
 
 library(tidyverse)
-setwd("exams")
+setwd(here::here("exams"))
 # Set up each exam command separately because versions and parameters may be different.
 crossing(version = 1:4, key = c(T, F)) %>%
   purrr::pwalk(., function(version, key) {
@@ -13,7 +13,7 @@ crossing(version = 1:4, key = c(T, F)) %>%
   })
 
 # Compile the practice exams
-setwd("exam-practice/")
+setwd(here::here("exam-practice/"))
 tibble(key = c(F, T)) %>%
   purrr::pwalk(., function(key) {
     rmarkdown::render(
@@ -23,5 +23,7 @@ tibble(key = c(F, T)) %>%
       params = list(key = key))
   })
 
+rmarkdown::render("index.Rmd") # Render exam-practice index
+
 setwd(here::here())
-rmarkdown::render("index.Rmd")
+rmarkdown::render("index.Rmd") # Render complete index
