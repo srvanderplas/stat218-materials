@@ -1,0 +1,9 @@
+---
+title: "Stat 218 Materials"
+author: "Stat 218"
+output: html_document
+---
+
+- [slides](slides/)
+- [exam practice](exam_practice/)
+- [handouts](handouts/)
