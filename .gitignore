@@ -1,0 +1,12 @@
+.Rproj.user
+.Rhistory
+.RData
+.Ruserdata
+Nathan\ Tintle*
+explorations/*
+previous-course-materials/*.zip
+*.log
+Syllabus-*.tex
+exams/*
+slides/*_cache/*
+slides/*_cache
