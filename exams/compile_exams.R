@@ -23,4 +23,5 @@ tibble(key = c(F, T)) %>%
       params = list(key = key))
   })
 
+setwd(here::here())
 rmarkdown::render("index.Rmd")
