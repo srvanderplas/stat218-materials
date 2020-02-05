@@ -343,7 +343,7 @@ class:center,middle,inverse
 
   - How might we select a SRS of everyone in the entire state?
   
-
+---
 ## Exploration 2.1
 
 Answer Question 10 here: https://forms.gle/8vCzyVAxLGLx84hH6
@@ -354,8 +354,6 @@ Answer Question 10 here: https://forms.gle/8vCzyVAxLGLx84hH6
 Answer Question 17 here: https://forms.gle/UxaVigrMn1gpVpaD7
 
 Turn in answers to 10-19 on Canvas by Monday at 6pm. I will post the graphs shown in class on Canvas.
-
----
 
 ---
 ## Review
@@ -402,10 +400,12 @@ Now, we're going to shift to **quantitative** variables with the hopes of learni
 ---
 ## Testing with means
 
-Parameter of interest is now **quantitative**
+Variable of interest is now **quantitative**
   - number of emails in a day
   - amount of money spent Christmas shopping
   - temperature
+
+Parameter is the population mean $\mu$
 
 Null and Alternative Hypotheses:
 <br/><br/>
@@ -545,9 +545,9 @@ Oftentimes, we don't know $\sigma$, which is fine because we can rely on $s$
 
 We can use the standard error in place of $\sigma$
 
-$\displaystyle \frac{s}{\sqrt{n}}$ is the **standard error** of the sample mean
+$\displaystyle \frac{s}{\sqrt{n}}$ is the **standard error** (measure of the accuracy of an estimate) of the sample mean
 
-The **standard error** is a measure of the accuracy of an estimate
+**Standardized Statistic for Chapter 2**
 
 $\displaystyle t = \frac{\overline{x} - \mu_{0}}{\frac{s}{\sqrt{n}}}$
 
@@ -661,7 +661,7 @@ To collect data, the author surveyed students in her introductory statistics cou
 - Assign appropriate symbols to the numbers: 
 $$\;\;\;=48\;\;\;\;\;\;\;\;=35.29\;\;\;\;\;\;\;\;=17.19$$
 
-- In the context of this stuudy, is the theory-based approach (one-sample t-test) valid to find a p-value to investigate whether the data provide evidence that the average SPF of sunscreens used by the students at this school exceeds 30? Explain
+- Is the theory-based approach (one-sample t-test) valid to find a p-value to investigate whether the data provide evidence that the average SPF of sunscreens used by the students at this school exceeds 30? Explain
 
 - Find and report a standardized statistic (t-statistic)
 
@@ -677,7 +677,7 @@ To collect data, the author surveyed students in her introductory statistics cou
 
 - Assign appropriate symbols to the numbers: $$n=48\;\;\;\;\;\overline{x}=35.29\;\;\;\;\;s=17.19$$
 
-- In the context of this stuudy, is the theory-based approach (one-sample t-test) valid to find a p-value to investigate whether the data provide evidence that the average SPF of sunscreens used by the students at this school exceeds 30? Explain    
+- Is the theory-based approach (one-sample t-test) valid to find a p-value to investigate whether the data provide evidence that the average SPF of sunscreens used by the students at this school exceeds 30? Explain    
 .red[Yes, the theory-based approach is valid. We have more than 20 observations in our sample, which means that we can expect our sample mean to be normally distributed thanks to the central limit theorem.]
 
 - Find and report a standardized statistic (t-statistic) $$t = \frac{\overline{x} - \mu}{\frac{s}{\sqrt{n}}} = \frac{35.29 - 30}{\frac{17.19}{\sqrt{48}}} = `r round((35.29-30)/(17.19/sqrt(48)), 3)`$$
@@ -696,7 +696,7 @@ To collect data, the author surveyed students in her introductory statistics cou
 
 - State your conclusion from this study based on the p-value, being sure to provide justification for your conclusion.    
     
-.red[We reject the null hypothesis, because p=0.0191 is less than 0.05. We have evidence that the average SPF of sunscreen used by students at this college is higher than 30. ]
+.red[We reject the null hypothesis, because p-value = 0.0191 is less than 0.05. We have evidence that the average SPF of sunscreen used by students at this college is higher than 30. ]
 
 ---
 class:center,middle,inverse

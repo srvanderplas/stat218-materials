@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<html lang="" xml:lang="">
   <head>
     <title>Ch. 2: Generalization: How Broadly Do the Results Apply</title>
     <meta charset="utf-8" />
     <meta name="author" content="" />
-    <link rel="stylesheet" href="css/default.css" type="text/css" />
-    <link rel="stylesheet" href="css/default-fonts.css" type="text/css" />
+    <link rel="stylesheet" href="css\default.css" type="text/css" />
+    <link rel="stylesheet" href="css\default-fonts.css" type="text/css" />
   </head>
   <body>
     <textarea id="source">
@@ -440,8 +440,6 @@ class:center,middle,inverse
 ---
 ## Review - Section 2.1
 
-- Changing from proportion/probability to averages of quantitative data
-
 - **population** - entire collection of observational units
 
 - **sample** - subset of data
@@ -480,6 +478,18 @@ class:center,middle,inverse
   - How might we select a SRS of everyone in the entire state?
   
 ---
+## Exploration 2.1
+
+Answer Question 10 here: https://forms.gle/8vCzyVAxLGLx84hH6
+
+---
+## Exploration 2.1
+
+Answer Question 17 here: https://forms.gle/UxaVigrMn1gpVpaD7
+
+Turn in answers to 10-19 on Canvas by Monday at 6pm. I will post the graphs shown in class on Canvas.
+
+---
 ## Review
 ### New Symbols
 
@@ -504,18 +514,8 @@ class:center,middle,inverse
 - Population standard deviation: `\(\sigma\)`
 
 ---
-## Exploration 2.1
 
-Answer Question 10 here: https://forms.gle/8vCzyVAxLGLx84hH6
 
----
-## Exploration 2.1
-
-Answer Question 17 here: https://forms.gle/UxaVigrMn1gpVpaD7
-
-Turn in answers to 10-19 on Canvas by Monday at 6pm. I will post the graphs shown in class on Canvas.
-
----
 class:center,middle,inverse
 # 2.2: Inference on a Single Quantitative Variable
 
@@ -528,31 +528,26 @@ Inference:
 - Standardized Statistics / p-values
 - Theory based approximations
 
-Now, we're going to shift to **quantitative** variables
+Now, we're going to shift to **quantitative** variables with the hopes of learning about the **population mean**
 
-2.1 covered sampling methods and vocabulary, symbols, and  drawing conclusions about **population means**
 
 ---
 ## Testing with means
 
-Parameter of interest is now in terms of **quantitative** data 
+Variable of interest is now **quantitative**
   - number of emails in a day
   - amount of money spent Christmas shopping
-  - population size
+  - temperature
 
-Hypotheses set up in the same way (new symbols):     
+Parameter is the population mean `\(\mu\)`
+
+Null and Alternative Hypotheses:
+&lt;br/&gt;&lt;br/&gt;
 `\(H_0: \mu = a\)`    
 `\(H_A: \mu &gt; a \text{, or } H_A: \mu &lt; a \text{, or } H_A: \mu \neq a\)`
 
-Tests have the same interpretation and conclusions from p-values and standardized statistics
+Tests have the same interpretation and conclusions using p-values and standardized statistics
 
----
-## Describing Distributions
-
-Quantitative variables can be distributed in more interesting ways...
-
-### Shape
-![Positive Skew, Symmetric, and Negative Skew Distributions](https://upload.wikimedia.org/wikipedia/commons/c/cc/Relationship_between_mean_and_median_under_different_skewness.png)
 ---
 ## Describing Distributions
 
@@ -562,6 +557,16 @@ Quantitative variables can be distributed in more interesting ways...
 Rounding effects (very common in human-recorded data)
 
 &lt;img src="chapter-2-generalization_files/figure-html/rounding-1.png" width="80%" style="display: block; margin: auto;" /&gt;
+
+
+---
+## Describing Distributions
+
+Quantitative variables can be distributed in more interesting ways...
+
+### Shape
+![Positive Skew, Symmetric, and Negative Skew Distributions](https://upload.wikimedia.org/wikipedia/commons/c/cc/Relationship_between_mean_and_median_under_different_skewness.png)
+
 ---
 ## Describing Distributions
 ### Center
@@ -592,60 +597,73 @@ The standard deviation of a binary variable is generally fixed; with quantitativ
 
 - A summary statistic is called **resistant** if its value does not change much when extreme observations are removed from the data set
 
+- The median is a resistant summary statistic
+
 ---
 ## Describing Distributions
 ## Example
 
 &lt;img src="chapter-2-generalization_files/figure-html/unnamed-chunk-3-1.png" width="80%" style="display: block; margin: auto;" /&gt;
 
-Describe the distribution
+This distribution is skewed right
 
 Median is .underline[.hidden[6.5]]
 
 What if 43 is a typo and it should be 34?
 
 ---
-## Quantitative Data
+## Inference of Quantitative Data
 
-- Categorical data
-  - Simulations with spinners, coins, etc.
-  - Create a null distribution
-  - Evaluate how our sample relates to the null distribution
+- Simulations
+  - Get many samples of the same sample size from the population
+  - Create a null distribution using the average of each simulated sample
   
-- Where was the null centered? How did sample size affect the null distribution?
+- Find p-value by evaluating how our sample statistic relates to the null distribution
+  
+- Null distribution is centered at the value of the population mean according to the null hypothesis
 
-- Quantitative data can't be modeled with coin flips, but the same principles apply
+- Review how the sample size affected the null distribution
+
+- Simulations are difficult
+
 
 ---
-## New values
+## Theory-Based Inference for Quantitative Data
 - The principles from categorical data carry over to quantitative data
 
 - Using theory-based methods, the standard deviation of the sample mean is calculated to be 
 `$$s = \frac{\sum_{i=1}^n{(x_i-\overline x)^2}}{n-1}$$`
 
 
-What do you remember about `\(\sigma\)`?
+Remember, `\(\sigma\)` is the standard deviation of the population
 
-Is it a parameter or a statistic?
+`\(\sigma\)` is a parameter
 
----
-## New values
-
-We don't  have to have `\(\sigma\)` - we can use `\(s\)`, the sample standard deviation, in its place
-
-In order to find thet standardized statistic, we use  `\(\displaystyle \frac{s}{\sqrt{n}}\)` in place of `\(\sigma\)`
-
-`\(\displaystyle \frac{s}{\sqrt{n}}\)` is the **standard error** of the sample mean
-
-The **standard error** is a measure of the accuracy of an estimate
 
 
 ---
-## T-statistics and Z-statistics
-- As with the normal approximation, we need a reference distribution
-  - Categorical data: `\(z\)` and compare to a normal distribution
+## Standardized Statistic
+
+Remember, the general template is
+
+`\(\displaystyle z = \frac{statistic - parameter_{H_0}}{\sigma}\)`
+
+Oftentimes, we don't know `\(\sigma\)`, which is fine because we can rely on `\(s\)`
+
+We can use the standard error in place of `\(\sigma\)`
+
+`\(\displaystyle \frac{s}{\sqrt{n}}\)` is the **standard error** (measure of the accuracy of an estimate) of the sample mean
+
+**Standardized Statistic for Chapter 2**
+
+`\(\displaystyle t = \frac{\overline{x} - \mu_{0}}{\frac{s}{\sqrt{n}}}\)`
+
+---
+## T-statistics vs. Z-statistics
+- As with normal approximation, we need a reference distribution
+  - Categorical data: find `\(z\)` and compare to a normal distribution
   - Quantitative: use `\(s\)` in place of `\(\sigma\)` -&gt; we can't compare to a normal distribution    
-  Instead, we use the `\(t\)` distribution, which is very similar but not quite the same
+  Instead, we use the `\(t\)` distribution, which is very similar
   
 &lt;img src="chapter-2-generalization_files/figure-html/unnamed-chunk-4-1.png" width="80%" style="display: block; margin: auto;" /&gt;
 **Interpretations and conclusions are still the same**
@@ -741,7 +759,7 @@ To collect data, the author surveyed students in her introductory statistics cou
 - Assign appropriate symbols to the numbers: 
 `$$\;\;\;=48\;\;\;\;\;\;\;\;=35.29\;\;\;\;\;\;\;\;=17.19$$`
 
-- In the context of this stuudy, is the theory-based approach (one-sample t-test) valid to find a p-value to investigate whether the data provide evidence that the average SPF of sunscreens used by the students at this school exceeds 30? Explain
+- Is the theory-based approach (one-sample t-test) valid to find a p-value to investigate whether the data provide evidence that the average SPF of sunscreens used by the students at this school exceeds 30? Explain
 
 - Find and report a standardized statistic (t-statistic)
 
@@ -757,7 +775,7 @@ To collect data, the author surveyed students in her introductory statistics cou
 
 - Assign appropriate symbols to the numbers: `$$n=48\;\;\;\;\;\overline{x}=35.29\;\;\;\;\;s=17.19$$`
 
-- In the context of this stuudy, is the theory-based approach (one-sample t-test) valid to find a p-value to investigate whether the data provide evidence that the average SPF of sunscreens used by the students at this school exceeds 30? Explain    
+- Is the theory-based approach (one-sample t-test) valid to find a p-value to investigate whether the data provide evidence that the average SPF of sunscreens used by the students at this school exceeds 30? Explain    
 .red[Yes, the theory-based approach is valid. We have more than 20 observations in our sample, which means that we can expect our sample mean to be normally distributed thanks to the central limit theorem.]
 
 - Find and report a standardized statistic (t-statistic) `$$t = \frac{\overline{x} - \mu}{\frac{s}{\sqrt{n}}} = \frac{35.29 - 30}{\frac{17.19}{\sqrt{48}}} = 2.132$$`
@@ -776,7 +794,7 @@ To collect data, the author surveyed students in her introductory statistics cou
 
 - State your conclusion from this study based on the p-value, being sure to provide justification for your conclusion.    
     
-.red[We reject the null hypothesis, because p=0.0191 is less than 0.05. We have evidence that the average SPF of sunscreen used by students at this college is higher than 30. ]
+.red[We reject the null hypothesis, because p-value = 0.0191 is less than 0.05. We have evidence that the average SPF of sunscreen used by students at this college is higher than 30. ]
 
 ---
 class:center,middle,inverse
