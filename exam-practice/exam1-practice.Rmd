@@ -8,7 +8,6 @@ course: "Stat 218"
 exam: "Exam 1 Practice Test"
 geometry: margin=1in
 params:
-  version: 1
   key: false
 ---
 ---
@@ -29,8 +28,9 @@ if (params$key) {
   cat("\\fancypagestyle{firststyle}")
   cat("{\\lhead{Name:\\color{red}{KEY}}}")
 } else {
-  cat("\\newcommand{\\answer}[1]{\\relax}")
-  cat("\\providecommand{\\tightlist}{\\setlength{\\itemsep}{3em}\\setlength{\\parskip}{0pt}}")
+  # cat("\\newcommand{\\answer}[1]{{\\color{white}#1}}") 
+  cat("\\newcommand{\\answer}[1]{{\\leavevmode\\protect\\phantom{#1}}}")
+  cat("\\providecommand{\\tightlist}{\\setlength{\\itemsep}{1em}\\setlength{\\parskip}{0pt}}")
 }
 
 ```
@@ -39,19 +39,19 @@ if (params$key) {
 
 true_false_qs <- tribble(~statement, ~answer,
                          "A parameter is the quantity of interest computed for the sample", F,
-                         "A statistic is the quantity of interest computed for the sample", F,
+                         "A statistic is the quantity of interest computed for the sample", T,
                          "A p-value is the proportion of failures in the sample", F,
-                         "The central limit theorem predicts the behavior of the null distribution when validity conditions are not met", F,
+                         "The central limit theorem predicts the behavior of the null distribution when validity conditions are met", F,
                          "A sampling frame is the set of all possible observational units in the population", T,
                          "$\\pi$ is the symbol for the population proportion", T,
                          "$\\hat p$ is the symbol for the sample mean", F, 
-                         "A standardized statistic is the distance between the sample statistic and the population mean", F, 
+                         "A standardized statistic is the raw distance between the sample statistic and the population mean", F, 
                          "A *plausible* model is one in which there is no reasonable explanation for the data we observed", F, 
-                         "The validity conditions for a hypothesis test of a proportion are to have 20 observations and a symmetric distribution", F,
+                         "The validity conditions for a hypothesis test on a quantitative variable are to have 20 observations and a not-strongly-skewed distribution", T,
                          "A categorical variable has at least three possible options", F,
-                         "Binary variables are categorical variables", T, 
+                         "All binary variables are also categorical variables", T, 
                          "Normal distributions have a right skewed distribution", F,
-                         "A two-sided test estimates the p-value by considering results that are not as extreme as the observed result in either direction", F,
+                         "A two-sided test estimates the p-value by considering results that are as extreme as the observed result in either direction", T,
                          "The standardized statistic is commonly denoted by the variable $t$ or $z$", T,
                          "$\\alpha$ is the probability of a Type I error", T
 )
@@ -112,43 +112,45 @@ Evaluating predictions made over 2019 in Lincoln, the weather service correctly 
 3. What is the parameter?     
 \longanswer\answer{The long-run proportion of days with correctly predicted precipitation.}
 4. Calculate the sample statistic      
-\longanswer[4em]\answer{$$\hat p = \frac{290}{365} \approx `r sprintf("%0.3f", 290/365)`$$}
+\answer{$\hat p = \displaystyle\frac{290}{365} \approx `r sprintf("%0.3f", 290/365)`$}
 5. What is $H_0$?     
-\longanswer\answer{$\pi=0.75$}
+\answer{$\pi=0.75$}
 6. What is $H_A$?     
-\longanswer\answer{$\pi>0.75$}
-7. What type of hypothesis test is this? 
-\longanswer\answer{A one-sided hypothesis test}
-8. You want to conduct a simulation to answer the research question. To test the hypotheses above, you set the one-proportion applet to have the following values: \vspace{1em}
+\answer{$\pi>0.75$}
+7. What type of hypothesis test is this?     
+\answer{A one-sided hypothesis test}
+8. You want to conduct a simulation to answer the research question. To test the hypotheses above, you set the one-proportion applet to have the following values:
     a. Probability of heads: \underline{\hspace{1in}\answer{0.75}\hspace{1in}}    
-    b. Number of tosses: \underline{\hspace{1in}\answer{365}\hspace{1in}}\vspace{-1em}
+    b. Number of tosses: \underline{\hspace{1in}\answer{365}\hspace{1in}}
     c. Number of repetitions: 100
 9. In this simulation, what does a heads represent?     
-\longanswer\answer{Heads represents a day with correctly predicted precipitation. }
+\answer{Heads represents a day with correctly predicted precipitation. }
 10. Your simulation produces the data shown in the plot below:    
 ```{r weather-data, fig.width = 8, fig.height = 2.8}
 set.seed(20200213)
 day_sim <- rbinom(100, 365, prob = .75)
 day_success <- mean(day_sim/365)
-max_day_success <- max(day_sim/365)
+max_day_success <- max(day_sim)
 
-p <- qplot(x = day_sim/365, geom = "dotplot", method = "histodot", 
-      binwidth = 1/365, 
+p <- qplot(x = day_sim, geom = "dotplot", method = "histodot", 
+      binwidth = 1, dotsize = .9,
       stackratio = 1.005, fill = I("white")) +
   scale_x_continuous(sprintf("Proportion of days correctly predicted"), 
-                     breaks = c((0:72)*5/365, 1), 
-                     labels = c("0", sprintf("%d/%d", (1:72)*5,
-                                             365), "1"),
-                     expand = expand_scale(mult = 0, add = 2/365)) +
+                     breaks = c((0:72)*5, 1),
+                     minor_breaks = 0:365,
+                     labels = c("0", sprintf("%d/%d", (1:72)*5, 365), "1"),
+                     expand = expand_scale(mult = 0, add = 2)) +
+  annotate("text", x = -Inf, y = Inf, hjust = -0.01, vjust = 1.1, 
+           label = sprintf("Simulation mean: %0.4f\nSimulation sd: %0.4f", day_success, sd(day_sim/365))) + 
+  scale_y_continuous("", breaks = NULL) + 
   theme(axis.text.y = element_blank(), 
         axis.title.y = element_blank(), 
-        axis.ticks.y = element_blank()) +
-  ggtitle(bquote(paste("Simulation Results, ", pi == .(.75))))
+        axis.ticks.y = element_blank())
 
 if (params$key) {
-  p <- p + annotate("segment", x = (290 - .5)/365, xend = (290 - .5)/365, y = 0, yend = Inf, color = "red") +
-    annotate("segment", x = (290 - .5)/365, xend = pmin(max_day_success, 1), y = .75, yend = .75, arrow = arrow(ends = "last", length = unit(.25, "cm")), color = "red") + 
-    geom_dotplot(aes(x = day_sim[day_sim >= 290]/365), fill = "red", method = "histodot", binwidth = 1/365, stackratio = 1.005)
+  p <- p + annotate("segment", x = (290 - .5), xend = (290 - .5), y = 0, yend = Inf, color = "red") +
+    annotate("segment", x = (290 - .5), xend = pmin(max_day_success, 365), y = .75, yend = .75, arrow = arrow(ends = "last", length = unit(.25, "cm")), color = "red") + 
+    geom_dotplot(aes(x = day_sim[day_sim >= 290]), fill = "red", method = "histodot", binwidth = 1, dotsize = .9, stackratio = 1.005)
 } 
 p
 
@@ -157,18 +159,85 @@ day_stat <- (290/365 - .75)/sqrt(.75*(1-.75)/365)
 
 ```    
     a. What does a dot represent in the plot?     
-    \longanswer\answer{A set of 365 simulated observations.}
-    b. On the plot, draw one or two vertical line(s) to indicate the cutoff(s), and an arrow(s) indicating the direction(s) of $H_A$. Shade in the dots corresponding to the simulation p-value calculation. 
+    \answer{A set of 365 simulated observations.}
+    b. On the plot, draw one or two vertical line(s) to indicate the cutoff(s), and an arrow(s) indicating the direction(s) of $H_A$. Shade in the dots corresponding to the simulation p-value calculation.
     c. Calculate the simulation p-value:     
-    \longanswer[4em]\answer{$$P(\hat p >= 290/365)\approx P(p^\ast >= .795) = \frac{`r sum(day_sim >= 290)`}{`r length(day_sim)`} = `r day_prop`$$}
+\answer{$P(\hat p >= 290/365)\approx P(p^\ast >= .795) = \displaystyle\frac{`r sum(day_sim >= 290)`}{`r length(day_sim)`} = `r day_prop`$}
     e. What is your conclusion?     
-    \longanswer[6em]{\answer{With a p-value of 0.06, I have moderate evidence against the null hypothesis that $\pi = 0.75$. I reject $H_0$ and conclude that the national weather service correctly predicts whether or not there will be precipitation over the long run with a probability of $\pi > .75$} }
-    f. Is it appropriate to use theory-based inference on this data? Why or why not?     
-    \longanswer[6em]{\answer{Yes, we could use theory-based inference on this data. We would expect that we would have 365\*0.75 = 273.75 successes and 365\*0.25 = 91.25 failures. As both the expected successes and failures under $H_0$ are greater than 10, we can use theory-based inference.}}
-    g. Calculate the theory-based standardized statistic for this test.     
-    \longanswer[6em]\answer{$$z = \frac{\hat p - \pi}{\sqrt{\pi(1-\pi)/n}} = \frac{.7945 - .75}{\sqrt{.75(1-.75)/365}} = \frac{`r 290/365 - .75`}{`r sqrt(.75*(1-.75)/365)`} = `r round(day_stat, 2)`$$}
-    c. What should the national weather service conclude about their precipitation model?     
-    \longanswer[6em]\answer{The national weather service should conclude that there is moderate evidence against the null hypothesis. The standardized statistic is almost 2, which indicates that the sample value is unlikely to be observed by chance alone. The NWS should reject $H_0$ and conclude that $\pi > 0.75$}
+    \answer{With a p-value of `r day_prop`, I have moderate evidence against the null hypothesis that $\pi = 0.75$. I reject $H_0$ and conclude that the national weather service correctly predicts whether or not there will be precipitation over the long run with a probability of $\pi > .75$}
+11. Is it appropriate to use theory-based inference on this data? Why or why not?     
+\longanswer[5.5em]{\answer{Yes, we could use theory-based inference on this data. We would expect that we would have $365\times 0.75 = 273.75$ successes and $365\times 0.25 = 91.25$ failures. As both the expected successes and failures under $H_0$ are greater than 10, we can use theory-based inference.}}
+12. Calculate the theory-based standardized statistic for this test.     
+\longanswer[5.5em]\answer{$z = \displaystyle\frac{\hat p - \pi}{\sqrt{\pi(1-\pi)/n}} = \displaystyle\frac{.7945 - .75}{\sqrt{.75(1-.75)/365}} = \displaystyle\frac{`r 290/365 - .75`}{`r sqrt(.75*(1-.75)/365)`} = `r round(day_stat, 2)`$\\Note that the theory-based standardized statistic does not use the simulation mean or standard deviation. You must use the formula for $\sigma$ from the formula sheet.}
+13. What should the national weather service conclude about their precipitation model?     
+\longanswer[5em]\answer{The national weather service should conclude that there is moderate evidence against the null hypothesis. The standardized statistic is almost 2, which indicates that the sample value is unlikely to be observed by chance alone. The NWS should reject $H_0$ and conclude that $\pi > 0.75$}
+
+# 3D Printing Mixup
+
+Dr. Vanderplas has been experimenting with her new 3d printer, and has used it to print both fair and unfair dice to use in Stat 218. The unfair dice she printed are weighted, causing some faces to be more likely to appear. 
+
+Dr. Vanderplas's son, Alex, mixed the two die together so that it is now impossible to tell which die is fair or unfair by sight. To separate the two die out, Dr. Vanderplas decides to test one of the die by rolling it 60 times and recording how many times each face appears. Using her data, can you determine whether the die she rolled is unfair?
+
+Face | 1 | 2 | 3 | 4 | 5 | 6 
+---- | - | - | - | - | - | - 
+\# Rolls | 4 | 5 | 7 | 12 | 14 | 17
+
+1. Identify the research question.    
+\answer{Is the die fair?}
+2. What is the probability of rolling a 6 under random chance?    
+\answer{$1/6 \approx 0.1667$}
+3. You decide to define a success as rolling a 6. Using this definition, state the null and alternative hypotheses.    
+\answer{$H_0:\pi = 1/6$\\$H_A: \pi \neq 1/6$}
+4. What does $\pi$ mean for this problem?    
+\answer{$\pi$ is the long-run probability of rolling a 6 with the selected die.}
+5. What is $\hat p$ for this problem?    
+\answer{$\hat p = \displaystyle\frac{17}{60} = 0.3$}
+6. What type of hypothesis test is this?    
+\answer{A two-sided hypothesis test} 
+7. Using your selected probability under random chance, you conduct 100 simulation trials, with the results shown in the plot below.     
+```{r, fig.width = 6.5, fig.height = 3}
+set.seed(2047812)
+dthresh <- 17 - 10
+die <- tibble(n6s = rbinom(100, 60, 1/6), 
+              shade = abs(n6s - 10) >= dthresh)
+die_mean <- mean(die$n6s/60)
+die_sd <- sd(die$n6s/60)
+
+p <- ggplot(die) + 
+  geom_dotplot(aes(x = n6s, fill = shade), binwidth = 1, dotsize = .35, inherit.aes = F) + 
+  
+  scale_x_continuous("Proportion of 6s Rolled", breaks = 0:60, 
+                     labels = parse(text = c(0, sprintf("over(%d,60)", 1:59), 1)), 
+                     expand = expand_scale(mult = 0, add = c(2, 2))) + 
+  scale_y_continuous("", breaks = NULL) + 
+  theme(axis.text.y = element_blank(), axis.title.y = element_blank(), axis.ticks.y = element_blank()) 
+
+if (params$key) {
+  p <- p + 
+    annotate("segment", x = (10 + dthresh - .5), xend = 10 + dthresh - .5, y = 0, yend = Inf, color = "red") + 
+    annotate("segment", x = (10 - dthresh + .5), xend = 10 - dthresh + .5, y = 0, yend = Inf, color = "red") +
+    annotate("segment", x = (10 + dthresh), xend = Inf, y = .75, yend = .75, 
+             arrow = arrow(ends = "last", length = unit(.25, "cm")), color = "red") + 
+    annotate("segment", x = (10 - dthresh), xend = -Inf, y = .75, yend = .75, 
+             arrow = arrow(ends = "last", length = unit(.25, "cm")), color = "red") + 
+    scale_fill_manual(values = c("TRUE" = "red", "FALSE" = "white"), guide = F)
+} else {
+  p <- p  + 
+    scale_fill_manual(values = c("TRUE" = "white", "FALSE" = "white"), guide = F)
+}
+print(p)
+```
+    a. Describe the distribution's shape, center, and variability.     
+    \longanswer[6em]\answer{The distribution is centered at approximately 1/6, and has a slight right skew. Most of the values are concentrated between 5/60 and 15/60 (or 1/12 and 1/4).\\Note: It is also ok to say this distribution is relatively symmetric. The skew is very slight.}
+    b.  On the plot, draw one or two vertical line(s) to indicate the cutoff(s), and an arrow(s) indicating the direction(s) of $H_A$. Shade in the dots corresponding to the simulation p-value calculation.
+    c. Calculate the simulation p-value.    
+    \answer{$P(|\hat p - 1/6| \geq 7/60)\approx P(|p^\ast - 1/6| \geq 7/60) = \displaystyle\frac{`r sum(die$shade)`}{`r nrow(die)`} = `r mean(die$shade)`$}
+    d. What do you conclude?    
+    \longanswer[4em]\answer{With a p-value of `r sprintf("%.02f", mean(die$shade))` I reject $H_0$ and conclude that it is unlikely that the long-run probability of rolling a 6 with the selected die is 1/6. It is more plausible that $\pi \neq 1/6$, which would indicate that Dr. Vanderplas rolled the unfair die. }
+    e. Given your conclusion in d, what type of error could you be making? Explain.
+    \longanswer[5em]\answer{(Assuming d is correct) It is possible that we have falsely rejected $H_0$ when in fact $\pi = 1/6$. This would be a Type I error.\\(If d is not correct) It is possible that we have failed to reject $H_0$ when it is in fact false. This would be a Type II error.}
+
+
 \clearpage
 ```{r ufo-data, include = F}
 set.seed(302847923)
@@ -180,7 +249,7 @@ alien_sd <- round(sd(alien$n), 2)
 
 # UFO Sightings
 
-Roswell, NM is home to a number of stories about sightings of unidentified flying objects (UFOs). The local police department has historically recorded an average of 10 reported sightings per month. Over the past year, a TV show about aliens has been popular on Netflix. During the period when the show was available, there have been, on average, `r sprintf("%.0.2f", mean(alien$n))` reported sightings per week (sample SD = `r sprintf("%0.2f", sd(alien$n))`). The police officers would like to know if there has been an increase in the number of reported UFO sightings since the TV show became available on Netflix. 
+Roswell, NM is home to a number of stories about sightings of unidentified flying objects (UFOs). The local police department has historically recorded an average of 10 reported sightings per month. Over the past year, a TV show about aliens has been popular on Netflix. During the period when the show was available, there have been, on average, `r alien_mean` reported sightings per week (sample SD = `r alien_sd`). The police officers would like to know if there has been an increase in the number of reported UFO sightings since the TV show became available on Netflix. 
 
 ```{r alien-hist, message = F, warning = F, error = F, fig.width = 8, fig.height = 3}
 ggplot(alien, aes(x = n)) + geom_dotplot(color = "black", fill = "white", binwidth = 1, dotsize = .5) + 
@@ -193,29 +262,28 @@ ggplot(alien, aes(x = n)) + geom_dotplot(color = "black", fill = "white", binwid
 ```
 
 1. Describe the shape of the distribution of the number of UFO sightings. Will the median be less than, greater than, or approximately equal to the sample mean?     
-\longanswer\answer{The distribution is relatively symmetric, with a mean around 16 and a standard deviation of almost 4. }
+\longanswer[4em]\answer{The distribution is relatively symmetric, with a mean around 16 and a standard deviation of almost 4. The sample median (which is 16.5) is approximately equal to the sample mean.}
 2. Formulate an appropriate research question      
 \longanswer\answer{Are there more reported UFO sightings since the show became popular on Netflix?}
 3. What is the parameter, in words?     
 \longanswer\answer{The long-run average number of reported UFO sightings since the show became popular on Netflix?}
 4. Using appropriate mathematical notation, write out $H_0$ and $H_A$.     
 \longanswer[3em]\answer{$H_0: \mu = 10$\\$H_A: \mu > 10$}
-5. What are the values of the following variables? If the value is not known, write "unknown". You can use values under $H_0$ where applicable.    
+5. What are the values of the following variables? If the value is not known, write "unknown". You can use values under $H_0$ where applicable.
 \begin{align*}
 \mu &= \answer{10} & \sigma &= \answer{\text{unknown}}\\
 \\
 \overline x & = \answer{`r sprintf("%.02f", mean(alien$n))`} &  s &= \answer{`r sprintf("%.02f", sd(alien$n))`}
 \end{align*}
 6. Calculate the standardized statistic.     
-\longanswer[5em]\answer{$$t = \frac{\overline x - \mu}{s/\sqrt{n}} = \frac{`r alien_mean` - 10}{`r alien_sd`/\sqrt{`r nrow(alien)`}} = \frac{`r sprintf("%.2f", alien_mean - 10)`}{`r sprintf("%.2f", alien_sd/sqrt(nrow(alien)))`} = `r sprintf("%.2f", (alien_mean - 10)/(alien_sd/sqrt(nrow(alien))))`$$}
-8. What are the validity conditions for a one-sample t-test?          
+\longanswer[5em]\answer{$t = \displaystyle\frac{\overline x - \mu}{s/\sqrt{n}} = \displaystyle\frac{`r alien_mean` - 10}{`r alien_sd`/\sqrt{`r nrow(alien)`}} = \displaystyle\frac{`r sprintf("%.2f", alien_mean - 10)`}{`r sprintf("%.2f", alien_sd/sqrt(nrow(alien)))`} = `r sprintf("%.2f", (alien_mean - 10)/(alien_sd/sqrt(nrow(alien))))`$}
+7. What are the validity conditions for a one-sample t-test?          
 \longanswer[6em]\answer{The variable should have a symmetric distribution, or there should be at least 20 observations and the sample distribution should not be strongly skewed.}
-9. Do you think the validity conditions are met? Why or why not?        
-\longanswer[7em]\answer{There are more than 20 observations, and the sampling distribution is not strongly skewed.}
-10. (Assume the validity conditions are met) What is your conclusion about the number of car accidents on snowy days?     
+8. Do you think the validity conditions for theory-based inference are met? Why or why not?        
+\longanswer[6em]\answer{There are more than 20 observations, and the sampling distribution is not strongly skewed, so the validity conditions are met. We can perform theory-based inference.}
+9. (Assume the validity conditions are met) What is your conclusion about the number of reported UFO sightings?     
 \longanswer[6em]\answer{As t = `r sprintf("%.2f", (alien_mean - 10)/(alien_sd/sqrt(nrow(alien))))`, I reject $H_0$ and conclude that there is very strong evidence that the long-run average number of reported UFO sightings is greater than 10. }
-\clearpage
-11. Which type of error is described? 
+10. Which type of error is described? 
     - Concluding that the number of UFO sightings reported to the police is higher than normal when in fact it is not. \vspace{.5em}         
 ```{r results='asis'}
 cat(ifelse(params$key, "\\phantom{xx}\\hfill\\cfbox{red}{Type 1 error}\\hfill Type 2 error\\hfill\\phantom{xx}", "\\phantom{xx}\\hfill Type 1 error \\hfill Type 2 error \\hfill\\phantom{xx}\\vspace{-1em}"))
