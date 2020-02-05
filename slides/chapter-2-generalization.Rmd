@@ -456,10 +456,18 @@ We usually use the median when the mean is not appropriate
 The standard deviation of a binary variable is generally fixed; with quantitative variables, there is much more freedom.
 
 ```{r}
-data(cerealsugar, package = "DAAG")
+if ("DAAG" %in% installed.packages()) {
+  data(cerealsugar, package = "DAAG")
 data(cuckoos, package = "DAAG")
 data(Fair, package = "Ecdat")
 data(measles, package = "DAAG")
+} else {
+  cerealsugar <- read_csv("../data/cerealsugar.csv")$x
+  measles <- read_csv("../data/measles.csv")$x
+  cuckoos <- read_csv("../data/cuckoos.csv")
+  Fair <- read_csv("../data/fair.csv")
+}
+
 tbl <- bind_rows(
   tibble(x = cerealsugar, set = "% Sugar in  Breakfast Cereal"),
   tibble(x = filter(cuckoos, species == "meadow.pipit")$length, set = "Length of Meadow Pipit"),
