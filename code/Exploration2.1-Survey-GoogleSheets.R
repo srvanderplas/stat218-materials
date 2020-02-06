@@ -7,7 +7,7 @@ q10 %>%
   ggplot(aes(x = avg_word_length)) +
   geom_dotplot(binwidth = 0.25, origin = 1, method = "histodot") +
   ggtitle("Question 10 Responses") +
-  annotate("text", x = Inf, y = Inf, hjust = 1.1, vjust = 1, label = sprintf("Mean word length: %.2f\nProportion > 4.29: %.2f",
+  annotate("text", x = Inf, y = Inf, hjust = 1.1, vjust = 0, label = sprintf("Mean word length: %.2f\nProportion > 4.29: %.2f",
                                                                              mean(q10$`What is the average word length in your sample?`), mean(q10$`What is the average word length in your sample?`>4.29)))
 
 
