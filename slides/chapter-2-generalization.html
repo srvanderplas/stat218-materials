@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<html lang="" xml:lang="">
   <head>
     <title>Ch. 2: Generalization: How Broadly Do the Results Apply</title>
     <meta charset="utf-8" />
     <meta name="author" content="" />
-    <link rel="stylesheet" href="css/default.css" type="text/css" />
-    <link rel="stylesheet" href="css/default-fonts.css" type="text/css" />
+    <link rel="stylesheet" href="css\default.css" type="text/css" />
+    <link rel="stylesheet" href="css\default-fonts.css" type="text/css" />
   </head>
   <body>
     <textarea id="source">
@@ -814,29 +814,15 @@ Significance tests are used to **make a decision** about whether the data provid
 ***
 But decisions imply making mistakes...
 
-
 ---
-## Significance and Errors
 
-- How extreme is extreme enough?
-  - Changes with the study: the consequences may be different for different types of errors&lt;br/&gt;&lt;br/&gt;
-  Criminal justice system: 
-  &gt; It is better that ten guilty persons escape than that one innocent suffer - William Blackstone
-  
-- In statistics, we control "extreme enough" with the value where we reject the null, aka. **significance level** or **alpha** ( `\(\alpha\)` )
-
-- Changing `\(\alpha\)` has consequences: 
-  - if we increase it (lowering the level of "extreme" necessary to reject), we might find evidence of an effect even though there is only chance. 
-  - if we decrease it (we need more evidence to reject), we might fail to reject an effect that is actually there
-  
----
 ## Errors
 
-- Any time we make a decision based on data, a mistake is possible
+- Any time we make a decision based on data, we may make a mistake
 
 - In significance tests, there are two types of mistakes we can make:
-  - (The effect is really there) and we fail to reject `\(H_0\)`
-  - (The effect is really not there) and we reject `\(H_0\)`
+  - (The effect is really not there) and we incorrectly reject `\(H_0\)`
+  - (The effect is really there) and we incorrectly fail to reject `\(H_0\)`
 
 &lt;br/&gt;&lt;br/&gt;
   
@@ -845,41 +831,9 @@ But decisions imply making mistakes...
   &lt;tr&gt;&lt;td rowspan=2&gt;What we say&lt;/td&gt;&lt;td&gt; Fail to reject `\(H_0\)` &lt;/td&gt;&lt;td&gt; Correct decision! &lt;/td&gt;&lt;td&gt; Missed opportunity&lt;br/&gt;(Type 2 error) &lt;/td&gt;&lt;/tr&gt;
   &lt;tr&gt;&lt;td&gt;Reject `\(H_0\)` &lt;/td&gt; &lt;td&gt; False alarm&lt;br/&gt;(Type 1 error)&lt;/td&gt;&lt;td&gt; Correct decision!&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
   
+
 ---
-## Errors
-- Helper toy example: Do more than half the babies pick the helper toy? 
-`$$H_0: \pi = 0.5 \;\;\;\; H_A: \pi &gt; 0.5$$`
 
-- We can simulate 100 reps of 16 babies assuming the null:
-&lt;img src="chapter-2-generalization_files/figure-html/unnamed-chunk-5-1.png" width="80%" style="display: block; margin: auto;" /&gt;
-
-- Is this strong evidence against the null?
-
-- Enough evidence to reject?
-
-  
----
-## Errors
-
-- Usual threshold is `\(\alpha = 0.05\)`    
-**What that actually means**: we are ok with making a type 1 error 5% of the time
-
-- We can choose something other than 5% `\((\alpha = 0.05)\)`
-
-- What if `\(\alpha = .10\)`?
-  - 10% of the time we will reject a true null hypothesis (in the long run)
-
-- The only thing that changes in our procedure is that we're deciding the cutoff for rejecting; it might be something other than 5%.
-
-- Where do we draw the line?
-  - How small does `\(p\)` have to be?
-  - Field dependent
-  - Consequences dependent: Would you want a lower p-value for 
-      - deciding whether someone should be executed,     
-      or for 
-      - deciding whether someone should get a sticker?
-  
----
 ## Types of Error
 
 **Type 1 Error** - reject the null hypothesis when `\(H_0\)` is actually true
@@ -891,21 +845,66 @@ But decisions imply making mistakes...
 - i.e. UNL students use sunscreen that is over 30 spf, but we did not reject the null hypothesis of `\(\mu = 30\)`
 
 ---
+## Significance and Errors
+
+- How extreme is extreme enough to decide to reject `\(H_0\)`?
+  - Changes with the study: the consequences may be different for different types of errors (See slides 62-65)&lt;br/&gt;&lt;br/&gt;
+  
+- In statistics, we control "extreme enough" with the value where we reject the null, aka. **significance level** or **alpha** ( `\(\alpha\)` )
+  - **If the p-value &lt; `\(\alpha\)`, reject `\(H_0\)`**
+
+- Changing `\(\alpha\)` has consequences: 
+  - if we increase it (lowering the level of "extreme" necessary to reject), we might find evidence of an effect even though there is only chance. 
+  - if we decrease it (we need more evidence to reject), we might fail to reject an effect that is actually there
+  
+
+---
+## Example of the Significance Level
+- Helper toy example: Do more than half the babies pick the helper toy? 
+`$$H_0: \pi = 0.5 \;\;\;\; H_A: \pi &gt; 0.5$$`
+
+- We can simulate 100 reps of 16 babies assuming the null:
+&lt;img src="chapter-2-generalization_files/figure-html/unnamed-chunk-5-1.png" width="80%" style="display: block; margin: auto;" /&gt;
+
+- Is this strong evidence against the null?
+
+- Enough evidence to reject? Depends on `\(\alpha\)`
+
+  
+---
+## Errors
+
+- Usual threshold is `\(\alpha = 0.05\)`    
+**What that actually means**: we are ok with making a type 1 error 5% of the time
+
+- We can choose something other than 5% `\((\alpha = 0.05)\)`
+
+- What if `\(\alpha = .10\)`?
+  - 10% of the time (in the long run) we will incorrectly reject the null hypothesis 
+
+- We're deciding the cutoff for rejecting; it might be something other than 5%.
+
+  
+---
 ## Reality
 - We never actually know whether we've made an error
 
-- We can control what we want to happen (depending on discipline)
+- We can control what we want to happen (depending on discipline). In other words, we can decide whether a type 1 or a type 2 error is worse. 
 
 - **Significance level** is the probability of Type 1 error
   - Smaller `\(\alpha\)` = less likely to make a Type 1 error
   - Trade off: more likely to make a Type 2 error
 
+
+---
+## Statistical Power
+
 - **Power** is the probability of rejecting a false null hypothesis
   - We want to reject when the null is not true
   - We want our tests to be as powerful as possible
-
----
-## Reality
+  &lt;br/&gt; 
+  &lt;br/&gt; 
+  
   &lt;table style="text-align:center;"&gt; &lt;tr&gt;&lt;td&gt;&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;td  colspan=2&gt;Reality&lt;/td&gt;&lt;/tr&gt;
   &lt;tr&gt;&lt;td style="background-color:#FFFFFF;"&gt;&lt;/td&gt;&lt;td style="background-color:#FFFFFF;"&gt;&lt;/td&gt;&lt;td&gt; `\(H_0\)` is true &lt;/td&gt;&lt;td&gt; `\(H_A\)` is true &lt;/td&gt;&lt;/tr&gt;
   &lt;tr&gt;&lt;td rowspan=2&gt;What we say&lt;/td&gt;&lt;td&gt; Fail to reject `\(H_0\)` &lt;/td&gt;&lt;td&gt; Correct decision! &lt;/td&gt;&lt;td&gt; Missed opportunity&lt;br/&gt;(Type 2 error) &lt;/td&gt;&lt;/tr&gt;

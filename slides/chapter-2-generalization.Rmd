@@ -724,29 +724,15 @@ Significance tests are used to **make a decision** about whether the data provid
 ***
 But decisions imply making mistakes...
 
-
 ---
-## Significance and Errors
 
-- How extreme is extreme enough?
-  - Changes with the study: the consequences may be different for different types of errors<br/><br/>
-  Criminal justice system: 
-  > It is better that ten guilty persons escape than that one innocent suffer - William Blackstone
-  
-- In statistics, we control "extreme enough" with the value where we reject the null, aka. **significance level** or **alpha** ( $\alpha$ )
-
-- Changing $\alpha$ has consequences: 
-  - if we increase it (lowering the level of "extreme" necessary to reject), we might find evidence of an effect even though there is only chance. 
-  - if we decrease it (we need more evidence to reject), we might fail to reject an effect that is actually there
-  
----
 ## Errors
 
-- Any time we make a decision based on data, a mistake is possible
+- Any time we make a decision based on data, we may make a mistake
 
 - In significance tests, there are two types of mistakes we can make:
-  - (The effect is really there) and we fail to reject $H_0$
-  - (The effect is really not there) and we reject $H_0$
+  - (The effect is really not there) and we incorrectly reject $H_0$
+  - (The effect is really there) and we incorrectly fail to reject $H_0$
 
 <br/><br/>
   
@@ -755,44 +741,9 @@ But decisions imply making mistakes...
   <tr><td rowspan=2>What we say</td><td> Fail to reject $H_0$ </td><td> Correct decision! </td><td> Missed opportunity<br/>(Type 2 error) </td></tr>
   <tr><td>Reject $H_0$ </td> <td> False alarm<br/>(Type 1 error)</td><td> Correct decision!</td></tr></table>
   
+
 ---
-## Errors
-- Helper toy example: Do more than half the babies pick the helper toy? 
-$$H_0: \pi = 0.5 \;\;\;\; H_A: \pi > 0.5$$
 
-- We can simulate 100 reps of 16 babies assuming the null:
-```{r, fig.width = 8, fig.height = 4}
-tbl <- tibble(helper = rbinom(100, 16, .5), extreme = helper >= 14)
-ggplot(tbl, aes(x = helper, fill = extreme)) + geom_dotplot(method="dotdensity", binwidth = 1, dotsize = 0.8) + coord_flip() + annotate("segment", x = 13.5, xend = 13.5, y = 0, yend = 1) + scale_x_continuous(breaks = (0:8)*2) + theme(axis.title.x = element_blank(), axis.ticks.x = element_blank(), axis.text.x = element_blank())
-```
-
-- Is this strong evidence against the null?
-
-- Enough evidence to reject?
-
-  
----
-## Errors
-
-- Usual threshold is $\alpha = 0.05$    
-**What that actually means**: we are ok with making a type 1 error 5% of the time
-
-- We can choose something other than 5% $(\alpha = 0.05)$
-
-- What if $\alpha = .10$?
-  - 10% of the time we will reject a true null hypothesis (in the long run)
-
-- The only thing that changes in our procedure is that we're deciding the cutoff for rejecting; it might be something other than 5%.
-
-- Where do we draw the line?
-  - How small does $p$ have to be?
-  - Field dependent
-  - Consequences dependent: Would you want a lower p-value for 
-      - deciding whether someone should be executed,     
-      or for 
-      - deciding whether someone should get a sticker?
-  
----
 ## Types of Error
 
 **Type 1 Error** - reject the null hypothesis when $H_0$ is actually true
@@ -804,21 +755,69 @@ ggplot(tbl, aes(x = helper, fill = extreme)) + geom_dotplot(method="dotdensity",
 - i.e. UNL students use sunscreen that is over 30 spf, but we did not reject the null hypothesis of $\mu = 30$
 
 ---
+## Significance and Errors
+
+- How extreme is extreme enough to decide to reject $H_0$?
+  - Changes with the study: the consequences may be different for different types of errors (See slides 62-65)<br/><br/>
+  
+- In statistics, we control "extreme enough" with the value where we reject the null, aka. **significance level** or **alpha** ( $\alpha$ )
+  - **If the p-value < $\alpha$, reject $H_0$**
+
+- Changing $\alpha$ has consequences: 
+  - if we increase it (lowering the level of "extreme" necessary to reject), we might find evidence of an effect even though there is only chance. 
+  - if we decrease it (we need more evidence to reject), we might fail to reject an effect that is actually there
+  
+
+---
+## Example of the Significance Level
+- Helper toy example: Do more than half the babies pick the helper toy? 
+$$H_0: \pi = 0.5 \;\;\;\; H_A: \pi > 0.5$$
+
+- We can simulate 100 reps of 16 babies assuming the null:
+```{r, fig.width = 8, fig.height = 4}
+tbl <- tibble(helper = rbinom(100, 16, .5), extreme = helper >= 14)
+ggplot(tbl, aes(x = helper, fill = extreme)) + geom_dotplot(method="dotdensity", binwidth = 1, dotsize = 0.8)  + annotate("segment", x = 13.5, xend = 13.5, y = 0, yend = 1) + coord_flip() + scale_x_continuous(breaks = (0:8)*2) + theme(axis.title.x = element_blank(), axis.ticks.x = element_blank(), axis.text.x = element_blank())
+```
+
+- Is this strong evidence against the null?
+
+- Enough evidence to reject? Depends on $\alpha$
+
+  
+---
+## Errors
+
+- Usual threshold is $\alpha = 0.05$    
+**What that actually means**: we are ok with making a type 1 error 5% of the time
+
+- We can choose something other than 5% $(\alpha = 0.05)$
+
+- What if $\alpha = .10$?
+  - 10% of the time (in the long run) we will incorrectly reject the null hypothesis 
+
+- We're deciding the cutoff for rejecting; it might be something other than 5%.
+
+  
+---
 ## Reality
 - We never actually know whether we've made an error
 
-- We can control what we want to happen (depending on discipline)
+- We can control what we want to happen (depending on discipline). In other words, we can decide whether a type 1 or a type 2 error is worse. 
 
 - **Significance level** is the probability of Type 1 error
   - Smaller $\alpha$ = less likely to make a Type 1 error
   - Trade off: more likely to make a Type 2 error
 
+
+---
+## Statistical Power
+
 - **Power** is the probability of rejecting a false null hypothesis
   - We want to reject when the null is not true
   - We want our tests to be as powerful as possible
-
----
-## Reality
+  <br/> 
+  <br/> 
+  
   <table style="text-align:center;"> <tr><td></td><td></td><td  colspan=2>Reality</td></tr>
   <tr><td style="background-color:#FFFFFF;"></td><td style="background-color:#FFFFFF;"></td><td> $H_0$ is true </td><td> $H_A$ is true </td></tr>
   <tr><td rowspan=2>What we say</td><td> Fail to reject $H_0$ </td><td> Correct decision! </td><td> Missed opportunity<br/>(Type 2 error) </td></tr>
