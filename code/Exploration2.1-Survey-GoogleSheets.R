@@ -47,3 +47,10 @@ res_random <- purrr::map_df(1:125, function(i) {
   tmp <- sample(ga_words_df$word, size = 10)
   tibble(i = i, length = mean(nchar(tmp)), prop_e = mean(str_detect(tmp, "e")))
 })
+
+
+ggplot(res_random, aes(x = prop_e)) +
+  geom_dotplot(binwidth = 0.1, origin = 1, method = "histodot", dotsize = .1) +
+  ggtitle("Random sample - proportion of words containing 'e'") +
+  annotate("text", x = Inf, y = Inf, hjust = 1, vjust = 1, label = sprintf("Mean # e-words in full text: %.2f\nProportion of samples with mean # e-words > %.2f: %.2f",
+                                                                           mean(str_detect(ga_words, "e")), mean(str_detect(ga_words, "e")), mean(res_random$prop_e)))
