@@ -2,6 +2,7 @@ library(googlesheets4)
 library(tidyverse)
 q10 <- read_sheet("https://docs.google.com/spreadsheets/d/1_snzmHEUdApqIqm0AtOuJPJKqHeYcWDWu2fRQb-0ki8/", sheet = 1)
 
+windows()
 q10 %>%
   set_names(c("time", "avg_word_length")) %>%
   ggplot(aes(x = avg_word_length)) +
@@ -11,8 +12,14 @@ q10 %>%
                                                                              mean(q10$`What is the average word length in your sample?`), mean(q10$`What is the average word length in your sample?`>4.29)))
 
 
-q17 <- read_sheet("https://docs.google.com/spreadsheets/d/1_snzmHEUdApqIqm0AtOuJPJKqHeYcWDWu2fRQb-0ki8/", sheet = 2) %>% na.omit()
+<<<<<<< HEAD
 
+q17 <- read_sheet("https://docs.google.com/spreadsheets/d/1_snzmHEUdApqIqm0AtOuJPJKqHeYcWDWu2fRQb-0ki8/", sheet = 2)
+=======
+q17 <- read_sheet("https://docs.google.com/spreadsheets/d/1_snzmHEUdApqIqm0AtOuJPJKqHeYcWDWu2fRQb-0ki8/", sheet = 2) %>% na.omit()
+>>>>>>> ba4bef3439eaa6147c11991423e25b2a6f5a4576
+
+windows()
 q17 %>%
   # na.omit() %>%
   set_names(c("time", "avg_word_length")) %>%
