@@ -27,3 +27,7 @@ rmarkdown::render("index.Rmd") # Render exam-practice index
 
 setwd(here::here())
 rmarkdown::render("index.Rmd") # Render complete index
+
+# Clean up extra files
+file.remove(list.files(here::here("exams/"), "tmp-pdfcrop", full.names = T))
+file.remove(list.files(here::here("exam_practice/"), "tmp-pdfcrop", full.names = T))
