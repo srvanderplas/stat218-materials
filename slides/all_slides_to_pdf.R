@@ -1,4 +1,4 @@
-setwd("slides/")
+setwd(here::here("slides/"))
 html_files <- list.files(".", "html")
 
 html_files <- html_files[!grepl("index", html_files)]
