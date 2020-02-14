@@ -627,5 +627,35 @@ $$\begin{align}z &= \frac{\text{observed statistic} - \text{hypothesized value}}
 where $\displaystyle\hat p = \frac{\hat p_1 n_1 + \hat p_2 n_2}{n_1 + n_2}$
 
 ---
-## Standard Error of the Difference Between Two Proportions
+## Confidence Interval: Difference Between Two Proportions
+
+- With a z-test, we are working as if $H_0$ is true
+  - $\hat p_1 = \hat p_2$ means that we can pool proportions
+  - $\hat p$ simplifies the standard error calculation
+  
+- With a confidence interval:
+  - we're estimating the value
+  - We don't have a null hypothesis
+
+For a confidence interval for the difference of two proportions:
+$$SE = \sqrt{\frac{\hat p_1 (1-\hat p_1)}{n_1} + \frac{\hat p_2 (1 - \hat p_2)}{n_2}}$$
+
+
+---
+## Confidence Interval: Difference Between Two Proportions
+
+The general formula for a confidence interval is $$\text{sample statistic}\pm \text{multiplier}\times SE$$
+
+So for a difference of two proportions, the CI formula is: 
+$$(\hat p_1 - \hat p_2) \pm \text{multiplier}\times \sqrt{\frac{\hat p_1 (1-\hat p_1)}{n_1} + \frac{\hat p_2 (1 - \hat p_2)}{n_2}}$$
+
+We will use a multiplier of 2 in class - this corresponds to approximately a 95% confidence interval.
+
+
+---
+## Validity Conditions for theory-based approach
+
+- 10 observations in each of the four cells of the 2x2 table
+
+- Required for a theory-based test or for the interval for the difference in two proportions.
 
