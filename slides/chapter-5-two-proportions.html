@@ -1,0 +1,2030 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+  <head>
+    <title>Ch. 5: Comparing Two Proportions</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="" />
+    <link rel="stylesheet" href="css/default.css" type="text/css" />
+    <link rel="stylesheet" href="css/default-fonts.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# Ch. 5: Comparing Two Proportions
+
+---
+
+&lt;script type="text/x-mathjax-config"&gt;
+  MathJax.Hub.Config({ TeX: { extensions: ["color.js","AMSmath.js", "AMSsymbols.js"] }});
+&lt;/script&gt;
+
+
+
+# Navigation
+
+.pull-left[
+.large[By Date]
+
+- March 10: [start](#3) - [end](#13)
+- March 12: [start](#14) - [end](#30)
+- March 17: [start](#31) - [end](#48)
+
+]
+.pull-right[
+.large[By Section]
+- 5.1: [start](#3) - [end](#14)
+- 5.2: [start](#15) - [end](#35)
+- 5.3: [start](#36) - [end](#48)
+]
+
+---
+class:inverse,middle,center
+# 5.1: Comparing Two Groups
+
+---
+## Summarizing Two Categorical Variables
+
+Quentin Tarantino's films are world-famous. A dedicated 538.com reporter watched all of the films, recording the incidence of curse words and deaths in each movie (along with the time of the occurrence, and the word) ([data](https://raw.githubusercontent.com/fivethirtyeight/data/master/tarantino/tarantino.csv)). 
+
+You would like to know if the frequency of curse words relative to deaths is the same between *Kill Bill: Volume 1* and *Kill Bill: Volume 2*. 
+
+&lt;table&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:left;"&gt;   &lt;/th&gt;
+   &lt;th style="text-align:left;"&gt; Movie &lt;/th&gt;
+   &lt;th style="text-align:left;"&gt; Type &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; Time &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 1 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Kill Bill: Vol. 2 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; word &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1.18 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 2 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Kill Bill: Vol. 2 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; word &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 4.83 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 3 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Kill Bill: Vol. 1 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; word &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 7.12 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 4 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Kill Bill: Vol. 1 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; word &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 8.10 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 5 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Kill Bill: Vol. 1 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; word &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 8.12 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 6 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Kill Bill: Vol. 2 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; word &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 9.02 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 7 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Kill Bill: Vol. 2 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; word &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 9.62 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 8 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Kill Bill: Vol. 1 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; word &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 10.45 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 9 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Kill Bill: Vol. 1 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; word &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 10.50 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 10 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Kill Bill: Vol. 1 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; word &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 10.95 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 11 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Kill Bill: Vol. 1 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; word &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 10.98 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 12 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Kill Bill: Vol. 2 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; word &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 11.38 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 13 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Kill Bill: Vol. 1 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; word &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 11.87 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 14 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Kill Bill: Vol. 1 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; word &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 12.17 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 15 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Kill Bill: Vol. 1 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; word &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 12.17 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 16 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Kill Bill: Vol. 1 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; word &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 12.48 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 17 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Kill Bill: Vol. 2 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; word &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 12.82 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 18 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Kill Bill: Vol. 1 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; word &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 13.07 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 19 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Kill Bill: Vol. 1 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; word &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 13.08 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 20 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Kill Bill: Vol. 1 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; word &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 13.13 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 21 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Kill Bill: Vol. 1 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; word &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 13.18 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 22 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Kill Bill: Vol. 1 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; word &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 13.18 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 23 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Kill Bill: Vol. 1 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; word &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 13.28 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 24 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Kill Bill: Vol. 1 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; word &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 13.42 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 25 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Kill Bill: Vol. 1 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; death &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 13.53 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 26 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Kill Bill: Vol. 2 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; death &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 14.38 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 27 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Kill Bill: Vol. 2 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; death &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 14.38 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 28 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Kill Bill: Vol. 2 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; death &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 14.38 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 29 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Kill Bill: Vol. 2 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; death &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 14.38 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 30 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Kill Bill: Vol. 2 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; death &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 14.38 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 31 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Kill Bill: Vol. 2 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; death &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 14.38 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 32 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Kill Bill: Vol. 2 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; death &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 14.38 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 33 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Kill Bill: Vol. 2 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; death &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 14.38 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 34 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Kill Bill: Vol. 2 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; death &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 14.38 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 35 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Kill Bill: Vol. 2 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; word &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 15.53 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 36 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Kill Bill: Vol. 1 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; word &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 17.20 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 37 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Kill Bill: Vol. 2 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; word &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 17.33 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 38 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Kill Bill: Vol. 1 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; word &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 17.58 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 39 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Kill Bill: Vol. 1 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; word &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 18.02 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 40 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Kill Bill: Vol. 1 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; word &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 18.07 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 41 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Kill Bill: Vol. 2 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; word &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 18.70 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 42 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Kill Bill: Vol. 2 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; word &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 18.72 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 43 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Kill Bill: Vol. 1 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; word &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 19.32 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 44 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Kill Bill: Vol. 2 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; word &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 19.37 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 45 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Kill Bill: Vol. 1 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; word &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 19.73 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 46 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Kill Bill: Vol. 2 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; word &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 20.17 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 47 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Kill Bill: Vol. 2 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; word &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 20.30 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 48 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Kill Bill: Vol. 2 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; word &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 20.57 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 49 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Kill Bill: Vol. 2 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; word &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 20.98 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 50 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Kill Bill: Vol. 2 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; word &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 21.37 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 51 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Kill Bill: Vol. 2 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; word &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 21.42 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 52 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Kill Bill: Vol. 2 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; word &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 21.52 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 53 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Kill Bill: Vol. 2 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; word &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 21.80 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 54 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Kill Bill: Vol. 2 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; word &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 22.50 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 55 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Kill Bill: Vol. 1 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; word &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 22.93 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 56 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Kill Bill: Vol. 1 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; word &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 23.40 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 57 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Kill Bill: Vol. 1 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; word &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 23.45 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 58 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Kill Bill: Vol. 1 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; word &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 25.02 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 59 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Kill Bill: Vol. 1 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; word &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 25.12 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 60 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Kill Bill: Vol. 2 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; word &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 26.62 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 61 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Kill Bill: Vol. 2 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; word &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 27.03 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 62 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Kill Bill: Vol. 1 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; word &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 28.03 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 63 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Kill Bill: Vol. 1 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; word &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 28.43 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 64 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Kill Bill: Vol. 1 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; word &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 28.88 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 65 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Kill Bill: Vol. 2 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; word &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 28.93 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 66 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Kill Bill: Vol. 1 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; word &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 29.37 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 67 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Kill Bill: Vol. 1 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; death &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 29.75 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 68 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Kill Bill: Vol. 2 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; word &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 29.92 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 69 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Kill Bill: Vol. 2 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; word &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 30.47 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 70 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Kill Bill: Vol. 1 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; word &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 31.07 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 71 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Kill Bill: Vol. 1 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; word &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 31.32 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 72 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Kill Bill: Vol. 1 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; word &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 31.42 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 73 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Kill Bill: Vol. 1 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; word &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 31.60 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 74 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Kill Bill: Vol. 1 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; death &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 31.68 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 75 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Kill Bill: Vol. 1 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; word &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 32.12 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 76 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Kill Bill: Vol. 1 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; word &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 32.15 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 77 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Kill Bill: Vol. 2 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; word &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 33.02 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 78 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Kill Bill: Vol. 2 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; word &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 33.15 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 79 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Kill Bill: Vol. 2 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; word &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 33.23 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 80 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Kill Bill: Vol. 2 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; word &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 34.60 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 81 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Kill Bill: Vol. 2 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; word &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 34.70 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 82 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Kill Bill: Vol. 2 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; word &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 34.77 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 83 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Kill Bill: Vol. 1 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; word &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 35.15 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 84 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Kill Bill: Vol. 1 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; word &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 35.22 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 85 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Kill Bill: Vol. 1 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; death &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 37.65 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 86 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Kill Bill: Vol. 1 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; death &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 39.57 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 87 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Kill Bill: Vol. 1 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; death &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 41.03 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 88 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Kill Bill: Vol. 1 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; death &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 42.57 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 89 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Kill Bill: Vol. 1 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; death &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 42.77 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 90 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Kill Bill: Vol. 1 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; death &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 43.48 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 91 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Kill Bill: Vol. 2 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; word &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 44.12 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 92 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Kill Bill: Vol. 2 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; word &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 44.65 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 93 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Kill Bill: Vol. 1 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; word &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 46.45 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 94 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Kill Bill: Vol. 1 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; word &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 46.47 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 95 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Kill Bill: Vol. 1 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; word &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 46.63 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 96 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Kill Bill: Vol. 2 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; word &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 47.13 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 97 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Kill Bill: Vol. 1 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; word &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 47.97 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 98 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Kill Bill: Vol. 1 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; word &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 48.03 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 99 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Kill Bill: Vol. 1 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; word &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 48.60 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 100 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Kill Bill: Vol. 2 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; word &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 49.20 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 101 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Kill Bill: Vol. 2 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; word &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 49.20 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 102 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Kill Bill: Vol. 2 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; word &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 50.93 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 103 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Kill Bill: Vol. 1 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; death &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 60.57 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 104 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Kill Bill: Vol. 1 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; word &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 62.33 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 105 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Kill Bill: Vol. 1 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; word &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 62.35 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 106 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Kill Bill: Vol. 1 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; word &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 62.87 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 107 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Kill Bill: Vol. 1 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; death &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 62.97 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 108 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Kill Bill: Vol. 1 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; word &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 64.20 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 109 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Kill Bill: Vol. 1 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; word &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 64.23 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 110 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Kill Bill: Vol. 1 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; word &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 64.32 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 111 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Kill Bill: Vol. 1 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; word &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 64.38 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 112 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Kill Bill: Vol. 2 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; word &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 65.67 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 113 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Kill Bill: Vol. 2 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; word &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 68.40 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 114 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Kill Bill: Vol. 2 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; word &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 72.45 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 115 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Kill Bill: Vol. 2 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; death &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 72.67 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 116 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Kill Bill: Vol. 1 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; word &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 73.48 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 117 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Kill Bill: Vol. 1 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; death &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 75.77 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 118 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Kill Bill: Vol. 1 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; death &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 76.02 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 119 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Kill Bill: Vol. 1 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; death &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 76.02 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 120 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Kill Bill: Vol. 1 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; death &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 76.02 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 121 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Kill Bill: Vol. 1 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; death &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 76.48 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 122 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Kill Bill: Vol. 1 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; death &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 77.02 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 123 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Kill Bill: Vol. 2 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; word &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 78.90 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 124 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Kill Bill: Vol. 2 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; word &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 79.88 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 125 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Kill Bill: Vol. 2 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; word &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 79.88 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 126 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Kill Bill: Vol. 2 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; word &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 79.93 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 127 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Kill Bill: Vol. 2 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; word &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 79.93 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 128 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Kill Bill: Vol. 2 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; word &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 80.28 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 129 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Kill Bill: Vol. 1 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; death &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 80.32 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 130 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Kill Bill: Vol. 2 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; word &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 80.63 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 131 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Kill Bill: Vol. 2 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; word &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 80.75 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 132 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Kill Bill: Vol. 1 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; death &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 82.95 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 133 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Kill Bill: Vol. 1 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; death &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 82.98 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 134 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Kill Bill: Vol. 1 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; death &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 83.00 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 135 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Kill Bill: Vol. 1 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; death &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 83.03 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 136 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Kill Bill: Vol. 1 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; death &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 83.05 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 137 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Kill Bill: Vol. 1 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; death &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 83.05 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 138 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Kill Bill: Vol. 1 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; death &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 83.05 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 139 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Kill Bill: Vol. 1 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; death &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 83.08 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 140 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Kill Bill: Vol. 1 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; death &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 83.12 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 141 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Kill Bill: Vol. 1 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; death &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 83.18 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 142 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Kill Bill: Vol. 1 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; death &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 83.38 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 143 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Kill Bill: Vol. 1 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; death &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 83.42 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 144 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Kill Bill: Vol. 1 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; death &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 83.48 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 145 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Kill Bill: Vol. 1 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; death &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 83.65 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 146 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Kill Bill: Vol. 1 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; death &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 83.72 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 147 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Kill Bill: Vol. 1 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; death &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 83.83 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 148 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Kill Bill: Vol. 1 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; death &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 83.88 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 149 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Kill Bill: Vol. 1 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; death &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 83.93 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 150 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Kill Bill: Vol. 1 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; death &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 84.05 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 151 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Kill Bill: Vol. 1 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; death &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 84.18 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 152 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Kill Bill: Vol. 1 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; death &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 84.23 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 153 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Kill Bill: Vol. 1 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; death &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 84.27 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 154 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Kill Bill: Vol. 1 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; death &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 84.58 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 155 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Kill Bill: Vol. 1 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; death &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 84.92 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 156 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Kill Bill: Vol. 1 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; death &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 84.92 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 157 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Kill Bill: Vol. 1 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; death &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 85.00 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 158 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Kill Bill: Vol. 1 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; death &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 85.08 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 159 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Kill Bill: Vol. 1 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; death &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 85.10 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 160 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Kill Bill: Vol. 1 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; death &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 85.20 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 161 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Kill Bill: Vol. 1 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; death &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 85.25 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 162 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Kill Bill: Vol. 1 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; death &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 85.25 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 163 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Kill Bill: Vol. 1 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; death &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 85.28 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 164 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Kill Bill: Vol. 2 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; word &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 85.35 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 165 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Kill Bill: Vol. 1 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; death &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 85.38 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 166 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Kill Bill: Vol. 2 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; word &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 85.40 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 167 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Kill Bill: Vol. 1 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; death &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 85.47 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 168 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Kill Bill: Vol. 1 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; death &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 85.98 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 169 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Kill Bill: Vol. 1 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; death &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 86.05 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 170 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Kill Bill: Vol. 1 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; death &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 86.15 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 171 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Kill Bill: Vol. 1 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; death &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 86.20 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 172 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Kill Bill: Vol. 1 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; death &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 86.27 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 173 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Kill Bill: Vol. 1 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; death &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 86.35 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 174 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Kill Bill: Vol. 1 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; death &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 86.40 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 175 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Kill Bill: Vol. 1 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; death &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 87.52 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 176 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Kill Bill: Vol. 1 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; death &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 87.63 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 177 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Kill Bill: Vol. 1 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; word &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 88.18 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 178 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Kill Bill: Vol. 1 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; death &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 88.95 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 179 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Kill Bill: Vol. 1 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; death &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 97.60 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 180 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Kill Bill: Vol. 1 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; word &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 100.10 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 181 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Kill Bill: Vol. 2 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; word &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 102.12 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 182 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Kill Bill: Vol. 2 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; word &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 103.23 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 183 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Kill Bill: Vol. 2 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; word &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 103.28 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 184 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Kill Bill: Vol. 2 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; word &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 104.63 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 185 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Kill Bill: Vol. 2 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; word &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 107.43 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 186 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Kill Bill: Vol. 2 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; word &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 110.23 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 187 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Kill Bill: Vol. 2 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; word &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 110.93 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 188 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Kill Bill: Vol. 2 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; word &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 110.97 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 189 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Kill Bill: Vol. 2 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; word &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 111.05 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 190 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Kill Bill: Vol. 2 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; word &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 111.58 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 191 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Kill Bill: Vol. 2 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; word &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 111.92 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 192 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Kill Bill: Vol. 2 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; word &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 112.52 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 193 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Kill Bill: Vol. 2 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; word &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 112.52 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 194 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Kill Bill: Vol. 2 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; word &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 116.28 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 195 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Kill Bill: Vol. 2 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; word &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 116.28 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 196 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Kill Bill: Vol. 2 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; word &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 116.57 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 197 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Kill Bill: Vol. 2 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; word &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 117.25 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 198 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Kill Bill: Vol. 2 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; word &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 117.35 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 199 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Kill Bill: Vol. 2 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; word &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 119.58 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 200 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Kill Bill: Vol. 2 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; death &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 121.12 &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+
+---
+## Summarizing Two Categorical Variables
+
+- What is the observational unit?    
+.hidden[.red[Each instance of an event (curse word or death) in a *Kill Bill* movie]]
+
+- Which columns do we need?    
+.hidden[.red[Movie and Type]]
+
+- How can we summarize this data?    
+.hidden[.red[For each movie, add up the total number of deaths and curse words]]
+
+
+---
+## Summarizing Two Categorical Variables
+
+
+- What is the observational unit?    
+.red[Each instance of an event (curse word or death) in a *Kill Bill* movie]
+
+- Which columns do we need?    
+.red[Movie and Type]
+
+- How can we summarize this data?    
+.red[For each movie, add up the total number of deaths and curse words]
+
+A **two-way table** (or *contingency table*) of counts can be used when we have 2 categorical variables
+
+&lt;table&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:left;"&gt; Movie &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; Death &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; Word &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; Total &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Kill Bill: Vol. 1 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 63 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 57 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 120 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Kill Bill: Vol. 2 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 11 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 69 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 80 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Total &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 74 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 126 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 200 &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+
+---
+## Summarizing Two Categorical Variables
+
+
+&lt;table&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:left;"&gt; Movie &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; Death &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; Word &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; Total &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Kill Bill: Vol. 1 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 63 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 57 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 120 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Kill Bill: Vol. 2 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 11 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 69 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 80 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Total &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 74 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 126 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 200 &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+- Do the counts differ? Does *Kill Bill: Vol 1* have a higher death:curse word ratio than Kill Bill: Vol 2?
+
+- Group sizes differ - 120 events in *Kill Bill: Vol 1*, 80 in *Kill Bill: Vol 2*
+
+--
+
+Solution: Use relative proportions
+
+---
+## Visualizing Categorical Variables
+.pull-left[
+&lt;img src="chapter-5-two-proportions_files/figure-html/unnamed-chunk-4-1.png" width="100%" style="display: block; margin: auto;" /&gt;
+]
+.pull-right[
+**segmented bar graphs** show the relative proportions of observational units in each category.
+
+These relative proportions are called **conditional proportions**
+
+- Of the events in *Kill Bill 1*, what proportion are deaths?
+
+- Of the events in *Kill Bill 2*, what proportion are curse words?
+
+.small[
+The mathematical notation for conditional proportions looks like this:
+
+P(death | Kill Bill 1) = 0.525
+
+Read it as "The probability of an event being a death given that the movie is *Kill Bill 1* is 0.525"
+]
+]
+
+---
+## Numerical Summaries of Contingency Tables
+
+The **relative risk** is the ratio of conditional proportions between two categories.
+
+.pull-left[
+&lt;table&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:left;"&gt; Movie &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; Death &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; Word &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; Total &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Kill Bill: Vol. 1 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 63 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 57 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 120 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Kill Bill: Vol. 2 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 11 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 69 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 80 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Total &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 74 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 126 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 200 &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+]
+.pull-right[
+In this case, we can calculate the relative risk of a death event in *Kill Bill 1* **relative to** the risk of a death event in *Kill Bill 2*
+
+`$$RR = \frac{\hat p_{KB1}}{\hat p_{KB2}} = \frac{63/120}{11/80} = 3.8182$$`
+
+Of observed events in the Kill Bill movies, we are 3.8182 times more likely to see a death in *Kill Bill 1* than we are in *Kill Bill 2*
+]
+
+---
+## Practice: Categorical variables
+
+The Titanic sank in 1912 after striking an iceberg, and did not have enough lifeboats on board for all passengers. The mantra of "Women and children first" is well known, but does it hold up under examination? Were women more likely to survive the Titanic disaster?
+
+&lt;table&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:left;"&gt; Sex &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; No &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; Yes &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; Total &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Female &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 126 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 344 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 470 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Male &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1364 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 367 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1731 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Total &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1490 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 711 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 2201 &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+- What are the observational units?
+
+- What are the two variables?
+
+- What variable is explanatory and what is the response?
+
+- Calculate the relative risk of dying on the titanic for men vs. women
+
+---
+## Exploration 5.1: Murderous Nurse?
+
+For  several  years  in  the  1990s,  Kristen  Gilbert  worked  as  a  nurse  in  the  intensive  care  unit  (ICU)  of  the  Veterans  Administration  Hospital  in  Northampton,  Massachusetts.  Over  the  course of her time there, other nurses came to suspect that she was killing patients by inject-ing  them  with  the  heart  stimulant  epinephrine.  Gilbert  was  eventually  arrested  and  charged  with these murders. 
+
+Part of the evidence presented against Gilbert at her murder trial was a statistical analysis of 1,641 eight-hour shifts during the time Gilbert worked in the ICU. For each of these shifts, researchers recorded two variables: whether or not Gilbert worked on the shift and whether or not at least one patient died during the shift.
+
+- What are the observational units? .red[Shifts]
+- Classify each variable as categorical or quantitative: 
+  - Whether or not Gilbert worked on the shift: .red[categorical]
+  - Whether or not at least one patient died during the shift: .red[categorical]
+- Which variable is the:
+  - Explanatory variable: .red[Whether or not Gilbert worked on the shift]
+  - Response variable: .red[Whether or not a patient died during the shfit]
+
+
+---
+## Exploration 5.1: Murderous Nurse?
+
+&amp;nbsp;    | working | not working | Total
+--- | ------- | ----------- | -------
+Death | 40 | 34 | 74 
+No Death | 217 | 1350 | 1567 
+Total | 257 | 1384 | 1641
+
+Using this data (from question 7), work through Exploration 5.1 in your groups
+
+---
+class:middle,center,inverse
+# 2.2: Comparing Two Proportions (Simulation-Based Approach)
+
+---
+## Example 5.2 - Swimming with Dolphins
+
+Is swimming with dolphins therapeutic for patients suffering from clinical depression?
+
+- 30 subjects (18-65) with mild to moderate depression
+- Randomly assigned to one of two treatment groups: 
+  - 1 hour of swimming and snorkeling each day
+  - 1 hour of swimming and snorkeling each day with dolphins
+- Evaluate depression at the end of two weeks:     
+(yes/no) did subjects experience a significant decline in depression
+
+***
+
+- Observational unit? .hidden[the patient]
+- Experiment or Observational study?    
+.hidden[Experiment - random assignment to treatment groups]
+- Variables:
+  - Explanatory: .hidden[treatment groups (dolphins/no dolphins)]
+  - Response: .hidden[depression status (substantial improvement/no substantial improvement)]
+  
+---
+## Example 5.2 - Swimming with Dolphins
+
+Is swimming with dolphins therapeutic for patients suffering from clinical depression?
+
+- 30 subjects (18-65) with mild to moderate depression
+- Randomly assigned to one of two treatment groups: 
+  - 1 hour of swimming and snorkeling each day
+  - 1 hour of swimming and snorkeling each day with dolphins
+- Evaluate depression at the end of two weeks:     
+(yes/no) did subjects experience a significant decline in depression
+
+***
+
+- Observational unit? .red[the patient]
+- Experiment or Observational study?     
+.red[Experiment - random assignment to treatment groups]
+- Variables:
+  - Explanatory: .red[treatment groups (dolphins/no dolphins)]
+  - Response: .red[depression status (substantial improvement/no substantial improvement)]
+
+---
+## Example 5.2 - Swimming with Dolphins
+
+- Null hypothesis (in words)    
+.hidden[Whether or not someone swims with dolphins has no association with whether or not someone shows substantial improvement]
+
+- Alt hypothesis (in words)    
+.hidden[Swimming with dolphins increases the probability of substantial improvement in depression symptoms (there is an association)]
+
+- In symbols:     
+.hidden[
+`$$\begin{align}H_0: \pi_{dolphins} - \pi_{control} &amp; = 0\\H_A: \pi_{dolphins} - \pi_{control} &amp; &gt; 0\end{align}$$`
+]
+
+- Parameter of interest (in words and symbols):    
+.hidden[The difference in the two probabilities ($\pi_{dolphins} - \pi_{control}$)]
+
+
+---
+## Example 5.2 - Swimming with Dolphins
+
+- Null hypothesis (in words)    
+.red[Whether or not someone swims with dolphins has no association with whether or not someone shows substantial improvement]
+
+- Alt hypothesis (in words)    
+.red[Swimming with dolphins increases the probability of substantial improvement in depression symptoms (there is an association)]
+
+- In symbols:    
+.red[
+`$$\begin{align}H_0: \pi_{dolphins} - \pi_{control} &amp; = 0\\H_A: \pi_{dolphins} - \pi_{control} &amp; &gt; 0\end{align}$$`
+]
+
+- Parameter of interest (in words and symbols):    
+.red[The difference in the two probabilities    
+`\(\pi_{dolphins} - \pi_{control}\)`
+]
+
+---
+## Example 5.2 - Swimming with Dolphins
+
+&amp;nbsp; | Dolphin therapy | Control group | Total
+------ | --------------- | ------------- | -----
+Substantial Improvement | 10 | 3 | 13 
+No Substantial Improvement | 5 | 12 | 17 
+Total | 15 | 15 | 30
+
+&lt;img src="chapter-5-two-proportions_files/figure-html/unnamed-chunk-7-1.png" width="80%" style="display: block; margin: auto;" /&gt;
+
+
+---
+## Example 5.2 - Swimming with Dolphins
+
+`$$\begin{align}\hat p_{dolphins} &amp;= 10/15 = 0.6667\\\hat p_{control} &amp;= 3/15 = 0.2\end{align}$$`
+- Statistic: `\(\hat p_{dolphins} - \hat p_{control} =\)`
+
+- Explanations for the difference?
+  - .hidden[Random chance alone]
+  - .hidden[Swimming with dolphins really helps depression]
+
+
+---
+## Example 5.2 - Swimming with Dolphins
+
+`$$\begin{align}\hat p_{dolphins} &amp;= 10/15 = 0.6667\\\hat p_{control} &amp;= 3/15 = 0.2\end{align}$$`
+- Statistic: `\(\hat p_{dolphins} - \hat p_{control} =\)` .red[0.4667]
+
+- Explanations for the difference?
+  - .red[Random chance alone (corresponds to 
+  `\(H_0\)`
+  )]
+  - .red[Swimming with dolphins really helps depression]
+  
+  
+- Simulation: 
+  - If `\(H_0\)` is true, dolphin therapy is no more effective than the control, and we would still have 13 improvers and 17 nonimprovers
+  - If we randomly assign outcome labels to explanatory variable groups and compute a simulation statistic `\(p^\ast_{dolphins} - p^\ast_{control}\)`...
+  
+  
+---
+## Example 5.2 - Swimming with Dolphins Simulation
+- Physical method: 
+  1. label index cards with "improve" (13 cards) and "not improve" (17 cards)
+  2. Shuffle
+  3. Count out 15 cards for the "dolphin therapy" group and 15 cards for the control group
+  4. Calculate proportions and subtract
+  5. Repeat N times
+  6. Count how many N are greater than or equal to `\(\hat p_{dolphins} - \hat p_{control}\)`
+
+---
+## Example 5.2 - Swimming with Dolphins Simulation
+- App:    
+  1. Other applets -&gt; Dolphin Study
+  2. Enter real data into the 2x2 table
+  3. Check "Show Shuffle Options"
+  4. Enter sample statistic under "Count Samples"
+  5. Click the "Count" button
+
+
+---
+## Example 5.2 - Swimming with Dolphins
+
+![App screenshot - Dolphin Study, data entry](figure/dolphin_app_screenshot_data_entry.png)
+
+---
+## Example 5.2 - Swimming with Dolphins
+![App screenshot - Dolphin study, Simulation options](figure/dolphin_app_screenshot_simulation.png)
+
+---
+## Example 5.2 - Swimming with Dolphins
+
+To recap:
+
+- Null Hypothesis:     
+.hidden[No difference in probability of substantial improvement]
+
+- One repetition:     
+.hidden[Random assignment of response outcomes to the two groups    
+Note: We always assign the **response outcome** to the **explanatory variable**]
+
+- Statistic:     
+.hidden[Difference in conditional proportions, 
+`\(p^\ast_{dolphin} - p^\ast_{control}\)`
+]
+
+
+- Strength of Evidence:    
+.hidden[Proportion of simulation samples with
+`\(p^\ast_{dolphin} - p^\ast_{control}\geq 0.4667\)`    
+`\(= 10/1000 = 0.0100\)` 
+]
+
+---
+## Example 5.2 - Swimming with Dolphins
+
+To recap:
+
+- Null Hypothesis:     
+.red[No difference in probability of substantial improvement]
+
+- One repetition: .red[Random assignment of response outcomes to the two groups    
+Note: We always assign the **response outcome** to the **explanatory variable**]
+
+- Statistic:     
+.red[Difference in conditional proportions, 
+`\(p^\ast_{dolphin} - p^\ast_{control}\)`
+]
+
+- Strength of Evidence:    
+.red[Proportion of simulation samples with 
+`\(p^\ast_{dolphin} - p^\ast_{control}\geq 0.4667\)`    
+`\(= 10/1000 = 0.0100\)` 
+]
+
+---
+## Example 5.2 - Swimming with Dolphins
+
+- Interpretation: 
+
+--
+
+.red[We have strong evidence against the null hypothesis that the difference in the proportion of individuals whose depression improved between the treatment and control groups is due to random chance alone. 
+
+We reject 
+`\(H_0\)` 
+(p = 0.0010) and conclude that there is evidence that swimming with dolphins increases the likelihood that individuals will have substantial improvement in their clinical depression.]
+
+---
+## Interpreting Tests for Difference of Proportions
+
+Generic version:
+
+We (reject/fail to reject) the null hypothesis that 
+
+the difference in the proportion of (response  variable) 
+
+between the (two levels of the explanatory variable)
+
+(is equal to/is greater than/is less than) (null hypothesis value) because (p = ...). 
+
+We conclude that (conclusion in the context of the problem). 
+
+
+---
+## Example 5.2 - Swimming with Dolphins - Confidence Intervals
+
+.pull-left[
+We can use the 2SD method to get confidence intervals for the difference in proportions
+
+`$$\begin{align}&amp; \hphantom{=} \hat p_{dolphin}-\hat p_{control} \pm 2\sigma \\&amp; = 0.467 \pm 2*0.183 \\&amp;=(0.101, 0.833)\end{align}$$`
+
+We are 95% confident that the difference in the percent of individuals whose depression improved after swimming with dolphins is between 10.1% and 83.3% higher than the percent of individuals whose depression improved and did not swim with dolphins. 
+
+].pull-right[
+![Graph from dolphin simulation, with simulation mean and standard deviation](figure/dolphin_app_simulation_graph.png)
+
+.small[You can work this in proportions and multiply by 100 to get a percent if that is easier for you to think about. The simulation SD will be for the proportion, so wait until the end of the calculation to multiply by 100.]
+]
+
+---
+## Example 5.2 - Swimming with Dolphins - Confidence Intervals
+
+.pull-left[
+We can use the 2SD method to get confidence intervals for the difference in proportions
+
+`$$\begin{align}&amp; \hphantom{=} \hat p_{dolphin}-\hat p_{control} \pm 2\sigma \\&amp; = 0.467 \pm 2*0.183 \\&amp;=(0.101, 0.833)\end{align}$$`
+
+
+We are 95% confident that the difference in the proportion of individuals whose depression improved after swimming with dolphins is between 0.101 and 0.833 higher than the proportion of individuals whose depression improved and did not swim with dolphins. 
+
+
+].pull-right[
+![Graph from dolphin simulation, with simulation mean and standard deviation](figure/dolphin_app_simulation_graph.png)]
+
+---
+## Confidence Intervals
+`$$\hat p_{1} - \hat p_2 \pm 2 * SD$$`
+
+- Does the interval contain zero? 
+    - If yes, there is no significant difference between the two groups
+    - If no, 
+        - Does the interval lie entirely above 0 (if `\(H_A\)` is greater than 0)?
+        - Does the interval lie entirely below 0 (if `\(H_A\)` is less than 0)?
+
+- If the interval does not contain your `\(H_0\)` value, then a hypothesis test would not be significant at the `\(\alpha =  0.05\)` level.
+
+---
+## Relative Risk
+
+We can also conduct significance tests for the relative risk:
+
+- Hypotheses: 
+  - Null: The relative risk of improvement in depression symptoms between those who swim with dolphins and those who do not is 1    
+  `$$\left\{\hat p_{dolphins} = \hat p_{control}\right\} \text{ implies } \left\{\frac{\hat p_{dolphins}}{\hat p_{control}} = 1\right\}$$`
+  
+  - Alt: The relative risk of improvement in depression symptoms between those who swim with dolphins and those who do not is greater than 1
+  `$$\left\{\hat p_{dolphins} &gt; \hat p_{control}\right\} \text{ implies } \left\{\frac{\hat p_{dolphins}}{\hat p_{control}} &gt; 1\right\}$$`
+
+---
+## Example 5.2: Relative Risk
+
+.left-column60[
+- Statistic: Observed relative risk = `\(\frac{0.6667}{0.2} = 3.333\)`
+
+- Simulate: Same strategy, but now compute `\(\frac{p^\ast_{dolphin}}{p^\ast_{control}}\)`
+
+- Strength of Evidence: p = 0.0010    
+.small[Note that the p-value is the same - this will always happen (with the same simulation).]
+
+- Conclusion:     
+We reject `\(H_0\)` and conclude that there is strong evidence that the relative risk of improvement in depression symptoms between those who swam with dolphins and those who do not is greater than 1. 
+
+].right-column40[
+![Relative Risk simulation](figure/dolphin_app_simulation_graph_relRisk.png)
+]
+
+---
+## Factors affecting Strength of Evidence
+
+- The larger the difference between `\(\hat p_1\)` and `\(\hat p_2\)`, the .underline[.hidden[stronger]] the evidence that the population proportions differ
+
+- The larger the sample size, the .underline[.hidden[stronger]] the evidence that the population proportions differ
+
+- The difference between the proportions is the .underline[.hidden[midpoint]] of the confidence interval
+
+- Larger sample sizes produce .underline[.hidden[narrower]] confidence intervals
+
+
+---
+## Factors affecting Strength of Evidence
+
+- The larger the difference between `\(\hat p_1\)` and `\(\hat p_2\)`, the .underline[.red[stronger]] the evidence that the population proportions differ
+
+- The larger the sample size, the .underline[.red[stronger]] the evidence that the population proportions differ
+
+- The difference between the proportions is the .underline[.red[midpoint]] of the confidence interval
+
+- Larger sample sizes produce .underline[.red[narrower]] confidence intervals
+
+
+
+---
+class:inverse,middle,center
+# 5.3: Comparing Two Proportions
+## Theory-Based Approach
+
+---
+## Normal Distributions
+
+.pull-left[
+As in Chapter 1, we often see symmetric, bell-shaped distributions for simulated differences between proportions
+
+For Theory-Based Inference, we need: 
+- Validity conditions (when can we use it)
+
+- Formula for the standard error of the statistic (under `\(H_0\)`)
+].pull-right[
+![Graph from dolphin simulation, with simulation mean and standard deviation](figure/dolphin_app_simulation_graph.png)
+]
+
+---
+## Z test for Difference Between Two Proportions
+
+`$$\begin{align}z &amp;= \frac{\text{observed statistic} - \text{hypothesized value}}{\text{standard error of statistic under }H_0} \\\\&amp;= \frac{(\hat p_1 - \hat p_2) - 0}{\text{standard error of }(\hat p_1 - \hat p_2)\text{ under }H_0}\end{align}$$`
+
+`\(H_0\)` is that `\(\pi_1 = \pi_2\)`, so let `$$\hat p = \frac{\hat p_1 n_1 + \hat p_2 n_2}{n_1 + n_2}$$` be the **combined proportion of success** (aka pooled proportion)
+
+---
+## Z test for Difference Between Two Proportions
+
+### What about the standard error?
+
+
+In the one-proportion case, our standard error was `\(\sqrt{\frac{\hat p (1-\hat p)}{n}}\)`
+
+With two proportions, we can pool our groups to get `\(\hat p = \frac{\hat p_1 n_1 + \hat p_2 n_2}{n_1 + n_2}\)`
+
+... but we also need a pooled sample size: `\(\frac{1}{\frac{1}{n_1} + \frac{1}{n_2}}\)`
+
+This is a formula that takes into account the difference in sample sizes between groups (smaller group = larger variance in `\(\hat p\)` for the group).
+
+`$$\text{Standard error of }\hat p = \sqrt{\frac{\hat p (1-\hat p)}{\frac{1}{\frac{1}{n_1} + \frac{1}{n_2}}}} = \sqrt{\hat p (1-\hat p)\left(\frac{1}{n_1} + \frac{1}{n_2}\right)}$$`
+
+---
+## Z test for Difference Between Two Proportions
+
+### CAUTION!
+
+The pooled `\(\hat p\)` is only used for the standard error calculation! Don't get it confused with `\(\hat p_1 - \hat p_2\)`!
+
+
+---
+## Z test for Difference Between Two Proportions
+
+`$$\begin{align}z &amp;= \frac{\text{observed statistic} - \text{hypothesized value}}{\text{standard error of statistic under }H_0} \\\\&amp;= \frac{(\hat p_1 - \hat p_2) - 0}{\text{standard error of }(\hat p_1 - \hat p_2)\text{ under }H_0}\\\\&amp;=\frac{(\hat p_1 - \hat p_2) - 0}{\sqrt{\hat p (1-\hat p)\left(\frac{1}{n_1} + \frac{1}{n_2}\right)}}\end{align}$$` 
+
+where `\(\displaystyle\hat p = \frac{\hat p_1 n_1 + \hat p_2 n_2}{n_1 + n_2}\)`
+
+---
+## Confidence Interval: Difference Between Two Proportions
+
+- With a z-test, we are working as if `\(H_0\)` is true
+  - `\(\hat p_1 = \hat p_2\)` means that we can pool proportions
+  - `\(\hat p\)` simplifies the standard error calculation
+  
+- With a confidence interval:
+  - we're estimating the value
+  - We don't have a null hypothesis
+
+For a confidence interval for the difference of two proportions:
+`$$SE = \sqrt{\frac{\hat p_1 (1-\hat p_1)}{n_1} + \frac{\hat p_2 (1 - \hat p_2)}{n_2}}$$`
+
+
+---
+## Confidence Interval: Difference Between Two Proportions
+
+The general formula for a confidence interval is `$$\text{sample statistic}\pm \text{multiplier}\times SE$$`
+
+So for a difference of two proportions, the CI formula is: 
+`$$(\hat p_1 - \hat p_2) \pm \text{multiplier}\times \sqrt{\frac{\hat p_1 (1-\hat p_1)}{n_1} + \frac{\hat p_2 (1 - \hat p_2)}{n_2}}$$`
+
+We will use a multiplier of 2 in class - this corresponds to approximately a 95% confidence interval.
+
+
+---
+## Validity Conditions for theory-based approach
+
+- 10 observations in each of the four cells of the 2x2 table
+
+- Required for a theory-based test or for the interval for the difference in two proportions.
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_HTMLorMML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
