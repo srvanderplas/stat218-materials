@@ -28,18 +28,18 @@ theme_set(theme_bw())
 .pull-left[
 .large[By Date]
 
-- February 18: [start](#3) - [end](#13)
-- February 20: [start](#14) - [end](#30)
-- February 25: [start](#31) - [end](#48)
-- February 27: [start](#49) - [end](#56)
+- February 18: [start](#3) - [end](#14)
+- February 20: [start](#15) - [end](#31)
+- February 25: [start](#32) - [end](#49)
+- February 27: [start](#50) - [end](#57)
 
 ]
 .pull-right[
 .large[By Section]
-- 3.1: [start](#3) - [end](#14)
-- 3.2: [start](#15) - [end](#35)
-- 3.3: [start](#36) - [end](#48)
-- 3.4: [start](#49) - [end](#56)
+- 3.1: [start](#3) - [end](#15)
+- 3.2: [start](#16) - [end](#36)
+- 3.3: [start](#37) - [end](#49)
+- 3.4: [start](#50) - [end](#57)
 ]
 
 ---
@@ -64,7 +64,22 @@ When we fail to reject our null hypothesis...
 Conclusion: Null hypothesis value is .underline[.hidden[plausible]]
 
 - We could do multiple two-sided tests to find which null hypothesis values are plausible and which are unlikely
+
 - This sets up an interval of values that could be our parameter rather than just a single estimate
+
+---
+## Confidence Intervals
+
+When we fail to reject our null hypothesis...    
+Conclusion: Null hypothesis value is .underline[.red[plausible]]
+
+- We could do multiple two-sided tests to find which null hypothesis values are plausible and which are unlikely
+
+- This sets up an interval of values that could be our parameter rather than just a single estimate
+
+.center[
+<img src="chapter-3-estimation_files/figure-html/unnamed-chunk-1.gif" alt="Preview animation of a confidence interval based on different hypothesis tests" width="70%"/>
+]
 
 ---
 ## Example 3.1 - Dogs Smell Cancer
@@ -123,7 +138,7 @@ show_p_test <- function(idx, ptest, sample_p = 32/33, sample_n = 33) {
   ps <- seq(.5, 1, .001)
   se <- sqrt((sample_p*(1 - sample_p))/sample_n)
   ptestres <- pnorm(32/33, ptest, se, lower.tail = F) * 2
-  ptestbin <- c("Reject", "Fail to Reject")[1 + as.numeric(ptestres > 0.05)]
+  ptestbin <- factor(c("Reject", "Fail to Reject")[1 + as.numeric(ptestres > 0.05)], levels = c("Reject", "Fail to Reject"))
   
   dlow <- ptest[idx] - abs(ptest[idx] - sample_p)
   dhigh <- ptest[idx] + abs(ptest[idx] - sample_p)
@@ -131,10 +146,12 @@ show_p_test <- function(idx, ptest, sample_p = 32/33, sample_n = 33) {
   plot <- ggplot() + geom_line(aes(x = ps, y = dnorm(ps, mean = ptest[idx], sd = se))) +
     geom_area(aes(x = ps[ps <= dlow], y = dnorm(ps[ps <= dlow], mean = ptest[idx], sd = se)), fill = "grey") + 
     geom_area(aes(x = ps[ps >= dhigh], y = dnorm(ps[ps >= dhigh], mean = ptest[idx], sd = se)), fill = "grey") + 
+    geom_vline(aes(xintercept = ptest[idx], color = factor("Pi (null)", levels = c("Fail to Reject", "Reject", "Sample p", "Pi (null)")))) +
     geom_vline(aes(xintercept = sample_p, color = "Sample p")) +
     geom_point(aes(x = ptest[1:idx], y = -.1, color = ptestbin[1:idx]), size = 2) + 
-    scale_colour_manual("Decision", values = c("Sample p" = "red", "Reject" = "orange", "Fail to Reject" = "blue"), na.val = "grey", drop = F) + 
-    scale_y_continuous("Density") + scale_x_continuous("Proportion")
+    scale_colour_manual("Decision", values = c("Sample p" = "red", "Reject" = "orange", "Fail to Reject" = "blue", "Pi (null)" = "grey60"), na.val = "grey", drop = F) + 
+    scale_y_continuous("Density") + scale_x_continuous("Proportion") + 
+    guides(color = guide_legend(override.aes= list(linetype = c(0, 0, 1, 1), shape = c(16, 16, NA, NA))))
   print(plot)
 }
 ptest <- seq(.8, 1, .015)
