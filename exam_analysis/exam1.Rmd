@@ -1,0 +1,85 @@
+---
+title: "Exam 1 Overview"
+output: html_document
+---
+
+```{r setup, include=FALSE, message = F}
+knitr::opts_chunk$set(echo = F, dpi = 300, message = F, warning = F, error = F)
+library(tidyverse)
+
+grades <- read_csv("../grades/2020-02-15T1703_Grades-STAT-218-150.1201.csv")[-1,] %>%
+  mutate_at(vars(-c(1:5)), as.numeric)
+
+cutoffs <- tibble(grade = LETTERS[c(1:4, 6)], min = c(.9, .8, .7, .6, -Inf), max = c(1, .9, .8, .7, .6), col =  rainbow(5)) %>%
+  mutate(mid = .5*(min + max), mid = ifelse(is.infinite(mid), .55, mid))
+max_score <- 66
+```
+
+
+The Exam 1 scores are distributed as follows:
+
+```{r}
+ggplot() + 
+  geom_rect(data = cutoffs, aes(xmin = min*max_score, xmax = max*max_score, ymin = 0, ymax = Inf, fill = col), alpha = .2) +
+  scale_fill_identity() + 
+  geom_histogram(data = grades, aes(x = `Exam 1 Unposted Current Score`), binwidth = 2, 
+                 fill = "white", color = "black", boundary = floor(min(grades$`Exam 1 Unposted Current Score`, na.rm = T)/2)*2, inherit.aes = F) + 
+  geom_text(data = cutoffs, aes(x = mid*max_score, y = 16, label = grade))+
+  scale_x_continuous("Exam 1 Score") + ylab("# Students")
+```
+
+
+After grading the tests, I noticed the common issues discussed below. As the material in this course is cumulative, and the next chapter is going to build on this chapter, please talk to Kevin or Dr. Vanderplas if you have questions about these topics.
+
+- A question ends with the proper punctuation - ?
+
+- Categorical variables vs. Quantitative variables
+  - If you have a quantitative variable, 
+      - that variable could be positive, negative, bigger than 1... it is only constrained by the problem description.
+      - you should not be using "proportion" in the description of the parameter, the variable of interest, the research question, ... use "average value" instead. 
+      - your hypotheses should use the variable $\mu$ (not $\hat p$, $\pi$, $\overline x$)
+      - you should end up with a t-value for your standardized statistic
+      - you get the standard deviation of the sample mean using $s/\sqrt{n}$ (because you can't simulate) - $s$ will be given to you in one way or another
+  - If you have a categorical variable, 
+      - you should be using "proportion" and not "value"
+      - your sample proportion should be between 0 and 1
+      - your hypotheses should use the variable $\pi$ (not $\hat p$, $\mu$, $\overline x$)
+      - you should end up with a z-value for your standardized statistic
+      - you get the standard deviation of the sample proportion using either of the following:
+          - $\sqrt\frac{p(1-p)}{n}$
+          - Simulation standard deviation
+
+- A statistical conclusion requires the following elements
+  1. Strength of evidence description (weak or no evidence, moderate evidence, strong evidence, very strong evidence) that references the relevant calculation (p-value, standardized statistic)
+  2. Reject or fail-to-reject $H_0$
+  3. Practical meaning/practical conclusion describing $H_A$ (if you reject) or stating that it is plausible that [$H_0$ in words]
+  
+- Distribution shape:
+  - Left vs. Right skew - the long tail points in which direction? If right, then it's right skewed. The median will be on the other side of the mean from the tail.
+  - Severe skew is more extreme than most things we've seen thus far... only the top row in the picture below is even possibly an issue
+  
+```{r severe-skew}
+N <- 150
+bind_rows(
+tibble(type = rep("Extreme skew", N), direction = "right", x = scale(rgamma(N, 2, 2), center = T)),
+tibble(type = rep("Extreme skew", N), direction = "left", x = scale(rbeta(N, 5, 1)), center = T), 
+tibble(type = rep("Skew", N), direction = "right", x = scale(rgamma(N, 4, 2), center = T)),
+tibble(type = rep("Skew", N), direction = "left", x = scale(rbeta(N, 5, 2)), center = T), 
+tibble(type = rep("Mild skew", N), direction = "right", x = scale(rgamma(N, 10, 2)), center = T),
+tibble(type = rep("Mild skew", N), direction = "left", x = scale(rbeta(N, 3, 2), center = T))
+) %>%
+  mutate(type = factor(type, levels = c("Extreme skew", "Skew", "Mild skew"), ordered = T)) %>%
+  ggplot(aes(x = x)) + 
+  geom_histogram() + 
+  facet_grid(type~direction)
+```
+
+- Validity conditions
+  - Categorical variable w/ sample proportion
+    - 10 successes and 10 failures **under** $H_0$ - so $\pi*n\geq 10$ and $(1-\pi)*n \geq 10$, where $n$ is the sample size
+  - Quantitative variable w/ sample mean: 2 options for validity conditions
+    1. Symmetric distribution (any # observations)
+    2. $\geq 20$ observations + distribution not highly skewed
+      - Highly skewed = looks like a right triangle 
+
+It is important to keep track of what type of variable you're working with!
