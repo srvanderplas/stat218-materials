@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Ch. 4: Causation: Can We Say What Caused the Effect?</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="" />
+    <link rel="stylesheet" href="css\default.css" type="text/css" />
+    <link rel="stylesheet" href="css\default-fonts.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# Ch. 4: Causation: Can We Say What Caused the Effect?
+
+---
+
+&lt;script type="text/x-mathjax-config"&gt;
+  MathJax.Hub.Config({ TeX: { extensions: ["color.js"] }});
+&lt;/script&gt;
+
+
+
+# Navigation
+
+.pull-left[
+.large[By Date]
+
+- March 3rd: [start](#3) - [end](#10)
+- March 5th: [start](#11) - [end](#19)
+
+]
+.pull-right[
+.large[By Section]
+- 4.1: [start](#3) - [end](#10)
+- 4.2: [start](#11) - [end](#19)
+]
+
+---
+class:inverse,middle,center
+# 4.1: Association and Confounding
+
+
+---
+
+## Introduction: Association vs. Causation
+
+- Association (correlation): Two variables are associated, or related, if the value of one variable gives you information about the value of the other variable.
+
+  - When comparing groups, this means that the proportions or means take on different values in the different groups.
+  
+  - Or as one variable decreases, the other variable may decrease too. We'll see other examples in chapter 10. 
+
+---
+
+## We Record Two Variables Now  
+- Explanatory Variable(s): variable(s) that may explain the change in the variable of interest.
+  - Called the independent variable. 
+
+- Response Variable(s): variable(s) of interest we measure  on observational units.
+
+  - Called the dependent variable. 
+
+  - Chapter 1 and 2, we did hypothesis tests about the response variable. In chapter 3, we estimated the response variable. 
+   
+- We hope that changes in the explanatory variable will affect the response variable =&gt; **cause-and-effect** relationship
+
+ - **End goal** = find cause-and-effect relationships
+ 
+---
+
+## Association vs. Causation
+
+- Often in scientific studies, we see associations.
+
+- Association, alone, is not enough to prove cause-and-effect relationships exist. 
+
+.center[
+&lt;img src="chapter-4-causation_files/margerine.png" alt="Spurrious correlation between margerine consumption and divorce rates" width="100%"/&gt;
+]
+
+---
+
+## Try to Explain This Association
+
+- For example, try to explain to your group how this association could be a cause-and-effect relationship. 
+
+.center[
+&lt;img src="chapter-4-causation_files/iceCreamShark.png" alt="Spurrious correlation between ice cream sales and shark attacks" width="70%"/&gt;
+]
+
+
+.center[
+&lt;img src="chapter-4-causation_files/iceCreamShark2.jpg" alt="Spurrious correlation between ice cream sales and shark attacks" width="60%"/&gt;
+]
+
+
+---
+
+## Why Can't Associations Determine Cause-And-Effect?
+
+- Confounding Variable(s) affect both the explanatory and response variables enough to make cause-and-effect impossible to determine.
+
+  - These are other variables that you may not know about, or aren't measured in your study. 
+  - What are possible confounding variables in the association between ice cream sales and shark attacks? 
+.center[
+&lt;img src="chapter-4-causation_files/confounding.png" alt="confounding variable affects both explanatory and response" width="80%"/&gt;
+]
+  
+---
+
+## Another Example
+
+- Phil Sokolof, an Omaha native, caused McDonalds to change their french fries. http://revisionisthistory.com/episodes/19-mcdonalds-broke-my-heart
+
+
+.pull-left[
+&lt;img src="chapter-4-causation_files/philSokolof.jpg" alt="Phil Sokolof" width="95%"/&gt;
+]
+
+.pull-right[
+&lt;img src="chapter-4-causation_files/frenchFries.jpg" alt="man eating McDonald's french fries" width="95%"/&gt;
+]
+
+---
+
+## Possible Confounding Variables Phil Could Have Considered
+
+
+---
+class:inverse,middle,center
+# 4.2: Observational Studies Vs. Experiments
+
+
+---
+
+## Observational Study
+
+- The values of the explanatory variable are simply observed. Researchers cannot change or assign them to observational units. Examples are: 
+
+  - Does your child sleep with a night light? 
+  - Which NBA team does a player play for? 
+  - Which country were you born in? 
+  - An animal's gender
+  - Number of social media profiles
+  - Amount of video games a person owns
+  - Commute to work in minutes
+
+---
+
+## Experiment
+
+- Researchers can assign the values of the explanatory variable to observational units. 
+
+  - In experiments, we can say observational units are called experimental units
+  
+- Examples:
+
+  - Treatment vs. Control (do nothing or give a placebo)
+  - Did you use the internet to play a game or pencil and paper?
+  - Amount of days a plant doesn't have any water
+  
+---
+
+## Setting Up a Good Experiment
+
+- We want to avoid two things:
+
+  - **Sampling Bias **
+  - **Confounding Variables**
+  
+We use two strategies in STAT 218
+
+- Simple Random Sampling
+
+
+- Random Assignment: Use a random/chance device to assign values of the explanatory variable to experimental units
+    - Randomly assign groups (categorical explanatory variable)
+    - Randomly assign a measurement (quantitative explanatory variable)
+    
+---
+## Random Sampling and Random Assignment
+
+- You can use neither, one of them, or both to do your experiment. 
+
+.center[
+&lt;img src="chapter-4-causation_files/samplingAssignment.png" alt="Random Sampling vs. Random Assignment" width="100%"/&gt;
+]
+
+    
+---
+
+## Example and Benefits
+
+- I need some random students from the class...
+
+- I will randomly assign them a group
+
+- Benefits:
+  - Random sampling gets rid of sampling bias. We can **generalize our conclusions** to the whole population.
+  - Random assignment removes the effect of confounding variables. We can determine **cause-and-effect** if we have enough evidence to reject `\(H_0\)`. 
+  
+---
+
+## Types of Experiments
+
+- No random assignment
+
+  - quasi-experiment
+  
+- Random assignment
+
+  - randomized experiment
+
+- Random assignment and neither the researcher or experimental unit know what group or measurement they have
+
+  - double-blind experiment
+  
+---
+
+## Answer These Questions with your Group
+Suppose you want to measure the average daily weight gain of steers. You assigned each steer dry-rolled corn or wet (fermented) corn. Then, you measured their average daily weight gain. You gathered a sample of 60 steers. 
+
+- What is the explanatory variable?
+
+- What is the response variable? 
+
+- How could you gather a random sample of steers? 
+
+- How would you do random assignment in this study?
+
+- Can you identify a confounding variable? 
+
+---
+
+## Exploration 4.2
+
+- Do questions 1 through 11 with your group
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_HTMLorMML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
