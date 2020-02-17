@@ -22,18 +22,14 @@ theme_set(theme_bw())
 
 ```{r fix-latex, results='asis'}
 if (params$key) {
-  cat("\\newcommand{\\answer}[1]{%")
-  cat("{\\color{red} \\emph{#1} }")
-  cat("}")
+  cat("\\newcommand{\\answer}[1]{{\\color{red}\\emph{#1}}}")
   cat("\\providecommand{\\tightlist}{\\setlength{\\itemsep}{1em}\\setlength{\\parskip}{0pt}}")
   cat("\\lhead{Name: \\color{red}{KEY}}")
   cat("\\fancypagestyle{firststyle}")
   cat("{\\lhead{Name:\\color{red}{KEY}}}")
 } else {
   # cat("\\newcommand{\\answer}[1]{{\\color{white}#1}}") 
-  cat("\\newcommand{\\answer}[1]{%")
-  cat("{\\leavevmode\\protect\\phantom{#1} }")
-  cat("}")
+  cat("\\newcommand{\\answer}[1]{{\\leavevmode\\protect\\phantom{#1}}}")
   cat("\\providecommand{\\tightlist}{\\setlength{\\itemsep}{1em}\\setlength{\\parskip}{0pt}}")
 }
 
