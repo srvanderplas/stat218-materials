@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="" xml:lang="">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
   <head>
     <title>Ch. 3: Estimation: How Large Is the Effect?</title>
     <meta charset="utf-8" />
@@ -729,6 +729,184 @@ What does it mean to be 95% or 99% confident?
 - We expect 95 of the 100 intervals will contain the true parameter
 
 - This does **NOT** mean the probability that the true parameter is in the confidence interval is 0.95.
+
+
+---
+class:center,middle,inverse
+# 3.5: Cautions When Conducting Inference
+
+---
+## The "Bradley Effect"
+
+- Discrepancies between polling numbers and election outcomes
+
+Hypothesized to be caused by "social desirability bias" - people answering poll questions in the way they thought the interviewer would want them to answer (e.g. politically correct)
+
+- Originally showed Tom Bradley was likely to win an election against George Deukmejian in the 1982 LA mayoral election
+  - Bradley is black, Deukmejian is white
+
+- Believed to be a factor in:
+  - polling between H. Clinton/Obama in 2008 primary elections
+    - in both directions - gender-based and race-based
+    - may have cancelled each other out or affected different states
+  - polling between H. Clinton and Trump in 2016
+
+
+---
+## The "Bradley Effect"
+
+New Hampshire polling in the 2008 Democratic primary: 778 likely voters, and only days before the primary, 319/778 (41%) said they were voting for Obama, compared to 218/778 (28%) who said they would vote for Clinton.
+
+Polling methodology:
+
+- Poll used random digit dialing
+
+- People who answered the phone were asked if they were likely to vote in the upcoming primary 
+
+- Only 9% of people contacted participated in the survey
+
+---
+## The "Bradley Effect"
+
+New Hampshire polling in the 2008 Democratic primary: 778 likely voters, and only days before the primary, 319/778 (41%) said they were voting for Obama, compared to 218/778 (28%) who said they would vote for Clinton.
+
+Assumptions:
+
+1. Random digit dialing is a reasonable way to get ahold of voters
+
+2. Self-identified likely voters are representative of the population of people who vote in the primary
+
+3. The 9% who participate in the poll are similar to the 91% who don't participate
+
+4. Respondents' answers match their voting behavior
+
+---
+## Testing for the "Bradley Effect"
+
+What is our research question?
+
+--
+
+.red[Does the proportion of people who say they will vote for Obama in the poll differ from the proportion of people who actually voted for Obama in the primary?]
+
+
+---
+## Testing for the "Bradley Effect"
+
+What is our parameter of interest?
+--
+
+
+`\(\pi\)` .red[is the probability voters will claim they are voting for Obama in the poll]
+
+What is our parameter value under `\(H_0\)`?
+
+--
+.red[
+`\(0.3645\)`, the proportion of people who voted for Obama in the primary
+]
+
+
+---
+## Testing for the "Bradley Effect"
+What are the null and alternative hypotheses (in symbols and in words)?
+
+`\(\begin{align}H_0: &amp;\\\\H_A:\end{align}\)`
+
+---
+## Testing for the "Bradley Effect"
+What are the null and alternative hypotheses (in symbols and in words)?
+.red[
+`\(\begin{align}H_0: \pi = 0.3645 &amp;\\\\H_A:\pi &gt; 0.3645\end{align}\)`
+]
+
+.red[The null hypothesis is that the proportion of voters who claim they will vote for Obama in the poll is 0.3645, the same as the proportion who voted for him in the primary]
+
+.red[The alternative hypothesis is that the proportion of voters who claim they will vote for Obama in the poll is greater than 0.3645; that is, that there is some effect which makes individuals who answer the poll more likely to say they will vote for Obama compared to their actual behavior]
+
+
+---
+## Testing for the "Bradley Effect"
+
+What is our `\(n\)`?
+--
+
+.red[
+`\(n = 778\)` , the number of people in the poll
+]
+
+What is our sample Statistic?
+--
+.red[
+`$$\hat p = 319/778 = 0.41,$$` 
+the proportion of people who indicated in the poll that they would vote for Obama
+]
+
+---
+## Testing for the "Bradley Effect"
+
+Conduct a Simulation:
+&lt;img src="chapter-3-estimation_files/figure-html/unnamed-chunk-2-1.png" width="80%" style="display: block; margin: auto;" /&gt;
+
+Our p-value is `\(P(p^\ast \geq \hat p) = P(p^\ast \geq 0.41) = 0.004\)`
+
+---
+## Testing for the "Bradley Effect"
+
+Strength of Evidence:
+
+*Evaluate the results of your simulation* 
+
+.red[
+It is unlikely that the proportion of people who claim they will vote for Obama in the poll would be 0.41 if the true proportion of people voting for Obama in the poll is 0.3645 ( `\(p=0.004\)` ). 
+]
+
+--
+
+*Evaluate the strength of your evidence*
+
+.red[
+This provides strong evidence against our null hypothesis that `\(\pi = 0.3645\)`
+]
+
+--
+
+*Make a conclusion*
+.red[
+We reject `\(H_0\)` and conclude that the proportion of people who claim they will vote for Obama in the poll is higher than 0.3645.
+]
+
+--
+
+Why?
+
+---
+## Testing for the "Bradley Effect"
+
+Assumptions:
+
+1. Random digit dialing is a reasonable way to get ahold of voters    
+.red[Random digit dialing is effectively a simple random sample of residents who have a landline or cell phone (slightly overrepresenting people who have more than one phone line).]
+
+--
+
+2. Self-identified likely voters are representative of the population of people who vote in the primary    
+.red[People are well-intentioned and may plan to vote, but may not actually make it to the polls. If these people are more likely to vote for one candidate over the other, this could bias results.]
+---
+## Testing for the "Bradley Effect"
+
+Assumptions:
+1. Random digit dialing is a reasonable way to get ahold of voters    
+
+2. Self-identified likely voters are representative of the population of people who vote in the primary    
+
+3. The 9% who participate in the poll are similar to the 91% who don't participate    
+.red[The **response rate** of a poll is the proportion of those asked who participate. Response rates are generally low for phone polls. Many other phone polls around the same time didn't show evidence of this bias, but that is no guarantee that this time the 9% who responded were actually a representative sample. Sometimes, you just get a [bad random sample](https://www.nytimes.com/2016/10/13/upshot/how-one-19-year-old-illinois-man-is-distorting-national-polling-averages.html).]
+
+--
+
+4. Respondents' answers match their voting behavior
+.red[People may change their minds between the poll and the election, or they may intentionally try to throw off the poll. If enough people do this in the same direction, the poll results may be off.]
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
