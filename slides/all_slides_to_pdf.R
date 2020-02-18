@@ -2,6 +2,7 @@ setwd(here::here("slides/"))
 html_files <- list.files(".", "html")
 
 html_files <- html_files[!grepl("index", html_files)]
+html_files <- html_files[!grepl("chapter-[12]", html_files)]
 
 html_to_pdf <- function(x) {
   xpdf <- stringr::str_replace(x, "html", "pdf")
