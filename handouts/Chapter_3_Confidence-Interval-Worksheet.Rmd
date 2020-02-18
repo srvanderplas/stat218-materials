@@ -1,0 +1,76 @@
+---
+title: "Chapter 3 Scenarios"
+output: 
+  # word_document:
+  #   reference_docx: word_template_reference.docx
+  pdf_document:
+    template: template.tex
+    # keep_tex: true
+geometry: margin=1in,headsep=.2in
+---
+
+
+# Asparagus grows up to 10" in a 24 hour period
+
+[Someone on the internet is claiming that asparagus shoots grow 10" in a 24 hour period](
+https://www.reddit.com/r/AskReddit/comments/9v1ynv/whats_your_favorite_fun_fact/). In order to test this theory, you plant a random sample of 20 seeds from a set of 5 different seed packets. After the seeds have sprouted and become well established, you measure each new shoot from the plant, measuring its length (in inches) at 8AM on the day it appeared and then again at 8AM the next day, subtracting to document the amount of growth. 
+
+As each plant produces multiple shoots, you end up with a sample of 85 measurements. The sample mean is 9.53 inches, with a sample standard deviation of 2.4 inches.
+
+\begin{enumerate}[itemsep=4em]
+\item What is the research question?
+\item What is the observational unit?
+\item What type of variable is this? Categorical or Quantitative?
+\item What are the appropriate symbols for the sample statistic, sample standard deviation, and population statistic for the variable type you chose above?
+\item If you were conducting a hypothesis test, what would $H_0$ and $H_A$ be using appropriate mathematical notation?
+\item What is the standard error? Show your work, including the formula you used to get your answer.
+\item What formula should you use for the confidence interval? \clearpage
+\item Calculate the 2SD theory-based confidence interval for this data
+\item What is your confidence level? What level of $\alpha$ corresponds to this confidence level?
+\item Interpret your confidence interval\\\vspace{4em}
+\end{enumerate}
+
+# Cardiopulmonary Resuscitation (CPR)
+
+On TV, CPR is seemingly more commom and more successful than it is in real life, where about 45% of people who receive CPR are revived temporarily, and only 10% survive to discharge from the hospital. A group of doctors collected data on CPR survival rates in medical dramas, examining 88 episodes which aired between July 2008 and April 2009. They documented 70 CPR attempts, of which 32 succeeded.
+
+\begin{enumerate}[itemsep=4em]
+\item What is the research question?
+\item What is the observational unit?
+\item What type of variable is this? Categorical or Quantitative?
+\item What are the appropriate symbols for the sample statistic, sample standard deviation, and population statistic for the variable type you chose above?
+\item If you were conducting a hypothesis test, what would $H_0$ and $H_A$ be using appropriate mathematical notation?
+\item What is your sample statistic?\clearpage
+\item What is the standard error? Show your work, including the formula you used to get your answer.
+\item What formula should you use for the confidence interval? 
+\item Calculate the 2SD theory-based confidence interval for this data
+\item What is your confidence level? What level of $\alpha$ corresponds to this confidence level?
+\item Interpret your confidence interval\\\vspace{4em}
+\end{enumerate}
+
+# The Great Emu War
+[The Great Emu War](http://www.todayifoundout.com/index.php/2014/01/great-emu-war-1932/) occurred in 1932 in western Australia. In the wake of WWI, veterans settled in Western Australia, on the border of the Emu's natural habitat. A drought caused many of the crops to fail, and Emus destroyed what remained, so when over 20,000 emus arrived the following year, the farmers appealed to the Minister of Defence, who deployed machine guns, and 10,000 bullets to the ``front" and expected an easy victory. 
+
+There were several battles over the course of the war, but after the first few, the Emus appeared to work out the range of the guns, and stayed just out of reach. During one of these battles, about 1000 emus gathered and the soldiers attempted an ambush; there were approximately 12 casualties as the machine gun jammed after the initial burst. 
+
+At the end of the Emu War, there were no human casualties (except perhaps dignity), and only 986 of the 20,000 emus had been killed. 9860 bullets were used for the operation. The Australian parliament debated whether to issue medals for this war, and one remarked that the medals should be given to the Emus, who had won every round so far. 
+
+\begin{enumerate}
+\item Suppose you want to establish the Emu casualty rate and compare it to the casualty rate of other Australian army operations. You decide to use the casualty rate from the entire war as your sample.
+  \begin{enumerate}[itemsep=4em]
+  \item What is the observational unit?
+  \item What is the population? (Hint: What are you hoping to compare your sample statistic to?)
+  \item What type of variable is this - Categorical or Quantitative?
+  \item What is the statistic of interest (proportion, mean, other quantity)?
+  \item What is your sample statistic?
+  \item What is your standard error? Show your work, including the formula you used to get your answer.
+  \item Calculate the 2SD theory-based confidence interval for your data
+  \item What is your confidence level?
+  \item Interpret your confidence interval in the context of the problem. 
+  \item What would you expect to change if you had used the statistics from one of the first battles, where there were 12 casualties of around 1000 estimated birids?
+  \item As the Emus could not return fire effectively, we might estimate the casualty rate for Australian soldiers by using the rate from the most recent world war. In World War I, approximately 349,000 Australian men enlisted, with 61,966 casualties. How does the casualty rate for the Emus during the ``Great War" compare to the casualty rate for the Australian soldiers during WWI?\\\vspace{4em}
+  \end{enumerate}
+
+\item something about bullets - 5 bullets to one emu killed?
+
+\end{enumerate}
