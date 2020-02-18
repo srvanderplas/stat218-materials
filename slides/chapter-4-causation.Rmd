@@ -1,5 +1,6 @@
 ---
-title: "Ch. 4: Causation: Can We Say What Caused the Effect?"
+title: "Ch. 4: Causation"
+subtitle: "Can We Say What Caused the Effect?"
 author: ""
 output:
   xaringan::moon_reader:
@@ -53,6 +54,21 @@ class:inverse,middle,center
   
   - Or as one variable decreases, the other variable may decrease too. We'll see other examples in chapter 10. 
 
+<!-- Show some pictures of what this looks like graphically -->
+
+```{r association-pics, fig.width = 2.5, fig.height = 2.625, out.width = "32%", fig.show = "hold", out.extra='style="display:inline-block;"'}
+tibble(group = rep(c("A", "B"), each = 2),
+       resp = rep(c(1, 2), times = 2),
+       prop = c(.5, .5, .3, .7)) %>%
+  ggplot(aes(x = group, fill = factor(resp), weight = prop)) + geom_bar(position = "stack") + theme(axis.title = element_blank(), axis.text = element_blank()) + scale_fill_manual(values = c("orange", "purple"), guide = F) + ggtitle("Difference in Proportions")
+tibble(group = rep(c("A", "B"), each = 100), 
+       obs = c(rnorm(100, 5, 1), rnorm(100, 3, 1))) %>%
+  ggplot(aes(x = group, y = obs, color = group)) + geom_jitter() + geom_boxplot(fill = "white", alpha = .5) + theme(axis.title = element_blank(), axis.text = element_blank()) + scale_color_manual(values = c("orange", "purple"), guide = F) + ggtitle("Difference in Means")
+tibble(x = seq(-5, 5, length.out = 100) + rnorm(100, 0, .2),
+       y = x + rnorm(100, sd = 1)) %>%
+  ggplot(aes(x = x, y = y)) + geom_point() + theme(axis.title = element_blank(), axis.text = element_blank()) + ggtitle("Linear Association")
+```
+
 ---
 
 ## We Record Two Variables Now  
@@ -80,7 +96,7 @@ class:inverse,middle,center
 .center[
 <img src="chapter-4-causation_files/margerine.png" alt="Spurrious correlation between margerine consumption and divorce rates" width="100%"/>
 ]
-
+.bottom[See more *spurious correlations* [here](https://www.tylervigen.com/spurious-correlations)]
 ---
 
 ## Try to Explain This Association
@@ -129,6 +145,12 @@ class:inverse,middle,center
 ## Possible Confounding Variables Phil Could Have Considered
 
 
+<!--Other possible examples - stork population vs. babies born in europe, https://www.buzzfeednews.com/article/kjh2110/the-10-most-bizarre-correlations (I'm fond of the "using IE leads to murder" myself) -->
+
+<!-- I'd like to give them practice with identifying and thinking critically about correlations - can we find a news article for them to analyze and respond to as an in-class/take home assignment? -->
+<!-- Possibly this: https://www.business-standard.com/article/pti-stories/city-life-makes-humans-less-kind-to-strangers-study-118102400623_1.html -->
+<!-- It has a ton of other issues (bad science reporting) but is fundamentally reporting on an observational study and implying causation -->
+
 ---
 class:inverse,middle,center
 # 4.2: Observational Studies Vs. Experiments
@@ -168,7 +190,7 @@ class:inverse,middle,center
 
 - We want to avoid two things:
 
-  - **Sampling Bias **
+  - **Sampling Bias**
   - **Confounding Variables**
   
 We use two strategies in STAT 218
@@ -208,7 +230,7 @@ We use two strategies in STAT 218
 
 - No random assignment
 
-  - quasi-experiment
+  - quasi-experiment (observational study)
   
 - Random assignment
 
@@ -238,3 +260,5 @@ Suppose you want to measure the average daily weight gain of steers. You assigne
 ## Exploration 4.2
 
 - Do questions 1 through 11 with your group
+
+<!-- Let's give them a bit of periodic guidance by going over e.g. questions 1-4 after a bit of work, then 5-9, then 10-12 -->
