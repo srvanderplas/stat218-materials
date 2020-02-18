@@ -262,3 +262,5 @@ Suppose you want to measure the average daily weight gain of steers. You assigne
 - Do questions 1 through 11 with your group
 
 <!-- Let's give them a bit of periodic guidance by going over e.g. questions 1-4 after a bit of work, then 5-9, then 10-12 -->
+
+<!--Ok. That sounds like a good plan. Kevin-->
