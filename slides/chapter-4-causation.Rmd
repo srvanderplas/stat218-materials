@@ -233,6 +233,14 @@ We use two strategies in STAT 218
   
 ---
 
+## Observational Study Vs. Experiment
+
+- Therefore, we aren't justified in determining cause-and-effect in an observational study
+
+  - Observational studies may be affected by confounding variables
+
+---
+
 ## Types of Experiments
 
 - No random assignment
