@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<html lang="" xml:lang="">
   <head>
     <title>Ch. 4: Causation</title>
     <meta charset="utf-8" />
     <meta name="author" content="" />
-    <link rel="stylesheet" href="css/default.css" type="text/css" />
-    <link rel="stylesheet" href="css/default-fonts.css" type="text/css" />
+    <link rel="stylesheet" href="css\default.css" type="text/css" />
+    <link rel="stylesheet" href="css\default-fonts.css" type="text/css" />
   </head>
   <body>
     <textarea id="source">
@@ -46,27 +46,34 @@ class:inverse,middle,center
 
 ## Introduction: Association vs. Causation
 
-- Association (correlation): Two variables are associated, or related, if the value of one variable gives you information about the value of the other variable.
+- Association (correlation): Two variables are associated, or related, if the value of one variable gives you information about the value of the other variable
 
-  - When comparing groups, this means that the proportions or means take on different values in the different groups.
+  - When comparing groups, this means that the proportions or means take on different values in the different groups
   
-  - Or as one variable decreases, the other variable may decrease too. We'll see other examples in chapter 10. 
+  - Or as one variable decreases, the other variable may decrease too. We'll see other examples in chapter 10 
 
-&lt;!-- Show some pictures of what this looks like graphically --&gt;
+&lt;!--
+.pull-left[
+&lt;img src="chapter-4-causation_files/boxplot.png" alt="Four box plots of chick weight vs. diet" width="100%"/&gt;
+]
+.pull-right[
+&lt;img src="chapter-4-causation_files/negCorrelation.png" alt="Scatterplot of miles per gallon vs. weight of the car" width="100%"/&gt;
+]
+--&gt;
 
 &lt;img src="chapter-4-causation_files/figure-html/association-pics-1.png" width="32%" style="display:inline-block;" style="display: block; margin: auto;" /&gt;&lt;img src="chapter-4-causation_files/figure-html/association-pics-2.png" width="32%" style="display:inline-block;" style="display: block; margin: auto;" /&gt;&lt;img src="chapter-4-causation_files/figure-html/association-pics-3.png" width="32%" style="display:inline-block;" style="display: block; margin: auto;" /&gt;
 
 ---
 
 ## We Record Two Variables Now  
-- Explanatory Variable(s): variable(s) that may explain the change in the variable of interest.
-  - Called the independent variable. 
+- Explanatory Variable(s): variable(s) that may explain the change in the variable of interest
+  - Called the independent variable
 
-- Response Variable(s): variable(s) of interest we measure  on observational units.
+- Response Variable(s): variable(s) of interest we measure  on observational units
 
-  - Called the dependent variable. 
+  - Called the dependent variable
 
-  - Chapter 1 and 2, we did hypothesis tests about the response variable. In chapter 3, we estimated the response variable. 
+  - Chapter 1 and 2, we did hypothesis tests about the response variable. In chapter 3, we estimated the response variable
    
 - We hope that changes in the explanatory variable will affect the response variable =&gt; **cause-and-effect** relationship
 
@@ -76,9 +83,9 @@ class:inverse,middle,center
 
 ## Association vs. Causation
 
-- Often in scientific studies, we see associations.
+- Often in scientific studies, we see associations
 
-- Association, alone, is not enough to prove cause-and-effect relationships exist. 
+- Association, alone, is not enough to prove cause-and-effect relationships exist
 
 .center[
 &lt;img src="chapter-4-causation_files/margerine.png" alt="Spurrious correlation between margerine consumption and divorce rates" width="100%"/&gt;
@@ -88,7 +95,7 @@ class:inverse,middle,center
 
 ## Try to Explain This Association
 
-- For example, try to explain to your group how this association could be a cause-and-effect relationship. 
+- For example, try to explain to your group how this association could be a cause-and-effect relationship 
 
 .center[
 &lt;img src="chapter-4-causation_files/iceCreamShark.png" alt="Spurrious correlation between ice cream sales and shark attacks" width="70%"/&gt;
@@ -104,9 +111,9 @@ class:inverse,middle,center
 
 ## Why Can't Associations Determine Cause-And-Effect?
 
-- Confounding Variable(s) affect both the explanatory and response variables enough to make cause-and-effect impossible to determine.
+- Confounding Variable(s) affect both the explanatory and response variables enough to make cause-and-effect impossible to determine
 
-  - These are other variables that you may not know about, or aren't measured in your study. 
+  - These are other variables that you may not know about, or aren't measured in your study 
   - What are possible confounding variables in the association between ice cream sales and shark attacks? 
 .center[
 &lt;img src="chapter-4-causation_files/confounding.png" alt="confounding variable affects both explanatory and response" width="80%"/&gt;
@@ -116,7 +123,7 @@ class:inverse,middle,center
 
 ## Another Example
 
-- Phil Sokolof, an Omaha native, caused McDonalds to change their french fries. http://revisionisthistory.com/episodes/19-mcdonalds-broke-my-heart
+- Phil Sokolof, an Omaha native, caused McDonalds to change their french fries http://revisionisthistory.com/episodes/19-mcdonalds-broke-my-heart
 
 
 .pull-left[
@@ -161,7 +168,7 @@ class:inverse,middle,center
 
 ## Experiment
 
-- Researchers can assign the values of the explanatory variable to observational units. 
+- Researchers can assign the values of the explanatory variable to observational units
 
   - In experiments, we can say observational units are called experimental units
   
@@ -192,7 +199,7 @@ We use two strategies in STAT 218
 ---
 ## Random Sampling and Random Assignment
 
-- You can use neither, one of them, or both to do your experiment. 
+- You can use neither, one of them, or both to do your experiment
 
 .center[
 &lt;img src="chapter-4-causation_files/samplingAssignment.png" alt="Random Sampling vs. Random Assignment" width="100%"/&gt;
@@ -208,8 +215,8 @@ We use two strategies in STAT 218
 - I will randomly assign them a group
 
 - Benefits:
-  - Random sampling gets rid of sampling bias. We can **generalize our conclusions** to the whole population.
-  - Random assignment removes the effect of confounding variables. We can determine **cause-and-effect** if we have enough evidence to reject `\(H_0\)`. 
+  - Random sampling gets rid of sampling bias. We can **generalize our conclusions** to the whole population
+  - Random assignment removes the effect of confounding variables. We can determine **cause-and-effect** if we have enough evidence to reject `\(H_0\)`
   
 ---
 
@@ -248,7 +255,11 @@ Suppose you want to measure the average daily weight gain of steers. You assigne
 
 - Do questions 1 through 11 with your group
 
+- We will periodically review answers as a class
+
 &lt;!-- Let's give them a bit of periodic guidance by going over e.g. questions 1-4 after a bit of work, then 5-9, then 10-12 --&gt;
+
+&lt;!--Ok. That sounds like a good plan. Kevin--&gt;
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
