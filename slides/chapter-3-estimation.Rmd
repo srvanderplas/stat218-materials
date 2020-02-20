@@ -269,7 +269,7 @@ We're finding a set of plausible values for the parameter centered around the .u
 - We do not want to plug in those parameter values every time we want an interval
 
 - Method boils down to one idea:     
-We're finding a set of plausible values for the parameter centered around the .underline[.red[sample mean]] and adding some wiggle room around it.    
+We're finding a set of plausible values for the parameter centered around the .underline[.red[sample statistic]] and adding some wiggle room around it.    
 <br/><br/>
 
 - The wiggle room is known as the .underline[.red[margin of error]]
@@ -278,7 +278,7 @@ We're finding a set of plausible values for the parameter centered around the .u
 ## Confidence Interval
 
 So the basic set up for our confidence interval is:
-$$\text{Sample statistic}\pm \text{margin of error}$$
+$$\text{Sample statistic}\pm \text{margin of error} = (lower, upper)$$
 
 Margin of error is based on two values:
 
