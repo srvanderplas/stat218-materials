@@ -52,17 +52,18 @@ class:inverse,middle,center
 
 - We compared long-run averages (means) of two groups in chapter 6
 
-- These chapters studied independent groups.
+- These chapters studied independent groups
 
-  - The observational units in different groups are not related to each other. 
+  - The observational units in different groups are not related to each other
   
   
 ---
 
 ## Paired Design
 
-- Data is observed in pairs. Each observational unit is a pair. 
-  - Now, a subject in group 1 is related to its partner in group 2.
+- Data is observed in pairs; each observational unit is a pair
+
+  - Now, a subject in group 1 is related to its partner in group 2
   
 .center[
 &lt;img src="chapter-7-paired-design_files/twinGirls.jpg" alt="Two twin girls laying down looking outside" width="75%"/&gt;
@@ -90,9 +91,11 @@ Instead of randomly assigning students to each of the two groups, each student w
 
 - **Response Variable**: The difference between the two groups
 
-  - Each observational unit pair will have a recorded difference. The difference can be positive or negative. 
+  - Each observational unit pair will have a recorded difference
   
-- Differences are expected to have **less variablility** than measurements in two independent groups (a person in one group may be very different than another in the second group)
+  - The difference can be positive or negative 
+  
+- Differences are expected to have **less variablility** than measurements in two independent groups 
  
 ---
 
@@ -100,10 +103,10 @@ Instead of randomly assigning students to each of the two groups, each student w
 
 - **Repeated Measures**: Measure each subject twice, once under explanatory group 1 and once under explanatory group 2
 
-  - Each horse run a 100 yard dash with the shoes a rancher currently uses vs. a new shoe they may buy.
+  - Each horse run a 100 yard dash with the shoes a rancher currently uses vs. a new shoe they may buy
 
 
-  - A person gets a medicine, then a placebo a few days later. 
+  - A person gets a medicine, then a placebo a few days later.
   
 .center[
 &lt;img src="chapter-7-paired-design_files/horseRacing.gif" alt="A race horse and a jockey" width="75%"/&gt;
@@ -115,9 +118,9 @@ Instead of randomly assigning students to each of the two groups, each student w
 
 - **Matching Pairs**: Match individuals based on prior knowledge to create our pairs
 
-  - Match two pigs of the same litter to see which feed will add more fat to the meat.
+  - Match two pigs of the same litter to see which feed will add more fat to the meat
 
-  - Pair people, based on their BMI, to see the difference in the amount of pushups they can do in regular clothes vs. workout clothes. 
+  - Pair people, based on their BMI, to see the difference in the amount of pushups they can do in regular clothes vs. workout clothes.
   
 .center[
 &lt;img src="chapter-7-paired-design_files/failedPushup.gif" alt="A school student struggling to do pushups" width="75%"/&gt;
@@ -127,22 +130,20 @@ Instead of randomly assigning students to each of the two groups, each student w
 
 ## Paired Designs Benefits
 
-- Paired Designs, just by themselves excludes all confounding variables except two
+- Paired Designs, just by themselves excludes all confounding variables except two:
   - order of tasks
   - carryover effects
 
 - To get rid of the task order confounding variable: 
-
-  -Randomize the order in which the tasks are done.
   
-  -Randomize which task is first.
+  - Randomize which task is first
 
 - To get rid of the carryover effects:
 
-  - Include a rest period (wash-out period) in order to eliminate a carry-over effect of the first task to the second.
+  - Rest period (wash-out period) to eliminate a carry-over effect of the first task to the second
 
-  - Example: Wait a few days for the drug left over in your blood system to leave the body
-  - Example: Rest to recover from a physical fitness test
+  - Wait for a drug to leave the body
+  - Rest to recover from fatique
 
   
 ---
@@ -162,16 +163,19 @@ Instead of randomly assigning students to each of the two groups, each student w
 
 Parameter: `\(\mu_D\)`
 
-The long-run mean difference of _______ between group 1 and group 2
+- The long-run mean difference of _______ between group 1 and group 2
 
 Hypotheses:
 
-`\(H_0: \mu_D = 0\)`
-`\(H_a: \mu_D &gt;, &lt;, \ne 0\)`
+- `\(H_0: \mu_D = 0\)`
 
-Statistic: `\(\bar{x}\)`
+- `\(H_a: \mu_D &gt;, &lt;, \ne 0\)`
 
-Sample mean difference between two groups
+Statistics:
+
+- Sample mean difference between two groups: `\(\overline{x}\)`
+
+- Sample standard deviation of the differences: `\(s_D\)`
 
 
 ---
@@ -209,127 +213,240 @@ They went to Old Cheney Place apartments. They randomly gave a flier notifying r
 
 ---
 class:inverse,middle,center
-# 4.2: Observational Studies Vs. Experiments
+# 7.2: Simulation Based Approach to Analyzing Paired Data
 
 
 ---
+## Review
 
-## Observational Study
-
-- The values of the explanatory variable are simply observed. Researchers cannot change or assign them to observational units. Examples are: 
-
-  - Does your child sleep with a night light? 
-  - Which NBA team does a player play for? 
-  - Which country were you born in? 
-  - An animal's gender
-  - Number of social media profiles
-  - Amount of video games a person owns
-  - Commute to work in minutes
-
----
-
-## Experiment
-
-- Researchers can assign the values of the explanatory variable to observational units
-
-  - In experiments, we can say observational units are called experimental units
+Data is observed in pairs. Each observational unit is a pair. 
+- Now, a subject in group 1 is related to its partner in group 2.
+- Do a paired design when you expect a strong association between repeated observations within a pair
   
-- Examples:
+**Response Variable**: The difference between the two groups
 
-  - Treatment vs. Control (do nothing or give a placebo)
-  - Did you use the internet to play a game or pencil and paper?
-  - Amount of days a plant doesn't have any water
+Parameter: `\(\mu_D\)`
+
+- The long-run mean difference of _______ between group 1 and group 2
+
+Hypotheses:
+
+- `\(H_0: \mu_D = 0\)`
+
+- `\(H_a: \mu_D &gt;, &lt;, \ne 0\)`
+
+Statistics: 
+
+- Sample mean difference between two groups: `\(\overline{x_D}\)`
+
+- Sample standard deviation of the differences: `\(s_D\)`
+
+
+---
+## Review
+
+- Repeated Measures: Each subject is measured twice. Once in each group. Their two measurements equals an observational unit pair 
+
+- Matched Pairs: Each observational unit is a pair of subjects that are closely related to each other
+  - One subject is in a group. The second subject is in the other
   
 ---
+## Eliminate Confounding Variable Effects
 
-## Setting Up a Good Experiment
-
-- We want to avoid two things:
-
-  - **Sampling Bias**
-  - **Confounding Variables**
+- Randomize the order of tasks:
+  - Repated Measures: randomize which task/group is measured first
+  - Matched Pairs: randomize which group goes to one of the subjects in each pair 
   
-We use two strategies in STAT 218
+- Rest period to eliminate the carry-over effects.
+  - rest from fatique
+  - wait for drugs/food to leave the body
 
-- Simple Random Sampling
-
-
-- Random Assignment: Use a random/chance device to assign values of the explanatory variable to experimental units
-    - Randomly assign groups (categorical explanatory variable)
-    - Randomly assign a measurement (quantitative explanatory variable)
-    
 ---
-## Random Sampling and Random Assignment
 
-- You can use neither, one of them, or both to do your experiment
+## Introduction to Simulation
 
+- Remember, when performing simulations, we are assuming the null hypothesis is true! 
+  - Therefore, we assume there is no association between the explanatory and response variables.
+  - In other words, we assume that `\(\mu_D = 0\)`
+
+
+---
+
+## Simulation Process
+
+Simulation Process: 
+
+1. For each pair...
+
+2. Flip a coin
+
+  a. If tails, keep the order of the measurements the same as observed data
+  
+  b. If heads, swap the measurements
+
+3. Calculate the new difference for each pair
+
+4. Average the differences for `\(\overline{x_D}\)`
+
+5. Repeat steps 1 through 4 many times
+
+---
+
+## Let's Do An Example
+
+Can a person's dominant hand click at a different speed than their other hand? Last semester, I asked each of my STAT 218 students to see how many clicks they can do in 5 seconds. I randomly assigned which hand each person used first. I didn’t do a wash-out period for the students. 
+
+
+Pair | DominantHand | WeakHand | Difference
+---: | :----------: | :------: | :---------
+1 | 32 | 27 | 5
+2 | 45 | 32 | 13
+3 | 33 | 34 | -1
+4 | 34 | 26 | 8
+5 | 32 | 24 | 8
+
+
+Average difference of the 5 people = 6.6
+
+Do two simulation reps and calculate the new sample average differences
+
+
+---
+
+## Use the Matched Pairs Applet
+
+Simulation in Matched Pairs Applet: 
+
+1. Download Excel File
+
+2. Copy and Paste Excel File data into the left-hand box. 
+
+3. ‘Use Data’ button
+
+4. Click ‘Randomize’ checkbox
+
+5. Input number of simulations (like 1000)
+
+6. Randomize Button
+
+7. P-value using “Count Samples: (Beyond, greater than, or less than) Observed Statistic”
+
+8. P-value is the proportion in the red text
+
+
+---
+## Work with the Same Data
+
+- Download ch7SpeedTest.csv from Canvas Chapter 7
+
+- There are 26 observational units
+
+- `\(\overline{x_D}\)` should equal 2.808
+
+- `\(s_D\)` should equal 4.561
+
+- Find the p-value knowing these two hypotheses
+
+  - `\(H_0: \mu_D = 0\)`
+  
+  - `\(H_a: \mu_D &gt; 0\)`
+
+---
+
+## We Used the Same Simulation Process
+
+**1.Statistic:** Compute the statistic in the sample: `\(\overline{x_D}\)`
+
+**2.Simulate:** Identify a chance model that reflects the null hypothesis. We tossed a coin for each pair. If heads, swap the measurements.
+
+**3.Strength of evidence:** How many statistics in our 1,000 repetitions were as extreme or more extreme than our observed `\(\overline{x_D}\)`
+
+
+---
+
+## You Can Still...
+
+- You can still find the following with your simulations:
+
+  - Standardized Statistic
+  
+  - Confidence Intervals
+  
 .center[
-&lt;img src="chapter-4-causation_files/samplingAssignment.png" alt="Random Sampling vs. Random Assignment" width="100%"/&gt;
+&lt;img src="chapter-7-paired-design_files/simStdStat.jpg" alt="A screenshot of the Rossman Chance Applets" width="85%"/&gt;
 ]
+  
+
+  
+  
+---
+class:inverse,middle,center
+# 7.3: Thoery-Based Approach to Analyzing Paired Data
+
+
+
+---
+
+## Validity Conditions
+
+- When the sample size is large enough, the  shape of the null distribution is approximately normal
+  - The null distribution is centered at the hypothesized value of `\(\mu_D\)`
+  - The variability of the null distribution depends on the sample size (larger samples will have less variability) and on the variability in the sample differences 
+  
+- **Validity Conditions**
+  - Need at least 20 pairs `\((n_D \ge 20)\)`
+  - Distribution of the sample's differences isn't strongly skewed
+    
+---
+## Standardized Statistic
+
+`\(t = \frac{\overline{x_D} - \mu_{D0}}{\frac{s_D}{\sqrt{n_D}}}\)`
+
+`\(\overline{x_D}\)` = observed mean difference of the pairs
+
+`\(s_D\)` = the observed standard deviation of the differences
+
+`\(n_D\)` = number of observed pairs
+
+`\(\mu_{D0}\)` = 0 because of the null hypothesis
+
+
+---
+## Standardized Statistic
+
+Same strength of evidence guidelines as before
+
+t-value range | Interpretation 
+------------: | :-------------
+`\(\phantom{\leq 0.10}\;\lvert t\rvert &lt; 1.5\)` | **little or no** evidence against `\(H_0\)` 
+`\(1.5 \leq \lvert t\rvert &lt; 2\phantom{.5}\)` | **moderate** evidence against `\(H_0\)`
+`\(2 \leq \lvert t\rvert &lt; 3\phantom{.5}\)` | **strong** evidence against `\(H_0\)`
+`\(3 \leq \lvert t\rvert\phantom{&lt; 3}\;\phantom{.5}\)` | **very strong** evidence against `\(H_0\)`
+
 
     
 ---
 
-## Example and Benefits
+## Theory-Based Confidence Interval
 
-- I need some random students from the class...
+- Confidence Interval: `\(\overline{x_D} \pm multiplier*\frac{s_D}{\sqrt{n_D}}\)`
 
-- I will randomly assign them a group
+- We are 95% confident the true mean difference of {response variable} between {group 1} and {group 2} is within the interval ____ and ____. 
 
-- Benefits:
-  - Random sampling gets rid of sampling bias. We can **generalize our conclusions** to the whole population
-  - Random assignment removes the effect of confounding variables. We can determine **cause-and-effect** if we have enough evidence to reject `\(H_0\)`
+
+- Is 0 in the interval? 
+
+  - No? Reject `\(H_0\)`
   
----
-
-## Observational Study Vs. Experiment
-
-- Therefore, we aren't justified in determining cause-and-effect in an observational study
-
-  - Observational studies may be affected by confounding variables
+  - Yes? Fail to reject `\(H_0\)`, because it is still a plausible explanation for `\(\mu_D\)`
 
 ---
 
-## Types of Experiments
+## Exploration 7.3
 
-- No random assignment
+- Do questions 1 through 9 with your group
 
-  - quasi-experiment (observational study)
-  
-- Random assignment
-
-  - randomized experiment
-
-- Random assignment and neither the researcher or experimental unit know what group or measurement they have
-
-  - double-blind experiment
-  
----
-
-## Answer These Questions with your Group
-Suppose you want to measure the average daily weight gain of steers. You assigned each steer dry-rolled corn or wet (fermented) corn. Then, you measured their average daily weight gain. You gathered a sample of 60 steers. 
-
-- What is the explanatory variable?
-
-- What is the response variable? 
-
-- How could you gather a random sample of steers? 
-
-- How would you do random assignment in this study?
-
-- Can you identify a confounding variable? 
-
----
-
-## Exploration 4.2
-
-- Do questions 1 through 11 with your group
-
-- We will periodically review answers as a class
-
-&lt;!-- Let's give them a bit of periodic guidance by going over e.g. questions 1-4 after a bit of work, then 5-9, then 10-12 --&gt;
-
-&lt;!--Ok. That sounds like a good plan. Kevin--&gt;
+- We will give periodical guidance for the whole class. Good luck!
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
