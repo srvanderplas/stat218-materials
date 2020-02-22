@@ -13,7 +13,12 @@ html_to_pdf <- function(x) {
   system(paste0("pdfjam-slides3up --suffix 3 --paper letterpaper ", xpdf))
 }
 
-purrr::map(html_files, html_to_pdf)
+mod_date_html <- file.mtime(html_files)
+mod_date_pdf <- file.mtime(str_replace(html_files, "html", "pdf"))
+
+regen <- (mod_date_html >= mod_date_pdf) | is.na(mod_date_pdf)
+
+purrr::map(html_files[regen], html_to_pdf)
 rmarkdown::render("index.Rmd")
 
 git2r::add(path = list.files(here::here("slides"), ".pdf$", full.names = T))
