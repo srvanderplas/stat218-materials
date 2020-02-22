@@ -1,0 +1,280 @@
+---
+title: "Ch. 6: Comparing Two Means"
+author: ""
+output:
+  xaringan::moon_reader:
+    css: ["css/default.css", "css/default-fonts.css"]
+    mathjax: "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_HTMLorMML"
+    lib_dir: libs
+    nature:
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+---
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({ TeX: { extensions: ["color.js"] }});
+</script>
+
+```{r setup, include = F}
+
+library(ggplot2)
+library(tidyverse)
+knitr::opts_chunk$set(dpi=300, message = F, warning = F, echo = F, fig.width = 8, fig.height = 4, out.width = "80%", fig.align = "center", cache = T)
+theme_set(theme_bw())
+```
+
+# Navigation
+
+.pull-left[
+.large[By Date]
+
+- March 31: [start](#3) - [end](#14)
+- April 2: [start](#15) - [end](#31)
+- April 7: [start](#32) - [end](#49)
+
+]
+.pull-right[
+.large[By Section]
+- 6.1: [start](#3) - [end](#15)
+- 6.2: [start](#16) - [end](#36)
+- 6.3: [start](#37) - [end](#49)
+]
+
+---
+class:inverse,middle,center
+# 6.1: Comparing Two Groups
+## Quantitative Response
+
+---
+## Describing Distributions of Quantitative Data
+
+- **5-number summary** - the minimum, lower quartile, median, upper quartile, and maximum of a set of data
+
+  - **lower quartile** - 25% of the data lie below this value
+  
+  - **median** - 50% of the data lie below this value
+  
+  - **upper quartile** - 75% of the data lie below this value
+  
+```{r, fig.width = 8, fig.height = 4}
+set.seed(205838)
+tmp <- tibble(x = sort(rpois(101, 10)),
+       lbl = c("minimum", rep(NA, 24), "lower quartile", rep(NA, 24), "median", rep(NA, 24), "upper quartile", rep(NA, 24), "maximum")) %>%
+  mutate(lbl = factor(lbl, levels = lbl[!is.na(lbl)], ordered = T))
+
+ggplot(tmp, aes(x = x)) + 
+  geom_dotplot(fill = "white") + 
+  theme(axis.text.y = element_blank(), axis.ticks.y = element_blank(), axis.title.y = element_blank(), axis.title.x = element_blank())
+```
+
+---
+## Describing Distributions of Quantitative Data
+
+- **5-number summary** - the minimum, lower quartile, median, upper quartile, and maximum of a set of data
+
+  - **lower quartile** - 25% of the data lie below this value
+  
+  - **median** - 50% of the data lie below this value
+  
+  - **upper quartile** - 75% of the data lie below this value
+  
+```{r fig.width = 8, fig.height = 4}
+cols <- RColorBrewer::brewer.pal(name = "Greens", 7)
+  ggplot(tmp, aes(x = x)) + 
+  geom_dotplot(fill = "white") + 
+  geom_dotplot(data = filter(tmp, !is.na(lbl)), aes(fill = lbl)) +
+  scale_fill_manual(values = cols[-c(1:2)], name = "5 number summary") + 
+  theme(axis.text.y = element_blank(), axis.ticks.y = element_blank(), axis.title.y = element_blank(), axis.title.x = element_blank(),
+        legend.pos = c(1,1), legend.justification = c(1.01,1.01))
+```
+
+
+---
+## Describing Distributions of Quantitative Data
+
+
+```{r fig.width = 8, fig.height = 4}
+iqr <- quantile(tmp$x, c(.25, .75))
+cols <- RColorBrewer::brewer.pal(name = "Greens", 7)
+ggplot(tmp, aes(x = x)) + 
+  geom_dotplot(fill = "white") + 
+  geom_dotplot(data = filter(tmp, !is.na(lbl)), aes(fill = lbl)) +
+  scale_fill_manual(values = cols[-c(1:2)], name = "5 number summary") + 
+  geom_segment(aes(x = iqr[1], xend = iqr[2], y = .95, yend = .95), arrow = arrow(ends = "both", angle = 90, length = unit(.25, "cm"))) + 
+  geom_text(aes(x = median(tmp$x), y = .98, label = "IQR"), size = 5) + 
+  theme(axis.text.y = element_blank(), axis.ticks.y = element_blank(), axis.title.y = element_blank(), axis.title.x = element_blank(),
+        legend.pos = c(1,1), legend.justification = c(1.01,1.01))
+```
+
+The distance between the two quartiles is called the **inter-quartile range**(IQR). The IQR is another measure of variability, along with the standard deviation.
+
+The IQR is resistant (or *robust*) to extreme values and skewness, unlike the standard deviation.
+
+---
+## Describing Distributions of Quantitative Data
+
+A **boxplot** (or box-and-whisker plot) is a visual display of the 5-number summary. 
+- The box displays the middle 50% of the distribution and its width (the IQR) shows the spread of the bulk of the distribution. 
+- The 'whiskers' extend to the 
+    - smallest and largest values in the dataset 
+    - OR the values in the dataset that are within 1.5\*IQR away from the edges of the box. 
+        - Observations outside of the 1.5\*IQR range may be shown as dots and are outliers
+
+```{r}
+tmp <- tmp %>%
+  mutate(in_box = (x >= iqr[1]) & (x <= iqr[2]),
+         in_iqr = (x >= iqr[1]-diff(iqr)*1.5) & (x <= iqr[2] + diff(iqr)*1.5))
+
+```
+
+---
+## Describing Distributions of Quantitative Data
+
+```{r}
+ggplot(tmp, aes(x = x)) + 
+  geom_dotplot(fill = "white") + 
+  geom_dotplot(data = filter(tmp, !is.na(lbl)), aes(fill = lbl)) +
+  scale_fill_manual(values = cols[-c(1:2)], name = "5 number summary") + 
+  geom_segment(aes(x = iqr[1], xend = iqr[2], y = .95, yend = .95), arrow = arrow(ends = "both", angle = 90, length = unit(.25, "cm"))) + 
+  geom_text(aes(x = median(tmp$x), y = .98, label = "IQR"), size = 5) + 
+  theme(axis.text.y = element_blank(), axis.ticks.y = element_blank(), axis.title.y = element_blank(), axis.title.x = element_blank(),
+        legend.pos = c(1,1), legend.justification = c(1.01,1.01))
+```
+
+What are the following values?
+- bottom whisker:
+- lower quartile:
+- median:
+- upper quartile:
+- top whisker:
+
+Are there any outliers?
+
+---
+## Describing Distributions of Quantitative Data
+
+```{r}
+ggplot(tmp, aes(x = x)) + 
+  geom_dotplot(fill = "white") + 
+  geom_dotplot(data = filter(tmp, !is.na(lbl)), aes(fill = lbl)) +
+  scale_fill_manual(guide = F, values = cols[-c(1:2)], name = "5 number summary") + 
+  geom_rect(aes(xmin = 7, xmax = 12, ymin = .93, ymax = 1), fill = "white", color = "black") + 
+  geom_segment(aes(x = 9, xend = 9, y = .93, yend = 1)) + 
+  theme(axis.text.y = element_blank(), axis.ticks.y = element_blank(), axis.title.y = element_blank(), axis.title.x = element_blank(),
+        legend.pos = c(1,1), legend.justification = c(1.01,1.01))
+```
+
+What are the following values?
+- bottom whisker: 
+- lower quartile: .red[7]
+- median: .red[9]
+- upper quartile: .red[12]
+- top whisker:
+
+Are there any outliers?
+
+---
+## Describing Distributions of Quantitative Data
+
+```{r}
+ggplot(tmp, aes(x = x)) + 
+  geom_dotplot(fill = "white") + 
+  geom_dotplot(data = filter(tmp, !is.na(lbl)), aes(fill = lbl)) +
+  scale_fill_manual(guide = F, values = cols[-c(1:2)], name = "5 number summary") + 
+  geom_rect(aes(xmin = 7, xmax = 12, ymin = .93, ymax = 1), fill = "white", color = "black") + 
+  geom_segment(aes(x = 9, xend = 9, y = .93, yend = 1)) + 
+  geom_segment(aes(x = 7, xend = 3, y = .965, yend = .965)) +
+  geom_segment(aes(x = 12, xend = 19.5, y = .965, yend = .965)) +
+  # geom_point(aes(x = 21, y = .965)) + 
+  theme(axis.text.y = element_blank(), axis.ticks.y = element_blank(), axis.title.y = element_blank(), axis.title.x = element_blank(),
+        legend.pos = c(1,1), legend.justification = c(1.01,1.01))
+```
+
+- bottom whisker: .red[1.5 x IQR below lower quartile, or smallest observation]    
+.red[7 - 1.5(12-7) = -0.5] or .red[3]    
+.red[bottom whisker: 3]
+- top whisker: .red[1.5 x IQR above upper quartile, or largest observation]    
+.red[12 + 1.5(12-7) = 19.5] or .red[21]    
+.red[top whisker: 19.5]
+
+Are there any outliers?
+
+---
+## Describing Distributions of Quantitative Data
+
+```{r}
+ggplot(tmp, aes(x = x)) + 
+  geom_dotplot(fill = "white") + 
+  geom_dotplot(data = filter(tmp, !is.na(lbl)), aes(fill = lbl)) +
+  scale_fill_manual(guide = F, values = cols[-c(1:2)], name = "5 number summary") + 
+  geom_rect(aes(xmin = 7, xmax = 12, ymin = .93, ymax = 1), fill = "white", color = "black") + 
+  geom_segment(aes(x = 9, xend = 9, y = .93, yend = 1)) + 
+  geom_segment(aes(x = 7, xend = 3, y = .965, yend = .965)) +
+  geom_segment(aes(x = 12, xend = 19.5, y = .965, yend = .965)) +
+  geom_point(aes(x = 21, y = .965)) + 
+  theme(axis.text.y = element_blank(), axis.ticks.y = element_blank(), axis.title.y = element_blank(), axis.title.x = element_blank(),
+        legend.pos = c(1,1), legend.justification = c(1.01,1.01))
+```
+
+What are the following values?
+- bottom whisker: .red[3]
+- lower quartile: .red[7]
+- median: .red[9]
+- upper quartile: .red[12]
+- top whisker: .red[19.5] 
+
+Are there any outliers? .red[Yes, at 21]
+
+
+---
+## Describing Distributions of Quantitative Data
+
+Boxplots make it easy to compare distributions of different groups.
+```{r}
+diseases <- read_csv(here::here("data/izb-cases-by-county-and-year.csv")) %>%
+  group_by(year, disease) %>%
+  summarize(count = sum(count))
+
+diseases %>%
+  # filter(!disease %in% c("Diphtheria", "Varicella Hospitalizations", "Pertussis")) %>%
+  filter(disease %in% c("Measles", "Mumps", "Invasive Meningococcal Disease") | str_detect(disease, "Hepatitis [BC]")) %>%
+  mutate(disease = str_replace(disease, "Invasive Meningococcal Disease", "Meningitis") %>% str_remove(", Acute")) %>%
+ggplot(aes(x = disease, y = count)) + geom_boxplot() + scale_y_continuous("# Cases") + 
+  ggtitle("California Reportable Disease Cases, 2000-2018") + 
+  theme(axis.text.y = element_text(angle = 90, hjust = .5, vjust = .5), axis.title.x = element_blank())
+
+```
+
+---
+## In-Class Practice: Jean Pocket Sizes
+
+Using the graph paper on the next page, create boxplots for each of the dimensions in the chart below. 
+
+```{r fig.width = 6, fig.height = 3}
+pockets <- read_csv("https://raw.githubusercontent.com/the-pudding/data/master/pockets/measurements.csv")
+
+pockets_clean <- pockets %>%
+  pivot_longer(matches("max|min"), names_to = "region", values_to = "length") %>%
+  extract(region, into = c("dim", "measurement", "side"), regex = c("(max|min|rivet)(Width|Height)(Front|Back)")) %>%
+  filter(dim == "max") %>%
+  filter(side == "Front") %>%
+  mutate(length = round(length*2, 0)/2) %>%
+  select(menWomen, measurement, length)
+
+ggplot(pockets_clean, aes(x = length)) + geom_dotplot(fill = "grey", binwidth = .5, dotsize = 1) + 
+  facet_grid(menWomen~measurement, scales = "free_x",space = "free_x") + 
+  scale_x_continuous("Size (cm)", breaks = (6:15)*2, minor_breaks = 12:30) +
+  theme(axis.text.y = element_blank(), axis.ticks.y = element_blank(), axis.title.y = element_blank()) +
+  ggtitle("Front Pocket Maximum")
+```
+
+.bottom[Data source: https://pudding.cool/2018/08/pockets/]
+
+---
+## In-Class Practice: Jean Pocket Sizes
+
+![graph paper](figure/graph_paper.png)
+
+What do you conclude about the distributions of front pocket maximum dimensions when comparing Men's jeans to Women's jeans?
+
+Upload your graph and conclusions to Canvas.
