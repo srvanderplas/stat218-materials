@@ -12,7 +12,7 @@ output:
       countIncrementalSlides: false
 ---
 <script type="text/x-mathjax-config">
-  MathJax.Hub.Config({ TeX: { extensions: ["color.js"] }});
+  MathJax.Hub.Config({ TeX: { extensions: ["color.js", "amsmath.js"] }});
 </script>
 
 ```{r setup, include = F}
@@ -28,8 +28,8 @@ theme_set(theme_bw())
 .pull-left[
 .large[By Date]
 
-- March 31: [start](#3) - [end](#14)
-- April 2: [start](#15) - [end](#31)
+- March 31: [start](#3) - [end](#15)
+- April 2: [start](#16) - [end](#31)
 - April 7: [start](#32) - [end](#49)
 
 ]
@@ -62,7 +62,7 @@ tmp <- tibble(x = sort(rpois(101, 10)),
        lbl = c("minimum", rep(NA, 24), "lower quartile", rep(NA, 24), "median", rep(NA, 24), "upper quartile", rep(NA, 24), "maximum")) %>%
   mutate(lbl = factor(lbl, levels = lbl[!is.na(lbl)], ordered = T))
 
-ggplot(tmp, aes(x = x)) + 
+ggplot(tmp, aes(x = x)) +  
   geom_dotplot(fill = "white") + 
   theme(axis.text.y = element_blank(), axis.ticks.y = element_blank(), axis.title.y = element_blank(), axis.title.x = element_blank())
 ```
@@ -81,7 +81,7 @@ ggplot(tmp, aes(x = x)) +
 ```{r fig.width = 8, fig.height = 4}
 cols <- RColorBrewer::brewer.pal(name = "Greens", 7)
   ggplot(tmp, aes(x = x)) + 
-  geom_dotplot(fill = "white") + 
+  geom_dotplot(fill = "white") +  
   geom_dotplot(data = filter(tmp, !is.na(lbl)), aes(fill = lbl)) +
   scale_fill_manual(values = cols[-c(1:2)], name = "5 number summary") + 
   theme(axis.text.y = element_blank(), axis.ticks.y = element_blank(), axis.title.y = element_blank(), axis.title.x = element_blank(),
@@ -103,7 +103,7 @@ ggplot(tmp, aes(x = x)) +
   geom_segment(aes(x = iqr[1], xend = iqr[2], y = .95, yend = .95), arrow = arrow(ends = "both", angle = 90, length = unit(.25, "cm"))) + 
   geom_text(aes(x = median(tmp$x), y = .98, label = "IQR"), size = 5) + 
   theme(axis.text.y = element_blank(), axis.ticks.y = element_blank(), axis.title.y = element_blank(), axis.title.x = element_blank(),
-        legend.pos = c(1,1), legend.justification = c(1.01,1.01))
+        legend.pos = c(1,1), legend.justification = c(1.01,1.01)) 
 ```
 
 The distance between the two quartiles is called the **inter-quartile range**(IQR). The IQR is another measure of variability, along with the standard deviation.
@@ -134,7 +134,7 @@ tmp <- tmp %>%
 ggplot(tmp, aes(x = x)) + 
   geom_dotplot(fill = "white") + 
   geom_dotplot(data = filter(tmp, !is.na(lbl)), aes(fill = lbl)) +
-  scale_fill_manual(values = cols[-c(1:2)], name = "5 number summary") + 
+  scale_fill_manual(values = cols[-c(1:2)], name = "5 number summary") +  
   geom_segment(aes(x = iqr[1], xend = iqr[2], y = .95, yend = .95), arrow = arrow(ends = "both", angle = 90, length = unit(.25, "cm"))) + 
   geom_text(aes(x = median(tmp$x), y = .98, label = "IQR"), size = 5) + 
   theme(axis.text.y = element_blank(), axis.ticks.y = element_blank(), axis.title.y = element_blank(), axis.title.x = element_blank(),
@@ -157,7 +157,7 @@ Are there any outliers?
 ggplot(tmp, aes(x = x)) + 
   geom_dotplot(fill = "white") + 
   geom_dotplot(data = filter(tmp, !is.na(lbl)), aes(fill = lbl)) +
-  scale_fill_manual(guide = F, values = cols[-c(1:2)], name = "5 number summary") + 
+  scale_fill_manual(guide = F, values = cols[-c(1:2)], name = "5 number summary") +  
   geom_rect(aes(xmin = 7, xmax = 12, ymin = .93, ymax = 1), fill = "white", color = "black") + 
   geom_segment(aes(x = 9, xend = 9, y = .93, yend = 1)) + 
   theme(axis.text.y = element_blank(), axis.ticks.y = element_blank(), axis.title.y = element_blank(), axis.title.x = element_blank(),
@@ -184,7 +184,7 @@ ggplot(tmp, aes(x = x)) +
   geom_rect(aes(xmin = 7, xmax = 12, ymin = .93, ymax = 1), fill = "white", color = "black") + 
   geom_segment(aes(x = 9, xend = 9, y = .93, yend = 1)) + 
   geom_segment(aes(x = 7, xend = 3, y = .965, yend = .965)) +
-  geom_segment(aes(x = 12, xend = 19.5, y = .965, yend = .965)) +
+  geom_segment(aes(x = 12, xend = 19.5, y = .965, yend = .965)) + 
   # geom_point(aes(x = 21, y = .965)) + 
   theme(axis.text.y = element_blank(), axis.ticks.y = element_blank(), axis.title.y = element_blank(), axis.title.x = element_blank(),
         legend.pos = c(1,1), legend.justification = c(1.01,1.01))
@@ -210,7 +210,7 @@ ggplot(tmp, aes(x = x)) +
   geom_rect(aes(xmin = 7, xmax = 12, ymin = .93, ymax = 1), fill = "white", color = "black") + 
   geom_segment(aes(x = 9, xend = 9, y = .93, yend = 1)) + 
   geom_segment(aes(x = 7, xend = 3, y = .965, yend = .965)) +
-  geom_segment(aes(x = 12, xend = 19.5, y = .965, yend = .965)) +
+  geom_segment(aes(x = 12, xend = 19.5, y = .965, yend = .965)) + 
   geom_point(aes(x = 21, y = .965)) + 
   theme(axis.text.y = element_blank(), axis.ticks.y = element_blank(), axis.title.y = element_blank(), axis.title.x = element_blank(),
         legend.pos = c(1,1), legend.justification = c(1.01,1.01))
@@ -239,7 +239,7 @@ diseases %>%
   # filter(!disease %in% c("Diphtheria", "Varicella Hospitalizations", "Pertussis")) %>%
   filter(disease %in% c("Measles", "Mumps", "Invasive Meningococcal Disease") | str_detect(disease, "Hepatitis [BC]")) %>%
   mutate(disease = str_replace(disease, "Invasive Meningococcal Disease", "Meningitis") %>% str_remove(", Acute")) %>%
-ggplot(aes(x = disease, y = count)) + geom_boxplot() + scale_y_continuous("# Cases") + 
+ggplot(aes(x = disease, y = count)) + geom_boxplot() + scale_y_continuous("# Cases") +  
   ggtitle("California Reportable Disease Cases, 2000-2018") + 
   theme(axis.text.y = element_text(angle = 90, hjust = .5, vjust = .5), axis.title.x = element_blank())
 
@@ -263,7 +263,7 @@ pockets_clean <- pockets %>%
 
 ggplot(pockets_clean, aes(x = length)) + geom_dotplot(fill = "grey", binwidth = .5, dotsize = 1) + 
   facet_grid(menWomen~measurement, scales = "free_x",space = "free_x") + 
-  scale_x_continuous("Size (cm)", breaks = (6:15)*2, minor_breaks = 12:30) +
+  scale_x_continuous("Size (cm)", breaks = (6:15)*2, minor_breaks = 12:30) + 
   theme(axis.text.y = element_blank(), axis.ticks.y = element_blank(), axis.title.y = element_blank()) +
   ggtitle("Front Pocket Maximum")
 ```
@@ -277,4 +277,180 @@ ggplot(pockets_clean, aes(x = length)) + geom_dotplot(fill = "grey", binwidth = 
 
 What do you conclude about the distributions of front pocket maximum dimensions when comparing Men's jeans to Women's jeans?
 
-Upload your graph and conclusions to Canvas.
+---
+## Exploration 6.1: Haircut Prices
+
+Work through Exploration 6.1A in groups. Upload your answers; you must complete at least 1-13. 
+
+If you complete 14-19, you may get extra credit.
+
+
+---
+class:middle,inverse,center
+## 6.2: Comparing Two Means: Simulation Based Approach
+
+---
+## 3S strategy
+
+1. Statistic
+2. Simulation
+3. Strength of Evidence
+
+***
+
+Our hypotheses are going to concern $\mu_1$ and $\mu_2$... specifically, the value of $\mu_1 - \mu_2$.
+
+We are interested in the long run (e.g. data collected forever) value of the difference between the group means
+
+$\begin{align}H_0&: \mu_1 - \mu_2 = 0\\H_A&: \mu_1 - \mu_2 \;\{\neq,>,< \} \;0\end{align}$
+
+---
+## Simulation 
+
+Group | Value | Simulated Group
+----- | ----- | ---------------
+1 | a | 1
+1 | b | 2 
+1 | c | 1
+2 | d | 1
+2 | e | 2 
+2 | f | 2
+
+Assign new group labels to existing values
+
+Think about sorting labeled index cards into stacks for each group.
+
+---
+## Simulation 
+
+![Simulation setup - index cards](figure/two-groups-simulation-start.png)
+
+---
+## Simulation 
+
+![Simulation round 1 - index cards](figure/two-groups-simulation-1.png)
+
+
+---
+## Simulation 
+
+![Simulation setup - index cards](figure/two-groups-simulation-2.png) 
+
+
+---
+## Simulation 
+
+![Simulation setup - index cards](figure/two-groups-simulation-3.png)
+
+At each simulation, we recalculate our statistic - e.g. $\overline x_1 - \overline x_2$
+
+---
+## Simulation
+
+Null hypothesis: Mean .underline[.hidden[measurement]] is the same in both groups
+
+One repetition: Rerandomizing groups for each .underline[.hidden[measurement]]
+
+Statistic: Difference in two group means
+
+---
+## Simulation
+
+Null hypothesis: Mean .underline[.red[measurement]] is the same in both groups
+
+One repetition: Rerandomizing groups for each .underline[.red[measurement]]
+
+Statistic: Difference in two group means
+
+---
+## Example - Didgeridoo playing and sleep apnea
+
+Scientists examined whether Didgeridoo lessons reduced the symptoms of sleep apnea as measured by the Epworth scale (0-24). Individuals were assessed for sleep apnea at the beginning and end of an 8-week period; the difference in scores was recorded. 14 individuals were randomly assigned to receive Didgeridoo lessons, while 11 did not receive any intervention.
+
+```{r}
+apnea <- tibble(group = rep(c("Didgeridoo", "Control"), c(14, 11)) %>% factor(levels = c("Control", "Didgeridoo"), ordered = T), 
+                difference = c(10, 9, 8, 3, 2, 3, 11, 2, 5, -1, 2, 5, 1, 4, 3, 0, 4, 1, 1, -3, 2, 1, 1, 0, 0)) %>%
+  mutate(color = ifelse(group == "Didgeridoo", "red", "white")) 
+res_means <- apnea %>% group_by(group) %>% summarize(difference = mean(difference))
+ggplot(apnea, aes(x = difference, fill = color)) + geom_dotplot() + facet_grid(group~.) + 
+    geom_vline(data = res_means, aes(xintercept = difference)) + 
+  scale_fill_identity() +  
+  scale_x_continuous("Difference in Epworth Scale Score after 8 weeks", breaks = seq(-10, 14, by = 2), limits = c(-4, 12)) + 
+  theme(axis.text.y = element_blank(), axis.title.y = element_blank(), axis.ticks.y = element_blank())
+```
+
+---
+## Example - Didgeridoo playing and sleep apnea
+
+$$\begin{align}H_0: \mu_D - \mu_C &= 0\\H_A: \mu_D - \mu_C &>0\end{align}$$
+
+In words:
+- $H_0$: The difference in the average change in Epworth Scale score between those who received Didgeridoo lessons and those that did not is 0
+
+- $H_A$: Those who received Didgeridoo lessons will have a higher average change in Epworth Scale score than those who did not.
+
+Because there is random assignment, if we conclude $H_A$, we can say the change is due to the Didgeridoo lessons.
+
+
+---
+## Example - Didgeridoo playing and sleep apnea
+
+```{r fig.width=8, fig.height=4, message = F, warning = F,  ffmpeg.format='gif', fig.show='animate', dev = "jpeg", dpi = 300}
+set.seed(240997823)
+actual <- apnea %>% group_by(group) %>% summarize(difference = mean(difference))
+res <- tibble(i = 1:100, mean_diff = 0)
+for (i in 1:100) {
+  apnea$groupnew <- sample(apnea$group, size = 25, replace = F) 
+  res_means <- apnea %>% group_by(groupnew) %>% summarize(difference = mean(difference))
+  res$mean_diff[i] <- diff(res_means$difference)
+  p1 <- ggplot(apnea, aes(x = difference, fill = color)) + geom_dotplot() + facet_grid(groupnew~.) + 
+    geom_vline(data = res_means, aes(xintercept = difference)) + 
+    scale_fill_identity() + 
+    scale_x_continuous("Difference in Epworth Scale Score after 8 weeks", breaks = seq(-10, 14, by = 2), limits = c(-4, 12)) + 
+    theme(axis.text.y = element_blank(), axis.title.y = element_blank(), axis.ticks.y = element_blank())
+  
+  p2 <- ggplot() + 
+    geom_text(aes(x = diff(actual$difference), y = 30, label = "Observed"), color = "grey30", hjust = 1.1) + 
+    geom_vline(xintercept = diff(actual$difference), color = "grey30") +
+    geom_vline(xintercept = diff(res_means$difference)) +
+    geom_histogram(aes(x = res$mean_diff[1:i]), center = 0, binwidth = 1, fill = "white", color = "black") + 
+    ylim(c(0, 30)) + xlim(c(-5, 5)) + xlab("Avg Didgeridoo score - Control score") +
+    theme(axis.title.y = element_blank())
+  
+  gridExtra::grid.arrange(p1, p2, nrow = 1)
+}
+
+```
+
+During each simulation, the group labels are shuffled and the difference in the means is calculated. The resulting simulation statistic distribution is used to calculate the p-value.
+
+---
+## Example - Didgeridoo playing and sleep apnea
+
+```{r}
+res <- res %>% mutate(extreme = ifelse(mean_diff > diff(actual$difference), "red", "white"))
+ 
+ggplot() + 
+    geom_text(aes(x = diff(actual$difference), y = 30, label = "Observed"), color = "grey30", hjust = 1.1) + 
+    geom_vline(xintercept = diff(actual$difference), color = "grey30") +
+    geom_histogram(data = res, aes(x = mean_diff, fill = extreme), center = 0, binwidth = 1, color = "black") +
+  scale_fill_identity() + 
+  annotate("text", x = -Inf, y = Inf, hjust = -0.1, vjust = 1.1, label = sprintf("p < %0.2f", mean(res$extreme == "red") + 0.01)) + 
+    ylim(c(0, 30)) + xlim(c(-5, 5)) + xlab("Avg Didgeridoo score - Control score") +
+    theme(axis.title.y = element_blank())
+
+```
+
+Interpretation: 
+
+--
+
+.red[
+With p < 0.01, we have very strong evidence against the null hypothesis that the two groups experienced equivalent reductions in Epworth Scale scores. Therefore, we reject $H_0$ and conclude that it is more plausible that the group who received Didgeridoo lessons had a higher average reduction in Epworth Scale score than the control group. There is evidence that Didgeridoo lessons reduce the symptoms of sleep apnea.
+]
+
+
+---
+## Exploration 6.2
+
+Complete Exploration 6.2, questions 1 - 15 in your groups. Upload to Canvas.

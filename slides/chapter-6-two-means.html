@@ -16,7 +16,7 @@ class: center, middle, inverse, title-slide
 ---
 
 &lt;script type="text/x-mathjax-config"&gt;
-  MathJax.Hub.Config({ TeX: { extensions: ["color.js"] }});
+  MathJax.Hub.Config({ TeX: { extensions: ["color.js", "amsmath.js"] }});
 &lt;/script&gt;
 
 
@@ -26,8 +26,8 @@ class: center, middle, inverse, title-slide
 .pull-left[
 .large[By Date]
 
-- March 31: [start](#3) - [end](#14)
-- April 2: [start](#15) - [end](#31)
+- March 31: [start](#3) - [end](#15)
+- April 2: [start](#16) - [end](#31)
 - April 7: [start](#32) - [end](#49)
 
 ]
@@ -171,7 +171,136 @@ Using the graph paper on the next page, create boxplots for each of the dimensio
 
 What do you conclude about the distributions of front pocket maximum dimensions when comparing Men's jeans to Women's jeans?
 
-Upload your graph and conclusions to Canvas.
+---
+## Exploration 6.1: Haircut Prices
+
+Work through Exploration 6.1A in groups. Upload your answers; you must complete at least 1-13. 
+
+If you complete 14-19, you may get extra credit.
+
+
+---
+class:middle,inverse,center
+## 6.2: Comparing Two Means: Simulation Based Approach
+
+---
+## 3S strategy
+
+1. Statistic
+2. Simulation
+3. Strength of Evidence
+
+***
+
+Our hypotheses are going to concern `\(\mu_1\)` and `\(\mu_2\)`... specifically, the value of `\(\mu_1 - \mu_2\)`.
+
+We are interested in the long run (e.g. data collected forever) value of the difference between the group means
+
+`\(\begin{align}H_0&amp;: \mu_1 - \mu_2 = 0\\H_A&amp;: \mu_1 - \mu_2 \;\{\neq,&gt;,&lt; \} \;0\end{align}\)`
+
+---
+## Simulation 
+
+Group | Value | Simulated Group
+----- | ----- | ---------------
+1 | a | 1
+1 | b | 2 
+1 | c | 1
+2 | d | 1
+2 | e | 2 
+2 | f | 2
+
+Assign new group labels to existing values
+
+Think about sorting labeled index cards into stacks for each group.
+
+---
+## Simulation 
+
+![Simulation setup - index cards](figure/two-groups-simulation-start.png)
+
+---
+## Simulation 
+
+![Simulation round 1 - index cards](figure/two-groups-simulation-1.png)
+
+
+---
+## Simulation 
+
+![Simulation setup - index cards](figure/two-groups-simulation-2.png) 
+
+
+---
+## Simulation 
+
+![Simulation setup - index cards](figure/two-groups-simulation-3.png)
+
+At each simulation, we recalculate our statistic - e.g. `\(\overline x_1 - \overline x_2\)`
+
+---
+## Simulation
+
+Null hypothesis: Mean .underline[.hidden[measurement]] is the same in both groups
+
+One repetition: Rerandomizing groups for each .underline[.hidden[measurement]]
+
+Statistic: Difference in two group means
+
+---
+## Simulation
+
+Null hypothesis: Mean .underline[.red[measurement]] is the same in both groups
+
+One repetition: Rerandomizing groups for each .underline[.red[measurement]]
+
+Statistic: Difference in two group means
+
+---
+## Example - Didgeridoo playing and sleep apnea
+
+Scientists examined whether Didgeridoo lessons reduced the symptoms of sleep apnea as measured by the Epworth scale (0-24). Individuals were assessed for sleep apnea at the beginning and end of an 8-week period; the difference in scores was recorded. 14 individuals were randomly assigned to receive Didgeridoo lessons, while 11 did not receive any intervention.
+
+&lt;img src="chapter-6-two-means_files/figure-html/unnamed-chunk-11-1.png" width="80%" style="display: block; margin: auto;" /&gt;
+
+---
+## Example - Didgeridoo playing and sleep apnea
+
+`$$\begin{align}H_0: \mu_D - \mu_C &amp;= 0\\H_A: \mu_D - \mu_C &amp;&gt;0\end{align}$$`
+
+In words:
+- `\(H_0\)`: The difference in the average change in Epworth Scale score between those who received Didgeridoo lessons and those that did not is 0
+
+- `\(H_A\)`: Those who received Didgeridoo lessons will have a higher average change in Epworth Scale score than those who did not.
+
+Because there is random assignment, if we conclude `\(H_A\)`, we can say the change is due to the Didgeridoo lessons.
+
+
+---
+## Example - Didgeridoo playing and sleep apnea
+
+&lt;img src="chapter-6-two-means_files/figure-html/unnamed-chunk-12.gif" width="80%" style="display: block; margin: auto;" /&gt;
+
+During each simulation, the group labels are shuffled and the difference in the means is calculated. The resulting simulation statistic distribution is used to calculate the p-value.
+
+---
+## Example - Didgeridoo playing and sleep apnea
+
+&lt;img src="chapter-6-two-means_files/figure-html/unnamed-chunk-13-1.png" width="80%" style="display: block; margin: auto;" /&gt;
+
+Interpretation: 
+
+--
+
+.red[
+With p &lt; 0.01, we have very strong evidence against the null hypothesis that the two groups experienced equivalent reductions in Epworth Scale scores. Therefore, we reject `\(H_0\)` and conclude that it is more plausible that the group who received Didgeridoo lessons had a higher average reduction in Epworth Scale score than the control group. There is evidence that Didgeridoo lessons reduce the symptoms of sleep apnea.
+]
+
+
+---
+## Exploration 6.2
+
+Complete Exploration 6.2, questions 1 - 15 in your groups. Upload to Canvas.
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
