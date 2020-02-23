@@ -453,4 +453,199 @@ With p < 0.01, we have very strong evidence against the null hypothesis that the
 ---
 ## Exploration 6.2
 
-Complete Exploration 6.2, questions 1 - 15 in your groups. Upload to Canvas.
+Complete Exploration 6.2, questions 1 - 15 in your groups.
+
+
+---
+class:center,middle,inverse
+## 6.3: Comparing Two Means: Theory-Based Approach
+
+---
+## Example 6.3: Breastfeeding and Intelligence
+
+An article published in the journal Pediatrics (1999) studied whether and how children who were breastfed during infancy differed from those who werent breastfed. The study involved 323 white children recruited at birth in 1980-1981 from four Western Michigan Hospitals. After some initial exploration, the researchers deemed the participants in the study were representative of the community in terms of social class, maternal education, age, marital status, and sex of infant.
+
+- Is this an experiment or an observational study? .hidden[Investigators did not assign treatments (breastfeeding/not) to infants]
+
+- Is this a random sample? .hidden[No - infants were not randomly selected - they were 'recruited']
+
+- Is this a representative sample? .hidden[Possibly, based on initial exploration by the researchers. If the population of interest is white infants, then maybe.]
+
+- Can we make causal conclusions (e.g. breastfeeding causes increased intelligence) .hidden[No, we can't make causal conclusions, because there was no random assignment of treatments to observational units]
+
+---
+## Example 6.3: Breastfeeding and Intelligence
+
+An article published in the journal Pediatrics (1999) studied whether and how children who were breastfed during infancy differed from those who weren't breastfed. The study involved 323 white children recruited at birth in 1980-1981 from four Western Michigan Hospitals. After some initial exploration, the researchers deemed the participants in the study were representative of the community in terms of social class, maternal education, age, marital status, and sex of infant.
+
+- Is this ~~an experiment~~ or an observational study? .red[Investigators did not assign treatments (breastfeeding/not) to infants]
+
+- Is this a random sample? .red[No - infants were not randomly selected - they were 'recruited']
+
+- Is this a representative sample? .red[Possibly, based on initial exploration by the researchers. If the population of interest is white infants, then maybe.]
+
+- Can we make causal conclusions (e.g. breastfeeding causes increased intelligence) .red[No, we can't make causal conclusions, because there was no random assignment of treatments to observational units]
+
+
+---
+## Example 6.3: Breastfeeding and Intelligence
+
+The researchers followed up with the children at age 4, assessing their abilities using the McCarthy Scales of Children's Abilities. The GCI (General Cognitive Index) was recorded for each child, along with whether or not the child was breastfed.
+
+What should the researchers use as their hypotheses, in words?
+
+
+
+---
+## Example 6.3: Breastfeeding and Intelligence
+
+The researchers followed up with the children at age 4, assessing their abilities using the McCarthy Scales of Children's Abilities. The GCI (General Cognitive Index) was recorded for each child, along with whether or not the child was breastfed.
+
+What should the researchers use as their hypotheses, in words?
+
+.red[Null: There is no underlying association between breastfeeding during infancy and GCI at age 4.]
+
+.red[Alt: There is an association between breastfeeding during infancy and GCI at age 4.]
+
+
+
+---
+## Example 6.3: Breastfeeding and Intelligence
+
+The researchers followed up with the children at age 4, assessing their abilities using the McCarthy Scales of Children's Abilities. The GCI (General Cognitive Index) was recorded for each child, along with whether or not the child was breastfed.
+
+What are the hypotheses in symbols?
+
+
+---
+## Example 6.3: Breastfeeding and Intelligence
+
+The researchers followed up with the children at age 4, assessing their abilities using the McCarthy Scales of Children's Abilities. The GCI (General Cognitive Index) was recorded for each child, along with whether or not the child was breastfed.
+
+What are the hypotheses in symbols?
+
+.red[
+$$\begin{align}H_0: \mu_{BF} - \mu_{Not}&= 0\\H_A: \mu_{BF} - \mu_{Not} &\neq 0\end{align}$$
+]
+
+OR
+
+.red[
+$$\begin{align}H_0: \mu_{BF} &= \mu_{Not}\\H_A: \mu_{BF} &\neq \mu_{Not}\end{align}$$
+]
+
+
+
+---
+## Example 6.3: Breastfeeding and Intelligence
+
+Summary Stats:
+
+Group | n | Sample mean | Sample SD
+----- | - | ----------- | ---------
+Breastfed | 237 | 105.30 | 14.50
+Not Breastfed | 85 | 100.90 | 14.00
+
+Simulated Data:
+```{r, fig.width = 8, fig.height = 4}
+set.seed(109248379)
+bf <- tibble(
+  status = rep(c("Breastfed", "Not Breastfed"), c(237, 85)),
+  GCI = c(rnorm(237, 105.30, 14.5), rnorm(85, 100.90, 14))
+)
+
+bf_stats <- bf %>% group_by(status) %>%
+  summarize(
+    y25 = quantile(GCI, .25),
+    y50 = quantile(GCI, .5),
+    y75 = quantile(GCI, .75),
+    ymin = pmax(y25 - 1.5*(y75-y25), min(GCI)),
+    ymax = pmin(y75 + 1.5*(y75-y25), max(GCI))
+  )
+
+ggplot() + 
+  geom_histogram(data = bf, aes(x = GCI), binwidth = 5, fill = "grey", color = "black") + 
+  scale_y_continuous("", breaks = (0:4)*10) +
+  geom_rect(data = bf_stats, aes(xmin = y25, xmax = y50, ymin = -10, ymax = -1), color = "red", fill = "white") +  
+  geom_rect(data = bf_stats, aes(xmin = y50, xmax = y75, ymin = -10, ymax = -1), color = "red", fill = "white") +  
+  geom_segment(data = bf_stats, aes(x = y25, xend = ymin, y = -5, yend = -5), color = "red") + 
+  geom_segment(data = bf_stats, aes(x = y75, xend = ymax, y = -5, yend = -5), color = "red") + 
+  facet_grid(status ~ .)
+
+```
+
+
+---
+## Example 6.3: Breastfeeding and Intelligence
+
+CI Option 1: Theory-ish based Confidence Interval
+
+- Statistic $\pm$ 2 SD(Statistic)    
+SD of difference in means from simulation
+
+```{r}
+set.seed(109248379)
+bf <- tibble(
+  status = rep(c("Breastfed", "Not Breastfed"), c(237, 85)),
+  GCI = c(rnorm(237, 105.30, 14.5), rnorm(85, 100.90, 14))
+)
+stat <- bf %>% group_by(status) %>% summarize(GCI = mean(GCI)) %>%
+    summarize(GCI_diff = GCI[status == "Breastfed"] - GCI[status == "Not Breastfed"]) %>%
+  unlist()
+
+bf_sim <- purrr::map_df(1:1000, function(x) {
+  bf %>%
+    mutate(status = sample(status, nrow(bf), replace = F)) %>%
+    group_by(status) %>%
+    summarize(GCI = mean(GCI)) %>%
+    summarize(x = x, GCI_diff = GCI[status == "Breastfed"] - GCI[status == "Not Breastfed"])
+}) %>%
+  mutate(extreme = abs(GCI_diff) >= abs(stat),
+         color = ifelse(extreme, "red", "grey"))
+
+ggplot(bf_sim, aes(x = GCI_diff, fill = color)) + 
+  scale_fill_identity() + 
+  geom_histogram(color = "black", binwidth = .2) + 
+  scale_x_continuous("Avg. GCI(Breastfed) - Avg. GCI(Not)") + 
+  annotate("text", x = -Inf, y = Inf, hjust = 0, vjust = 1.1, label = sprintf("N = 1000\nMean = %0.3f\nSD = %0.3f\nExtreme = %d", mean(bf_sim$GCI_diff), sd(bf_sim$GCI_diff), sum(bf_sim$extreme))) + 
+  theme(axis.title.y = element_blank()) + 
+  ggtitle("Simulated Mean Differences under H0")
+```
+
+`r round(stat, 3)` $\pm$ 2 (`r round(sd(bf_sim$GCI_diff), 3)`) = `r sprintf("(%0.3f, %0.3f)", stat - 2 * sd(bf_sim$GCI_diff),  mean(bf_sim$GCI_diff) + 2 * sd(bf_sim$GCI_diff))`
+
+---
+## Example 6.3: Breastfeeding and Intelligence
+
+CI Option 2: Theory based Confidence Interval
+
+- Statistic $\pm$ 2 SD(Statistic)    
+SD of difference in means from formula
+
+$$\begin{align}SD(\overline x_1 - \overline x_2) &= \sqrt{\frac{s_1^2}{n_1} + \frac{s_2^2}{n_2}} \\&= \sqrt{\frac{14.5^2}{237} + \frac{14.0^2}{85}} \\&= \sqrt{0.887 + 2.306} \\&= 1.787\end{align}$$
+`r round(stat, 3)` $\pm$ 2 (1.787) = `r sprintf("(%0.3f, %0.3f)", stat - 2 * 1.787,  mean(bf_sim$GCI_diff) + 2 * 1.787)`
+
+On a test, use Option 2 unless it explicitly says you may use the simulation standard error
+
+---
+## Example 6.3: Breastfeeding and Intelligence
+
+A standardized statistic is thus
+
+$$t = \frac{\text{statistic} - \text{hypothesized value}}{SE(\text{statistic})} = \frac{\overline x_1 - \overline x_2 - 0}{\sqrt{\frac{s_1^2}{n_1} + \frac{s_2^2}{n_2}}}$$ 
+
+***
+### Validity Conditions
+
+Either
+
+- a symmetric distribution in both groups
+
+OR
+
+- at least 20 observations in each group and sample distributions that are not highly skewed
+
+If the validity conditions hold, you can use the guideline that if $t > 2$, then the p-value is probably $< 0.05$.
+
+---
+## Factors Affecting the Width of a CI
