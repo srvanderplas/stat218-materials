@@ -303,7 +303,7 @@ Simulation Process:
 
 ## Let's Do An Example
 
-Can a person's dominant hand click at a different speed than their other hand? Last semester, I asked each of my STAT 218 students to see how many clicks they can do in 5 seconds. I randomly assigned which hand each person used first. I didn’t do a wash-out period for the students. 
+Can a person's dominant hand click at a different speed than their other hand? Last semester, I asked each of my STAT 218 students to see how many clicks they can do in 5 seconds. I randomly assigned which hand each person used first. I didn't do a wash-out period for the students. 
 
 
 Pair | DominantHand | WeakHand | Difference
@@ -382,7 +382,7 @@ Simulation in Matched Pairs Applet:
   - Confidence Intervals
   
 .center[
-<img src="chapter-7-paired-design_files/simStdStat.jpg" alt="A screenshot of the Rossman Chance Applets" width="85%"/>
+<img src="chapter-7-paired-design_files/simStdStat.jpg" alt="A screenshot of the Rossman Chance Applets" width="100%"/>
 ]
   
 
