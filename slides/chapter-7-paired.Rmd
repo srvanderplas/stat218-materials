@@ -29,14 +29,14 @@ theme_set(theme_bw())
 .pull-left[
 .large[By Date]
 
-- April 9: [start](#3) - [end](#14)
-- April 14: [start](#15) - [end](#31)
-- April 16: [start](#32) - [end](#49)
+- April 9: [start](#3) - [end](#16)
+- April 14: [start](#17) - [end](#27)
+- April 16: [start](#28) - [end](#33)
 
 ]
 .pull-right[
 .large[By Section]
-- 7.1: [start](#3) - [end](#15)
-- 7.2: [start](#16) - [end](#36)
-- 7.3: [start](#37) - [end](#49)
+- 7.1: [start](#3) - [end](#16)
+- 7.2: [start](#17) - [end](#27)
+- 7.3: [start](#28) - [end](#33)
 ]

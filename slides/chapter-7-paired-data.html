@@ -27,16 +27,16 @@ class: center, middle, inverse, title-slide
 .pull-left[
 .large[By Date]
 
-- April 9th: [start](#3) - [end](#10)
-- April 14th: [start](#11) - [end](#19)
-- April 16th: [start](#11) - [end](#19)
+- April 9: [start](#3) - [end](#16)
+- April 14: [start](#17) - [end](#27)
+- April 16: [start](#28) - [end](#33)
 
 ]
 .pull-right[
 .large[By Section]
-- 7.1: [start](#3) - [end](#10)
-- 7.2: [start](#11) - [end](#19)
-- 7.3: [start](#11) - [end](#19)
+- 7.1: [start](#3) - [end](#16)
+- 7.2: [start](#17) - [end](#27)
+- 7.3: [start](#28) - [end](#33)
 ]
 
 ---
@@ -106,7 +106,7 @@ Instead of randomly assigning students to each of the two groups, each student w
   - Each horse run a 100 yard dash with the shoes a rancher currently uses vs. a new shoe they may buy
 
 
-  - A person gets a medicine, then a placebo a few days later.
+  - A person gets a medicine, then a placebo a few days later, or visa-versa
   
 .center[
 &lt;img src="chapter-7-paired-design_files/horseRacing.gif" alt="A race horse and a jockey" width="75%"/&gt;
@@ -134,15 +134,16 @@ Instead of randomly assigning students to each of the two groups, each student w
   - order of tasks
   - carryover effects
 
-- To get rid of the task order confounding variable: 
+- To eliminate task order confounding variable: 
   
   - Randomize which task is first
+  
+  - Randomize group assignment to each subject in a pair
 
-- To get rid of the carryover effects:
-
-  - Rest period (wash-out period) to eliminate a carry-over effect of the first task to the second
+- To eliminate carryover effects, use a rest period (wash-out period) to eliminate a carry-over effect of the first task to the second
 
   - Wait for a drug to leave the body
+  
   - Rest to recover from fatique
 
   
@@ -153,7 +154,7 @@ Instead of randomly assigning students to each of the two groups, each student w
 - When we expect a strong association between repeated observations within a pair
 
 - Why use Paired Designs?
-  - In some scenarios, you will get more informative results
+  - In some scenarios, you will get more informative results than independent groups
 
 
 ---
@@ -163,7 +164,7 @@ Instead of randomly assigning students to each of the two groups, each student w
 
 Parameter: `\(\mu_D\)`
 
-- The long-run mean difference of _______ between group 1 and group 2
+- The long-run mean difference of ____ _____ ___ between group 1 and group 2
 
 Hypotheses:
 
@@ -173,7 +174,7 @@ Hypotheses:
 
 Statistics:
 
-- Sample mean difference between two groups: `\(\overline{x}\)`
+- Sample mean difference between two groups: `\(\overline{x_D}\)`
 
 - Sample standard deviation of the differences: `\(s_D\)`
 
@@ -187,7 +188,7 @@ Observational studies can have paired designs too!
 
 ## Practice Problems
 
-Student researchers, who were big fans of Jeopardy, wanted to see whether an adult’s reaction time is different if they hit a button once they see a flashing light vs. hear a noise. They randomly sampled 55 adults. To start, the adult subjects would have both hands behind their back. Then, the researchers had a computer program display a red circle. When it flashed or when the computer made a loud noise, the subjects were to hit the buzzer as fast as they could. The computer would calculate the reaction time in seconds. Researchers recorded the reaction time. Each subject did both tests. The researchers randomly determined which test was first (flashing button vs. a noise) was completed first.
+Student researchers, who were big fans of Jeopardy, wanted to see whether an adult's reaction time is different if they hit a button once they see a flashing light vs. hear a noise. They randomly sampled 55 adults. To start, the adult subjects would have both hands behind their back. Then, the researchers had a computer program display a red circle. When it flashed or when the computer made a loud noise, the subjects were to hit the buzzer as fast as they could. The computer would calculate the reaction time in milliseconds. Researchers recorded the reaction time. Each subject did both tests. The researchers randomly determined which test (flashing button vs. a noise) was completed first.
 
 - Is this an indpendent groups or paired design? 
 
@@ -197,9 +198,9 @@ Student researchers, who were big fans of Jeopardy, wanted to see whether an adu
 ---
 ## Practice Problems
 
-On March 19th 2019, Lincoln residents and businesses were urged to continue to voluntarily reduce water consumption by 25 percent (see the article here). UNL’s Institute of Agriculture and Natural Resources wanted to see if voluntary water restrictions reduced water consumption.
+On March 19th 2019, Lincoln residents and businesses were urged to continue to voluntarily reduce water consumption by 25 percent. UNL's Institute of Agriculture and Natural Resources wanted to see if voluntary water restrictions reduced water consumption.
 
-They went to Old Cheney Place apartments. They randomly gave a flier notifying residents of voluntary water restrictions to 100 one-bedroom apartments. For the control group, they gave a flier to 100 other apartments  and only advertised the CASNR week food drive. 
+They delivered fliers to 200 Old Cheney Place apartments. They randomly gave a flier notifying residents of voluntary water restrictions to a treatment group (100 one-bedroom apartments). For the control group, they gave a flier to 100 other apartments  and only advertised the CASNR week food drive. 
 
 - Is this an indpendent groups or paired design? 
 
@@ -219,15 +220,15 @@ class:inverse,middle,center
 ---
 ## Review
 
-Data is observed in pairs. Each observational unit is a pair. 
-- Now, a subject in group 1 is related to its partner in group 2.
+Data is observed in pairs. Each observational unit is a pair
+- Now, a subject in group 1 is related to its partner in group 2
 - Do a paired design when you expect a strong association between repeated observations within a pair
   
 **Response Variable**: The difference between the two groups
 
 Parameter: `\(\mu_D\)`
 
-- The long-run mean difference of _______ between group 1 and group 2
+- The long-run mean difference of _____ ____ __ between group 1 and group 2
 
 Hypotheses:
 
@@ -266,8 +267,14 @@ Statistics:
 ## Introduction to Simulation
 
 - Remember, when performing simulations, we are assuming the null hypothesis is true! 
-  - Therefore, we assume there is no association between the explanatory and response variables.
-  - In other words, we assume that `\(\mu_D = 0\)`
+
+  - Therefore, we assume there is no association between the explanatory and response variables
+  
+  - In other words, we assume `\(\mu_D = 0\)`
+  
+- Therefore, the two measurements in a pair are different by chance. 
+
+  - We can swap the two!
 
 
 ---
@@ -286,7 +293,7 @@ Simulation Process:
 
 3. Calculate the new difference for each pair
 
-4. Average the differences for `\(\overline{x_D}\)`
+4. Average the differences = `\(\overline{x_D}\)`
 
 5. Repeat steps 1 through 4 many times
 
@@ -294,7 +301,7 @@ Simulation Process:
 
 ## Let's Do An Example
 
-Can a person's dominant hand click at a different speed than their other hand? Last semester, I asked each of my STAT 218 students to see how many clicks they can do in 5 seconds. I randomly assigned which hand each person used first. I didn’t do a wash-out period for the students. 
+Can a person's dominant hand click at a different speed than their other hand? Last semester, I asked each of my STAT 218 students to see how many clicks they can do in 5 seconds. I randomly assigned which hand each person used first. I didnât do a wash-out period for the students. 
 
 
 Pair | DominantHand | WeakHand | Difference
@@ -317,19 +324,19 @@ Do two simulation reps and calculate the new sample average differences
 
 Simulation in Matched Pairs Applet: 
 
-1. Download Excel File
+1. Download Excel file
 
 2. Copy and Paste Excel File data into the left-hand box. 
 
-3. ‘Use Data’ button
+3. "Use Data" button
 
-4. Click ‘Randomize’ checkbox
+4. Click "Randomize" checkbox
 
 5. Input number of simulations (like 1000)
 
 6. Randomize Button
 
-7. P-value using “Count Samples: (Beyond, greater than, or less than) Observed Statistic”
+7. P-value using "Count Samples: (Beyond, greater than, or less than) Observed Statistic"
 
 8. P-value is the proportion in the red text
 
@@ -357,7 +364,7 @@ Simulation in Matched Pairs Applet:
 
 **1.Statistic:** Compute the statistic in the sample: `\(\overline{x_D}\)`
 
-**2.Simulate:** Identify a chance model that reflects the null hypothesis. We tossed a coin for each pair. If heads, swap the measurements.
+**2.Simulate:** Identify a chance model that reflects the null hypothesis. We tossed a coin for each pair. If heads, swap the measurements. Repeat many times. 
 
 **3.Strength of evidence:** How many statistics in our 1,000 repetitions were as extreme or more extreme than our observed `\(\overline{x_D}\)`
 
@@ -400,7 +407,9 @@ class:inverse,middle,center
 ---
 ## Standardized Statistic
 
+.large[
 `\(t = \frac{\overline{x_D} - \mu_{D0}}{\frac{s_D}{\sqrt{n_D}}}\)`
+]
 
 `\(\overline{x_D}\)` = observed mean difference of the pairs
 
@@ -429,9 +438,11 @@ t-value range | Interpretation
 
 ## Theory-Based Confidence Interval
 
+.large[
 - Confidence Interval: `\(\overline{x_D} \pm multiplier*\frac{s_D}{\sqrt{n_D}}\)`
+]
 
-- We are 95% confident the true mean difference of {response variable} between {group 1} and {group 2} is within the interval ____ and ____. 
+- We are 95% confident the true mean difference of {response variable} between {group 1} and {group 2} is within the interval [____] and [____]. 
 
 
 - Is 0 in the interval? 
