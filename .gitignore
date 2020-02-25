@@ -7,7 +7,7 @@ explorations/*
 previous-course-materials/*.zip
 *.log
 Syllabus-*.tex
-exams/*
+exams
 slides/*_cache/*
 slides/*_cache
 grades/*
