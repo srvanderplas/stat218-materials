@@ -1,0 +1,117 @@
+---
+title: "Chapter 4 Scenarios"
+output: 
+  pdf_document:
+    template: template.tex
+geometry: margin=1in,headsep=.2in
+params:
+  key: true
+---
+
+```{r fix-latex, results='asis', echo = F}
+if (params$key) {
+  cat("\\newcommand{\\answer}[1]{{\\color{red}\\emph{#1}}}")
+  cat("\\providecommand{\\tightlist}{\\setlength{\\itemsep}{1em}\\setlength{\\parskip}{0pt}}")
+  cat("\\chead{\\color{red}{KEY}}")
+} else {
+  # cat("\\newcommand{\\answer}[1]{{\\color{white}#1}}") 
+  cat("\\newcommand{\\answer}[1]{{\\leavevmode\\protect\\phantom{#1}}}")
+  cat("\\providecommand{\\tightlist}{\\setlength{\\itemsep}{1em}\\setlength{\\parskip}{0pt}}")
+}
+
+```
+
+
+# Effect of different types of textiles on sexual activity
+
+Note: This study won the 2016 Ig Nobel Prize in Reproduction. \footnote{https://www.improbable.com/ig-about/winners/\#ig2016}
+
+The effect of wearing different types of textiles on sexual activity was studied in 75 rats which were randomly assigned to one of five equal groups: four test groups and one control. Each of the four test groups were dressed in one type of textile pants made of either 100% polyester, 50/50% polyester/cotton mix, 100% cotton or 100% wool. Sexual behaviour was assessed before and after 6 and 12 months of wearing the pants and 6 months after their removal, using the ratio of intromission to mounting (I/M) and the electrostatic potentials generated on the penis and scrotum, measured by electrostatic kilovoltameter.
+
+1. What is the explanatory variable? Is it categorical or quantitative?    
+\longanswer\answer{The explanatory variable is the type of textile used in the rats' clothing (or control if no pants were worn). It is categorical.}
+2. What are the response variable(s)? Are they categorical or quantitative?    
+\longanswer\answer{Broadly, sexual behavior is the response variable, measured by the quantitative variables I/M ratio and genital electrostatic potential. }
+3. Is this an observational study or an experiment? Why?    
+\longanswer\answer{This is an experiment - the rats were randomly assigned to an experimenter-controlled treatment. }
+4. What is the observational/experimental unit?    
+\longanswer\answer{A rat}
+5. What is the population?    
+\longanswer\answer{Rats; that is, the population of all rats, past, present, and future.}
+6. Was there random assignment?    
+\longanswer\answer{Yes, there was random assignment}
+7. Did the experimenters use a random sample?    
+\longanswer\answer{No, there is no evidence that the experimenters randomly sampled rats.}
+8. Can you think of any sources of bias which might be avoided by using a random sample?
+\longanswer\answer{If the species of lab rat used has meaningfully different sexual behavior than most wild rats, that might cause a problem.}
+9. Can you think of a way to conduct a random sample in this experiment?     
+\longanswer\answer{It would be difficult to design a way to randomly sample wild rats in a representative way; obtaining a sampling frame of all rats in the world (or even in one local area) would be astonishingly difficult.}
+10. What conclusions can be drawn about the population?    
+\longanswer\answer{Because there is random assignment of experimental units to treatments, we can make causal conclusions about the effect of pants fabric composition on the sexual behavior of rats.}
+
+
+# On the reception and detection of pseudo-profound bullshit
+
+Note: This study won the 2016 Ig Nobel Peace Prize. \footnote{https://www.improbable.com/ig-about/winners/\#ig2016}
+
+Full Study Description:
+
+In this study, we focus on pseudo-profound bullshit, which consists of seemingly impressive assertions that are presented as true and meaningful but are actually vacuous. We presented participants with bullshit statements consisting of buzzwords randomly organized into statements with syntactic structure but no discernible meaning. The results support the idea that some people are more receptive to this type of bullshit and that detecting it is not merely a matter of skepticism but rather an ability to identify deception by vagueness in otherwise impressive claims. Our results also suggest that a bias toward accepting statements as true may be an important component of pseudo-profound bullshit receptivity. 
+
+## Study 1
+
+University of Waterloo undergraduate psychology students participated in this study in exchange for course credit. Participants were presented with ten statements that have syntactic structure but that consist of a series of randomly selected vague buzzwords. They were then asked to indicate the relative profundity of each statement on a scale from 1 (not at all profound) to 5 (very profound). 
+
+Participants also completed a series of cognitive tests, receiving a score indicating their susceptability to logical fallacies and cognitive shortcuts. In addition, participants completed an inventory measuring belief in mythical beings, where high scores are indicative of a greater likelihood of belief in the absence of evidence. The goal of Study 1 was to validate the bullshit receptivity scale (the 10 statements selected from vague buzzwords) and establish the relationship between the scale and the fallacy and belief scores.
+
+1. What are the explanatory variables? Are they categorical or quantitative?    
+\longanswer\answer{The explanatory variables are the quantitative scores for cognitive fallacy susceptibility and belief in the absence of proof.}
+2. What are the response variable(s)? Are they categorical or quantitative?    
+\longanswer\answer{The response variable is the average rating of the vague statements on the bullshit receptivity scale.}
+3. Is this an observational study or an experiment? Why?    
+\longanswer\answer{This is an observational study; the experimenters did not control treatments in any way }
+4. What is the observational/experimental unit?    
+\longanswer\answer{A university of waterloo undergraduate student}
+5. What is the population?    
+\longanswer\answer{University of Waterloo psychology students}
+6. Was there random assignment?    
+\longanswer\answer{No, there was no random assignment.}
+7. Did the experimenters use a random sample?    
+\longanswer\answer{No, participants in the study were volunteers.}
+8. Can you think of any sources of bias which might be avoided by using a random sample?
+\longanswer\answer{Psychology students might be more likely than the general undergraduate population to be scientifically minded or skeptical about psychology experiments.}
+9. Can you think of a way to conduct a random sample in this experiment?     
+\longanswer\answer{Obtain a list of all undergraduate students, randomly sample those students, and ask them to participate in the study.}
+10. What conclusions can be drawn about the population?    
+\longanswer\answer{Because there is no random assignment to treatment groups, we cannot make causal conclusions. However, as long as the sample is seen as representative of the broader population, }
+
+
+
+1. What is the explanatory variable? Is it categorical or quantitative?
+2. What is the response variable? Is it categorical or quantitative?
+3. Is this an observational study or an experiment? Why?
+4. What is the observational/experimental unit?
+5. What is the population?
+6. Was there random assignment?
+7. What conclusions can be drawn about the population?
+8. Would you look for an association between the explanatory and response variables, or a causal effect?
+
+
+Note: Study 2 is essentially a replication of Study 1 using real-world (not randomly generated) statements. 
+
+## Study 3
+
+In Studies 1 and 2, the authors established a statistically reliable bullshit receptivity scale. It remains unclear, however, whether these associations are driven by a bias toward accepting pseudo-profound bullshit as meaningful or a failure to detect the need for skepticism (or both) when skepticism is warranted. 
+
+A total of 125 participants were recruited from Amazon’s Mechanical Turk (an online service) in return for pay. Only American residents were permitted to sign up for the study. All participants reported speaking fluent English. Participants were given fourty different statements: 10 each of random vague statements (study 1), real vague statements (study 2), meaningful but mundane statements, and motivational quotations. The first 20 statements were classified as pseudo-profound bullshit, the second 20 consisted of two types of controls. Participants were asked to indicate the relative profundity of each statement on a scale from 1 (not at all profound) to 5 (very profound). Participants also completed a series of cognitive tests in order to establish their susceptability to logical fallacies and cognitive shortcuts, as well as factors such as belief in mythical beings.
+
+The researchers assessed the difference in average profundity ratings between legitimately meaningful quotations and pseudo-profound bullshit (a measure of so-called bullshit sensitivity). They also examined the difference in average profundity ratings between pseudo-profound bullshit and mundane statements (a measure of bullshit sensitivity due to failure to detect the need for skepticism). 
+
+1. What is the explanatory variable? Is it categorical or quantitative?
+2. What are the response variables? Are they categorical or quantitative?
+3. Is this an observational study or an experiment? Why?
+4. What is the observational/experimental unit?
+5. What is the population?
+6. Was there random assignment?
+7. What conclusions can be drawn about the population?
+8. Would you look for an association between the explanatory and response variables, or a causal effect?
