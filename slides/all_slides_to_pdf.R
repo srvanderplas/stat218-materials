@@ -15,7 +15,7 @@ build_slides <- function(x, stop_at = ifelse(grepl("index", x), "html", "pdf")) 
     # Rerender if rmd modtime is more recent or if HTML file doesn't exist
     html_update <- ifelse(file.exists(xhtml), file.mtime(xhtml), -Inf)
     if (file.mtime(xrmd) > file.mtime(x) | file.mtime(xrmd) > html_update) {
-      rmarkdown::render(input = xrmd, output_file = x)
+      rmarkdown::render(input = xrmd, output_file = xhtml)
     }
   }
 
