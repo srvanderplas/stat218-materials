@@ -3,6 +3,7 @@
 library(tidyverse)
 setwd(here::here("exams"))
 # Set up each exam command separately because versions and parameters may be different.
+setwd(here::here("exams/exam1"))
 crossing(version = 1:4, key = c(T, F)) %>%
   purrr::pwalk(., function(version, key) {
     rmarkdown::render(
@@ -29,5 +30,5 @@ setwd(here::here())
 rmarkdown::render("index.Rmd") # Render complete index
 
 # Clean up extra files
-file.remove(list.files(here::here("exams/"), "tmp-pdfcrop", full.names = T))
-file.remove(list.files(here::here("exam_practice/"), "tmp-pdfcrop", full.names = T))
+file.remove(list.files(here::here("exams/"), "tmp-pdfcrop", full.names = T, recursive = T))
+file.remove(list.files(here::here("exam_practice/"), "tmp-pdfcrop", full.names = T, recursive = T))
