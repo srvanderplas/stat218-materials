@@ -56,7 +56,7 @@ class:inverse,middle,center
   <br/><br/>
   
 ![Garfield weather prediction comic](https://d1ejxu6vysztl5.cloudfront.net/comics/garfield/1999/1999-03-12.gif)  
-
+ 
 ---
 ## Confidence Intervals
 
