@@ -241,7 +241,7 @@ We're finding a set of plausible values for the parameter centered around the .u
 - We do not want to plug in those parameter values every time we want an interval
 
 - Method boils down to one idea:     
-We're finding a set of plausible values for the parameter centered around the .underline[.red[sample mean]] and adding some wiggle room around it.    
+We're finding a set of plausible values for the parameter centered around the .underline[.red[sample statistic]] and adding some wiggle room around it.    
 &lt;br/&gt;&lt;br/&gt;
 
 - The wiggle room is known as the .underline[.red[margin of error]]
@@ -250,7 +250,7 @@ We're finding a set of plausible values for the parameter centered around the .u
 ## Confidence Interval
 
 So the basic set up for our confidence interval is:
-`$$\text{Sample statistic}\pm \text{margin of error}$$`
+`$$\text{Sample statistic}\pm \text{margin of error} = (lower, upper)$$`
 
 Margin of error is based on two values:
 
@@ -906,7 +906,18 @@ Assumptions:
 --
 
 4. Respondents' answers match their voting behavior
+
 .red[People may change their minds between the poll and the election, or they may intentionally try to throw off the poll. If enough people do this in the same direction, the poll results may be off.]
+
+
+---
+## Testing for the "Bradley Effect"
+
+We do not have any statistical evidence (yet) to decide whether these assumptions played a role in our results.
+
+See Explanation 3.5.3 for a more thorough analysis of the post-election poll analysis findings
+
+**Nonrandom errors** (systematic errors) are errors that affect the results of your measurement process (the system) consistently. Nonrandom errors would be a problem even if you could measure the whole population - they are not a failure of the statistical calculations, but of the measurement method.
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
