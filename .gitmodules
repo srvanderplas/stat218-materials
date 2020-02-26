@@ -1,0 +1,3 @@
+[submodule "exams"]
+	path = exams
+	url = git@github.com:srvanderplas/unl-stat218-exams.git
