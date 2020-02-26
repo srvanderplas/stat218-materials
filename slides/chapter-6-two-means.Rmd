@@ -4,17 +4,12 @@ author: ""
 output:
   xaringan::moon_reader:
     css: ["css/default.css", "css/default-fonts.css"]
-    mathjax: "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_HTMLorMML"
     lib_dir: libs
     nature:
       highlightStyle: github
       highlightLines: true
       countIncrementalSlides: false
 ---
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Config({ TeX: { extensions: ["color.js", "amsmath.js"] }});
-</script>
-
 ```{r setup, include = F}
 
 library(ggplot2)
