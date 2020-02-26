@@ -1,1 +1,1 @@
-exclude: ['*.Rmd']
+exclude: ['exams', '*.Rmd']
