@@ -1,0 +1,328 @@
+---
+output: 
+  pdf_document: 
+    df_print: kable
+    keep_tex: yes
+    latex_engine: xelatex
+    template: exam-template.tex
+course: "Stat 218"
+exam: "Exam 2"
+geometry: margin=1in
+params:
+  version: 1
+  key: true
+---
+---
+version_str: `r ifelse(params$key, "Practice - KEY", "Practice Exam")`
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = F, dpi = 300, fig.path=sprintf("figure/Ex2-Practice-"))
+library(tidyverse)
+theme_set(theme_bw())
+options(digits=3, scipen=999)
+```
+
+```{r fix-latex, results='asis'}
+if (params$key) {
+  cat("\\newcommand{\\answer}[1]{{\\color{red}\\emph{#1}}}")
+  cat("\\providecommand{\\tightlist}{\\setlength{\\itemsep}{1em}\\setlength{\\parskip}{0pt}}")
+  cat("\\lhead{Name: \\color{red}{KEY}}")
+  cat("\\fancypagestyle{firststyle}")
+  cat("{\\lhead{Name:\\color{red}{KEY}}}")
+} else {
+  # cat("\\newcommand{\\answer}[1]{{\\color{white}#1}}") 
+  cat("\\newcommand{\\answer}[1]{{\\leavevmode\\protect\\phantom{#1}}}")
+  cat("\\providecommand{\\tightlist}{\\setlength{\\itemsep}{1em}\\setlength{\\parskip}{0pt}}")
+}
+
+```
+
+
+```{r define-variables, include = F, cache = F}
+set.seed(34028473)
+# Need to add table of true/false q's here
+
+true_false_qs <- tribble(
+  ~statement, ~answer, ~chapter,
+  "A confidence interval is the set of all possible values for the parameter", F, 3,
+  "A parameter value is not plausible if it produces a small two-sided p-value when tested in a null hypothesis test", T, 3,
+  "If a hypothesis test for a value $\\pi$ leads to a rejection of $H_0$ at the $\\alpha$ level, the value $\\pi$ will be in the corresponding $(1-\\alpha)\\times 100$\\% confidence interval", F, 3,
+  "Using a higher confidence level produces a wider interval of plausible values", T, 3,
+  "If a statistic A has a smaller standard error than statistic B, the width of the 95\\% interval for A will be smaller than the 95\\% interval for B", T, 3,
+  "There is a 5\\% probability that the true parameter value falls outside the 95\\% confidence interval for that value", F, 3,
+  "To use a theory-based interval for a proportion, there have to be 10 successes and 10 failures", T, 3,
+  "The midpoint of a confidence interval is the parameter value", F, 3,
+  "You cannot create a theory-based confidence interval for a population mean if you have 15 observations and a symmetric distribution", F, 3,
+  "You can create a confidence interval for a population mean if you have 15 observations and a skewed distribution", F, 3,
+  "The width of the confidence interval increases when the sample size decreases", T, 3,
+  "2 $\times$ SE is called the margin of estimation", F, 3,
+  "A confounding variable is a variable that is related to only the explanatory variable", F, 4, 
+  "In an experiment, statistics can be used to make cause-and-effect claims", T, 4,
+  "A balanced study is one with the same distribution of a confounding variable in the study as in the population", F, 4,
+  "A representative sample is required to make unbiased inference about the population", T, 4,
+  "Sampling bias occurs when there is not random assignment", F, 4,
+  "A quasi-experiment is one that manipulates the explanatory variable and uses random assignment of treatments to groups", F, 4,
+  "An experiment is a study in which subjects are not randomly assigned to treatment groups or conditions", F, 4,
+  "The usual null hypothesis when comparing two proportions is $H_0: \\mu_1 - \\mu_2 = 0$", F, 5,
+  "The relative risk is one way to summarize the association between two quantitative variables", F, 5,
+  "In order to use theory-based inference when estimating the difference in two proportions, we must have a total of 40 observations with at least 10 observations in each group", T, 5,
+  "There are validity conditions for using simulation-based inference for the difference between two proportions", F, 5,
+  "We examine the difference in proportions across treatment groups because we want to know what proportion of people in the population respond to treatment.", F, 5
+)
+
+```
+
+# Formula sheet
+\begin{tabularx}{\textwidth}{|l|X|X|}\cline{2-3}
+\multicolumn{1}{c|}{} & \multicolumn{2}{c|}{Single Variable} \\\cline{2-3}
+\multicolumn{1}{c|}{} & Proportion & Quantitative \\\hline
+Statistic & $\hat p = \displaystyle\frac{\text{Num. successes}}{n}$ & $\overline x = \frac{\sum x}{n}$, where $\sum x$ is the sum of all observations in the sample\\
+& & \\
+\pbox{1in}{Standard\\Error} & $SE(\hat p) = \displaystyle\sqrt\frac{\hat p(1-\hat p)}{n}$ & $SE(\overline x) = \displaystyle\frac{s}{\sqrt{n}}$\\
+& & \\
+\pbox{1.25in}{Standardized\\Statistic} & $z = \displaystyle\frac{\hat p - \pi_0}{\sqrt{\pi_0 (1-\pi_0)/n}}$ & $t = \displaystyle\frac{\overline x - \mu_0}{s/\sqrt{n}}$\\
+\hline
+Theory-Based CI & \multicolumn{2}{c|}{$\text{statistic} \pm 2 \times SE(\text{statistic})$}\\\hline
+\end{tabularx}
+\vfil
+\begin{tabularx}{\textwidth}{|Y|Y|}\hline
+\multicolumn{2}{|c|}{Difference in proportions}\\\hline
+Overall proportion of successes & Standardized Statistic \\
+$\hat p = \displaystyle\frac{n_1 \hat p_1 + n_2 \hat p_2}{n_1 + n_2}$ & $z = \displaystyle\frac{\hat p_1 - \hat p_2 - 0}{\sqrt{\hat p (1-\hat p)\left(\frac{1}{n_1} + \frac{1}{n_2}\right)}}$ \\\hline
+\multicolumn{2}{|c|}{Theory Based CI}\\
+\multicolumn{2}{|c|}{$\hat p_1 - \hat p_2 \pm 2 \times \sqrt{\displaystyle\frac{\hat p_1(1-\hat p_1)}{n_1} + \frac{\hat p_2(1-\hat p_2)}{n_2}}$}\\\hline
+\end{tabularx}
+\clearpage
+# Concepts
+
+\vspace{-2em}\hfill{\underline{\hspace{1in}}\large /15}
+
+Circle T (true) or F (false) for each of the following statements[1pt each]:\vspace{1em}
+
+\begin{description}[align=right,labelindent=5em,leftmargin=!]\raggedright
+```{r results='asis', eval = T}
+set.seed(502973)
+ordered_sample <- true_false_qs %>%
+  group_by(chapter) %>% 
+  sample_n(size = 5, replace = F) %>%
+  mutate(ans = ifelse(answer, "T\\hspace{1em}\\phantom{F}", "\\phantom{T}\\hspace{1em}F"))
+if (!params$key) {
+  cat(paste(sprintf("\\item[T\\hspace{1em}F\\hspace{1em}] %s\\vfill", ordered_sample$statement), 
+  collapse = "
+
+")) } else {
+  cat(paste(sprintf("\\item[{\\color{red} %s\\hspace{1em}}] %s\\vfill", ordered_sample$ans, ordered_sample$statement), 
+  collapse = "
+
+"))
+}
+
+```
+\end{description}
+\clearpage
+
+# Plague, Inc.
+
+You are playing a game of Plague, Inc, where you are attempting to mutate your bacterium, 'BubonicEbola' so that it can kill everyone on earth. You decide to use statistics to investigate how the game mechanics work so that you can determine the best strategy.
+
+## Infecting Madagascar
+
+\vspace{-2em}\hfill{\underline{\hspace{1in}}\large /19}
+
+Early in the game, the goal is to evolve enough mutations that increase the infectivity of the virus, but are unlikely to be noticed (symptoms aren't too visibly obvious). If the disease becomes noticed, countries will start working on a cure and will implement quarantine measures that make it difficult for the disease to spread across the globe. The country which is seen as hardest to infect is Madagascar, because it is only accessible by boat (no airports) and will close its ports as soon as an even moderately serious disease is identified. 
+
+You play 30 games using the same starting parameters and minor mutations (coughing, sneezing, cysts) that increase infectivity but are unlikely to be noticed, and in each game, you record whether or not Madigascar is infected at the end of 3 in-game years. In total, you manage to infect Madagascar 12 times.
+
+1. [1pt] What is the observational unit?      
+\longanswer\answer{A single game of Plague, Inc.}
+
+2. [1pt each] For each of the following, fill in the value. If a quantity does not apply to this problem, write NA. If a quantity is unknown, write `unknown'. Show your work for any calculations. 
+\begin{align*}
+\mu &= \answer{NA} & \pi &= \answer{unknown} & 
+\overline x & = \answer{NA} \\
+\\
+\hat p &= \answer{12/30 = 0.4} & n & = \answer{30} & \text{successes} &= \answer{12}
+\end{align*}
+
+3. [1pt] What type of variable is this?      
+\longanswer[2em]\answer{Categorical (or Binary)}
+
+4. [2pt] What are the validity conditions for theory-based inference on this type of data?    
+\longanswer[2em]\answer{At least 10 successes and 10 failures}
+
+5. [1pt] Are these conditions met? Explain.    
+\longanswer[3em]\answer{Yes, the validity conditions are met. We have 12 successes and 18 failures; both quantities are greater than 10.}\clearpage
+
+6. [1pt] What formula should you use to calculate the standard deviation of the sample statistic?     
+\longanswer[5em]\answer{$SE(\hat p) = \displaystyle\sqrt\frac{\hat p(1-\hat p)}{n}$}
+
+7. [1pt] What is the value of the standard deviation of the sample statistic?      
+\longanswer[5em]\answer{$SE(\hat p) = \displaystyle\sqrt\frac{\hat p(1-\hat p)}{n} = \sqrt\frac{0.4 (0.6)}{30} = \sqrt\frac{0.24}{30} = \sqrt{0.008} = 0.0894$}
+
+8. [1pt] What formula should you use to calculate an approximately 95% confidence interval for the long-run proportion of times you can infect Madagascar using your current strategy?    
+\longanswer\answer{$\text{statistic} \pm 2 \times SE(\text{statistic})$}
+
+9. [1pt] Calculate an approximately 95% confidence interval for the long-run proportion of times you can infect Madagascar using your current strategy. Show your work. If you do not have a value for a component of the formula, define a variable for that value and show as much work as you can.    
+\longanswer[5em]\answer{$\hat p \pm 2 \times SE(\hat p) = 0.4 \pm 2\times(0.0894) = 0.4 \pm 0.1789= (0.2211, 0.5789)$}
+
+10. [2pt] Interpret your interval from 9 in the context of the problem. If you did not get an interval from 7, use $(a, b)$ as your values and interpret as normal.    
+\longanswer\answer{I am 95\% confident that, using my strategy, Madagascar will be infected with BubonicEbola between 22.11\% and 57.89\% of the time over the long run.}
+
+11. [2pt] If you wanted to decrease the width of the interval you calculated in 9, while still having 95\% confidence, what approach would you use? Explain why your solution will decrease the width of the interval.    
+\longanswer\answer{Collect more data. Increasing $n$ will decrease the width of the confidence interval by decreasing the standard error.}
+\clearpage
+
+## Number of Deaths
+
+\vspace{-2em}\hfill{\underline{\hspace{1in}}\large /21}
+
+Once your disease has spread across the globe, the next part of your strategy is to significantly increase the lethality of BubonicEbola by evolving symptoms such as Dysentery, Hemorrhagic Shock, and Total Organ Failure. This time, you play 60 games, using this strategy starting at the beginning of year 3. For each game,  you record how many people are dead worldwide (in millions) at the end of year 4. You would like to assess the long run performance of this strategy, as measured by body count.  
+
+```{r deaths, fig.width = 6, fig.height = 3, out.width = ".8\\textwidth"}
+set.seed(340927674)
+res <- tibble::tibble(dead = abs(rexp(60, 1/540) + rnorm(60, 640, 100)))
+ggplot(res, aes(x = dead)) + 
+  geom_histogram(fill = "grey", color = "black", binwidth = 100) + 
+  scale_y_continuous("# Games") + 
+  scale_x_continuous("# Dead (in millions)", minor_breaks = seq(0, max(ceiling(res$dead/200)*200), by = 200)) + 
+  annotate("text", x = Inf, y = Inf, hjust = 1.01, vjust = 1.01, label = sprintf("%d games\nMean Deaths: %0.2f\nSD(Deaths): %0.2f", nrow(res), mean(res$dead), sd(res$dead)))
+```
+
+1. [3pt] Describe the shape, spread, and center of the distribution of the number of deaths in the `r nrow(res)` games in the sample.    
+\longanswer[6em]\answer{The distribution is right-skewed, with the bulk of the data between `r quantile(res$dead, .25)` and `r quantile(res$dead, .75)`. The distribution is centered around `r quantile(res$dead, .5)`, but, due to the skew, has a mean of `r mean(res$dead)`.}
+
+2. [2pt] Is this an experiment or an observational study? Explain why.     
+\longanswer\answer{This is an observational study. We are not assigning treatments to sampled units, rather, we are observing the pre-existing characteristics of those units. }
+
+3. [1pt] What type of variable is this?     
+\longanswer\answer{This is a quantitative variable}
+
+4. [1pt] Describe the population (in words)     
+\longanswer\answer{The population is the long-run average number of people dead from BubonicEbola at the end of year 4.}\clearpage
+
+5. [1pt] Is it possible to collect data on every item in the population? If yes, how would you do it? If no, why not?    
+\longanswer[6em]\answer{It is not possible to collect data on every item in the population because we cannot collect data on all future games which might be played with this strategy.}
+
+6. [1pt] Can you use simulation-based inference for this data? Why or why not?    
+\longanswer[6em]\answer{No, we cannot use simulation-based inference for this data. We do not have knowledge about the entire population of potential outcomes.}
+
+7. [2pt] What are the validity conditions for theory-based inference on the type of data you selected in question 3?    
+\longanswer[6em]\answer{We must have either a symmetric distribution OR at least 20 observations and a distribution that is not too strongly skewed.}
+
+8. [2pt] Are these validity conditions met? Why or why not?    
+\longanswer[6em]\answer{Our distribution is not symmetric, so we must instead have at least 20 observations (we have `r nrow(res)`) and a distribution that is not too strongly skewed. The distribution is skewed, but it is not skewed enough to be a problem for the use of theory-based inference.}
+
+9. [1pt] What formula would you use to calculate the standard deviation of the sample mean?     
+\longanswer[6em]\answer{The standard deviation of the sample mean is $SE(\overline x)$, and is calculated as $\frac{s}{\sqrt{n}}$.}
+
+10. [1pt] Calculate the standard deviation of the sample mean for your sample.    
+\longanswer[6em]\answer{$s = `r sd(res$dead)`$ and $n = `r nrow(res)`$. Thus, $SE(\overline x) = `r sd(res$dead)`/`r sqrt(nrow(res))` = `r sd(res$dead)/sqrt(nrow(res))`$.}
+
+11. [2pt] What formula would you use to calculate an approximately 95% confidence interval for the population mean number of fatalities due to BubonicEbola using your strategy? Write it using the appropriate mathematical symbols for this type of variable.     
+\longanswer[6em]\answer{$\text{statistic} \pm 2 \times SE(\text{statistic}) = \overline x \pm 2 \times \frac{s}{\sqrt{n}}$ }
+
+12. [1pt] Calculate the approximately 95% confidence interval for the population mean number of BubonicEbola fatalities at the end of year 4. Show your work. If you do not have a value for a component of the formula, define a variable for that value and show as much work as you can.    
+\longanswer[6em]\answer{$\overline x \pm 2\frac{s}{\sqrt{n}} = `r mean(res$dead)` \pm 2\frac{`r sd(res$dead)`}{\sqrt{`r nrow(res)`}} = `r mean(res$dead)` \pm 2(`r sd(res$dead)/sqrt(nrow(res))`) = (`r mean(res$dead) - 2*sd(res$dead)/sqrt(nrow(res))`, `r mean(res$dead) + 2*sd(res$dead)/sqrt(nrow(res))`)$}
+
+13. [3pt] Interpret your interval from 12 in the context of the problem. If you did not get an interval from 13, use $(a, b)$ as your values and interpret as normal.    
+\longanswer[6em]\answer{
+I am 95\% confident that the average number of deaths due to BubonicEbola at the end of year 4 is between `r mean(res$dead) - 2*sd(res$dead)/sqrt(nrow(res))` and `r mean(res$dead) + 2*sd(res$dead)/sqrt(nrow(res))`. 
+}
+\clearpage
+
+## Comparing Infection Strategies
+
+\vspace{-2em}\hfill{\underline{\hspace{1in}}\large /26+6}
+
+When evolving a disease in Plague, Inc., you have multiple different upgrades you can focus on - Symptoms, Transmission, and Abilities. Symptoms increase the likelihood of infection, while Transmission upgrades focus on how the disease is spread (e.g. through animal contact, blood transmission, air, or in humid environments). You decide to compare strategies, playing 60 games in total. You will randomly sample 30 numbers from 1 to 60; games with sampled numbers will use only transmission-focused upgrades to increase the spread of the disease, while games with numbers not in the random sample will use only symptom upgrades to increase infectivity. For each game, you will play 3 in-game years, and at the end of that period, you will assess whether the disease has spread so that at least 50\% of the world is infected (a success). Is focusing on one type of upgrades more likely to infect at least 50\% of the world in 3 years than focusing on the other type of upgrades?
+
+```{r}
+infection_data <- tibble(
+  Strategy = c("Symptom", "Symptom", "Transmission", "Transmission"),
+  Spread = c("Yes", "No", "Yes", "No"),
+  Count = c(12, 18, 17, 13)
+)  %>%
+  mutate(prop = Count/30) %>%
+  filter(Spread == "Yes")
+
+infection_summary <- infection_data %>%
+  arrange(Strategy) %>%
+  summarize(pdiff = diff(prop), hatp = sum(Count)/60, sep = sqrt(hatp*(1-hatp)*sum(c(1/30, 1/30))), z = pdiff/sep,
+            decision = ifelse(abs(z)>=2, "We have strong evidence against the null hypothesis that symptom upgrades are as effective as transmission upgrades. With $z \\approx %0.2f$ we reject $H_0$ and conclude that it is more likely  that 50%% of the world will be infected using only transmission upgrades than using only symptom upgrades.", "With $z \\approx %0.2f$, we have very little or no evidence against the $H_0$ that the success rates are equal when using only transmission or only symptom upgrades. We fail to reject $H_0$ and conclude that it is plausible that the true success rate of the two strategies is equal."),
+            ci_inf = ifelse(abs(z)>=2, "The confidence interval will not contain 0.", "The confidence interval will contain 0."))
+
+infection_df <- infection_data %>%
+  mutate(se2 = prop*(1-prop)*(1/30))
+inf1 <- infection_df[1,]
+inf2 <- infection_df[2,]
+purrr::walk(names(infection_summary), ~assign(., infection_summary[[.]], envir = .GlobalEnv))
+
+inf_ci <- pdiff + c(-1, 1)*2*sqrt(sum(infection_df$se2))
+
+ci_interp1 <- sprintf("We are 95\\%% confident that the difference in the proportion of games with more than 50%% of the world infected using the transmission and symptom only strategies is between %.4f and %.4f. ", inf_ci[1], inf_ci[2])
+ci_z <- ifelse(sign(inf_ci[1]) != sign(inf_ci[2]), "As the interval contains 0, the magnitude of z will be less than 2. ", "As the interval does not contain 0, we know that the magnitude of z will be more than 2.")
+ci_interp2 <- ifelse(sign(inf_ci[1]) != sign(inf_ci[2]), "As the interval contains 0, it is plausible that the two strategies have equal probability of infecting at least 50% of the world in 3 years. I fail to reject $H_0$", "As the interval does not contain 0, it is not plausible that the two strategies have equal probability of infecting at least 50% of the world in 3 years. I would reject $H_0$ and conclude that there is a significant difference in the long-run success rate of the two strategies.")
+
+options(digits = 5)
+```
+
+```{r}
+infection_df %>% 
+  mutate(`Killed <50%` = 30 - Count, `Killed >= 50%` = Count, Total = 30) %>% 
+  select(Strategy, `Killed >= 50%`,`Killed <50%`, Total) %>%
+  knitr::kable(format = "markdown")
+```
+
+0. [1pt] Is this an observational study or an experiment?     
+\longanswer[4em]\answer{This is an experiment, there is random assignment of strategies to games.}
+
+1. [1pt] What is the research question? (Please state in the form of a question, with appropriate punctuation)     
+\longanswer[4em]\answer{Is the success rate for the transmission upgrade strategy the same as the success rate for the symptom upgrade strategy?}
+
+2. [1pt] Are the variables categorical or quantitative?     
+  \longanswer\answer{The variable (More than 50\% of the world infected, or not) is categorical/binary. The group variable (Strategy) is also categorical.}
+  
+3. [4pt] If you were using a hypothesis test to answer the research question,
+    - What would your null hypothesis be in words?    
+      \longanswer[2em]\answer{The success (more than 50\% of the world infected) rate is the same for the two strategies.}
+      
+    - What is the null hypothesis, in symbols? Be sure to use the appropriate symbols for the variable type you identified in 2!    
+      \longanswer[2em]\answer{$H_0: \pi_{S} = \pi_{T}$ or $\pi_{T} - \pi_{S} = 0$}
+      
+    - What is the alternative hypothesis, in words?    
+      \longanswer[2em]\answer{The success rate is not the same for the two strategies. }
+      
+    - What is the alternative hypothesis, in symbols?    
+      \longanswer[2em]\answer{$H_A: \pi_{S} \neq \pi_{T}$ or $\pi_{T} - \pi_{S} \neq 0$}
+        
+4. [1pt] What is the relevant statistic for this problem? What is the population equivalent? Be sure to use the correct symbols.    
+\longanswer\answer{Population version: $\pi_{T} - \pi_{S}$\\Sample version: $\hat p_{`T} - \hat p_{S}$}
+
+5. [2pt] What are the validity conditions for theory-based inference which are applicable to this problem? Are they met? Why or why not?    
+  \longanswer[6em]\answer{Each group must have both 10 successes and 10 failures. The validity conditions are met - there are 12 and 17 successes, and 18 and 13 failures; all quantities are greater than 10.}
+  
+6. [2pt] Calculate the sample proportion for each group; using these values, calculate the value you identified in 4.    
+\longanswer[6em]\answer{$\hat p_{S} = 12/30 = 0.4000$\\
+$\hat p_{T} = 17/30 = 0.5667$\\
+$\hat p_{T} - \hat p_{S} = 0.5667 - 0.4000 = 0.1667$}
+
+7. [2pt] What formula should you use to calculate the \underline{standard error} of the quantity in 4, if you were to conduct a theory-based hypothesis test? If the formula uses symbols not defined in previous questions, please define those symbols as well. (Hint: Be sure you use the standard error formula for hypothesis tests, not confidence intervals! You may have to find this formula within a formula that is given to you.)     
+\longanswer[4em]\answer{\phantom{a}\hfill$\hat p = \displaystyle\frac{n_T \hat p_T + n_S \hat p_S}{n_T + n_S}$ \hfill$SE(\pi_T - \pi_S) = \sqrt{\hat p (1-\hat p)\left(\frac{1}{n_T} + \frac{1}{n_S}\right)}$\hfill\phantom{a}}
+
+8. [2pt] What formula should you use to calculate the \underline{standard error} of the quantity in 4, if you want to construct a confidence interval? (Hint: This is not the same formula as you used in question 7, and you may have to find it inside a different formula.)     
+\longanswer[4em]\answer{$SE(\hat p_T - \hat p_S) = \sqrt{\displaystyle\frac{\hat p_T(1-\hat p_T)}{n_T} + \frac{\hat p_S(1-\hat p_S)}{n_S}}$}
+
+9. [3pt] Calculate a 2SD confidence interval for the difference in shiny encounter rates between the two species; be sure to use correct notation and show your work.    
+\longanswer[8em]\answer{SE $ = \sqrt{\displaystyle\frac{17/30(13/30)}{30} + \frac{12/30(18/30)}{30}} = `r sqrt(sum(infection_df$se2))`$\\
+$\phantom{=}\hat p_T - \hat p_S \pm 2 \times SE = `r pdiff` \pm 2(`r sqrt(sum(infection_df$se2))`) =  `r sprintf("(%.4f, %.4f)", inf_ci[1], inf_ci[2])`$}\clearpage
+
+10. [4pt] Interpret your interval in the context of the problem. If you did not get an answer for 9, use the (wrong) interval (0.1503, 0.3201).    
+\longanswer[6em]\answer{`r ci_interp1`}
+
+11. [2pt] Given your answer in 10, what can you conclude about the value of the standardized statistic? Explain your conclusion.    
+Note: Do not calculate the standardized statistic; instead, base your explanation on the confidence interval you interpreted.     
+\longanswer[4em]\answer{`r ci_z`}
+
+12. [2pt] Given your answers in 10 and 11, would you reject or fail to reject the hypothesis $H_0:$ the shiny encounter rates between the two species are the same?         
+\longanswer[4em]\answer{`r ci_interp2`}

@@ -17,9 +17,15 @@ $endif$
 % \renewcommand{\item}{%
 % \olditem\vspace{3em}}
 
-\usepackage{longtable,booktabs}
+
+\usepackage{longtable,booktabs,tabularx,multicol,multirow}
+\newcolumntype{Y}{>{\centering\arraybackslash}X}
+
+\setlength{\extrarowheight}{10pt}
+
 
 \usepackage{parskip}
+\usepackage{pbox}
 
 \usepackage[$if(fontenc)$$fontenc$$else$T1$endif$]{fontenc}
 \usepackage[utf8]{inputenc}
@@ -48,7 +54,7 @@ $endif$
 \chead{}
 \rhead{ID: \hspace{2in}}
 \lfoot{\small\currentname}
-\cfoot{$if(course)$$course$ -- $endif$ $if(exam)$$exam$$endif$ $if(version_str)$(Form $version_str$)$endif$}
+\cfoot{}
 \rfoot{\small \thepage/\pageref*{LastPage}}
 
 \fancypagestyle{firststyle}
@@ -69,8 +75,8 @@ $endif$
 
 %\def\labelitemi{--}
 \usepackage{enumitem}
-\setitemize[0]{leftmargin=15pt,itemsep=3em}
-\setenumerate[0]{leftmargin=15pt,itemsep=3em}
+\setitemize[0]{leftmargin=15pt,itemsep=1em}
+\setenumerate[0]{leftmargin=15pt,itemsep=1em}
 \makeatletter
 \@ifpackageloaded{hyperref}{}{%
 \ifxetex
@@ -117,18 +123,7 @@ $if(tables)$
 \usepackage{longtable}
 $endif$
 
-$if(graphics)$
 \usepackage{graphicx}
-% We will generate all images so they have a width \maxwidth. This means
-% that they will get their normal width if they fit onto the page, but
-% are scaled down if they would overflow the margins.
-\makeatletter
-\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
-\else\Gin@nat@width\fi}
-\makeatother
-\let\Oldincludegraphics\includegraphics
-\renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=\maxwidth]{#1}}
-$endif$
 
 \usepackage{setspace}
 
@@ -138,7 +133,7 @@ $endif$
 \begin{document}
 \thispagestyle{firststyle}
 \begin{center}
-{\Large $if(course)$$course$$endif$ - $if(exam)$$exam$$endif$ $if(version_str)$(Form $version_str$)$endif$}\\[.5cm]
+{\Large $if(course)$$course$$endif$ - $if(exam)$$exam$$endif$ $if(version_str)$($version_str$)$endif$}\\[.5cm]
 \end{center}
 \hrule
 \vspace{.5cm}
