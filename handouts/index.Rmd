@@ -8,7 +8,16 @@ knitr::opts_chunk$set(echo = F)
 library(tidyverse)
 library(shiny)
 ```
-
+```{r}
+tibble(key = c(F, T)) %>%
+  purrr::pwalk(., function(key) {
+    rmarkdown::render(
+      "04_Causation.Rmd",
+      output_file = sprintf("04_Causation%s.pdf",
+                            ifelse(key, "_key", "")),
+      params = list(key = key))
+  })
+```
 ```{r}
 files <- list.files(here::here("handouts"), pattern = ".pdf$")
 
