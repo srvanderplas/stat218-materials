@@ -217,23 +217,22 @@ ggplot(res, aes(x = dead)) +
 \longanswer[6em]\answer{The standard deviation of the sample mean is $SE(\overline x)$, and is calculated as $\frac{s}{\sqrt{n}}$.}
 
 10. [1pt] Calculate the standard deviation of the sample mean for your sample.    
-\longanswer[6em]\answer{$s = `r sd(res$dead)`$ and $n = `r nrow(res)`$. Thus, $SE(\overline x) = `r sd(res$dead)`/`r sqrt(nrow(res))` = `r sd(res$dead)/sqrt(nrow(res))`$.}
+\longanswer[4em]\answer{$s = `r sd(res$dead)`$ and $n = `r nrow(res)`$. Thus, $SE(\overline x) = `r sd(res$dead)`/`r sqrt(nrow(res))` = `r sd(res$dead)/sqrt(nrow(res))`$.}\clearpage
 
 11. [2pt] What formula would you use to calculate an approximately 95% confidence interval for the population mean number of fatalities due to BubonicEbola using your strategy? Write it using the appropriate mathematical symbols for this type of variable.     
-\longanswer[6em]\answer{$\text{statistic} \pm 2 \times SE(\text{statistic}) = \overline x \pm 2 \times \frac{s}{\sqrt{n}}$ }
+\longanswer[4em]\answer{$\text{statistic} \pm 2 \times SE(\text{statistic}) = \overline x \pm 2 \times \frac{s}{\sqrt{n}}$ }
 
 12. [1pt] Calculate the approximately 95% confidence interval for the population mean number of BubonicEbola fatalities at the end of year 4. Show your work. If you do not have a value for a component of the formula, define a variable for that value and show as much work as you can.    
 \longanswer[6em]\answer{$\overline x \pm 2\frac{s}{\sqrt{n}} = `r mean(res$dead)` \pm 2\frac{`r sd(res$dead)`}{\sqrt{`r nrow(res)`}} = `r mean(res$dead)` \pm 2(`r sd(res$dead)/sqrt(nrow(res))`) = (`r mean(res$dead) - 2*sd(res$dead)/sqrt(nrow(res))`, `r mean(res$dead) + 2*sd(res$dead)/sqrt(nrow(res))`)$}
 
 13. [3pt] Interpret your interval from 12 in the context of the problem. If you did not get an interval from 13, use $(a, b)$ as your values and interpret as normal.    
-\longanswer[6em]\answer{
+\longanswer[4em]\answer{
 I am 95\% confident that the average number of deaths due to BubonicEbola at the end of year 4 is between `r mean(res$dead) - 2*sd(res$dead)/sqrt(nrow(res))` and `r mean(res$dead) + 2*sd(res$dead)/sqrt(nrow(res))`. 
-}
-\clearpage
+} 
 
 ## Comparing Infection Strategies
 
-\vspace{-2em}\hfill{\underline{\hspace{1in}}\large /26+6}
+\vspace{-2em}\hfill{\underline{\hspace{1in}}\large /27}
 
 When evolving a disease in Plague, Inc., you have multiple different upgrades you can focus on - Symptoms, Transmission, and Abilities. Symptoms increase the likelihood of infection, while Transmission upgrades focus on how the disease is spread (e.g. through animal contact, blood transmission, air, or in humid environments). You decide to compare strategies, playing 60 games in total. You will randomly sample 30 numbers from 1 to 60; games with sampled numbers will use only transmission-focused upgrades to increase the spread of the disease, while games with numbers not in the random sample will use only symptom upgrades to increase infectivity. For each game, you will play 3 in-game years, and at the end of that period, you will assess whether the disease has spread so that at least 50\% of the world is infected (a success). Is focusing on one type of upgrades more likely to infect at least 50\% of the world in 3 years than focusing on the other type of upgrades?
 
@@ -260,9 +259,9 @@ purrr::walk(names(infection_summary), ~assign(., infection_summary[[.]], envir =
 
 inf_ci <- pdiff + c(-1, 1)*2*sqrt(sum(infection_df$se2))
 
-ci_interp1 <- sprintf("We are 95\\%% confident that the difference in the proportion of games with more than 50%% of the world infected using the transmission and symptom only strategies is between %.4f and %.4f. ", inf_ci[1], inf_ci[2])
+ci_interp1 <- sprintf("We are 95\\%% confident that the difference in the proportion of games with more than 50\\%% of the world infected using the transmission and symptom only strategies is between %.4f and %.4f. ", inf_ci[1], inf_ci[2])
 ci_z <- ifelse(sign(inf_ci[1]) != sign(inf_ci[2]), "As the interval contains 0, the magnitude of z will be less than 2. ", "As the interval does not contain 0, we know that the magnitude of z will be more than 2.")
-ci_interp2 <- ifelse(sign(inf_ci[1]) != sign(inf_ci[2]), "As the interval contains 0, it is plausible that the two strategies have equal probability of infecting at least 50% of the world in 3 years. I fail to reject $H_0$", "As the interval does not contain 0, it is not plausible that the two strategies have equal probability of infecting at least 50% of the world in 3 years. I would reject $H_0$ and conclude that there is a significant difference in the long-run success rate of the two strategies.")
+ci_interp2 <- ifelse(sign(inf_ci[1]) != sign(inf_ci[2]), "As the interval contains 0, it is plausible that the two strategies have equal probability of infecting at least 50\\% of the world in 3 years. I fail to reject $H_0$.", "As the interval does not contain 0, it is not plausible that the two strategies have equal probability of infecting at least 50\\% of the world in 3 years. I would reject $H_0$ and conclude that there is a significant difference in the long-run success rate of the two strategies.")
 
 options(digits = 5)
 ```
@@ -273,17 +272,18 @@ infection_df %>%
   select(Strategy, `Killed >= 50%`,`Killed <50%`, Total) %>%
   knitr::kable(format = "markdown")
 ```
+\clearpage
 
-0. [1pt] Is this an observational study or an experiment?     
+1. [1pt] Is this an observational study or an experiment?     
 \longanswer[4em]\answer{This is an experiment, there is random assignment of strategies to games.}
 
-1. [1pt] What is the research question? (Please state in the form of a question, with appropriate punctuation)     
+2. [1pt] What is the research question? (Please state in the form of a question, with appropriate punctuation)     
 \longanswer[4em]\answer{Is the success rate for the transmission upgrade strategy the same as the success rate for the symptom upgrade strategy?}
 
-2. [1pt] Are the variables categorical or quantitative?     
+3. [1pt] Are the variables categorical or quantitative?     
   \longanswer\answer{The variable (More than 50\% of the world infected, or not) is categorical/binary. The group variable (Strategy) is also categorical.}
   
-3. [4pt] If you were using a hypothesis test to answer the research question,
+4. [4pt] If you were using a hypothesis test to answer the research question,
     - What would your null hypothesis be in words?    
       \longanswer[2em]\answer{The success (more than 50\% of the world infected) rate is the same for the two strategies.}
       
@@ -296,33 +296,33 @@ infection_df %>%
     - What is the alternative hypothesis, in symbols?    
       \longanswer[2em]\answer{$H_A: \pi_{S} \neq \pi_{T}$ or $\pi_{T} - \pi_{S} \neq 0$}
         
-4. [1pt] What is the relevant statistic for this problem? What is the population equivalent? Be sure to use the correct symbols.    
-\longanswer\answer{Population version: $\pi_{T} - \pi_{S}$\\Sample version: $\hat p_{`T} - \hat p_{S}$}
+5. [1pt] What is the relevant statistic for this problem? What is the population equivalent? Be sure to use the correct symbols.    
+\longanswer\answer{Population version: $\pi_{T} - \pi_{S}$\\Sample version: $\hat p_{`T} - \hat p_{S}$}\clearpage
 
-5. [2pt] What are the validity conditions for theory-based inference which are applicable to this problem? Are they met? Why or why not?    
+6. [2pt] What are the validity conditions for theory-based inference which are applicable to this problem? Are they met? Why or why not?    
   \longanswer[6em]\answer{Each group must have both 10 successes and 10 failures. The validity conditions are met - there are 12 and 17 successes, and 18 and 13 failures; all quantities are greater than 10.}
   
-6. [2pt] Calculate the sample proportion for each group; using these values, calculate the value you identified in 4.    
+7. [2pt] Calculate the sample proportion for each group; using these values, calculate the value you identified in 5.    
 \longanswer[6em]\answer{$\hat p_{S} = 12/30 = 0.4000$\\
 $\hat p_{T} = 17/30 = 0.5667$\\
 $\hat p_{T} - \hat p_{S} = 0.5667 - 0.4000 = 0.1667$}
 
-7. [2pt] What formula should you use to calculate the \underline{standard error} of the quantity in 4, if you were to conduct a theory-based hypothesis test? If the formula uses symbols not defined in previous questions, please define those symbols as well. (Hint: Be sure you use the standard error formula for hypothesis tests, not confidence intervals! You may have to find this formula within a formula that is given to you.)     
+8. [2pt] What formula should you use to calculate the \underline{standard error} of the quantity in 5, if you were to conduct a theory-based hypothesis test? If the formula uses symbols not defined in previous questions, please define those symbols as well. (Hint: Be sure you use the standard error formula for hypothesis tests, not confidence intervals! You may have to find this formula within a formula that is given to you.)     
 \longanswer[4em]\answer{\phantom{a}\hfill$\hat p = \displaystyle\frac{n_T \hat p_T + n_S \hat p_S}{n_T + n_S}$ \hfill$SE(\pi_T - \pi_S) = \sqrt{\hat p (1-\hat p)\left(\frac{1}{n_T} + \frac{1}{n_S}\right)}$\hfill\phantom{a}}
 
-8. [2pt] What formula should you use to calculate the \underline{standard error} of the quantity in 4, if you want to construct a confidence interval? (Hint: This is not the same formula as you used in question 7, and you may have to find it inside a different formula.)     
+9. [2pt] What formula should you use to calculate the \underline{standard error} of the quantity in 5, if you want to construct a confidence interval? (Hint: This is not the same formula as you used in question 7, and you may have to find it inside a different formula.)     
 \longanswer[4em]\answer{$SE(\hat p_T - \hat p_S) = \sqrt{\displaystyle\frac{\hat p_T(1-\hat p_T)}{n_T} + \frac{\hat p_S(1-\hat p_S)}{n_S}}$}
 
-9. [3pt] Calculate a 2SD confidence interval for the difference in shiny encounter rates between the two species; be sure to use correct notation and show your work.    
-\longanswer[8em]\answer{SE $ = \sqrt{\displaystyle\frac{17/30(13/30)}{30} + \frac{12/30(18/30)}{30}} = `r sqrt(sum(infection_df$se2))`$\\
+10. [3pt] Calculate a 2SD confidence interval for the difference in shiny encounter rates between the two species; be sure to use correct notation and show your work.    
+\longanswer[8em]\answer{SE $ = \sqrt{\displaystyle\frac{17/30(13/30)}{30} + \frac{12/30(18/30)}{30}} = `r sqrt(sum(infection_df$se2))`$\\[1em]
 $\phantom{=}\hat p_T - \hat p_S \pm 2 \times SE = `r pdiff` \pm 2(`r sqrt(sum(infection_df$se2))`) =  `r sprintf("(%.4f, %.4f)", inf_ci[1], inf_ci[2])`$}\clearpage
 
-10. [4pt] Interpret your interval in the context of the problem. If you did not get an answer for 9, use the (wrong) interval (0.1503, 0.3201).    
+11. [4pt] Interpret your interval in the context of the problem. If you did not get an answer for 10, use the (wrong) interval (0.1503, 0.3201).    
 \longanswer[6em]\answer{`r ci_interp1`}
 
-11. [2pt] Given your answer in 10, what can you conclude about the value of the standardized statistic? Explain your conclusion.    
+12. [2pt] Given your answer in 10, what can you conclude about the value of the standardized statistic? Explain your conclusion.    
 Note: Do not calculate the standardized statistic; instead, base your explanation on the confidence interval you interpreted.     
 \longanswer[4em]\answer{`r ci_z`}
 
-12. [2pt] Given your answers in 10 and 11, would you reject or fail to reject the hypothesis $H_0:$ the shiny encounter rates between the two species are the same?         
+13. [2pt] Given your answers in 10 and 11, would you reject or fail to reject the hypothesis $H_0:$ the shiny encounter rates between the two species are the same?         
 \longanswer[4em]\answer{`r ci_interp2`}
