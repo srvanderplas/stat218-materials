@@ -30,24 +30,33 @@ The effect of wearing different types of textiles on sexual activity was studied
 
 1. What is the explanatory variable? Is it categorical or quantitative?    
 \longanswer\answer{The explanatory variable is the type of textile used in the rats' clothing (or control if no pants were worn). It is categorical.}
+
 2. What are the response variable(s)? Are they categorical or quantitative?    
 \longanswer\answer{Broadly, sexual behavior is the response variable, measured by the quantitative variables I/M ratio and genital electrostatic potential. }
+
 3. Is this an observational study or an experiment? Why?    
-\longanswer\answer{This is an experiment - the rats were randomly assigned to an experimenter-controlled treatment. }
+\answer{This is an experiment - the rats were randomly assigned to an experimenter-controlled treatment. }
+
 4. What is the observational/experimental unit?    
-\longanswer\answer{A rat}
+\answer{A rat}
+
 5. What is the population?    
-\longanswer\answer{Rats; that is, the population of all rats, past, present, and future.}
+\answer{Rats; that is, the population of all rats, past, present, and future.}
+
 6. Was there random assignment?    
-\longanswer\answer{Yes, there was random assignment}
+\answer{Yes, there was random assignment}
+
 7. Did the experimenters use a random sample?    
 \longanswer\answer{No, there is no evidence that the experimenters randomly sampled rats.}
+
 8. Can you think of any sources of bias which might be avoided by using a random sample?
 \longanswer\answer{If the species of lab rat used has meaningfully different sexual behavior than most wild rats, that might cause a problem.}
+
 9. Can you think of a way to conduct a random sample in this experiment?     
-\longanswer\answer{It would be difficult to design a way to randomly sample wild rats in a representative way; obtaining a sampling frame of all rats in the world (or even in one local area) would be astonishingly difficult.}
+\longanswer[4em]\answer{It would be difficult to design a way to randomly sample wild rats in a representative way; obtaining a sampling frame of all rats in the world (or even in one local area) would be astonishingly difficult.}
+
 10. What conclusions can be drawn about the population?    
-\longanswer\answer{Because there is random assignment of experimental units to treatments, we can make causal conclusions about the effect of pants fabric composition on the sexual behavior of rats.}
+\longanswer[4em]\answer{Because there is random assignment of experimental units to treatments, we can make causal conclusions about the effect of pants fabric composition on the sexual behavior of rats.}
 
 
 # On the reception and detection of pseudo-profound bullshit
@@ -66,52 +75,66 @@ Participants also completed a series of cognitive tests, receiving a score indic
 
 1. What are the explanatory variables? Are they categorical or quantitative?    
 \longanswer\answer{The explanatory variables are the quantitative scores for cognitive fallacy susceptibility and belief in the absence of proof.}
+
 2. What are the response variable(s)? Are they categorical or quantitative?    
 \longanswer\answer{The response variable is the average rating of the vague statements on the bullshit receptivity scale.}
+
 3. Is this an observational study or an experiment? Why?    
 \longanswer\answer{This is an observational study; the experimenters did not control treatments in any way }
+
 4. What is the observational/experimental unit?    
 \longanswer\answer{A university of waterloo undergraduate student}
+
 5. What is the population?    
 \longanswer\answer{University of Waterloo psychology students}
+
 6. Was there random assignment?    
 \longanswer\answer{No, there was no random assignment.}
+
 7. Did the experimenters use a random sample?    
 \longanswer\answer{No, participants in the study were volunteers.}
+
 8. Can you think of any sources of bias which might be avoided by using a random sample?
 \longanswer\answer{Psychology students might be more likely than the general undergraduate population to be scientifically minded or skeptical about psychology experiments.}
+
 9. Can you think of a way to conduct a random sample in this experiment?     
 \longanswer\answer{Obtain a list of all undergraduate students, randomly sample those students, and ask them to participate in the study.}
+
 10. What conclusions can be drawn about the population?    
-\longanswer\answer{Because there is no random assignment to treatment groups, we cannot make causal conclusions. However, as long as the sample is seen as representative of the broader population, }
+\longanswer[6em]\answer{Because there is no random assignment to treatment groups, we cannot make causal conclusions. However, as long as the sample is seen as representative of the broader population, we can generalize the result from the sample to the population - we can use the sample to assess the association between scores on the cognitive tests and scores on the bullshit reciptivity scale.}
 
 
-
-1. What is the explanatory variable? Is it categorical or quantitative?
-2. What is the response variable? Is it categorical or quantitative?
-3. Is this an observational study or an experiment? Why?
-4. What is the observational/experimental unit?
-5. What is the population?
-6. Was there random assignment?
-7. What conclusions can be drawn about the population?
-8. Would you look for an association between the explanatory and response variables, or a causal effect?
-
-
-Note: Study 2 is essentially a replication of Study 1 using real-world (not randomly generated) statements. 
 
 ## Study 3
 
+Note: Study 2 is essentially a replication of Study 1 using real-world (not randomly generated) statements. 
+
 In Studies 1 and 2, the authors established a statistically reliable bullshit receptivity scale. It remains unclear, however, whether these associations are driven by a bias toward accepting pseudo-profound bullshit as meaningful or a failure to detect the need for skepticism (or both) when skepticism is warranted. 
 
-A total of 125 participants were recruited from Amazon’s Mechanical Turk (an online service) in return for pay. Only American residents were permitted to sign up for the study. All participants reported speaking fluent English. Participants were given fourty different statements: 10 each of random vague statements (study 1), real vague statements (study 2), meaningful but mundane statements, and motivational quotations. The first 20 statements were classified as pseudo-profound bullshit, the second 20 consisted of two types of controls. Participants were asked to indicate the relative profundity of each statement on a scale from 1 (not at all profound) to 5 (very profound). Participants also completed a series of cognitive tests in order to establish their susceptability to logical fallacies and cognitive shortcuts, as well as factors such as belief in mythical beings.
+A total of 125 participants were recruited from Amazon’s Mechanical Turk (an online service) in return for pay. Only American residents were permitted to sign up for the study. All participants reported speaking fluent English. Participants were given forty different statements: 10 each of random vague statements (study 1), real vague statements (study 2), meaningful but mundane statements, and motivational quotations. The first 20 statements were classified as pseudo-profound bullshit, the second 20 consisted of two types of controls. Participants were asked to indicate the relative profundity of each statement on a scale from 1 (not at all profound) to 5 (very profound). Participants also completed a series of cognitive tests in order to establish their susceptability to logical fallacies and cognitive shortcuts, as well as factors such as belief in mythical beings.
 
 The researchers assessed the difference in average profundity ratings between legitimately meaningful quotations and pseudo-profound bullshit (a measure of so-called bullshit sensitivity). They also examined the difference in average profundity ratings between pseudo-profound bullshit and mundane statements (a measure of bullshit sensitivity due to failure to detect the need for skepticism). 
 
-1. What is the explanatory variable? Is it categorical or quantitative?
-2. What are the response variables? Are they categorical or quantitative?
-3. Is this an observational study or an experiment? Why?
-4. What is the observational/experimental unit?
-5. What is the population?
-6. Was there random assignment?
-7. What conclusions can be drawn about the population?
-8. Would you look for an association between the explanatory and response variables, or a causal effect?
+1. What is the explanatory variable? Is it categorical or quantitative?    
+\longanswer\answer{The explanatory variable is the score on the cognitive tests; it is quantitative.}
+
+2. What are the response variables? Are they categorical or quantitative?    
+\longanswer[6em]\answer{The response variables are the difference in average profundity ratings for meaningful and pseudo-profound statements, as well as the difference in average profundity ratings for pseud-profound statements and mundane statements. Both are quantitative.}
+
+3. Is this an observational study or an experiment? Why?    
+\longanswer\answer{This is still an observational study - the levels of the explanatory variable cannot be assigned by the experimenter.}
+
+4. What is the observational/experimental unit?    
+\longanswer\answer{An Amazon Mechanical Turk user}
+
+5. What is the population?    
+\longanswer\answer{American residents who speak fluent English}
+
+6. Was there random assignment?    
+\longanswer\answer{No, there was not any random assignment in this study}
+
+7. What conclusions can be drawn about the population?    
+\longanswer\answer{Assuming that Amazon Mechanical Turk users are a representative sample of the population, we can generalize to the population, but cannot make cause-and-effect statements.
+}
+8. Would you look for an association between the explanatory and response variables, or a causal effect?    
+\longanswer\answer{We would be looking for an association between the variables, because we cannot randomly assign cognitive scores to participants before having them evaluate statements for profundity.}
