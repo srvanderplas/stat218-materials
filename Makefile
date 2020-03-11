@@ -21,12 +21,32 @@ TARGETLIST      += $(SLIDETARGET) $(SLIDEPDFTARGET) $(SLIDEPDFPGTARGET)
 
 # --- Handouts -----------------------------------------------------------------
 HANDOUTSOURCE    = $(filter-out handouts/index.Rmd, $(wildcard handouts/*.Rmd))
-HANDOUTTARGET    = $(HANDOUTSOURCE:%.Rmd=%.pdf)
-TARGETLIST      += $(HANDOUTTARGET)
+HANDOUTKEY       = $(shell grep -l 'params.key' $(HANDOUTSOURCE))
+HANDOUTOUTPUT		 = $(subst handouts/%.Rmd, %, $(HANDOUTSOURCE))
+HANDOUTTARGET    = $(HANDOUTOUTPUT:handouts/%.Rmd=handouts/%.pdf)
+HANDOUTTARGETKEY = $(HANDOUTKEY:handouts/%.Rmd=handouts/%_key.pdf)
+TARGETLIST      += $(HANDOUTTARGET) $(HANDOUTTARGETKEY)
+
+#all:
+#	@echo "HANDOUTSOURCE is $(HANDOUTSOURCE)"
+#	@echo "grep -l 'params.key' $(HANDOUTSOURCE)"
+#	@echo "HANDOUTTARGETKEY is $(HANDOUTTARGETKEY)"
+
 
 %.pdf: %.Rmd
 	Rscript -e "rmarkdown::render('$<')"
 	rm -f $*.tex $*.log
+handouts/%.pdf: handouts/%.Rmd
+	Rscript -e "rmarkdown::render('$<', output_file = '$*', \
+	                              output_dir = '$(@D)', \
+	                              params = list(key = F))"
+	rm -f handouts/$*.tex handouts/$*.log
+handouts/%_key.pdf: handouts/%.Rmd
+	Rscript -e "rmarkdown::render('$<', output_file = '$*_key', \
+	                              output_dir = '$(@D)', \
+	                              params = list(key = T))"
+	rm -f handouts/$*_key.tex
+	rm -f handouts/$*_key.log
 
 # --- Exam Practice ------------------------------------------------------------
 PEXAMSOURCE      = $(filter-out exam_practice/index.Rmd, $(wildcard exam_practice/*.Rmd))

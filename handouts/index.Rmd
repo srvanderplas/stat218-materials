@@ -8,26 +8,22 @@ knitr::opts_chunk$set(echo = F)
 library(tidyverse)
 library(shiny)
 ```
-```{r}
-tibble(key = c(F, T)) %>%
-  purrr::pwalk(., function(key) {
-    rmarkdown::render(
-      "04_Causation.Rmd",
-      output_file = sprintf("04_Causation%s.pdf",
-                            ifelse(key, "_key", "")),
-      params = list(key = key))
-  })
-```
+
 ```{r}
 files <- list.files(here::here("handouts"), pattern = ".pdf$")
 
 tibble(file = files) %>%
   mutate(
     Chapter = str_extract(file, "[\\d\\.]{1,}(?:_P)?"),
-    Title = str_remove(file, Chapter) %>% str_remove(".pdf$") %>% str_replace_all("_", " ") %>% str_trim(),
-    Link = sprintf("<a href=\"%s\">%s</a>", file, Title)
+    Title = str_remove(file, Chapter) %>% str_remove("(_key)?.pdf$") %>% str_replace_all("_", " ") %>% str_trim(),
+    Link = sprintf("<a href=\"%s\">%s</a>", file, Title),
+    Type = str_extract(file, "key")
   ) %>%
+  mutate(Type = ifelse(is.na(Type), "Blank Worksheet", "Key"),
+         Link = ifelse(Type == "Key", sprintf("<a href=\"%s\">Key</a>", file), Link)) %>%
+  pivot_wider(id_cols = Chapter:Title, names_from = Type, values_from = Link) %>%
+  mutate(Key = ifelse(is.na(Key), "", Key)) %>%
   arrange(Chapter, Title) %>%
-  select(-file, -Title) %>%
+  select(-Title) %>%
   knitr::kable(escape = F)
 ```

@@ -7,6 +7,8 @@ output:
     template: template.tex
     # keep_tex: true
 geometry: margin=1in,headsep=.2in
+params: 
+  key: false
 ---
 
 ```{r setup, include=FALSE}
