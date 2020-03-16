@@ -232,7 +232,7 @@ Using this data (from question 7), work through Exploration 5.1 in your groups
 
 ---
 class:middle,center,inverse
-# 2.2: Comparing Two Proportions (Simulation-Based Approach)
+# 5.2: Comparing Two Proportions (Simulation-Based Approach)
 
 ---
 ## Example 5.2 - Swimming with Dolphins
@@ -512,7 +512,7 @@ $$\hat p_{1} - \hat p_2 \pm 2 * SD$$
         - Does the interval lie entirely above 0 (if $H_A$ is greater than 0)?
         - Does the interval lie entirely below 0 (if $H_A$ is less than 0)?
 
-- If the interval does not contain your $H_0$ value, then a hypothesis test would not be significant at the $\alpha =  0.05$ level.
+- If the interval does not contain your $H_0$ value, then a hypothesis test would be significant at the $\alpha =  0.05$ level.
 
 ---
 ## Relative Risk
