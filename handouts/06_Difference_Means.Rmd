@@ -5,11 +5,12 @@ output:
     template: template.tex
 geometry: margin=1in,headsep=.2in
 params:
-  key: false
+  key: true
 ---
 
 ```{r fix-latex, results='asis', echo = F, message = F}
 library(tidyverse)
+options(digits = 3)
 if (params$key) {
   cat("\\newcommand{\\answer}[1]{{\\large\\color{red}\\emph{#1}}}")
   cat("\\providecommand{\\tightlist}{\\setlength{\\itemsep}{1em}\\setlength{\\parskip}{0pt}}")
@@ -30,8 +31,65 @@ Goats, however, were domesticated not as companion animals, but for food and mil
 
 To test this theory, goats were led into a pen which had an image of either a happy human face or an angry human face on a metal board placed at approximately goat-height. Each of the 35 goats was randomly assigned to view either the happy or angry face.  During each 4 minute trial, researchers recorded the amount of time (in seconds) each goat spent in proximity to the face. 
 
-```{r}
+```{r, echo = F, fig.width = 8, fig.height = 4}
 set.seed(2049729863)
-tbl <- tibble(id = 1:35, face = sample(c("positive", "negative"), size = 35, replace = T)) %>%
-  mutate(time = round(rnorm(35, mean = ifelse(face == "positive", 120, 80), sd = 10)))
+tbl <- tibble(id = 1:35, face = factor(sample(c("happy", "angry"), size = 35, replace = T), levels = c("happy", "angry"), ordered = T)) %>%
+  mutate(time = round(rnorm(35, mean = ifelse(face == "happy", 100, 80), sd = 20)))
+write_tsv(tbl[,-1], path = "goat_means.txt")
+
+tsum <- group_by(tbl, face) %>% 
+  summarize(mean = mean(time),var = var(time), sd = sd(time), n = n())
+sstat <- tsum %>%
+  `$`("mean") %>% diff() %>% `-`
+pooled_se <- tsum %>%
+  mutate(se = var/n) %>%
+  `$`("se") %>% sum() %>% sqrt()
+
+ggplot(tbl) + geom_boxplot(aes(x = face, y = time)) + xlab("Human Face") + ylab("Number of Seconds In Proximity to the Face") + ggtitle("Do Goats Read Human Emotions?") + coord_flip() + theme(axis.text.y = element_text(angle = 90, hjust = .5, vjust = .5))
 ```
+
+You can find the data at \url{https://srvanderplas.github.io/unl-stat218-materials/handouts/goat_means.txt} (use this data in the applet).
+
+1. Is this an experiment or an observational study? Why? In your explanation, identify the observational/experimental unit and the explanatory variable or treatment.    
+\longanswer\answer{This is an experiment because experimenters assigned treatments (angry or happy face) to experimental units (goats). }
+
+2. Does this study use random assignment? What implications does that have for the conclusions that can be drawn?    
+\longanswer\answer{This study uses random assignment, which means that the experimenters can make cause-and-effect conclusions.}
+
+3. Does this study use random sampling? What implications does that have for the conclusions that can be drawn?    
+\longanswer[6em]\answer{This study does not use random sampling; instead, it used a convenience sample of goats in a goat sanctuary in the UK. As a result, the experimenters cannot guarantee that the sample is representative of all goats. They need to use caution when generalizing the study results to the entire population.}
+
+4. What is the population parameter of interest? What is the corresponding sample statistic? Use correct notation.    
+\longanswer[6em]\answer{$\mu_\text{happy} - \mu_\text{angry}$ (population parameter)\\
+$\overline{x}_\text{happy} - \overline{x}_\text{angry}$ (sample statistic)}
+
+5. What are the null and alternative hypotheses for this experiment?    
+\longanswer[8em]\answer{$H_0: \mu_\text{happy} - \mu_\text{angry} = 0$\\$H_A: \mu_\text{happy} - \mu_\text{angry} > 0$\\
+Note that the researchers want to test whether goats also display a **preference** for human faces showing positive emotion. Preference implies that we care about whether they spend more time with a face showing positive emotion. 
+}
+
+6. Using the Multiple Means applet, conduct 1000 simulations of this experiment. Note: You will need to open [this file](goat_means.txt) and paste it into the applet. What is your sample statistic, according to the applet?    
+\longanswer\answer{The sample statistic is $\overline{x}_\text{happy} - \overline{x}_\text{angry} = `r tsum$mean[1]` - `r tsum$mean[2]` = `r sstat`$}
+
+7. What does one simulation represent?    
+\longanswer\answer{One simulation represents a set of 35 trials in which goats are shown either a happy or angry human face.}
+
+8. Describe the distribution of the simulated sample statistics. Where is it centered? Is it symmetric?    
+\longanswer\answer{The distribution of the simulated sample statistic is centered at 0, with most of the values between $\pm 20$. It is roughly symmetric.}
+
+9. What is your simulation p-value? Show or describe the calculation you used to determine your answer.    
+\longanswer\answer{(Answers will vary) 20/1000 samples had a value greater than the observed value, so the simulation p-value is 0.0200. }
+
+10. Construct and interpret an approximately 95% **simulation** confidence interval for the amount of extra time goats spent around the happy human face. Show your work.    
+\longanswer[10em]\answer{From the applet, my sample statistic is `r sstat` and the simulation standard error of the difference is 8.179 (will vary slightly). Thus, an approximately 95\% confidence interval is $`r sstat` \pm 2\times 8.179 = (`r paste(round(sstat + c(-2, 2)*8.179, 3), collapse = ", ")`)$. Thus, we are 95\% confident that goats spend between `r sstat + c(-2)*8.179` and `r sstat + c(2)*8.179` seconds longer around a picture of a happy human face than an angry human face. This suggests that goats can, indeed, read human social cues. }
+
+11. What are the validity conditions for theory-based inference for this type of data? Are they met? Why or why not?    
+\longanswer[10em]\answer{Both groups should have a symmetric distribution, or there should be 20 observations in each group and the distributions should not be strongly skewed. From the boxplot, it appears that both distributions are roughly symmetric, suggesting that we can use theory based inference for the problem. If the distributions were not roughly symmetric, then we would not be able to use theory-based inference because we have only `r tsum$n[1]` and `r tsum$n[2]` observations in each group, respectively.}
+
+12. Assuming the validity conditions are met, calculate the standard error of $\overline x_\text{happy} - \overline x_\text{angry}$. Show your work, including the formula you used.    
+\longanswer[6em]\answer{$\displaystyle\sqrt{\displaystyle\frac{s_h^2}{n_h} + \displaystyle\frac{s_a^2}{n_a}} = \sqrt{\displaystyle\frac{`r tsum$sd[1]`^2}{`r tsum$n[1]`} + \displaystyle\frac{`r tsum$sd[2]`^2}{`r tsum$n[2]`}} = \sqrt{`r pooled_se^2`} = `r pooled_se`$ }
+
+13. Using theory-based inference, calculate a standardized t-statistic and conduct a test of the null hypothesis in question 5. Interpret your result.    
+\longanswer[10em]\answer{$t = \displaystyle\frac{\overline x_h - \overline x_a - 0}{SE} = \displaystyle\frac{`r sstat`}{`r pooled_se`} = `r sstat/pooled_se`$. \\[.5em]
+With a standardized statistic of `r sstat/pooled_se`, we have strong evidence against $H_0$ that goats spend equal amounts of time around happy and angry human faces, and thus cannot read human social cues. Therefore, we reject $H_0$ and conclude that goats spend significantly more time around happy human faces than angry human faces, suggesting that goats can, in fact, read social cues.}
+
