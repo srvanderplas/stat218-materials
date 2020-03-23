@@ -3,3 +3,5 @@ Difference of continuous quantities: https://www.bmj.com/content/332/7536/266?re
 Lady tasting tea: randomization test for a single proportion https://en.wikipedia.org/wiki/Lady_tasting_tea
 
 https://www.improbable.com/2020/02/21/benefits-of-tapping-on-an-un-opened-beer-can/ - difference in quantitative variables
+
+Proportion data: Elephants getting math problems correct.  https://www.springer.com/gp/about-springer/media/research-news/all-english-research-news/asian-elephants-could-be-the-maths-kings-of-the-jungle/16208962

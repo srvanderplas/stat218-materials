@@ -1,0 +1,147 @@
+---
+title: "Chapter 6 Scenarios"
+output: 
+  pdf_document:
+    template: template.tex
+geometry: margin=1in,headsep=.2in
+params:
+  key: true
+---
+
+```{r fix-latex, results='asis', echo = F, message = F}
+library(tidyverse)
+options(digits = 3)
+if (params$key) {
+  cat("\\newcommand{\\answer}[1]{{\\large\\color{red}\\emph{#1}}}")
+  cat("\\providecommand{\\tightlist}{\\setlength{\\itemsep}{1em}\\setlength{\\parskip}{0pt}}")
+  cat("\\chead{\\color{red}{KEY}}")
+} else {
+  # cat("\\newcommand{\\answer}[1]{{\\color{white}#1}}") 
+  cat("\\newcommand{\\answer}[1]{{\\leavevmode\\protect\\phantom{\\large #1}}}")
+  cat("\\providecommand{\\tightlist}{\\setlength{\\itemsep}{1em}\\setlength{\\parskip}{0pt}}")
+}
+
+``` 
+
+# Human Social Cues
+
+According to past research, dogs are very good at perceiving human facial communication cues because of their domestication as companion animals. Horses, too, understand human expressions of anger, reacting with increased heart-rate and negative body language. 
+
+Goats, however, were domesticated not as companion animals, but for food and milk. Selective breeding in goats was used to optimize coat color, milk production, and meat quality, rather than prosocial behavior toward humans. Researchers decided to test whether understanding of human social cues is a product of domestication even in the absence of selection for prosocial behavior, or whether it results from selectively breeding for cross-species social comprehension. Specifically, the researchers examined 35 goats from a goat sanctuary in the United Kingdom to test whether goats also display a preference for human faces showing positive emotion. 
+
+To test this theory, goats were led into a pen which had an image of either a happy human face or an angry human face on a metal board placed at approximately goat-height. Each of the 35 goats was randomly assigned to view either the happy or angry face.  During each 4 minute trial, researchers recorded the amount of time (in seconds) each goat spent in proximity to the face. 
+
+```{r, echo = F, fig.width = 8, fig.height = 4}
+set.seed(2049729863)
+tbl <- tibble(id = 1:35, face = factor(sample(c("happy", "angry"), size = 35, replace = T), levels = c("happy", "angry"), ordered = T)) %>%
+  mutate(time = round(rnorm(35, mean = ifelse(face == "happy", 100, 80), sd = 20)))
+write_tsv(tbl[,-1], path = "goat_means.txt")
+
+tsum <- group_by(tbl, face) %>% 
+  summarize(mean = mean(time),var = var(time), sd = sd(time), n = n())
+sstat <- tsum %>%
+  `$`("mean") %>% diff() %>% `-`
+pooled_se <- tsum %>%
+  mutate(se = var/n) %>%
+  `$`("se") %>% sum() %>% sqrt()
+
+ggplot(tbl) + geom_boxplot(aes(x = face, y = time)) + xlab("Human Face") + ylab("Number of Seconds In Proximity to the Face") + ggtitle("Do Goats Read Human Emotions?") + coord_flip() + theme(axis.text.y = element_text(angle = 90, hjust = .5, vjust = .5))
+```
+
+You can find the data at \url{https://srvanderplas.github.io/unl-stat218-materials/handouts/goat_means.txt} (use this data in the applet).
+
+1. Is this an experiment or an observational study? Why? In your explanation, identify the observational/experimental unit and the explanatory variable or treatment.    
+\longanswer\answer{This is an experiment because experimenters assigned treatments (angry or happy face) to experimental units (goats). }
+
+2. Does this study use random assignment? What implications does that have for the conclusions that can be drawn?    
+\longanswer\answer{This study uses random assignment, which means that the experimenters can make cause-and-effect conclusions.}
+
+3. Does this study use random sampling? What implications does that have for the conclusions that can be drawn?    
+\longanswer[6em]\answer{This study does not use random sampling; instead, it used a convenience sample of goats in a goat sanctuary in the UK. As a result, the experimenters cannot guarantee that the sample is representative of all goats. They need to use caution when generalizing the study results to the entire population.}
+
+4. What is the population parameter of interest? What is the corresponding sample statistic? Use correct notation.    
+\longanswer[6em]\answer{$\mu_\text{happy} - \mu_\text{angry}$ (population parameter)\\
+$\overline{x}_\text{happy} - \overline{x}_\text{angry}$ (sample statistic)}
+
+5. What are the null and alternative hypotheses for this experiment?    
+\longanswer[8em]\answer{$H_0: \mu_\text{happy} - \mu_\text{angry} = 0$\\$H_A: \mu_\text{happy} - \mu_\text{angry} > 0$\\
+Note that the researchers want to test whether goats also display a **preference** for human faces showing positive emotion. Preference implies that we care about whether they spend more time with a face showing positive emotion. 
+}
+
+6. Using the Multiple Means applet, conduct 1000 simulations of this experiment. Note: You will need to open [this file](goat_means.txt) and paste it into the applet. What is your sample statistic, according to the applet?    
+\longanswer\answer{The sample statistic is $\overline{x}_\text{happy} - \overline{x}_\text{angry} = `r tsum$mean[1]` - `r tsum$mean[2]` = `r sstat`$}
+
+7. What does one simulation represent?    
+\longanswer\answer{One simulation represents a set of 35 trials in which goats are shown either a happy or angry human face.}
+
+8. Describe the distribution of the simulated sample statistics. Where is it centered? Is it symmetric?    
+\longanswer\answer{The distribution of the simulated sample statistic is centered at 0, with most of the values between $\pm 20$. It is roughly symmetric.}
+
+9. What is your simulation p-value? Show or describe the calculation you used to determine your answer.    
+\longanswer\answer{(Answers will vary) 20/1000 samples had a value greater than the observed value, so the simulation p-value is 0.0200. }
+
+10. Construct and interpret an approximately 95% **simulation** confidence interval for the amount of extra time goats spent around the happy human face. Show your work.    
+\longanswer[10em]\answer{From the applet, my sample statistic is `r sstat` and the simulation standard error of the difference is 8.179 (will vary slightly). Thus, an approximately 95\% confidence interval is $`r sstat` \pm 2\times 8.179 = (`r paste(round(sstat + c(-2, 2)*8.179, 3), collapse = ", ")`)$. Thus, we are 95\% confident that goats spend between `r sstat + c(-2)*8.179` and `r sstat + c(2)*8.179` seconds longer around a picture of a happy human face than an angry human face. This suggests that goats can, indeed, read human social cues. }
+
+11. What are the validity conditions for theory-based inference for this type of data? Are they met? Why or why not?    
+\longanswer[10em]\answer{Both groups should have a symmetric distribution, or there should be 20 observations in each group and the distributions should not be strongly skewed. From the boxplot, it appears that both distributions are roughly symmetric, suggesting that we can use theory based inference for the problem. If the distributions were not roughly symmetric, then we would not be able to use theory-based inference because we have only `r tsum$n[1]` and `r tsum$n[2]` observations in each group, respectively.}
+
+12. Assuming the validity conditions are met, calculate the standard error of $\overline x_\text{happy} - \overline x_\text{angry}$. Show your work, including the formula you used.    
+\longanswer[6em]\answer{$\displaystyle\sqrt{\displaystyle\frac{s_h^2}{n_h} + \displaystyle\frac{s_a^2}{n_a}} = \sqrt{\displaystyle\frac{`r tsum$sd[1]`^2}{`r tsum$n[1]`} + \displaystyle\frac{`r tsum$sd[2]`^2}{`r tsum$n[2]`}} = \sqrt{`r pooled_se^2`} = `r pooled_se`$ }
+
+13. Using theory-based inference, calculate a standardized t-statistic and conduct a test of the null hypothesis in question 5. Interpret your result.    
+\longanswer[10em]\answer{$t = \displaystyle\frac{\overline x_h - \overline x_a - 0}{SE} = \displaystyle\frac{`r sstat`}{`r pooled_se`} = `r sstat/pooled_se`$. \\[.5em]
+With a standardized statistic of `r sstat/pooled_se`, we have strong evidence against $H_0$ that goats spend equal amounts of time around happy and angry human faces, and thus cannot read human social cues. Therefore, we reject $H_0$ and conclude that goats spend significantly more time around happy human faces than angry human faces, suggesting that goats can, in fact, read social cues.}
+
+
+
+# Wizards and Vampires
+
+Read the Introduction, Method, and the 1st paragraph of the Results sections of the research report "Becoming a Vampire Without Being Bitten: The Narrative Collective-Assimilation Hypothesis" by Gabriel & Young, published in Psuchological Science in 2011\footnote{DOI: \url{https://journals.sagepub.com/doi/abs/10.1177/0956797611415541}}. A PDF of the study is available in the Box folder at \url{https://unl.box.com/v/vampire-wizard-study}. An explanation of the Implicit Association Test used in the study can be found at \url{https://implicit.harvard.edu/implicit/iatdetails.html}. 
+
+1. Is this an experiment or an observational study? Why?    
+\longanswer\answer{This is an experiment - Researchers assigned treatments (reading a section of Harry Potter or Twilight) to the experimental units (students). }
+
+2. Was random sampling, random assignment, both, or neither used in this study? What are the implications?    
+\longanswer[6em]\answer{This study used volunteers, so there was no random sampling; the researchers may not be able to generalize their results to the population if the sample was not representative. However, random assignment was used, so the researchers can make cause-and-effect claims about the treatment. }
+
+3. What is/are the explanatory variable(s)? How are they calculated? (You may have to read the additional information about the IAT) What does this variable mean in real life?    
+\longanswer[14em]\answer{The explanatory variable is the IAT score - the difference between the mean response time between "me" and vampires (and "not me" and wizards) and the mean response time between "me" and wizards (and "not me" and vampires). The IAT score is the amount an individual identifies themselves with the concept of vampires (high score) compared with wizards (low score).\\[.5em]
+A second explanatory variable is the Twilight/Harry Potter Narrative Collective-Assimilation Score, which was designed by the researchers. This score was computed as the difference between the participant's z-score for wizard items and the participant's z-score for vampire items.}
+
+***
+
+The study does not report the full dataset, but we can simulate study results for the IAT using the values which are reported. We will use the IAT score, rather than the narrative collective-assimilation score, for the rest of this problem. 
+
+```{r, echo = F, fig.width = 8, fig.height = 3, message = F}
+set.seed(20200322)
+vamp <- tibble(id = 1:140, 
+            Story = sample(c("Twilight", "Harry Potter"), 
+                           size = 140, replace = T)) %>%
+  mutate(IAT_score = round(rnorm(140, mean = ifelse(Story == "Twilight", .35, -.39), sd = .13), 2))
+
+ggplot(vamp, aes(x = IAT_score, fill = Story)) + geom_histogram(color = "black") + 
+  ylab("Participants") + xlab("IAT Score")
+
+vamp_sum <- vamp %>% group_by(Story) %>% summarize(N = n(), Mean = mean(IAT_score), SD = sd(IAT_score), var = var(IAT_score)) 
+knitr::kable(vamp_sum[,-5])
+```
+
+***
+
+4. Is it appropriate to use theory-based inference for this problem?    
+\longanswer\answer{Yes, we can use theory-based inference. Both groups have a symmetric distribution, but we also have more than 20 observations in each group, so we are safe to use theory based inference in any case.}
+
+5. What is the relevant population parameter and corresponding sample statistic, in symbols?    
+\longanswer\answer{$\mu_\text{v} - \mu_\text{w}$, where v = vampire and w = wizard correspond to the twilight and harry potter conditions respectively. $\overline x_\text{v} - \overline x_\text{w}$ is the sample statistic.}
+
+6. What is the standard error of the sample statistic? Show your work, including the formula you used.    
+\longanswer{\answer{ 
+$SE = \sqrt{\displaystyle\frac{s_v^2}{n_v} + \displaystyle\frac{s_w^2}{n_w}} = \sqrt{\frac{`r vamp_sum$var[2]`}{`r vamp_sum$N[2]`} + \frac{`r vamp_sum$var[1]`}{`r vamp_sum$N[1]`}} = \sqrt{`r sum(vamp_sum$var/vamp_sum$N)`} = `r sqrt(sum(vamp_sum$var/vamp_sum$N))`$ 
+}}
+
+7. Construct and interpret a 95% confidence interval for the difference in IAT scores for participants who read Twilight and the participants who read Harry Potter.    
+\longanswer[8em]\answer{
+$\text{Statistic} \pm 2 \times \text{SE(Statistic)} = `r diff(vamp_sum$Mean)` \pm 2 \times `r sqrt(sum(vamp_sum$var/vamp_sum$N))` = `r paste0("(", paste(round(diff(vamp_sum$Mean) + c(-2, 2) * sqrt(sum(vamp_sum$var/vamp_sum$N)), 3), collapse = ", "), ")")`$\\[.5em]
+We are 95\% confident that on average, people who read Twilight will have an IAT score which is between `r round(diff(vamp_sum$Mean) + c(-2, 2) * sqrt(sum(vamp_sum$var/vamp_sum$N)), 3)[1]` and `r round(diff(vamp_sum$Mean) + c(-2, 2) * sqrt(sum(vamp_sum$var/vamp_sum$N)), 3)[2]` higher than people who read Harry Potter. This indicates that there is a significant difference in self-identification with vampire or wizard group membership, depending on the story read at the beginning of the study. 
+}
