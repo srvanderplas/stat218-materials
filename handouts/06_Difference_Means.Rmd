@@ -1,0 +1,37 @@
+---
+title: "Chapter 6 Scenarios"
+output: 
+  pdf_document:
+    template: template.tex
+geometry: margin=1in,headsep=.2in
+params:
+  key: false
+---
+
+```{r fix-latex, results='asis', echo = F, message = F}
+library(tidyverse)
+if (params$key) {
+  cat("\\newcommand{\\answer}[1]{{\\large\\color{red}\\emph{#1}}}")
+  cat("\\providecommand{\\tightlist}{\\setlength{\\itemsep}{1em}\\setlength{\\parskip}{0pt}}")
+  cat("\\chead{\\color{red}{KEY}}")
+} else {
+  # cat("\\newcommand{\\answer}[1]{{\\color{white}#1}}") 
+  cat("\\newcommand{\\answer}[1]{{\\leavevmode\\protect\\phantom{\\large #1}}}")
+  cat("\\providecommand{\\tightlist}{\\setlength{\\itemsep}{1em}\\setlength{\\parskip}{0pt}}")
+}
+
+``` 
+
+# Human Social Cues
+
+According to past research, dogs are very good at perceiving human facial communication cues because of their domestication as companion animals. Horses, too, understand human expressions of anger, reacting with increased heart-rate and negative body language. 
+
+Goats, however, were domesticated not as companion animals, but for food and milk. Selective breeding in goats was used to optimize coat color, milk production, and meat quality, rather than prosocial behavior toward humans. Researchers decided to test whether understanding of human social cues is a product of domestication even in the absence of selection for prosocial behavior, or whether it results from selectively breeding for cross-species social comprehension. Specifically, the researchers examined 35 goats from a goat sanctuary in the United Kingdom to test whether goats also display a preference for human faces showing positive emotion. 
+
+To test this theory, goats were led into a pen which had an image of either a happy human face or an angry human face on a metal board placed at approximately goat-height. Each of the 35 goats was randomly assigned to view either the happy or angry face.  During each 4 minute trial, researchers recorded the amount of time (in seconds) each goat spent in proximity to the face. 
+
+```{r}
+set.seed(2049729863)
+tbl <- tibble(id = 1:35, face = sample(c("positive", "negative"), size = 35, replace = T)) %>%
+  mutate(time = round(rnorm(35, mean = ifelse(face == "positive", 120, 80), sd = 10)))
+```
