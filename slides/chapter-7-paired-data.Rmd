@@ -457,6 +457,6 @@ $3 \leq \lvert t\rvert\phantom{< 3}\;\phantom{.5}$ | **very strong** evidence ag
 
 ## Exploration 7.3
 
-- Do questions 1 through 9 with your group
+- Do questions 1 through 9 
 
-- We will give periodical guidance for the whole class. Good luck!
+- We will upload a video walkthrough for the whole class. Good luck!
