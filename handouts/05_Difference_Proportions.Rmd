@@ -8,7 +8,7 @@ params:
   key: false
 ---
 
-```{r fix-latex, results='asis', echo = F}
+```{r fix-latex, results='asis', echo = F, message = F}
 library(tidyverse)
 if (params$key) {
   cat("\\newcommand{\\answer}[1]{{\\large\\color{red}\\emph{#1}}}")
@@ -49,6 +49,7 @@ Total | \answer{12,111} | \answer{1,917,889} | \answer{1,930,000}
 
 3. For each city, calculate the marginal \emph{crude fatality rate}, that is, the total number of deaths divided by the total population. The crude fatality rate is lower than the \emph{case fatality rate}, which uses the number of confirmed cases as the denominator.    
 \longanswer[8em]\answer{Philadelpha: $\hat p_P = \displaystyle\frac{12000}{1800000} \approx 0.00667$\\Houston: $\hat p_H = \displaystyle\frac{111}{130000} \approx 0.000854$}
+\clearpage
 
 4. Calculate the risk of dying of the 1918 flu pandemic in Philadelphia relative to the risk of dying of the flu in Houston during the same period. Interpret the number you get in the context of the problem.    
 \longanswer[8em]\answer{$RR_{P,H} = \displaystyle\frac{\hat p_P}{\hat p_H} = \frac{0.00667}{0.000854} \approx 7.808$\\
@@ -72,6 +73,7 @@ Note that you could also write $H_0:\pi_P = \pi_H$ and $H_A: \pi_P > \pi_H$; the
 
 10. Interpret the interval you got in 9. Note that when working with rates, it may be easier to interpret and think about the values as fatality rate per 1000 - e.g. a rate of 0.005 would be read as 5 per 1000. What can you say about your null hypothesis in 6?     
 \longanswer\answer{We can be 95\% confident that per 1000 residents, between 5.6 and 6.0 more died in Philadelphia than in Houston. As this interval does not contain 0, we can conclude that the death rate in Philadelphia was significantly higher than in Houston; the difference in the death rates cannot be explained by chance alone.}
+\clearpage
 
 11. Does this mean we can conclude that the public health interventions and social distancing measures used in Houston were effective at reducing the death rate? Can you think of any potential confounding variables?    
 \longanswer\answer{No, because this is an observational study. Philadelphia and Houston were vastly different sizes, with different population density and climates (this is especially true in the fall). It is possible that the difference in the crude mortality rate is due to one of these other differences.}
@@ -100,14 +102,10 @@ Assuming for the moment that South Koreans tested for coronavirus are representa
 
 5. What is the value of the sample statistic? Show your work.    
 \longanswer\answer{The sample statistic is the infection rate in South Korea, which is $\hat p_i = \frac{7382}{189236} \approx 0.03901$}
+\clearpage
 
 6. Create a 95% confidence interval for the infection rate in South Korea.    
 \longanswer\answer{$\hat p_i \pm 2 \sqrt{\frac{\hat p_i (1-\hat p_i)}{n}} = 0.03901 \pm 2 \sqrt{\frac{0.03901(0.96099)}{189236}} = 0.03901 \pm 2(0.000445) = (0.0381, 0.0399)$}
 
 7. Interpret the interval in the context of the problem. What can you say about the null hypothesis?    
 \longanswer[5em]\answer{Epidemiologists can be 95\% confident that the infection rate in South Korea is between 3.80\% and 3.99\%. This is significantly lower than the infection rate on the Diamond Princess, suggesting that under normal living conditions, the infection rate is not equal to the ~19\% observed on the cruise ship. }
-
-
-## Case Fatality Rate
-
-Get fatality rate for 80+, 70+ and compare. 
