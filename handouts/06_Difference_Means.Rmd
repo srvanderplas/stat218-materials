@@ -93,3 +93,55 @@ Note that the researchers want to test whether goats also display a **preference
 \longanswer[10em]\answer{$t = \displaystyle\frac{\overline x_h - \overline x_a - 0}{SE} = \displaystyle\frac{`r sstat`}{`r pooled_se`} = `r sstat/pooled_se`$. \\[.5em]
 With a standardized statistic of `r sstat/pooled_se`, we have strong evidence against $H_0$ that goats spend equal amounts of time around happy and angry human faces, and thus cannot read human social cues. Therefore, we reject $H_0$ and conclude that goats spend significantly more time around happy human faces than angry human faces, suggesting that goats can, in fact, read social cues.}
 
+
+
+# Wizards and Vampires
+
+Read the Introduction, Method, and the 1st paragraph of the Results sections of the research report "Becoming a Vampire Without Being Bitten: The Narrative Collective-Assimilation Hypothesis" by Gabriel & Young, published in Psuchological Science in 2011\footnote{DOI: \url{https://journals.sagepub.com/doi/abs/10.1177/0956797611415541}}. A PDF of the study is available in the Box folder at \url{https://unl.box.com/v/vampire-wizard-study}. An explanation of the Implicit Association Test used in the study can be found at \url{https://implicit.harvard.edu/implicit/iatdetails.html}. 
+
+1. Is this an experiment or an observational study? Why?    
+\longanswer\answer{This is an experiment - Researchers assigned treatments (reading a section of Harry Potter or Twilight) to the experimental units (students). }
+
+2. Was random sampling, random assignment, both, or neither used in this study? What are the implications?    
+\longanswer[6em]\answer{This study used volunteers, so there was no random sampling; the researchers may not be able to generalize their results to the population if the sample was not representative. However, random assignment was used, so the researchers can make cause-and-effect claims about the treatment. }
+
+3. What is/are the explanatory variable(s)? How are they calculated? (You may have to read the additional information about the IAT) What does this variable mean in real life?    
+\longanswer[14em]\answer{The explanatory variable is the IAT score - the difference between the mean response time between "me" and vampires (and "not me" and wizards) and the mean response time between "me" and wizards (and "not me" and vampires). The IAT score is the amount an individual identifies themselves with the concept of vampires (high score) compared with wizards (low score).\\[.5em]
+A second explanatory variable is the Twilight/Harry Potter Narrative Collective-Assimilation Score, which was designed by the researchers. This score was computed as the difference between the participant's z-score for wizard items and the participant's z-score for vampire items.}
+
+***
+
+The study does not report the full dataset, but we can simulate study results for the IAT using the values which are reported. We will use the IAT score, rather than the narrative collective-assimilation score, for the rest of this problem. 
+
+```{r, echo = F, fig.width = 8, fig.height = 3, message = F}
+set.seed(20200322)
+vamp <- tibble(id = 1:140, 
+            Story = sample(c("Twilight", "Harry Potter"), 
+                           size = 140, replace = T)) %>%
+  mutate(IAT_score = round(rnorm(140, mean = ifelse(Story == "Twilight", .35, -.39), sd = .13), 2))
+
+ggplot(vamp, aes(x = IAT_score, fill = Story)) + geom_histogram(color = "black") + 
+  ylab("Participants") + xlab("IAT Score")
+
+vamp_sum <- vamp %>% group_by(Story) %>% summarize(N = n(), Mean = mean(IAT_score), SD = sd(IAT_score), var = var(IAT_score)) 
+knitr::kable(vamp_sum[,-5])
+```
+
+***
+
+4. Is it appropriate to use theory-based inference for this problem?    
+\longanswer\answer{Yes, we can use theory-based inference. Both groups have a symmetric distribution, but we also have more than 20 observations in each group, so we are safe to use theory based inference in any case.}
+
+5. What is the relevant population parameter and corresponding sample statistic, in symbols?    
+\longanswer\answer{$\mu_\text{v} - \mu_\text{w}$, where v = vampire and w = wizard correspond to the twilight and harry potter conditions respectively. $\overline x_\text{v} - \overline x_\text{w}$ is the sample statistic.}
+
+6. What is the standard error of the sample statistic? Show your work, including the formula you used.    
+\longanswer{\answer{ 
+$SE = \sqrt{\displaystyle\frac{s_v^2}{n_v} + \displaystyle\frac{s_w^2}{n_w}} = \sqrt{\frac{`r vamp_sum$var[2]`}{`r vamp_sum$N[2]`} + \frac{`r vamp_sum$var[1]`}{`r vamp_sum$N[1]`}} = \sqrt{`r sum(vamp_sum$var/vamp_sum$N)`} = `r sqrt(sum(vamp_sum$var/vamp_sum$N))`$ 
+}}
+
+7. Construct and interpret a 95% confidence interval for the difference in IAT scores for participants who read Twilight and the participants who read Harry Potter.    
+\longanswer[8em]\answer{
+$\text{Statistic} \pm 2 \times \text{SE(Statistic)} = `r diff(vamp_sum$Mean)` \pm 2 \times `r sqrt(sum(vamp_sum$var/vamp_sum$N))` = `r paste0("(", paste(round(diff(vamp_sum$Mean) + c(-2, 2) * sqrt(sum(vamp_sum$var/vamp_sum$N)), 3), collapse = ", "), ")")`$\\[.5em]
+We are 95\% confident that on average, people who read Twilight will have an IAT score which is between `r round(diff(vamp_sum$Mean) + c(-2, 2) * sqrt(sum(vamp_sum$var/vamp_sum$N)), 3)[1]` and `r round(diff(vamp_sum$Mean) + c(-2, 2) * sqrt(sum(vamp_sum$var/vamp_sum$N)), 3)[2]` higher than people who read Harry Potter. This indicates that there is a significant difference in self-identification with vampire or wizard group membership, depending on the story read at the beginning of the study. 
+}
