@@ -1,0 +1,135 @@
+---
+title: "Paired Designs Have More Power!"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, message = F, warning = F, dpi = 300)
+options(digits = 3)
+library(tidyverse)
+```
+
+Why do paired designs work better than an unpaired equivalent?
+
+Let's suppose we want to evaluate the effectiveness of watching Slow TV[^1] shows on stress levels. We assess the initial stress level of 30 people, and then assign each person to watch 1 hour of slow TV every night for a week. At the end of the week, we measure the stress level of each person again.
+
+```{r data}
+set.seed(202003238)
+dat_wide <- tibble(
+  id = 1:30,
+  baseline_stress = rnorm(30, 10, 2),
+  reduction_level = rnorm(30, -1, 1),
+  err1 = rnorm(30, 0, .5),
+  err2 = rnorm(30, 0, .5),
+  initial = baseline_stress + err1,
+  final = baseline_stress + reduction_level + err2
+) 
+
+dat <- dat_wide %>%
+  pivot_longer(initial:final, names_to = "Week", values_to = "Stress") %>%
+  mutate(Week = factor(Week, levels = c("initial", "final"), labels = c("Initial", "Final")) %>% as.numeric() - 1)
+dat_summary <- dat %>% group_by(Week) %>% summarize(n = n(), Mean = mean(Stress), SD = sd(Stress)) 
+
+unpaired_t <- diff(dat_summary$Mean) / sqrt(sum(dat_summary$SD^2/dat_summary$n))
+paired_t <- mean(dat_wide$final - dat_wide$initial)/(sd(dat_wide$final - dat_wide$initial)/sqrt(nrow(dat_wide)))
+```
+
+Below, each stage of the analysis process is performed for this data, treating it first as unpaired, and then as paired. Notice the differences between the two analyses.
+
+# Data Summary {.tabset .tabset-fade .tabset-pills}
+
+## Unpaired
+
+Here is the data summary table for an unpaired design:
+```{r}
+
+knitr::kable(dat_summary)
+```
+
+## Paired
+
+
+The mean of the difference between the Final stress measurement and the Initial stress measurement is `r mean(dat_wide$final - dat_wide$initial)` and the standard deviation is  `r sd(dat_wide$final - dat_wide$initial)`. There are 30 individuals in the study.
+
+
+
+# Visually {.tabset .tabset-fade .tabset-pills}
+
+## Unpaired 
+
+We can plot these observations using boxplots:
+```{r, fig.align="center", fig.width=5, fig.height = 3, out.width="60%"}
+dat %>%
+  mutate(Week = factor(Week, levels = 0:1, 
+                       labels = c("Before\nSlowTV", "After\nSlowTV"))) %>% 
+  ggplot(aes(y = Stress, x = Week)) + 
+  geom_boxplot() +
+  coord_flip() + 
+  theme(axis.text.y = element_text(angle = 90, hjust = .5, vjust = 1))
+```
+
+We can see that there is a slight difference in the mean stress level before and after a week of SlowTV, but the distributions overlap significantly; our difference might be due to chance alone. 
+
+## Paired
+
+The before-and-after measurements are related - they describe the change in a single person. The boxplots (and the unpaired test) do not account for the fact that each initial observation has a "mate". 
+
+We could also plot these measurements as line segments, where the left end is the initial stress level and the right end is the final stress level:
+```{r, fig.align="center", fig.width=5, fig.height = 3, out.width="60%"}
+ggplot(dat) + 
+  geom_line(aes(x = Week, y = Stress, group = id)) + 
+  scale_x_continuous(breaks = 0:2)
+
+```
+
+Most of the line segments have a negative (downward) slope, right? That should mean most people had decreased stress after a week of watching SlowTV. 
+
+
+# Null and Alternative Hypothesis {.tabset .tabset-fade .tabset-pills}
+
+## Unpaired
+
+Our null hypothesis is $H_0: \mu_1 = \mu_0$ where $\mu_1$ is the "after SlowTV" mean stress level and $\mu_0$ is the initial mean stress level.
+
+Our alternative hypothesis is $H_A: \mu_1 < \mu_0$, that is, that the stress level decreases after a week of SlowTV. 
+
+## Paired
+
+Our null hypothesis is that $H_0: \mu_D = 0$, that is, on average, there is no difference between the stress level after watching a week of Slow TV and the stress level before watching a week of Slow TV. 
+
+Our alternative hypothesis is that $H_A: \mu_D < 0$, that is, on average, there is a decrease in stress level after watching a week of Slow TV. 
+
+
+# Hypothesis Test {.tabset .tabset-fade .tabset-pills}
+
+
+## Unpaired
+
+\begin{align}
+t &= \displaystyle\frac{\overline x_1 - \overline x_0 - 0}{\sqrt{\frac{s_0^2}{n_0} + \frac{s_1^2}{n_1}}}\\
+& = \displaystyle\frac{`r dat_summary$Mean[2]` - `r dat_summary$Mean[1]` - 0}{\sqrt{\frac{`r dat_summary$SD[1]^2`}{`r dat_summary$n[1]`} + \frac{`r dat_summary$SD[2]^2`}{`r dat_summary$n[2]`}}} \\
+&=\displaystyle\frac{`r dat_summary$Mean[2]- dat_summary$Mean[1]` - 0}{\sqrt{`r dat_summary$SD[1]^2/dat_summary$n[1]` + `r dat_summary$SD[2]^2/dat_summary$n[2]`}} \\ 
+&= \frac{`r (dat_summary$Mean[2]- dat_summary$Mean[1])`}{`r sqrt(sum(dat_summary$SD^2/dat_summary$n))`}\\ 
+&= `r (dat_summary$Mean[2]- dat_summary$Mean[1])/ sqrt(sum(dat_summary$SD^2/dat_summary$n))`
+\end{align}
+
+As $t = `r unpaired_t`$, we have `r ifelse(abs(unpaired_t) >= 1.5, "strong", "little to no")` evidence against the null hypothesis that SlowTV has no effect on stress levels. We `r ifelse(abs(unpaired_t) >= 1.5, "reject", "fail to reject")` $H_0$ and conclude that `r ifelse(abs(unpaired_t) >= 1.5, "there is a significant reduction in average stress levels among people who watch SlowTV for an hour a night compared with those who do not watch SlowTV for an hour a night.", "it is possible that the observed difference in average stress levels could have happened by chance alone. We have no evidence that watching SlowTV affects average stress levels. ")`
+
+## Paired
+
+\begin{align}
+t &= \displaystyle\frac{\overline x_D - 0}{s_D/\sqrt{n}} \\
+& = \displaystyle\frac{`r mean(dat_wide$final - dat_wide$initial)`}{`r sd(dat_wide$final - dat_wide$initial)`/\sqrt{`r nrow(dat_wide)`}} \\
+& = \displaystyle\frac{`r mean(dat_wide$final - dat_wide$initial)`}{`r sd(dat_wide$final - dat_wide$initial)/sqrt(nrow(dat_wide))`} \\
+& = `r mean(dat_wide$final - dat_wide$initial)/(sd(dat_wide$final - dat_wide$initial)/sqrt(nrow(dat_wide)))`
+\end{align}
+
+
+As $t = `r paired_t`$, we have `r ifelse(abs(paired_t) >= 1.5, ifelse(abs(paired_t) > 3, "very strong", "strong"), "little to no")` evidence against the null hypothesis that there is no difference. We `r ifelse(abs(paired_t) >= 1.5, "reject", "fail to reject")` $H_0$ and conclude that `r ifelse(abs(paired_t) >= 1.5, " on average, there is a significant reduction in stress levels when people watch SlowTV for an hour a night.", "it is possible that the observed average difference in stress levels could have happened by chance alone. We have no evidence that watching SlowTV affects average stress levels. ")`
+
+
+# Overall Conclusion
+
+Using the same data, we can get much better estimates of the average difference in stress levels by computing that difference for each individual, instead of in aggregate. As a result, we have more statistical **power** to detect an effect (if one exists). This is particularly important with small-magnitude effects common in studies of people - people researchers get used to dealing with lots of variability. 
+
+[^1]: [News Article](https://www.cbsnews.com/news/norways-slow-tv-fascinating-viewers-for-hours-or-days-at-a-time/), [YouTube channel](https://www.youtube.com/channel/UCHRGA07fn3RpmPvUD-qgE-A)
