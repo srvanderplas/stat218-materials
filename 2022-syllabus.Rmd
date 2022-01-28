@@ -1,0 +1,391 @@
+---
+output: 
+  pdf_document:
+    template: "rmd-syllabus-template.tex"
+    latex_engine: xelatex
+    dev: cairo_pdf
+geometry: margin=1in
+
+title: "Stat 218: Introduction to Statistics"
+instructor: Susan Vanderplas
+date: "Spring 2022"
+
+email: "susan.vanderplas@unl.edu"
+web: "srvanderplas.netlify.app"
+officehours: "\\href{https://calendly.com/drvanderplas/officehours}{Schedule here}"
+office: "Hardin 349A"
+classroom: "Online"
+classhours: "Asynchronous"
+
+fontfamily: mathpazo
+fontsize: 11pt
+---
+
+
+```{r setup, include=FALSE}
+# knitr::opts_chunk$set(cache=FALSE, dev='pdf')
+knitr::opts_chunk$set(cache=F,
+                      fig.path = 'figs/',
+                      cache.path='cache/',
+                      warning=F,
+                      message=F)
+
+knitr::opts_chunk$set(
+                  fig.process = function(x) {
+                      x2 = sub('-\\d+([.][a-z]+)$', '\\1', x)
+                      if (file.rename(x, x2)) x2 else x
+                      }
+                  )
+
+library(tidyverse)
+library(lubridate)
+
+# Create a calendar for your syllabus ----
+# Source: http://svmiller.com/blog/2020/08/a-ggplot-calendar-for-your-semester/
+
+# 1) what is the first Monday of the semester?
+# Any number of ways to identify dates in R, but we'll use {lubridate} and the ymd() function here.
+# Format: YYYYMMDD. In this example, 4 January 2022.
+
+# Weekday(s) of class
+# class_wdays <- c("Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday")
+
+# Spring Break was 13 March 2022 to 20 March 2022.
+not_here_dates <- c(
+  ymd("20220117"),
+  # Spring Break
+  seq(ymd(20220313),ymd(20220319), by=1))
+
+# You can adjust this as you see fit. Basically: add assignment types (e.g. papers, quizzes).
+# My intro class was fairly simple: just exams.
+exam_dates <- c(ymd(20220210:20220212), ymd(20220412:20220414))
+
+project_dates <- ymd(c(20220307, 20220328, 20220401, 20220418))
+
+quiz_dates <- ymd(c(20220201, 20220225, 20220323, 20220429, 20220503))
+
+# What are the full dates of the semester? Here, I'll exclude exam week as I like to do.
+# In this case: 6 January to 23 April
+semester_dates <- seq(ymd(20220117), ymd(20220513), by=1)
+
+exam_week <- seq(ymd(20220509), ymd(20220513), by = 1)
+
+# Custom function for treating the first day of the month as the first week 
+# of the month up until the first Sunday (unless Sunday was the start of the month)
+wom <- function(date) {
+    first <- wday(as.Date(paste(year(date),month(date),1,sep="-")))
+    return((mday(date)+(first-2)) %/% 7+1)
+  }
+
+# Create a data frame of dates, assign to Cal
+Cal <- tibble(date = seq(ymd(20220102), ymd(20220530), by=1))  %>%
+  mutate(mon = lubridate::month(date, label=T, abbr=F), # get month label
+         wkdy = weekdays(date, abbreviate=T), # get weekday label
+         wkdy = fct_relevel(wkdy, "Sun", "Mon", "Tue", "Wed", "Thu","Fri","Sat"), # make sure Sunday comes first
+         semester = date %in% semester_dates, # is date part of the semester?
+         exams = date %in% exam_dates, # is it an exam?
+         quiz = date %in% quiz_dates, 
+         project = date %in% project_dates, 
+         not_here = date %in% not_here_dates, # is it a day off?
+         exam_wk = date %in% exam_week,
+         day = lubridate::mday(date), # get day of month to add later as a label
+         # Below: our custom wom() function
+         week = wom(date))
+
+# Create a category variable, for filling.
+# I can probably make this a case_when(), but this will work.
+
+Cal <- Cal %>%
+  mutate(category = case_when(
+    quiz ~ "Quiz",
+    exams ~ "Exam",
+    project ~ "Project Component Due",
+    not_here ~ "UNL holiday",
+    # semester  & !not_here & !exam_wk ~ "Class Day",
+    semester ~ "Semester",
+    TRUE ~ "NA"
+  ))
+  # mutate(category = NA,
+  #        category = ifelse(semester == 1, "Semester", category),
+  #        category = ifelse(semester == 1 & wkdy %in% c("Wed"), "Class Day", category),
+  #        category = ifelse(exams == 1, "Exams", category),
+  #        category = ifelse(is.na(category) | (semester == 1 & not_here == 1), "NA", category)) -> Cal 
+
+class_cal <- Cal %>% 
+  ggplot(.,aes(wkdy, week)) +
+  # custom theme stuff below
+  # theme_steve_web() + 
+  theme_bw() +
+  theme(panel.grid.major.x = element_blank(),
+        legend.position = c(1, 0), legend.justification = c(1,0), legend.direction = "vertical", legend.title = element_blank(),
+        axis.title.y = element_blank(), axis.title.x = element_blank(), axis.ticks.y = element_blank(), axis.text.y = element_blank()) +
+  # geom_tile and facet_wrap will do all the heavy lifting
+  geom_tile(alpha=0.8, aes(fill=category), color="black", size=.45) +
+  facet_wrap(~mon, scales = "free", ncol=3) +
+  # fill in tiles to make it look more "calendary" (sic)
+  geom_text(aes(label=day, color = semester&(!not_here)),family="Open Sans") +
+  # put your y-axis down, flip it, and reverse it
+  scale_y_reverse(breaks=NULL) +
+  # manually fill scale colors to something you like...
+  scale_color_manual(values = c("FALSE" = "white", "TRUE" = "black"), guide = "none") + 
+  scale_fill_manual(values=c("Class Day"="purple", 
+                             "Project Component Due"= "green",
+                             "Quiz" = "steelblue",
+                             "Semester"="white",
+                             "UNL holiday" = "grey10",
+                             "NA" = "white", # I like these whited out...
+                             "Exam"="orange"),
+                    #... but also suppress a label for a non-class semester day
+                    breaks=c("Semester", "UNL holiday","Project Component Due","Exam", "Quiz"))
+# class_cal
+
+exam_days <- filter(Cal, category == "Exam") %>% 
+  group_by(mon) %>%
+  summarize(date = min(date)) %>%
+  mutate(topic = c("Exam 1 (Ch P, 1, 2)", "Exam 2 (Ch 3-7)"))
+
+quiz_days <- filter(Cal, category == "Quiz") %>%
+  mutate(topic = c("Ch. P, 1 Quiz", "Ch. 3 Quiz", "Ch. 4, 5 Quiz", "Ch. 10 Quiz", "ACE Assessment Quiz"))
+
+project_days <- filter(Cal, category == "Project Component Due") %>%
+  mutate(topic = c("Grade and Discuss Practice Articles", "Post Draft Article to Group Board", "Submit Peer Review Feedback", "Final Draft of Article Critique Due"))
+
+content <- bind_rows(exam_days, quiz_days, project_days) %>%
+  arrange(date)
+
+# content <- tribble(
+#   ~date, ~topic
+#   ymd(20220117), "Chapter P, 1.1",
+#   ymd(202201)
+# )
+#   bind_rows(exam_days) %>%
+#   arrange(date)
+
+```
+
+# Course Description
+
+The practical application of statistical thinking to contemporary issues; collection and organization of data; probability distributions; statistical inference; estimation; and hypothesis testing.
+
+This particular section of STAT 218 is conducted **online in Canvas**. It is **NOT**:
+
+- an online course where you will work through the material at your own pace
+- a course where you will sit each week and listen to pre-recorded lectures
+
+The primary method for learning new statistical concepts and methods will be by careful reading, participating in class activities, discussion and practicing with the online applets. If you work hard, and engage with the course material, you will be successful! 
+
+**There will be frequent deadlines to meet each day**, and it may very well take more of your time than a face-to-face section of STAT 218 would require. Please think seriously about whether this is the appropriate section of STAT 218 for you.
+
+# Course Objectives
+This course will help you learn to think and reason statistically, and to construct arguments based on numerical evidence. At the end of this course you will be able to:
+
+- Recognize that variability is natural, predictable, and quantifiable
+- Determine the population to which conclusions can be drawn based on the randomly sampled data
+- Construct and interpret numerical summaries and graphical displays of data
+- Translate a research question/scenario into a statistically testable null model
+- Construct a simulation study to determine the strength of evidence for your research question, and draw conclusions about the research question based on the results of the simulation study
+- Critique news stories and journal articles that include statistical information
+
+## ACE Outcome 3
+
+Use mathematical, computational, statistical, or formal reasoning (including reasoning based on principles of logic) to solve problems, draw inferences, and determine reasonableness. The reinforced skills for STAT 218 are Writing and Critical Thinking. STAT 218 will provide the student opportunities to achieve this learning outcome through readings, quizzes and small group activities/discussion. These assignments( together with exams) will be used by the instructor to assess achievement of the outcome. A standardized Canvas assessment will be used by the Department of Statistics to carry out an overall assessment of STAT 218, and the course’s effectiveness at assisting students in achieving Outcome 3.
+
+# Class Schedule & Topic Outline
+
+Canvas has the complete course schedule, including all reading assignments, video links, and due dates. This calendar is to serve as a summary of major course events.
+
+\FloatBarrier
+```{r calendar, echo=F, eval=T,  warning=F, fig.width=8, fig.height=4, out.width = "90%", fig.align = "center"}
+class_cal
+```
+
+\FloatBarrier
+
+```{r schedule, eval = T, echo = F, fig.pos = 'htbp'}
+content %>% select(date, topic) %>%
+  # mutate(time = ifelse(is.na(time), "", time)) %>%
+  mutate(date2 = format(date, "%b %e")) %>%
+  set_names(c("date", "Event", "Date")) %>%
+  select(Date, Event) %>%
+kableExtra::kable(caption = "Major Events", format='simple')
+```
+
+
+# Textbook
+
+This class uses a digital textbook integrated with Canvas. By registering for this class, you have access to the textbook through Canvas, and the cost of the book has been automatically added to your student bill. This class will use Wiley online, which has a rich set of content (videos, practice problems, explorations) to go along with the written material. In addition, your homework will be through Wiley Assignments. In addition, the textbook makes use of a number of web applets which will help you develop a feel for the concepts we are discussing in this course. You will need to make use of these applets to complete your homework assignments, explorations, quizzes, and tests.
+
+# Assessment/Grading
+
+Assignments | Weight
+----- | -----
+Homework & Participation | 25% 
+Quizzes | 25%
+Exam 1 | 20%
+Exam 2 | 20%
+Article Critique | 10%
+
+
+Lower bounds for grade cutoffs are shown in the following table. I will not "round up" grades at the end of the semester beyond strict mathematical rules of rounding.
+
+Letter grade |	X + |  	X |	X - 
+-------- | ----- | ----- | -----
+A |	97 |	94 | 	90
+B |	87 |	84 |	80
+C |	77 |	74 |	70
+D |	67 |	64 |	61
+F |	<61 | |
+
+Interpretation of this table: A grade of 85 will receive a B. A grade of 77 will receive a C+. A grade of 70 will receive a C-. Anything below a 61 will receive an F. 
+
+## Homework
+
+Assigned homework problems, participation activities, and discussions provide you with opportunities to practice methods from class and to deepen your understanding through interacting with classmates.
+
+All assignments will have a "drop dead" time after which they cannot be submitted. **No exceptions will be made.**
+
+The 10 lowest homework assignments will be dropped.
+
+Usually due at 8am on the due date. We will not be available between 8pm and 8am, so plan ahead!
+
+### Specific Assignment Types/Policies
+
+- Homework Problems:
+    - Completed via Wiley Assignments 
+    - Graded for correctness
+
+- Explorations: 
+    - Submitted via Canvas (fillable pdf)
+    - Graded for correctness and completion
+
+## Group Work
+
+There will be 10-15 group assignments over the course of the semester. Group assignments will be made during the second week of class and will not change from assignment to assignment (there may be shifting between groups after the drop date to equalize group sizes). 
+
+If the assignment involves submitting a PDF document, **designate one person in your group to submit the assignment.** Assignments submitted individually will receive a score of 0. 
+
+Please make sure that **all participating group members' names are on the final pdf**. If a name is omitted from the PDF, that person will receive a score of 0. All participating group members will receive the same grade.
+
+You will be given the opportunity to evaluate your group members' contributions to your group twice over the semester. Please keep in mind that even though this is an online class, you may find it helpful to meet with your group in person.
+
+## Quizzes
+
+Five quizzes will be given. These quizzes will be taken through Canvas, and are open book/note, but not open-classmate. 
+
+Quizzes will have a “drop dead” time, after which they cannot be submitted. No exceptions will be made.
+
+## Article Critique
+
+One of the main goals of this course is for you to think critically, and to see how the concepts we learn in class are applicable in today’s society. You’ll demonstrate this through a critique of an article. We’ll provide you with several articles to choose from, so that you may select one that interests you. An article critique is not a summary of the article. Instead, it involves picking the article apart and trying to find both the good and the bad. We’ll practice with article critiques before you are expected to do this on your own.
+
+## Exams
+
+Two exams will be given. Each exam will include a 60 minute portion taken in the DLC (or, if you are not in Lincoln, you will have to arrange for a proctored exam). The exams will also include a separate non-timed component that allows you to demonstrate your knowledge in a more open-ended way.
+
+Note that you will need to make an appointment to take your exams! Please plan ahead. You will need your N-card for exams.
+
+Exams will be held on the following dates:
+
+- Exam 1: Thursday February 10 - Saturday February 12, 2021
+- Exam 2: Tuesday April 12 - Thursday April 14, 2021
+
+Two online review sessions will be scheduled for each exam - one in the week before the exam, and one within ~2 days of the beginning of the exam period. Review sessions will be announced on Canvas well in advance.
+
+### Digital Learning Center Exam Commons
+
+Exams for this course will be taken under electronic supervision at Digital Learning Center. All testing times are pre-scheduled and exams will be completed on a computer. Before you begin an exam, you must place your personal items in your pre-assigned locker and check-in with Digital Learning Center staff at the front desk. When you have completed your exam, you must check-out at the front desk.
+
+- All testing times are pre-scheduled by students. All students are responsible for self sign-up and early sign-up is recommended as time slots fill up quickly. Students can start signing up for test times up to two weeks before the first day of a scheduled exam.
+- All students are **required to have their current N-Card** to test. Other forms of ID will not be accepted as a substitute for N-Cards. DLC staff reserve the right to ask for a second ID if needed for identity verification.
+- All students will receive two pieces of barcoded scratch paper for their exam. This paper will be scanned in to students upon check-in and scanned out upon check-out.
+- Only permitted items are allowed at your computer station during testing, including your N-Card, DLC provided barcoded scratch paper, and writing utensils. Nothing else is allowed at your computer station unless your instructor has made prior arrangements with the DLC.
+- All exams must be submitted for grading at the posted closing time. Students will not be given additional time to finish their exams past the posted closing time.
+- To schedule your exam, please visit **http://dlc-reserve.unl.edu**. For more information about the Exam Commons location, operating hours and student guidelines, please visit http://dlc.unl.edu.
+
+
+# Course Policies
+
+## Discussion Board
+
+All nongrade related questions should be posted to the discussion board. We will monitor the discussion board from 8am to 8pm, and you can expect a response to your question within a couple of hours (we have other obligations, meetings, and classes, just like you do). Note that the expected response time for discussion board is much faster than for email. On weekends, we may take a bit more time to respond to discussion board posts, but you should expect a response within the day.
+
+Please feel free to answer each others' questions! To incentivize use of the discussion board, we will award 1 extra credit point (Homework/Participation) to the first correct answer to any question posted on the discussion board.
+
+## Announcements & Questions
+
+We will frequently use Canvas Announcements to pass on information to you. Please make sure your announcement notifications are turned on and that you check Canvas several times every day. If you email us a question that has been addressed in an announcement, your email will be deleted without a response. All questions, except those regarding grades, should be posted to the discussion board. We will set up a discussion board thread for each week of the course. Any non grade-related questions emailed to an instructor will be deleted without a response. This is important so that we reduce the amount of email to a manageable level, ensuring that we actually see any emails
+
+## Late Policy
+
+Late assignments will be accepted only under extenuating circumstances, and only if you have **contacted me prior to the assignment due date** and received permission to hand the assignment in late. I reserve the right not to grade any assignments received after the assignment due date.
+
+
+## Class Participation
+
+
+Because this course is investigation-led, you are expected to read the material on your own and complete assignments promptly. There are weekly discussion boards you can use to ask questions and engage with your classmates -- please take advantage of them. You can also schedule an appointment with Dr. Vanderplas or with the course TA(s) for additional help.
+
+
+## Expectations
+
+You can expect me to:
+
+- reply to emails within 48 hours during the week (72 hours on weekends)
+- be available in class to assist with assignments
+- be available by appointment for additional help or discussion
+
+I expect you to:
+
+- Read the module material and watch any videos that are posted
+- Engage with the material and your classmates/group members
+- Seek help when you do not understand the material
+- Communicate promptly if you anticipate that you will have trouble meeting deadlines or participating in a portion of the course.
+- Be respectful and considerate of everyone in the class
+
+
+## Technology
+
+This class will require you to use Canvas, web applets, and various other multimodal content. You are also expected to be able to participate in online discussions, zoom meetings, and office hours as necessary. To complete the required assignments and participate effectively in this course, you are expected to have:
+
+- A computer with firefox, google chrome, or chromium installed
+- A reliable high speed internet connection
+- Access to Adobe Reader (to view/fill pdf files)
+- Working sound input and output devices (so a working microphone and headphones/speakers)
+- A working web camera (optional, but will make things easier)
+
+We realize that in any online course, technical issues will arise. We are here to help, and we also encourage you to help each other via the discussion board. However, we strongly encourage you to avoid working on assignments until the very last minute. We want to help you if you run into problems, and it can be challenging for us to help if you do not ask questions in a timely manner. If you elect not to start a lab activity or a homework assignment until just a few hours before the due date, we might not be available to help you if you get stuck. For tips on interacting with Wiley content and completing the fillable pdf assignments, see the videos in the “Start Here” section of Canvas. Pay special attention to the tips on working with pdf files, as screen shots will not be accepted in place of a fillable pdf.
+
+**Technical difficulties do not excuse you from course responsibilities.**
+
+### Calculators
+
+You will need a calculator for class activities, quizzes, and exams. However, this class is not a math class. We will not focus on memorizing formulas and doing complex calculations. You may use any calculator that contains functions (i.e., it can take a square root); an advanced calculator is not needed to be successful in this course. However, cell phones and computers may not be used to perform calculations on exams.
+
+## Netiquette
+
+This course involves online discussions. It is important to maintain professionalism and mutual respect in these discussions. Here are some guidelines:
+
+- Avoid sarcasm. It’s difficult to detect online. Remember that you are relying on your words to show the tone you intend. If in doubt, leave it out.
+- Avoid yelling. ALL CAPS LOOKS LIKE YELLING. As does a lot of punctuation!!!!!!?????? Just as you wouldn’t shout during a classroom discussion, avoid shouting in an online discussion.
+- Be professional.
+- Check your spelling and grammar, and be patient with others’ spelling and grammar. 
+- Don't dominate the discussion, but also be willing to express a minority opinion, trusting your classmates to be professional and engage in good faith. Above all, think before you push the "Send" button.
+- Avoid responding immediately if you are upset. If a post or feedback upsets you, stand up and take a breath before responding. Re-read your responses carefully before finally posting them. If you aren’t sure, wait a few minutes and then come back to get perspective. Once your thoughts are posted, they are free for everyone to read and even if they are removed the impact has still been made.
+- Stay on point. Avoid taking the conversation away from course content.
+- Be clear. Be as clear as possible in your response. Remember that you are not in the room with your classmates – all the information you want to express needs to be self-evident in the post itself. Avoid texting shorthand (eg., UR, np), and use simple language if it is sufficient to communicate your point clearly.
+- Avoid overly long posts. As the number of posts increases as the week goes on, it’s easier for everyone to participate if posts are clear and to the point so that everyone’s posts can be read in a timely manner.
+- Read before responding. Before you respond to the professor's post, read the other comments in the discussion board first. If someone else made the point you wanted to make, you can agree with them and elaborate further, expand on the idea, take it in a different direction, or come up with a different approach altogether.
+- Help each other! (But be aware of the University's Academic Honesty Policy)
+- Do not hesitate to ask for feedback. When in doubt, always check with your instructor for clarification.
+
+Failure to adhere to these guidelines will result in a loss of participation points for the class. Repeated violations will result in your removal from the online discussion space.
+
+Tip: On a more practical level, it’s often useful to type out responses in word processing or text editing software to refine before posting them, in case there’s a problem with the browser or the software. Then copy and paste them into the discussion post.
+
+## Inclement Weather
+
+If in-person classes are canceled, you will be notified of the instructional continuity plan for this class by Canvas Announcement. In most circumstances, class will continue as normal. The only exception to this is if the DLC hours are affected and an exam is scheduled during an inclement weather event.
+
+
+# Required University Information
+See https://executivevc.unl.edu/academic-excellence/teaching-resources/course-policies
