@@ -11,12 +11,12 @@ TARGETLIST      += $(SLIDETARGET) $(SLIDEPDFTARGET) $(SLIDEPDFPGTARGET)
 %.pdf: %.html
 	Rscript -e "pagedown::chrome_print('$<', '$@')"
 %-4.pdf: %.pdf
-	pdfnup --nup 2x2 --frame true --paper letterpaper --noautoscale false \
+	~/bin/pdfnup --nup 2x2 --frame true --paper letterpaper --noautoscale false \
 	       --scale 0.92 --suffix 4 --outfile slides $<
 %-3.pdf: %.pdf
-	pdfjam-slides3up --suffix 3 --paper letterpaper --outfile slides $<
+	~/bin/pdfjam-slides3up --suffix 3 --paper letterpaper --outfile slides $<
 %-2.pdf: %.pdf
-	pdfnup --nup 1x2 --frame true --paper letterpaper --noautoscale false \
+	~/bin/pdfnup --nup 1x2 --frame true --paper letterpaper --noautoscale false \
 	       --no-landscape --scale 0.92 --suffix 2 --outfile slides $<
 
 # --- Handouts -----------------------------------------------------------------

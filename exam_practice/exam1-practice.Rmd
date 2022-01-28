@@ -126,7 +126,7 @@ Evaluating predictions made over 2019 in Lincoln, the weather service correctly 
 9. In this simulation, what does a heads represent?     
 \answer{Heads represents a day with correctly predicted precipitation. }
 10. Your simulation produces the data shown in the plot below:    
-```{r weather-data, fig.width = 8, fig.height = 2.8}
+```{r weather-data, fig.width = 6.5, fig.height = 2.8}
 set.seed(20200213)
 day_sim <- rbinom(100, 365, prob = .75)
 day_success <- mean(day_sim/365)
@@ -139,7 +139,7 @@ p <- qplot(x = day_sim, geom = "dotplot", method = "histodot",
                      breaks = c((0:72)*5, 1),
                      minor_breaks = 0:365,
                      labels = c("0", sprintf("%d/%d", (1:72)*5, 365), "1"),
-                     expand = expand_scale(mult = 0, add = 2)) +
+                     expand = expansion(mult = 0, add = 2)) +
   annotate("text", x = -Inf, y = Inf, hjust = -0.01, vjust = 1.1, 
            label = sprintf("Simulation mean: %0.4f\nSimulation sd: %0.4f", day_success, sd(day_sim/365))) + 
   scale_y_continuous("", breaks = NULL) + 
@@ -208,7 +208,7 @@ p <- ggplot(die) +
   
   scale_x_continuous("Proportion of 6s Rolled", breaks = 0:60, 
                      labels = parse(text = c(0, sprintf("over(%d,60)", 1:59), 1)), 
-                     expand = expand_scale(mult = 0, add = c(2, 2))) + 
+                     expand = expansion(mult = 0, add = c(2, 2))) + 
   scale_y_continuous("", breaks = NULL) + 
   theme(axis.text.y = element_blank(), axis.title.y = element_blank(), axis.ticks.y = element_blank()) 
 
@@ -220,13 +220,14 @@ if (params$key) {
              arrow = arrow(ends = "last", length = unit(.25, "cm")), color = "red") + 
     annotate("segment", x = (10 - dthresh), xend = -Inf, y = .75, yend = .75, 
              arrow = arrow(ends = "last", length = unit(.25, "cm")), color = "red") + 
-    scale_fill_manual(values = c("TRUE" = "red", "FALSE" = "white"), guide = F)
+    scale_fill_manual(values = c("TRUE" = "red", "FALSE" = "white"), guide = "none")
 } else {
   p <- p  + 
-    scale_fill_manual(values = c("TRUE" = "white", "FALSE" = "white"), guide = F)
+    scale_fill_manual(values = c("TRUE" = "white", "FALSE" = "white"), guide = "none")
 }
 print(p)
 ```
+
     a. Describe the distribution's shape, center, and variability.     
     \longanswer[6em]\answer{The distribution is centered at approximately 1/6, and has a slight right skew. Most of the values are concentrated between 5/60 and 15/60 (or 1/12 and 1/4).\\Note: It is also ok to say this distribution is relatively symmetric. The skew is very slight.}
     b.  On the plot, draw one or two vertical line(s) to indicate the cutoff(s), and an arrow(s) indicating the direction(s) of $H_A$. Shade in the dots corresponding to the simulation p-value calculation.
@@ -251,7 +252,7 @@ alien_sd <- round(sd(alien$n), 2)
 
 Roswell, NM is home to a number of stories about sightings of unidentified flying objects (UFOs). The local police department has historically recorded an average of 10 reported sightings per month. Over the past year, a TV show about aliens has been popular on Netflix. During the period when the show was available, there have been, on average, `r alien_mean` reported sightings per week (sample SD = `r alien_sd`). The police officers would like to know if there has been an increase in the number of reported UFO sightings since the TV show became available on Netflix. 
 
-```{r alien-hist, message = F, warning = F, error = F, fig.width = 8, fig.height = 3}
+```{r alien-hist, message = F, warning = F, error = F, fig.width = 6.5, fig.height = 3}
 ggplot(alien, aes(x = n)) + geom_dotplot(color = "black", fill = "white", binwidth = 1, dotsize = .5) + 
   scale_y_continuous("Count") + 
   scale_x_continuous("Number of Reported UFO Sightings") + 
