@@ -56,7 +56,7 @@ true_false_qs <- tribble(
   "You cannot create a theory-based confidence interval for a population mean if you have 15 observations and a symmetric distribution", F, 3,
   "You can create a confidence interval for a population mean if you have 15 observations and a skewed distribution", F, 3,
   "The width of the confidence interval increases when the sample size decreases", T, 3,
-  "2 $\\times$ SE is called the margin of estimation", F, 3,
+  "2 $\times$ SE is called the margin of estimation", F, 3,
   "A confounding variable is a variable that is related to only the explanatory variable", F, 4, 
   "In an experiment, statistics can be used to make cause-and-effect claims", T, 4,
   "A balanced study is one with the same distribution of a confounding variable in the study as in the population", F, 4,
@@ -68,35 +68,22 @@ true_false_qs <- tribble(
   "The relative risk is one way to summarize the association between two quantitative variables", F, 5,
   "In order to use theory-based inference when estimating the difference in two proportions, we must have a total of 40 observations with at least 10 observations in each group", T, 5,
   "There are validity conditions for using simulation-based inference for the difference between two proportions", F, 5,
-  "We examine the difference in proportions across treatment groups because we want to know what proportion of people in the population respond to treatment.", F, 5
+  "We examine the difference in proportions across treatment groups because we want to know what proportion of people in the population respond to treatment.", F, 5,
+  "A boxplot is a visual display of the five-number summary", T, 6,
+  "The IQR is the difference between the minimum and the maximum value", F, 6,
+  "A two sample t-test requires that both groups are symmetric or that both groups have 20 observations and the sample distributions are not strongly skewed", T, 6,
+  "$\\mu_d$ is the population average of the differences", T, 7,
+  "$\\overline{x}_d$ is the average of the individual differences in the sample", T, 7,
+  "Two samples are dependent if the data recorded on one sample are unrelated to those recorded on the other sample", F, 7,
+  "A t-test for paired data is the same as a t-test for one sample continuous data", T, 7,
+  "A matched pairs experiment is an experiment where the same units are measured multiple times, so that each unit is its own control", F, 7
 )
 
 ```
 
-# Formula sheet
-\begin{tabularx}{\textwidth}{|l|X|X|}\cline{2-3}
-\multicolumn{1}{c|}{} & \multicolumn{2}{c|}{Single Variable} \\\cline{2-3}
-\multicolumn{1}{c|}{} & Proportion & Quantitative \\\hline
-Statistic & $\hat p = \displaystyle\frac{\text{Num. successes}}{n}$ & $\overline x = \frac{\sum x}{n}$, where $\sum x$ is the sum of all observations in the sample\\
-& & \\
-\pbox{1in}{Standard\\Error} & $SE(\hat p) = \displaystyle\sqrt\frac{\hat p(1-\hat p)}{n}$ & $SE(\overline x) = \displaystyle\frac{s}{\sqrt{n}}$\\
-& & \\
-\pbox{1.25in}{Standardized\\Statistic} & $z = \displaystyle\frac{\hat p - \pi_0}{\sqrt{\pi_0 (1-\pi_0)/n}}$ & $t = \displaystyle\frac{\overline x - \mu_0}{s/\sqrt{n}}$\\
-\hline
-Theory-Based CI & \multicolumn{2}{c|}{$\text{statistic} \pm 2 \times SE(\text{statistic})$}\\\hline
-\end{tabularx}
-\vfil
-\begin{tabularx}{\textwidth}{|Y|Y|}\hline
-\multicolumn{2}{|c|}{Difference in proportions}\\\hline
-Overall proportion of successes & Standardized Statistic \\
-$\hat p = \displaystyle\frac{n_1 \hat p_1 + n_2 \hat p_2}{n_1 + n_2}$ & $z = \displaystyle\frac{\hat p_1 - \hat p_2 - 0}{\sqrt{\hat p (1-\hat p)\left(\frac{1}{n_1} + \frac{1}{n_2}\right)}}$ \\\hline
-\multicolumn{2}{|c|}{Theory Based CI}\\
-\multicolumn{2}{|c|}{$\hat p_1 - \hat p_2 \pm 2 \times \sqrt{\displaystyle\frac{\hat p_1(1-\hat p_1)}{n_1} + \frac{\hat p_2(1-\hat p_2)}{n_2}}$}\\\hline
-\end{tabularx}
-\clearpage
 # Concepts
 
-\vspace{-2em}\hfill{\underline{\hspace{1in}}\large /15}
+\vspace{-2em}\hfill{\underline{\hspace{1in}}\large /32}
 
 Circle T (true) or F (false) for each of the following statements[1pt each]:\vspace{1em}
 
@@ -104,8 +91,7 @@ Circle T (true) or F (false) for each of the following statements[1pt each]:\vsp
 ```{r results='asis', eval = T}
 set.seed(502973)
 ordered_sample <- true_false_qs %>%
-  group_by(chapter) %>% 
-  sample_n(size = 5, replace = F) %>%
+  sample_frac(1) %>%
   mutate(ans = ifelse(answer, "T\\hspace{1em}\\phantom{F}", "\\phantom{T}\\hspace{1em}F"))
 if (!params$key) {
   cat(paste(sprintf("\\item[T\\hspace{1em}F\\hspace{1em}] %s\\vfill", ordered_sample$statement), 
@@ -326,3 +312,81 @@ Note: Do not calculate the standardized statistic; instead, base your explanatio
 
 13. [2pt] Given your answers in 10 and 11, would you reject or fail to reject the hypothesis $H_0:$ the shiny encounter rates between the two species are the same?         
 \longanswer[4em]\answer{`r ci_interp2`}
+
+
+# Itchy Pups
+
+\vspace{-2em}\hfill{\underline{\hspace{1in}}\large /20}
+
+A veterinary medicine company is doing final trials of a new type of flea and tick medication. In trials of new medicine, it is common to compare the results to the current "gold standard" of treatment, that is, the current commonly used medication. The company recruits 60 dogs who are randomly selected from the population of current canine customers, and randomly assigns 30 of them to receive the new treatment and 30 to receive the old treatment. Each pup receives 60 days of medication; after the first 30 days, which are necessary for the treatment to take effect, the dogs are monitored to assess how many times a day they scratch themselves. The 30 days of scratch counts are averaged together for each dog, and the distribution of average number of scratches are shown below.
+
+```{r fig.width = 8, fig.height = 4, out.width = "100%", message = F, warning = F}
+pup <- tibble(
+  trt = rep(c("Orig", "New"), each = 30),
+  scratch = rnorm(60, mean = rep(c(10, 5), each = 30), sd = 2)
+)
+
+ggplot(data = pup, aes(x = scratch, fill = trt)) + geom_histogram(binwidth = .5, color = "black") + facet_grid(trt~.) + ylab("# pups") + xlab("Average # Scratches") + scale_fill_discrete("Treatment", guide = F)
+```
+
+1. [1pt] What is the population of interest?    
+\longanswer\answer{The company's current canine customers. (Also acceptable - all canines)}
+
+2. [2pt] Which group has the largest median? Draw a vertical line corresponding to the approximate median on the chart for each group.    
+\longanswer[6em]\answer{The original group has the largest median. The vertical line for the new group should be at approximately `r median(filter(pup, trt == "New")$scratch)` and the vertical line for the original group should be at approximately `r median(filter(pup, trt != "New")$scratch)`.}
+
+3. [2pt] Suppose we would like to compare the average itchiness of the pups receiving the original treatment to the average itchiness of pups receiving the new treatment (Original - New). What is the parameter of interest, in words and in symbols?    
+\longanswer[6em]\answer{The population mean itchiness of pups receiving the original treatment minus the population mean itchiness of pups receiving the new treatment, or $\mu_o - \mu_n$ where $\mu_o$ is the population mean itchiness of pups receiving the original treatment and $\mu_n$ is the population mean itchiness of pups receiving the new treatment.}
+
+4. [2pt] Set up the appropriate null and alternative hypotheses to examine the parameter of interest.    
+\longanswer\answer{$H_0: \mu_o - \mu_n = 0$\\$H_A: \mu_o - \mu_n \neq 0$}
+
+5. [2pt] Are theory-based validity conditions met for this problem?    
+\longanswer[8em]\answer{Yes. The validity conditions are either (1) symmetric distribution of both groups or (2) 20 observations for each group and a distribution which is not too skewed for each group. The data were actually simulated from a symmetric distribution, so technically (1) is met, but if we didn't know that, we can definitely say that (2) is met because we have 30 observations per group and the distributions are not too skewed. }
+
+6. [3pt] Suppose that the new group of pups scratches on average `r mean(filter(pup, trt == "New")$scratch)` times per day (SD = `r sd(filter(pup, trt == "New")$scratch)`) and the old group of pups scratches on average `r mean(filter(pup, trt != "New")$scratch)` times per day (SD = `r sd(filter(pup, trt != "New")$scratch)`). What is the observed statistic?    
+\longanswer\answer{$\overline x_o - \overline x_n = `r mean(filter(pup, trt != "New")$scratch)` - `r mean(filter(pup, trt == "New")$scratch)` = `r mean(filter(pup, trt != "New")$scratch) -mean(filter(pup, trt == "New")$scratch)`$}
+
+7. [2pt] What is the standard deviation of the difference (i.e. the standard deviation of the statistic?)    
+\longanswer\answer{
+$\displaystyle\sqrt{\frac{s^2_o}{n_o} + \frac{s^2_n}{n_n}} = \displaystyle\sqrt{\frac{(`r sd(filter(pup, trt != "New")$scratch)`)^2}{30} + \frac{(`r sd(filter(pup, trt == "New")$scratch)`)^2}{30}} = \sqrt{`r var(filter(pup, trt != "New")$scratch)/30` + `r var(filter(pup, trt == "New")$scratch)/30`} = `r sqrt(var(filter(pup, trt != "New")$scratch)/30 +  var(filter(pup, trt == "New")$scratch)/30)`$}
+
+8. [3pt] What is the test statistic, $t$?    
+\longanswer\answer{$t = \displaystyle\frac{\overline x_o - \overline x_n - 0}{SE(\overline x_o - \overline x_n)} = \displaystyle\frac{`r mean(filter(pup, trt != "New")$scratch)- mean(filter(pup, trt == "New")$scratch)`}{`r sqrt(var(filter(pup, trt != "New")$scratch)/30 +  var(filter(pup, trt == "New")$scratch)/30)`} = `r (mean(filter(pup, trt != "New")$scratch)- mean(filter(pup, trt == "New")$scratch))/(sqrt(var(filter(pup, trt != "New")$scratch)/30 +  var(filter(pup, trt == "New")$scratch)/30))`$}
+
+9. [3pt] What is your conclusion in the context of the study?    
+\longanswer[6em]\answer{With $t = `r (mean(filter(pup, trt != "New")$scratch)- mean(filter(pup, trt == "New")$scratch))/(sqrt(var(filter(pup, trt != "New")$scratch)/30 +  var(filter(pup, trt == "New")$scratch)/30))`$ we have strong evidence to reject the hypothesis that the two treatments are equally effective at reducing dog itchiness. We reject $H_0$ and conclude that dogs who received the new treatment are less itchy than dogs who receive the standard treatment. The new treatment is thus more effective at reducing the amount of irritation experienced by dogs treated with flea and tick medication.}
+
+
+# More Itchy Pups
+
+\vspace{-2em}\hfill{\underline{\hspace{1in}}\large /12}
+The veterinary medicine company wants to estimate the reduction in scratching after taking the new medication. It recruits 60 dogs; for the first 30 days, the dogs' scratches are counted but no treatment is given (Control). Then, each dog takes the new medication for 30 days, and at the end of that 30 days, the company counts each dog's scratches for another 30 days (Med).
+
+
+
+```{r fig.width = 8, fig.height = 4, out.width = "100%", message = F, warning = F}
+pup <- tibble(
+  id = rep(1:60, times = 2),
+  trt = rep(c("Control", "Med"), each = 60),
+  scratch = rnorm(120, mean = rep(c(30, 20), each = 60), sd = 5)
+)
+
+pup_wide <- pup %>% pivot_wider(names_from = trt, values_from = scratch) %>%
+  mutate(diff = Control - Med)
+
+ggplot(data = pup, aes(x = trt, y = scratch, group = id)) + geom_line() + 
+  xlab("Test Period") + ylab("Average # Scratches per day")
+```
+
+1. [3pt] What is the difference between this type of study design and the previous study design? What is the advantage to this type of design over the previous study?    
+\longanswer\answer{This is a paired design (repeated measures). Each dog serves as its own control, which means that we can more precisely estimate the size of the effect because we reduce the variability between groups.}
+
+2. [4pt] The goal of this experiment is to estimate the reduction in scratching after taking the new medication. What do you need to do in order to meet this experiment's goal? Describe the steps in the analysis process.    
+\longanswer[6em]\answer{We need to calculate a confidence interval for $\mu_d$, the population average reduction in scratching after taking the new medication. To do this, we need to calculate the reduction in scratching for each dog, and then compute the average and std. deviation of the differences (Control - Med) to determine the overall reduction. We then use techniques from Chapter 3 to construct a 2SD interval for the population mean difference.}
+
+3. [3pt] Suppose the sample average difference is `r round(mean(pup_wide$diff), 2)` and the sample standard deviation is `r round(sd(pup_wide$diff), 2)`. Can you calculate a 2SD interval for the population average difference?    
+\longanswer[6em]\answer{First, we compute the standard error: $s/\sqrt{n} = `r round(sd(pup_wide$diff), 2)`/\sqrt{60} = `r round(sd(pup_wide$diff)/sqrt(60), 2)`$. The interval is then $`r round(mean(pup_wide$diff), 2)` \pm 2 \times `r round(sd(pup_wide$diff)/sqrt(60), 2)` = `r sprintf("(%0.2f, %0.2f)", round(mean(pup_wide$diff), 2) -2 * round(sd(pup_wide$diff)/sqrt(60), 2), round(mean(pup_wide$diff), 2) +2 * round(sd(pup_wide$diff)/sqrt(60), 2))`$.}
+
+4. [2pt] Interpret your interval from 3 in the context of the problem.    
+\longanswer[6em]\answer{We are 95\% confident that the flea and tick treatment reduces the population average number of dog scratches by between `r round(mean(pup_wide$diff), 2) -2 * round(sd(pup_wide$diff)/sqrt(60), 2)` and `r round(mean(pup_wide$diff), 2) +2 * round(sd(pup_wide$diff)/sqrt(60), 2)` per day.}

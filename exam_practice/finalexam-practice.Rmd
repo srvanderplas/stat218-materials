@@ -124,7 +124,7 @@ true_false_qs <- tribble(
 
 # Itchy Pups
 
-A veterinary medicine company is doing final trials of a new type of flea and tick medication. In trials of new medicine, it is common to compare the results to the current "gold standard" of treatment, that is, the current commonly used medication. The company recruits 60 dogs who are randomly selected from the population of current canine customers, and randomly assigns 30 of them to receive the new treatment and 30 to receive the old treatment. Each pup receives 60 days of medication; after the first 30 days, which are necessary for the treatment to take effecct, the dogs are monitored to assess how many times a day they scratch themselves. The 30 days of scratch counts are averaged together for each dog, and the distribution of average number of scratches are shown below.
+A veterinary medicine company is doing final trials of a new type of flea and tick medication. In trials of new medicine, it is common to compare the results to the current "gold standard" of treatment, that is, the current commonly used medication. The company recruits 60 dogs who are randomly selected from the population of current canine customers, and randomly assigns 30 of them to receive the new treatment and 30 to receive the old treatment. Each pup receives 60 days of medication; after the first 30 days, which are necessary for the treatment to take effect, the dogs are monitored to assess how many times a day they scratch themselves. The 30 days of scratch counts are averaged together for each dog, and the distribution of average number of scratches are shown below.
 
 ```{r fig.width = 8, fig.height = 4, out.width = "100%"}
 pup <- tibble(
